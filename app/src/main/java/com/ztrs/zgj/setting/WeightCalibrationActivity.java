@@ -389,7 +389,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 updateCurSensorValue(getSensorValue());
             }else {
-//                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -420,7 +420,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
                 initCalibrationBean();
                 updateCalibration();
             }else {
-//                Toast.makeText(this,"载重标定查询失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"载重标定查询失败",Toast.LENGTH_LONG).show();
             }
         }
     }

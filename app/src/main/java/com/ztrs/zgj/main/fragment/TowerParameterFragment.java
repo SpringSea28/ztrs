@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,6 +111,8 @@ public class TowerParameterFragment extends Fragment {
 
     @BindView(R.id.img_rotation_angle)
     ImageView imgRotationAngle;
+    @BindView(R.id.rl_rotation_angle)
+    RelativeLayout rlRotationAngle;
     @BindView(R.id.ll_hookup)
     LinearLayout llHookup;
     @BindView(R.id.v_hookup_line)
@@ -225,7 +228,7 @@ public class TowerParameterFragment extends Fragment {
     private void initRotationAngle() {
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         int aroundValue = realTimeDataBean.getAroundAngle();
-        imgRotationAngle.setRotation((float) (aroundValue * 1.0 / 10));
+        rlRotationAngle.setRotation((float) (aroundValue * 1.0 / 10));
     }
 
     private void hookupAnimation(){

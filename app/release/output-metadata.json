@@ -11,10 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 14,
-      "versionName": "1.0.14_test",
+      "versionCode": 15,
+      "versionName": "1.0.15_test",
       "enabled": true,
-      "outputFile": "ZGJ_v1.0.14_test_20210121-004509.apk"
+      "outputFile": "ZGJ_v1.0.15_test_20210123-211830.apk"
     }
   ]
 }

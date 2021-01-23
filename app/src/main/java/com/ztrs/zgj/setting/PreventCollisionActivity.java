@@ -395,6 +395,13 @@ public class PreventCollisionActivity extends AppCompatActivity {
             }else {
                 Toast.makeText(this,"区域限制参数设置保存失败",Toast.LENGTH_LONG).show();
             }
+        }else if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+                initData();
+                updateRegional();
+            }else {
+                Toast.makeText(this,"区域限制参数查询失败",Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -417,7 +424,7 @@ public class PreventCollisionActivity extends AppCompatActivity {
                 initData();
                 updateAlarm();
             }else {
-//                Toast.makeText(this,"防碰撞报警参数查询失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"防碰撞报警参数查询失败",Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -133,7 +133,18 @@
         <item name="android:text">保存</item>
     </style>
 
-
+    <style name="setting_current_value_tv_style">
+        <item name="android:layout_width">27dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">#0784FF</item>
+        <item name="android:textSize">7sp</item>
+        <item name="android:text">当前值</item>
+    </style>
 
 
 

@@ -48,6 +48,7 @@ import com.ztrs.zgj.main.fragment.LuffingConverterFragment;
 import com.ztrs.zgj.main.fragment.TowerParameterFragment;
 import com.ztrs.zgj.main.fragment.UploadConverterFragment;
 import com.ztrs.zgj.main.msg.SerialPortOpenResultMsg;
+import com.ztrs.zgj.setting.OutputActivity;
 import com.ztrs.zgj.setting.SettingActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -107,8 +108,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Test test = new Test();
-//                byte[] bytes =new byte[10];
-//                int i= bytes[-4];
+                byte[] bytes =new byte[10];
+                int i= bytes[-4];
 //                Log.e("wch","testUnLockCarCmd");
 //                test.testUnLockCarCmd();
 //                test.testSwitchMachineCmd();
@@ -222,7 +223,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
-        R.id.rl_setting})
+        R.id.rl_setting,R.id.rl_output})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_upload_converter:
@@ -236,6 +237,9 @@ public class MainActivity extends AppCompatActivity  {
                 break;
             case R.id.rl_setting:
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                break;
+            case R.id.rl_output:
+                startActivity(new Intent(MainActivity.this, OutputActivity.class));
                 break;
         }
     }
@@ -308,7 +312,7 @@ public class MainActivity extends AppCompatActivity  {
                 queryStaticParameterResult = QUERY_FINISH_SUCCESS;
             } else {
                 queryStaticParameterResult = QUERY_FINISH_FAIL;
-                Toast.makeText(this, "查询静态参数命令发送失败", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "查询静态参数查询命令发送失败", Toast.LENGTH_LONG).show();
             }
             isInitQuerySuccess();
         }

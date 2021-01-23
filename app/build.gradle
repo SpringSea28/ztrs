@@ -10,8 +10,8 @@ android {
         applicationId "com.ztrs.zgj"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 14
-        versionName "1.0.14_test"
+        versionCode 15
+        versionName "1.0.15_test"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -79,6 +79,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
+    implementation  'com.umeng.umsdk:common:9.3.3' // 版本号(必选)
+    implementation  'com.umeng.umsdk:asms:1.1.4' // asms包依赖(必选)
+    implementation 'com.umeng.umsdk:apm:1.1.0'
 
     implementation(project(':SerialPortLibrary'))
 }

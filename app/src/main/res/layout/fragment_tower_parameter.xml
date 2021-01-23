@@ -172,14 +172,26 @@
                         android:textSize="@dimen/tower_primary_value_text_dimen"
                         android:text="10.0"/>
                 </RelativeLayout>
-                <ImageView
-                    android:id="@+id/img_rotation_angle"
+                <RelativeLayout
+                    android:id="@+id/rl_rotation_angle"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:layout_marginTop="9dp"
-                    android:layout_marginEnd="33dp"
-                    android:background="@drawable/tower_parameter_rotation_angle_bg"
-                    android:src="@mipmap/zhizhen"/>
+                    android:layout_marginEnd="33dp">
+                    <ImageView
+                        android:id="@+id/img_rotation_angle"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:background="@drawable/tower_parameter_rotation_angle_bg"
+                        android:src="@mipmap/zhizhen"/>
+                    <ImageView
+                        android:id="@+id/img_car"
+                        android:layout_width="6dp"
+                        android:layout_height="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/tower_parameter_car_bg"
+                        android:layout_marginTop="35dp"/>
+                </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -249,99 +261,105 @@
             android:id="@+id/ll_direction"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:visibility="visible">
+
             <TextView
                 android:id="@+id/tv_direction_up"
                 style="@style/tower_primary_text_style"
                 android:layout_width="32dp"
                 android:layout_height="13dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector"
                 android:drawableLeft="@drawable/tower_parameter_direction_up_text_drawable_left_selector"
                 android:drawablePadding="0dp"
-                android:text="上行"/>
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:text="上行"
+                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+
             <TextView
                 android:id="@+id/tv_direction_down"
                 style="@style/tower_primary_text_style"
                 android:layout_width="32dp"
                 android:layout_height="13dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector"
                 android:drawableLeft="@drawable/tower_parameter_direction_down_text_drawable_left_selector"
                 android:drawablePadding="0dp"
-                android:text="下行"/>
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:text="下行"
+                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+
             <TextView
                 android:id="@+id/tv_direction_left"
                 style="@style/tower_primary_text_style"
                 android:layout_width="32dp"
                 android:layout_height="13dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector"
                 android:drawableLeft="@drawable/tower_parameter_direction_left_text_drawable_left_selector"
                 android:drawablePadding="0dp"
-                android:text="左转"/>
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:text="左转"
+                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+
             <TextView
                 android:id="@+id/tv_direction_right"
                 style="@style/tower_primary_text_style"
                 android:layout_width="32dp"
                 android:layout_height="13dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector"
                 android:drawableLeft="@drawable/tower_parameter_direction_right_text_drawable_left_selector"
                 android:drawablePadding="0dp"
-                android:text="右转"/>
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:text="右转"
+                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+
             <TextView
                 android:id="@+id/tv_direction_before"
                 style="@style/tower_primary_text_style"
                 android:layout_width="32dp"
                 android:layout_height="13dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector"
                 android:drawableLeft="@drawable/tower_parameter_direction_before_text_drawable_left_selector"
                 android:drawablePadding="0dp"
-                android:text="前行"/>
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:text="前行"
+                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+
             <TextView
                 android:id="@+id/tv_direction_after"
                 style="@style/tower_primary_text_style"
                 android:layout_width="32dp"
                 android:layout_height="13dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector"
                 android:drawableLeft="@drawable/tower_parameter_direction_after_text_drawable_left_selector"
                 android:drawablePadding="0dp"
-                android:text="后行"/>
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="4dp"
+                android:text="后行"
+                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
 
         </LinearLayout>
     </LinearLayout>

@@ -194,7 +194,7 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 updateCurSensorValue(getSensorValue());
             }else {
-                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -225,7 +225,7 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
                 initAroundCalibrationBean();
                 updateCalibration();
             }else {
-//                Toast.makeText(this,"回转标定查询失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"回转标定查询失败",Toast.LENGTH_LONG).show();
             }
         }
     }

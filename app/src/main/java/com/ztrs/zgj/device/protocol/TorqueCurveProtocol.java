@@ -71,7 +71,7 @@ public class TorqueCurveProtocol extends BaseProtocol{
         torqueCurveApplyBean.setModel(s.substring(0,zeroOffset));
         int bigArmLen = ((data[15]&0xffffffff) << 8)
                 |(data[15+1]&0x00ff);
-        torqueCurveApplyBean.setBigArmLen(bigArmLen);
+        torqueCurveApplyBean.setBigArmLen(bigArmLen/10);
         byte magnification= data[17];
         torqueCurveApplyBean.setMagnification(magnification);
 
@@ -115,7 +115,7 @@ public class TorqueCurveProtocol extends BaseProtocol{
             System.arraycopy(model.getBytes(), 0, data, 0,
                     model.length() > 15 ? 15 : model.length());
         }
-        int bigArmLen  = torqueCurveApplyBean.getBigArmLen();
+        int bigArmLen  = torqueCurveApplyBean.getBigArmLen()*10;
         data[15] = (byte)(bigArmLen>>8);
         data[15+1] = (byte)bigArmLen;
 

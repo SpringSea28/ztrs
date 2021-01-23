@@ -95,6 +95,8 @@ public abstract class BaseSensorCalibrationActivity extends AppCompatActivity {
         updateCalibration();
         binding.btnSave.setOnClickListener(v -> save());
         binding.rlTitle.tvBack.setOnClickListener(v -> finish());
+        binding.tvCode1Current.setOnClickListener(v -> updateCode1Value(getSensorValue()));
+        binding.tvCode2Current.setOnClickListener(v -> updateCode2Value(getSensorValue()));
     }
 
     void initLowControl() {

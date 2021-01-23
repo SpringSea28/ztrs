@@ -50,6 +50,10 @@
             style="@style/setting_item_edit_int_style"
             android:layout_alignParentEnd="true"
             android:text="" />
+        <TextView
+            android:id="@+id/tv_code1_current"
+            style="@style/setting_current_value_tv_style"/>
+
     </RelativeLayout>
     <View
         style="@style/setting_item_divide_line_style"
@@ -83,6 +87,9 @@
             style="@style/setting_item_edit_int_style"
             android:layout_alignParentEnd="true"
             android:text=""/>
+        <TextView
+            android:id="@+id/tv_code2_current"
+            style="@style/setting_current_value_tv_style"/>
     </RelativeLayout>
     <View
         style="@style/setting_item_divide_line_style"
