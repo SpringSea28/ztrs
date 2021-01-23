@@ -366,25 +366,25 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRelayConfiguration(RelayConfigurationMessage msg){
-        LogUtils.LogI("wch","onRelayConfiguration: "+msg.getResult());
-        if(msg.getResult() == BaseMessage.RESULT_OK) {
-            Toast.makeText(this, "配置继电器命令发送成功", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "配置继电器命令发送失败", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRelayOutputControl(RelayOutputControlMessage msg){
-        LogUtils.LogI("wch","onRelayOutputControl: "+msg.getResult());
-        if(msg.getResult() == BaseMessage.RESULT_OK) {
-            Toast.makeText(this, "继电器输出控制命令发送成功", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "继电器输出控制命令发送失败", Toast.LENGTH_LONG).show();
-        }
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onRelayConfiguration(RelayConfigurationMessage msg){
+//        LogUtils.LogI("wch","onRelayConfiguration: "+msg.getResult());
+//        if(msg.getResult() == BaseMessage.RESULT_OK) {
+//            Toast.makeText(this, "配置继电器命令发送成功", Toast.LENGTH_LONG).show();
+//        }else {
+//            Toast.makeText(this, "配置继电器命令发送失败", Toast.LENGTH_LONG).show();
+//        }
+//    }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onRelayOutputControl(RelayOutputControlMessage msg){
+//        LogUtils.LogI("wch","onRelayOutputControl: "+msg.getResult());
+//        if(msg.getResult() == BaseMessage.RESULT_OK) {
+//            Toast.makeText(this, "继电器输出控制命令发送成功", Toast.LENGTH_LONG).show();
+//        }else {
+//            Toast.makeText(this, "继电器输出控制命令发送失败", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEmergencyCall(EmergencyCallMessage msg){

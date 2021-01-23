@@ -4,277 +4,267 @@ import com.ztrs.zgj.LogUtils;
 
 public class RelayConfigurationBean {
     private static final String TAG = RelayConfigurationBean.class.getSimpleName();
-    byte load25;
-    byte load25OutputState;
-    byte load50;
-    byte load50OutputState;
-    byte load90;
-    byte load90OutputState;
-    byte load100;
-    byte load100OutputState;
 
-    byte torque80;
-    byte torque80OutputState;
-    byte torque90;
-    byte torque90OutputState;
-    byte torque100;
-    byte torque100OutputState;
-    byte torque110;
-    byte torque110OutputState;
+    public static final int NC = 0;
+    public static final int HEIGHT_ALARM_HIGH = 1;
+    public static final int HEIGHT_ALARM_LOW = 2;
+    public static final int AROUND_ALARM_HIGH = 3;
+    public static final int AROUND_ALARM_LOW = 4;
+    public static final int AMPLITUDE_ALARM_HIGH = 5;
+    public static final int AMPLITUDE_ALARM_LOW = 6;
+    public static final int TORQUE_WARN = 7;
+    public static final int TORQUE_ALARM = 8;
+    public static final int WEIGHT_ALARM = 10;
+    public static final int LOCK_CONTROL = 11;
 
-    byte heightUpStop;
-    byte heightUpStopOutputState;
-    byte heightDownStop;
-    byte heightDownStopOutputState;
-    byte aroundLeftStop;
-    byte aroundLeftStopOutputState;
-    byte aroundRightStop;
-    byte aroundRightStopOutputState;
-    byte amplitudeOutStop;
-    byte amplitudeOutStopOutputState;
-    byte amplitudeInStop;
-    byte amplitudeInStopOutputState;
+    byte relay1Use;
+    byte relay1State =2;
+    byte relay2Use ;
+    byte relay2State=2;
+    byte relay3Use;
+    byte relay3State=2;
+    byte relay4Use;
+    byte relay4State=2;
+    byte relay5Use;
+    byte relay5State=2;
+    byte relay6Use;
+    byte relay6State=2;
+    byte relay7Use;
+    byte relay7State=2;
+    byte relay8Use;
+    byte relay8State=2;
+    byte relay9Use;
+    byte relay9State=2;
+    byte relay10Use;
+    byte relay10State=2;
+    byte relay11Use;
+    byte relay11State=2;
+    byte relay12Use;
+    byte relay12State=2;
+//    byte load25;
+//    byte load25OutputState;
+//    byte load50;
+//    byte load50OutputState;
+//    byte load90;
+//    byte load90OutputState;
+//    byte load100;
+//    byte load100OutputState;
+//
+//    byte torque80;
+//    byte torque80OutputState;
+//    byte torque90;
+//    byte torque90OutputState;
+//    byte torque100;
+//    byte torque100OutputState;
+//    byte torque110;
+//    byte torque110OutputState;
+//
+//    byte heightUpStop;
+//    byte heightUpStopOutputState;
+//    byte heightDownStop;
+//    byte heightDownStopOutputState;
+//    byte aroundLeftStop;
+//    byte aroundLeftStopOutputState;
+//    byte aroundRightStop;
+//    byte aroundRightStopOutputState;
+//    byte amplitudeOutStop;
+//    byte amplitudeOutStopOutputState;
+//    byte amplitudeInStop;
+//    byte amplitudeInStopOutputState;
+//
+//    byte loadWeight80;
+//    byte loadWeight80OutputState;
 
-    byte loadWeight80;
-    byte loadWeight80OutputState;
 
-    public byte getLoad25() {
-        return load25;
+    public byte getRelay1Use() {
+        return relay1Use;
     }
 
-    public void setLoad25(byte load25) {
-        this.load25 = load25;
+    public void setRelay1Use(byte relay1Use) {
+        this.relay1Use = relay1Use;
     }
 
-    public byte getLoad25OutputState() {
-        return load25OutputState;
+    public byte getRelay1State() {
+        return relay1State;
     }
 
-    public void setLoad25OutputState(byte load25OutputState) {
-        this.load25OutputState = load25OutputState;
+    public void setRelay1State(byte relay1State) {
+        this.relay1State = relay1State;
     }
 
-    public byte getLoad50() {
-        return load50;
+    public byte getRelay2Use() {
+        return relay2Use;
     }
 
-    public void setLoad50(byte load50) {
-        this.load50 = load50;
+    public void setRelay2Use(byte relay2Use) {
+        this.relay2Use = relay2Use;
     }
 
-    public byte getLoad50OutputState() {
-        return load50OutputState;
+    public byte getRelay2State() {
+        return relay2State;
     }
 
-    public void setLoad50OutputState(byte load50OutputState) {
-        this.load50OutputState = load50OutputState;
+    public void setRelay2State(byte relay2State) {
+        this.relay2State = relay2State;
     }
 
-    public byte getLoad90() {
-        return load90;
+    public byte getRelay3Use() {
+        return relay3Use;
     }
 
-    public void setLoad90(byte load90) {
-        this.load90 = load90;
+    public void setRelay3Use(byte relay3Use) {
+        this.relay3Use = relay3Use;
     }
 
-    public byte getLoad90OutputState() {
-        return load90OutputState;
+    public byte getRelay3State() {
+        return relay3State;
     }
 
-    public void setLoad90OutputState(byte load90OutputState) {
-        this.load90OutputState = load90OutputState;
+    public void setRelay3State(byte relay3State) {
+        this.relay3State = relay3State;
     }
 
-    public byte getLoad100() {
-        return load100;
+    public byte getRelay4Use() {
+        return relay4Use;
     }
 
-    public void setLoad100(byte load100) {
-        this.load100 = load100;
+    public void setRelay4Use(byte relay4Use) {
+        this.relay4Use = relay4Use;
     }
 
-    public byte getLoad100OutputState() {
-        return load100OutputState;
+    public byte getRelay4State() {
+        return relay4State;
     }
 
-    public void setLoad100OutputState(byte load100OutputState) {
-        this.load100OutputState = load100OutputState;
+    public void setRelay4State(byte relay4State) {
+        this.relay4State = relay4State;
     }
 
-    public byte getTorque80() {
-        return torque80;
+    public byte getRelay5Use() {
+        return relay5Use;
     }
 
-    public void setTorque80(byte torque80) {
-        this.torque80 = torque80;
+    public void setRelay5Use(byte relay5Use) {
+        this.relay5Use = relay5Use;
     }
 
-    public byte getTorque80OutputState() {
-        return torque80OutputState;
+    public byte getRelay5State() {
+        return relay5State;
     }
 
-    public void setTorque80OutputState(byte torque80OutputState) {
-        this.torque80OutputState = torque80OutputState;
+    public void setRelay5State(byte relay5State) {
+        this.relay5State = relay5State;
     }
 
-    public byte getTorque90() {
-        return torque90;
+    public byte getRelay6Use() {
+        return relay6Use;
     }
 
-    public void setTorque90(byte torque90) {
-        this.torque90 = torque90;
+    public void setRelay6Use(byte relay6Use) {
+        this.relay6Use = relay6Use;
     }
 
-    public byte getTorque90OutputState() {
-        return torque90OutputState;
+    public byte getRelay6State() {
+        return relay6State;
     }
 
-    public void setTorque90OutputState(byte torque90OutputState) {
-        this.torque90OutputState = torque90OutputState;
+    public void setRelay6State(byte relay6State) {
+        this.relay6State = relay6State;
     }
 
-    public byte getTorque100() {
-        return torque100;
+    public byte getRelay7Use() {
+        return relay7Use;
     }
 
-    public void setTorque100(byte torque100) {
-        this.torque100 = torque100;
+    public void setRelay7Use(byte relay7Use) {
+        this.relay7Use = relay7Use;
     }
 
-    public byte getTorque100OutputState() {
-        return torque100OutputState;
+    public byte getRelay7State() {
+        return relay7State;
     }
 
-    public void setTorque100OutputState(byte torque100OutputState) {
-        this.torque100OutputState = torque100OutputState;
+    public void setRelay7State(byte relay7State) {
+        this.relay7State = relay7State;
     }
 
-    public byte getTorque110() {
-        return torque110;
+    public byte getRelay8Use() {
+        return relay8Use;
     }
 
-    public void setTorque110(byte torque110) {
-        this.torque110 = torque110;
+    public void setRelay8Use(byte relay8Use) {
+        this.relay8Use = relay8Use;
     }
 
-    public byte getTorque110OutputState() {
-        return torque110OutputState;
+    public byte getRelay8State() {
+        return relay8State;
     }
 
-    public void setTorque110OutputState(byte torque110OutputState) {
-        this.torque110OutputState = torque110OutputState;
+    public void setRelay8State(byte relay8State) {
+        this.relay8State = relay8State;
     }
 
-    public byte getHeightUpStop() {
-        return heightUpStop;
+    public byte getRelay9Use() {
+        return relay9Use;
     }
 
-    public void setHeightUpStop(byte heightUpStop) {
-        this.heightUpStop = heightUpStop;
+    public void setRelay9Use(byte relay9Use) {
+        this.relay9Use = relay9Use;
     }
 
-    public byte getHeightUpStopOutputState() {
-        return heightUpStopOutputState;
+    public byte getRelay9State() {
+        return relay9State;
     }
 
-    public void setHeightUpStopOutputState(byte heightUpStopOutputState) {
-        this.heightUpStopOutputState = heightUpStopOutputState;
+    public void setRelay9State(byte relay9State) {
+        this.relay9State = relay9State;
     }
 
-    public byte getHeightDownStop() {
-        return heightDownStop;
+    public byte getRelay10Use() {
+        return relay10Use;
     }
 
-    public void setHeightDownStop(byte heightDownStop) {
-        this.heightDownStop = heightDownStop;
+    public void setRelay10Use(byte relay10Use) {
+        this.relay10Use = relay10Use;
     }
 
-    public byte getHeightDownStopOutputState() {
-        return heightDownStopOutputState;
+    public byte getRelay10State() {
+        return relay10State;
     }
 
-    public void setHeightDownStopOutputState(byte heightDownStopOutputState) {
-        this.heightDownStopOutputState = heightDownStopOutputState;
+    public void setRelay10State(byte relay10State) {
+        this.relay10State = relay10State;
     }
 
-    public byte getAroundLeftStop() {
-        return aroundLeftStop;
+    public byte getRelay11Use() {
+        return relay11Use;
     }
 
-    public void setAroundLeftStop(byte aroundLeftStop) {
-        this.aroundLeftStop = aroundLeftStop;
+    public void setRelay11Use(byte relay11Use) {
+        this.relay11Use = relay11Use;
     }
 
-    public byte getAroundLeftStopOutputState() {
-        return aroundLeftStopOutputState;
+    public byte getRelay11State() {
+        return relay11State;
     }
 
-    public void setAroundLeftStopOutputState(byte aroundLeftStopOutputState) {
-        this.aroundLeftStopOutputState = aroundLeftStopOutputState;
+    public void setRelay11State(byte relay11State) {
+        this.relay11State = relay11State;
     }
 
-    public byte getAroundRightStop() {
-        return aroundRightStop;
+    public byte getRelay12Use() {
+        return relay12Use;
     }
 
-    public void setAroundRightStop(byte aroundRightStop) {
-        this.aroundRightStop = aroundRightStop;
+    public void setRelay12Use(byte relay12Use) {
+        this.relay12Use = relay12Use;
     }
 
-    public byte getAroundRightStopOutputState() {
-        return aroundRightStopOutputState;
+    public byte getRelay12State() {
+        return relay12State;
     }
 
-    public void setAroundRightStopOutputState(byte aroundRightStopOutputState) {
-        this.aroundRightStopOutputState = aroundRightStopOutputState;
-    }
-
-    public byte getAmplitudeOutStop() {
-        return amplitudeOutStop;
-    }
-
-    public void setAmplitudeOutStop(byte amplitudeOutStop) {
-        this.amplitudeOutStop = amplitudeOutStop;
-    }
-
-    public byte getAmplitudeOutStopOutputState() {
-        return amplitudeOutStopOutputState;
-    }
-
-    public void setAmplitudeOutStopOutputState(byte amplitudeOutStopOutputState) {
-        this.amplitudeOutStopOutputState = amplitudeOutStopOutputState;
-    }
-
-    public byte getAmplitudeInStop() {
-        return amplitudeInStop;
-    }
-
-    public void setAmplitudeInStop(byte amplitudeInStop) {
-        this.amplitudeInStop = amplitudeInStop;
-    }
-
-    public byte getAmplitudeInStopOutputState() {
-        return amplitudeInStopOutputState;
-    }
-
-    public void setAmplitudeInStopOutputState(byte amplitudeInStopOutputState) {
-        this.amplitudeInStopOutputState = amplitudeInStopOutputState;
-    }
-
-    public byte getLoadWeight80() {
-        return loadWeight80;
-    }
-
-    public void setLoadWeight80(byte loadWeight80) {
-        this.loadWeight80 = loadWeight80;
-    }
-
-    public byte getLoadWeight80OutputState() {
-        return loadWeight80OutputState;
-    }
-
-    public void setLoadWeight80OutputState(byte loadWeight80OutputState) {
-        this.loadWeight80OutputState = loadWeight80OutputState;
+    public void setRelay12State(byte relay12State) {
+        this.relay12State = relay12State;
     }
 }

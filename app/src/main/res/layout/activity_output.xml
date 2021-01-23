@@ -7,7 +7,7 @@
     <data>
         <variable
             name="calibration"
-            type="com.ztrs.zgj.device.bean.RelayOutputControlBean" />
+            type="com.ztrs.zgj.device.bean.RelayConfigurationBean" />
     </data>
 <LinearLayout
     android:layout_width="match_parent"

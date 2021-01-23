@@ -440,8 +440,8 @@ public class Test {
     //3.9
     public void setRelayConfiguration() {
         RelayConfigurationBean relayConfigurationBean = new RelayConfigurationBean();
-        relayConfigurationBean.setLoadWeight80((byte) 5);
-        relayConfigurationBean.setLoadWeight80OutputState((byte) 1);
+        relayConfigurationBean.setRelay1State((byte) 2);
+        relayConfigurationBean.setRelay1Use((byte) 1);
         DeviceManager.getInstance().setRelayConfiguration(relayConfigurationBean);
         Observable.timer(200, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -462,7 +462,7 @@ public class Test {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        String str = "b3 2b 00 00 31 20 12 23 22 55 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 01 10 4b";
+                        String str = "b3 25 00 00 31 21 01 23 14 07 57 01 01 0a 02 08 01 00 02 00 02 00 02 00 02 00 02 00 02 00 02 00 02 00 00 8d 67";
 
                         byte[] byteFromStr = getByteFromStr(str);
                         int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
@@ -471,9 +471,7 @@ public class Test {
                         DeviceManager.getInstance().onDataReceive(byteFromStr);
                         RelayConfigurationBean data = DeviceManager.getInstance()
                                 .getZtrsDevice().getRelayConfigurationBean();
-                        if (data.getLoadWeight80() != 5) {
-                            LogUtils.LogE(TAG, " queryRelayConfiguration B2 error");
-                        }
+
                     }
                 });
     }

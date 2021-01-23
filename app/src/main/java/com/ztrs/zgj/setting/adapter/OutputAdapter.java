@@ -48,15 +48,16 @@ public class OutputAdapter extends RecyclerView.Adapter<OutputAdapter.OutputHold
 
     @Override
     public void onBindViewHolder(@NonNull OutputHolder holder, int position) {
-//        RelayBean relayBean = relayBeans.get(position);
+        RelayBean relayBean = relayBeans.get(position);
         holder.binding.tvRelay.setText(relayName[position]);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(holder.context, R.layout.settting_spinner_item, optUses);//默认样式
         adapter.setDropDownViewResource(R.layout.settting_spinner_dropdown_item);//下拉样式
         holder.binding.spinnerUse.setAdapter(adapter);
+        holder.binding.spinnerUse.setSelection(relayBean.getUse());
         holder.binding.spinnerUse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                relayBean.setUse(position);
             }
 
             @Override
@@ -68,10 +69,11 @@ public class OutputAdapter extends RecyclerView.Adapter<OutputAdapter.OutputHold
         ArrayAdapter<String> actionAdapter = new ArrayAdapter<String>(holder.context, R.layout.settting_spinner_item, optActions);//默认样式
         actionAdapter.setDropDownViewResource(R.layout.settting_spinner_dropdown_item);//下拉样式
         holder.binding.spinnerAction.setAdapter(actionAdapter);
+        holder.binding.spinnerAction.setSelection(relayBean.getAction());
         holder.binding.spinnerAction.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                relayBean.setAction(position);
             }
 
             @Override
