@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Test test = new Test();
-                byte[] bytes =new byte[10];
-                int i= bytes[-4];
+//                byte[] bytes =new byte[10];
+//                int i= bytes[-4];
 //                Log.e("wch","testUnLockCarCmd");
 //                test.testUnLockCarCmd();
 //                test.testSwitchMachineCmd();
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity  {
 //                test.testOnReceiveRegisterInfo();
 //                test.testOnReceiveRealtimedata();
 //                test.testOnReceiveTorqueCurve();
-                test.testQueryStaticParameter();
+//                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
             }
         });

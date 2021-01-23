@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -113,6 +114,8 @@ public class TowerParameterFragment extends Fragment {
     ImageView imgRotationAngle;
     @BindView(R.id.rl_rotation_angle)
     RelativeLayout rlRotationAngle;
+    @BindView(R.id.img_car)
+    ImageView imgCar;
     @BindView(R.id.ll_hookup)
     LinearLayout llHookup;
     @BindView(R.id.v_hookup_line)
@@ -229,6 +232,13 @@ public class TowerParameterFragment extends Fragment {
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         int aroundValue = realTimeDataBean.getAroundAngle();
         rlRotationAngle.setRotation((float) (aroundValue * 1.0 / 10));
+        int amplitude = realTimeDataBean.getAmplitude();
+        int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
+        float offset = 0;
+        if(upWeightArmLen != 0){
+            offset = (float) (1.0*amplitude/upWeightArmLen*ScaleUtils.dip2px(context,27));
+        }
+        imgCar.setTranslationY(offset);
     }
 
     private void hookupAnimation(){
