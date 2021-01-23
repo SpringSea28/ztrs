@@ -1,6 +1,7 @@
 package com.ztrs.zgj.setting;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -13,16 +14,20 @@ import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.SensorRealtimeDataBean;
+import com.ztrs.zgj.device.bean.TorqueCurveApplyBean;
 import com.ztrs.zgj.device.bean.WeightCalibrationBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
 import com.ztrs.zgj.device.eventbus.SensorRealtimeDataMessage;
+import com.ztrs.zgj.device.eventbus.TorqueCurveMessage;
 import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
+import com.ztrs.zgj.setting.bean.TorqueCurveBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -39,6 +44,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
     WeightCalibrationBean calibrationBean;
     SensorRealtimeDataBean sensorRealtimeDataBean;
     RealTimeDataBean realTimeDataBean;
+    TorqueCurveApplyBean torqueCurveApplyBean;
 
     ActivityWeightCalibrationBinding binding;
 
@@ -52,7 +58,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
         initUi();
         querySensor();
         DeviceManager.getInstance().queryWeightCalibration();
-        new Test().querySensorRealtimeData();
+        DeviceManager.getInstance().queryTorqueCurve();
     }
 
     @Override
@@ -66,6 +72,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
         initCalibrationBean();
         sensorRealtimeDataBean = DeviceManager.getInstance().getZtrsDevice().getSensorRealtimeDataBean();
         realTimeDataBean = DeviceManager.getInstance().getZtrsDevice().getRealTimeDataBean();
+        torqueCurveApplyBean = DeviceManager.getInstance().getZtrsDevice().getTorqueCurveApplyBean();
     }
 
     private void initCalibrationBean(){
@@ -87,6 +94,8 @@ public class WeightCalibrationActivity extends AppCompatActivity {
         updateCalibration();
         binding.btnSave.setOnClickListener(v -> save());
         binding.rlTitle.tvBack.setOnClickListener(v -> finish());
+        binding.tvCod1Current.setOnClickListener(v -> updateCode1Value(sensorRealtimeDataBean.getWeightSensor()));
+        binding.tvCod2Current.setOnClickListener(v -> updateCode2Value(sensorRealtimeDataBean.getWeightSensor()));
     }
 
     long getSensorValue() {
@@ -210,7 +219,13 @@ public class WeightCalibrationActivity extends AppCompatActivity {
 
 
     void updateLowAlarmValue(int value) {
-        int currentRatedLoad = realTimeDataBean.getCurrentRatedLoad();
+        int currentRatedLoad = 0;
+        List<TorqueCurveBean> torqueCurveBeanList = torqueCurveApplyBean.getTorqueCurveBeanList();
+        if(torqueCurveBeanList == null || torqueCurveBeanList.size()<1){
+            currentRatedLoad = 0;
+        }else {
+            currentRatedLoad = torqueCurveBeanList.get(0).getWeight();
+        }
         int percent;
         if(currentRatedLoad == 0){
             percent = 0;
@@ -222,7 +237,13 @@ public class WeightCalibrationActivity extends AppCompatActivity {
 
 
     void updateHighAlarmValue(int value) {
-        int currentRatedLoad = realTimeDataBean.getCurrentRatedLoad();
+        int currentRatedLoad = 0;
+        List<TorqueCurveBean> torqueCurveBeanList = torqueCurveApplyBean.getTorqueCurveBeanList();
+        if(torqueCurveBeanList == null || torqueCurveBeanList.size()<1){
+            currentRatedLoad = 0;
+        }else {
+            currentRatedLoad = torqueCurveBeanList.get(0).getWeight();
+        }
         int percent;
         if(currentRatedLoad == 0){
             percent = 0;
@@ -338,12 +359,18 @@ public class WeightCalibrationActivity extends AppCompatActivity {
 //            Toast.makeText(this,"未初始化，高度标定失败",Toast.LENGTH_LONG).show();
 //            return;
 //        }
+        List<TorqueCurveBean> torqueCurveBeanList = torqueCurveApplyBean.getTorqueCurveBeanList();
+        if(torqueCurveBeanList == null || torqueCurveBeanList.size()<1){
+            Toast.makeText(this,"力矩曲线未获取，高度标定失败",Toast.LENGTH_LONG).show();
+            return;
+        }
         calibrationBean = new WeightCalibrationBean();
         calibrationBean.setCurrent1(code1);
         calibrationBean.setCalibration1((int) (calibration1 * 100));
         calibrationBean.setCurrent2(code2);
         calibrationBean.setCalibration2((int) (calibration2 * 100));
-        int currentRatedLoad = realTimeDataBean.getCurrentRatedLoad();
+        int currentRatedLoad = 0;
+        currentRatedLoad = torqueCurveBeanList.get(0).getWeight();
         int highWarnSend = (int)(1.0*currentRatedLoad*lowAlarm/100);
         calibrationBean.setHighWarnValue(highWarnSend);
         int highAlarmSend = (int)(1.0*currentRatedLoad*highAlarm/100);
@@ -362,7 +389,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 updateCurSensorValue(getSensorValue());
             }else {
-                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_LONG).show();
+//                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -394,6 +421,19 @@ public class WeightCalibrationActivity extends AppCompatActivity {
                 updateCalibration();
             }else {
 //                Toast.makeText(this,"载重标定查询失败",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTorqueCurve(TorqueCurveMessage msg){
+        LogUtils.LogI(TAG,"onTorqueCurve: "+msg.getCmdType());
+        LogUtils.LogI(TAG,"onTorqueCurve: "+msg.getResult());
+        if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+//                Toast.makeText(this,"力矩曲线保存成功",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this,"力矩曲线获取失败",Toast.LENGTH_LONG).show();
             }
         }
     }
