@@ -68,8 +68,13 @@ public class InstallationActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         initView();
         upDateView();
-        DeviceManager.getInstance().queryStaticParameter();
 //        new Test().testQueryStaticParameter();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DeviceManager.getInstance().queryStaticParameter();
     }
 
     @Override
