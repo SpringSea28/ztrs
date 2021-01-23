@@ -279,7 +279,7 @@
             <TextView
                 style="@style/setting_item_key_text_style"
                 android:paddingStart="22dp"
-                android:text="预警值" />
+                android:text="报警值" />
 
             <EditText
                 android:id="@+id/et_height_alarm"
@@ -330,7 +330,7 @@
             <TextView
                 style="@style/setting_item_key_text_style"
                 android:paddingStart="22dp"
-                android:text="预警值" />
+                android:text="报警值" />
 
             <EditText
                 android:id="@+id/et_distance_alarm"
