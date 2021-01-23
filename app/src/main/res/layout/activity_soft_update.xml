@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_bg_color"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_item"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_weight"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="当前版本号"/>
+        <TextView
+            android:id="@+id/tv_version"
+            style="@style/setting_item_key_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:text="v1.1.01"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_check"
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:textColor="#0784FF"
+            android:text="检查更新"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+</LinearLayout>

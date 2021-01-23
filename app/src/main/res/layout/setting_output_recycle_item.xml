@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="center">
+
+
+    <TextView
+        android:id="@+id/tv_relay"
+        style="@style/setting_item_key_text_style"
+        android:layout_width="85dp"
+        android:layout_height="27dp"
+        android:background="#19898989"
+        android:gravity="center"
+        android:paddingStart="0dp"
+        android:text="继电器" />
+
+    <RelativeLayout
+        android:id="@+id/rl_use"
+        android:layout_width="158dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="1dp"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@id/tv_relay"
+        android:background="#19898989"
+        android:paddingEnd="0dp">
+
+        <Spinner
+            android:id="@+id/spinner_use"
+            android:layout_width="126dp"
+            android:layout_height="17dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/setting_edittext_bg"
+            android:dropDownHorizontalOffset="0dp"
+            android:dropDownVerticalOffset="17dp"
+            android:dropDownSelector="@drawable/setting_spinner_dropdown_bg_selector"
+            android:popupBackground="@android:color/white"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:src="@mipmap/xuanze" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_action"
+        android:layout_width="107dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="1dp"
+        android:layout_toRightOf="@id/rl_use"
+        android:background="#19898989"
+        android:gravity="center_vertical"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp">
+
+        <Spinner
+            android:id="@+id/spinner_action"
+            android:layout_width="65dp"
+            android:layout_height="17dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/setting_edittext_bg"
+            android:dropDownHorizontalOffset="0dp"
+            android:dropDownVerticalOffset="17dp"
+            android:dropDownSelector="@drawable/setting_spinner_dropdown_bg_selector"
+            android:popupBackground="@android:color/white"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:src="@mipmap/xuanze" />
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

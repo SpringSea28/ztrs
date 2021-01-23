@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_tower_parameter_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rl_obstacle"
+        style="@style/setting_item_style"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/tv_obstacle_name"
+            style="@style/setting_item_key_text_style"
+            android:text="障碍物1"/>
+
+        <ImageView
+            android:id="@+id/img_obstacle_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/zhankai_black" />
+    </RelativeLayout>
+    <ImageView style="@style/setting_item_divide_line_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_obstacle_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="27dp"
+        android:paddingEnd="27dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:background="#330784FF"
+                android:text="坐标1"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="0dp"
+                android:gravity="center"
+                android:background="#330784FF"
+                android:text="坐标2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_coordinate_1_x"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/et_coordinate_1_y"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/et_coordinate_2_x"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/et_coordinate_2_y"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:background="#330784FF"
+                android:text="坐标3"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="0dp"
+                android:gravity="center"
+                android:background="#330784FF"
+                android:text="坐标4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_coordinate_3_x"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/et_coordinate_3_y"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/et_coordinate_4_x"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <EditText
+                android:id="@+id/et_coordinate_4_y"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:background="#330784FF"
+                android:text="高度"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <EditText
+                android:id="@+id/et_height"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="7sp"
+                android:background="#1a898989"
+                android:textColor="@color/tower_primary_text_color"
+                android:inputType="numberDecimal|numberSigned"
+                android:text=""/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_save_obstacle"
+            style="@style/setting_save_btn_style"
+            android:layout_width="40dp"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/img_obstacle_divide_line"
+        style="@style/setting_item_divide_line_style"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

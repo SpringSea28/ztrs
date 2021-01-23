@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_item" />
+
+    <RelativeLayout
+        android:id="@+id/rl_self"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="本塔机坐标"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_self_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/zhankai" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_self_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="X坐标" />
+
+            <EditText
+                android:id="@+id/et_self_x"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="Y坐标" />
+
+            <EditText
+                android:id="@+id/et_self_y"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="塔高" />
+
+            <EditText
+                android:id="@+id/et_self_height"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="米" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/setting_save_btn_style"
+            android:layout_width="40dp"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_regional_restriction"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="区域限制"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_regional_restriction_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/arrow_more" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_regional_restriction_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_obstacle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_near_prevent_collision"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="临塔防碰撞设置"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_near_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/arrow_more" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_near_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="27dp"
+        android:paddingEnd="27dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="17dp"
+        android:background="@android:color/white"
+        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="0dp"
+                android:background="#190784FF"
+                android:gravity="center"
+                android:text="序号"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="0dp"
+                android:background="#190784FF"
+                android:gravity="center"
+                android:text="塔机编号"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="0dp"
+                android:background="#190784FF"
+                android:gravity="center"
+                android:text="X坐标"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="0dp"
+                android:background="#190784FF"
+                android:gravity="center"
+                android:text="Y坐标"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_near"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_alarm_setting"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="预警报警设置"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_alarm_setting_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/arrow_more" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_alarm_setting_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="高度" />
+
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:paddingStart="22dp"
+                android:text="预警值" />
+
+            <EditText
+                android:id="@+id/et_height_warn"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="米" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:paddingStart="22dp"
+                android:text="预警值" />
+
+            <EditText
+                android:id="@+id/et_height_alarm"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="米" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="距离" />
+
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:paddingStart="22dp"
+                android:text="预警值" />
+
+            <EditText
+                android:id="@+id/et_distance_warn"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="米" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:paddingStart="22dp"
+                android:text="预警值" />
+
+            <EditText
+                android:id="@+id/et_distance_alarm"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="米" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <Button
+            android:id="@+id/btn_save_alarm"
+            style="@style/setting_save_btn_style"
+            android:layout_width="40dp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+</LinearLayout>

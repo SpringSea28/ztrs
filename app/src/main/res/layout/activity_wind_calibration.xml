@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="calibration"
+            type="com.ztrs.zgj.device.bean.StaticParameterBean" />
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary_bg_color"
+    tools:context=".setting.TorqueCalibrationActivity">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_back"
+            style="@style/tower_primary_text_style"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="8sp"
+            android:drawableLeft="@mipmap/back"
+            android:drawablePadding="12dp"
+            android:text="返回"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="8sp"
+            android:textColor="#111D29"
+            android:text="标题" />
+        >
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="9dp"
+        android:layout_marginStart="12dp"
+        android:textColor="#111D29"
+        android:textSize="7sp"
+        android:text="预警值设定"/>
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="风力等级"/>
+        <RelativeLayout
+            style="@style/setting_item_edit_text_base_style"
+            android:background="@null"
+            android:paddingEnd="0dp"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/spinner_low_control"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:popupBackground="@android:color/white"
+                android:dropDownHorizontalOffset="0dp"
+                android:dropDownVerticalOffset = "17dp"
+                android:dropDownSelector="@drawable/setting_spinner_dropdown_bg_selector"
+                android:background="@drawable/setting_edittext_bg"
+                />
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="4dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/xuanze"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <View
+        style="@style/setting_item_divide_line_style"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="9dp"
+        android:layout_marginStart="12dp"
+        android:textColor="#111D29"
+        android:textSize="7sp"
+        android:text="报警值设定"/>
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="风力等级"/>
+         <RelativeLayout
+            style="@style/setting_item_edit_text_base_style"
+            android:background="@null"
+            android:paddingEnd="0dp"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/spinner_high_control"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:popupBackground="@android:color/white"
+                android:dropDownHorizontalOffset="0dp"
+                android:dropDownVerticalOffset = "17dp"
+                android:dropDownSelector="@drawable/setting_spinner_dropdown_bg_selector"
+                android:background="@drawable/setting_edittext_bg"
+                />
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="4dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/xuanze"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <View
+        style="@style/setting_item_divide_line_style"
+        />
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/setting_save_btn_style"/>
+
+</LinearLayout>
+</layout>

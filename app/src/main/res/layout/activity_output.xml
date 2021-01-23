@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="calibration"
+            type="com.ztrs.zgj.device.bean.RelayOutputControlBean" />
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary_bg_color"
+    tools:context=".setting.TorqueCalibrationActivity">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_back"
+            style="@style/tower_primary_text_style"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="8sp"
+            android:drawableLeft="@mipmap/back"
+            android:drawablePadding="12dp"
+            android:text="返回"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="8sp"
+            android:textColor="#111D29"
+            android:text="标题" />
+        >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:paddingTop="6dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_relay"
+                style="@style/setting_item_key_text_style"
+                android:layout_width="85dp"
+                android:layout_height="27dp"
+                android:paddingStart="0dp"
+                android:gravity="center"
+                android:background="#320784FF"
+                android:text="继电器"/>
+            <TextView
+                android:id="@+id/tv_use"
+                style="@style/setting_item_key_text_style"
+                android:layout_width="158dp"
+                android:layout_height="27dp"
+                android:layout_toRightOf="@id/tv_relay"
+                android:layout_marginLeft="1dp"
+                android:paddingStart="0dp"
+                android:gravity="center"
+                android:background="#320784FF"
+                android:text="用途"/>
+            <TextView
+                android:id="@+id/tv_action"
+                style="@style/setting_item_key_text_style"
+                android:layout_width="107dp"
+                android:layout_height="27dp"
+                android:layout_toRightOf="@id/tv_use"
+                android:layout_marginLeft="1dp"
+                android:paddingStart="0dp"
+                android:gravity="center"
+                android:background="#320784FF"
+                android:text="动作"/>
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_relay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/setting_save_btn_style"/>
+    </LinearLayout>
+
+
+</LinearLayout>
+</layout>

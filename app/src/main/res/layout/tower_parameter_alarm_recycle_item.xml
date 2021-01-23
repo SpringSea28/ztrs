@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:id="@+id/ll_tower_parameter_item"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="13dp"-->
+<!--    android:layout_weight="1"-->
+<!--    android:gravity="center"-->
+<!--    android:orientation="vertical">-->
+    <TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tv_alarm_value"
+        style="@style/tower_primary_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:textColor="#FF3702"
+        android:textSize="6sp"
+        android:gravity="center"
+        android:text="alarm"
+        android:background="@drawable/tower_parameter_alarm_item_bg"/>
+<!--</LinearLayout>-->

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_bg_color"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_item"/>
+
+    <RelativeLayout
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="音量设置"/>
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:layout_width="151dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_firmware_update"
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="固件升级"/>
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/more"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_soft_update"
+        style="@style/setting_item_style">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="软件升级" />
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/more"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        android:id="@+id/rl_reset"
+        style="@style/setting_item_style"
+        >
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:textColor="#FD3C01"
+            android:text="恢复出厂设置"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+</LinearLayout>

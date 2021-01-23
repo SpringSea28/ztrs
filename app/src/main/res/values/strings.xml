@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ZGJ</string>
+    <!--title-->
+
+    <!--tower parameter-->
+    <string name="tower_serial_number">吊塔编号：%x</string>
+    <string name="tower_specification_model">规格型号：%s</string>
+    <string name="tower_monitoring_number">监控编号：%x</string>
+    <string name="tower_magnification">倍率:%d</string>
+    <string name="tower_warn">报警</string>
+
+    <string name="parameter_wireRope">钢丝绳(%)</string>
+    <string name="parameter_max_load">荷载(%)</string>
+    <string name="parameter_height">高度(m)</string>
+    <string name="parameter_around">回转</string>
+    <string name="parameter_torque">力矩(KN.m)</string>
+    <string name="parameter_load">载重(t)</string>
+    <string name="parameter_wind">风力</string>
+    <string name="parameter_amplitude">幅度(m)</string>
+
+
+    <string name="setting_re_input">请重新输入</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

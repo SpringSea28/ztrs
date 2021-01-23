@@ -1,0 +1,87 @@
+<resources>
+    <string-array name="alarms">
+        <item>钢丝绳报警</item>
+        <item>荷载报警</item>
+        <item>高度报警</item>
+        <item>回转报警</item>
+        <item>力矩绳报警</item>
+        <item>载重绳报警</item>
+        <item>风力绳报警</item>
+        <item>幅度绳报警</item>
+    </string-array>
+
+    <string-array name="tower_model">
+        <item>6051</item>
+        <item>4808</item>
+        <item>5010</item>
+        <item>5013</item>
+        <item>5510</item>
+        <item>5513</item>
+        <item>5610</item>
+        <item>5613</item>
+        <item>6010</item>
+        <item>6013</item>
+    </string-array>
+    <string-array name="control">
+        <item>NC</item>
+        <item>K1</item>
+        <item>K2</item>
+        <item>K3</item>
+        <item>K4</item>
+        <item>K5</item>
+        <item>K6</item>
+        <item>K7</item>
+        <item>K8</item>
+        <item>K9</item>
+        <item>K10</item>
+        <item>K11</item>
+    </string-array>
+    <string-array name="output">
+        <item>关</item>
+        <item>开</item>
+        <item>NC</item>
+    </string-array>
+    <string-array name="wind">
+        <item>0级</item>
+        <item>1级</item>
+        <item>2级</item>
+        <item>3级</item>
+        <item>4级</item>
+        <item>5级</item>
+        <item>6级</item>
+        <item>7级</item>
+        <item>8级</item>
+        <item>9级</item>
+        <item>10级</item>
+        <item>11级</item>
+        <item>12级</item>
+    </string-array>
+
+    <string-array name="relay">
+        <item>K1</item>
+        <item>K2</item>
+        <item>K3</item>
+        <item>K4</item>
+        <item>K5</item>
+        <item>K6</item>
+        <item>K7</item>
+        <item>K8</item>
+        <item>K9</item>
+        <item>K10</item>
+        <item>K11</item>
+    </string-array>
+
+    <string-array name="use">
+        <item>过载报警输出控制</item>
+        <item>力矩预警输出控制</item>
+        <item>力矩报警输出控制</item>
+        <item>高度高报警输出控制</item>
+        <item>高度低报警输出控制</item>
+        <item>幅度高报警输出控制</item>
+        <item>幅度低报警输出控制</item>
+        <item>回转高报警输出控制</item>
+        <item>回转低报警输出控制</item>
+        <item>人脸识别锁机控制</item>
+        <item>无控制</item>
+    </string-array>
+</resources>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_item" />
+
+    <RelativeLayout
+        android:id="@+id/rl_wirerope_parameter"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="参数标定"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_wirerope_parameter_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/zhankai" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_wirerope_parameter_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="门限" />
+
+            <EditText
+                android:id="@+id/et_threshold"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="%" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="轻度损伤" />
+
+            <EditText
+                android:id="@+id/et_light_damage"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="%" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="中度损伤" />
+
+            <EditText
+                android:id="@+id/et_middle_damage"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="%" />
+
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="重度损伤" />
+
+            <EditText
+                android:id="@+id/et_severe_damage"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="%" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="严重损伤" />
+
+            <EditText
+                android:id="@+id/et_damage"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="%" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="报废" />
+
+            <EditText
+                android:id="@+id/et_scrapped"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="%" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="延时" />
+
+            <EditText
+                android:id="@+id/et_delay"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="秒" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="检测限次" />
+
+            <EditText
+                android:id="@+id/et_detect_count"
+                style="@style/setting_item_edit_int_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="次" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="模式" />
+
+            <EditText
+                android:id="@+id/et_mode"
+                style="@style/setting_item_edit_int_style"
+                android:text="" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="报警间隔时间" />
+
+            <EditText
+                android:id="@+id/et_alarm_interval"
+                style="@style/setting_item_edit_text_float_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="秒" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+
+        <RelativeLayout style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="报警上限次数" />
+
+            <EditText
+                android:id="@+id/et_alarm_count"
+                style="@style/setting_item_edit_int_style"
+                android:text="" />
+
+            <TextView
+                style="@style/setting_item_unit_style"
+                android:text="次" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/setting_save_btn_style" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_wirerope_detect"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="检测设置"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_wirerope_detect_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/arrow_more" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_wirerope_detect_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rl_start_detect"
+            style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="开始检测" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+        <RelativeLayout
+            android:id="@+id/rl_stop_detect"
+            style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="停止检测" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+        <RelativeLayout
+            android:id="@+id/rl_query_state"
+            style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="查询状态" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+        <RelativeLayout
+            android:id="@+id/rl_reset"
+            style="@style/setting_item_style">
+
+            <TextView
+                style="@style/setting_item_key_text_style"
+                android:text="复位" />
+        </RelativeLayout>
+
+        <ImageView style="@style/setting_item_divide_line_style" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_wirerope_system"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="系统参数"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_wirerope_system_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/arrow_more" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_wirerope_work"
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp"
+        android:background="#0784FF">
+
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="工作参数"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_wirerope_work_show"
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/arrow_more" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_clear"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:background="@android:color/white"
+        android:textColor="#FD3C01"
+        android:textSize="7sp"
+        android:text="清除参数"/>
+</LinearLayout>

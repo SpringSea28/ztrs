@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_tower_parameter_item"
+    android:layout_width="36dp"
+    android:layout_height="32dp"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_value"
+        style="@style/tower_primary_text_style"
+        android:textColor="@color/tower_parameter_normal_text_color"
+        android:textSize="8dp"
+        android:text="value"/>
+    <TextView
+        android:id="@+id/tv_warn"
+        style="@style/tower_primary_text_style"
+        android:textColor="@color/tower_parameter_warn_text_color"
+        android:textSize="6dp"
+        android:text="@string/tower_warn"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_key"
+        style="@style/tower_primary_text_style"
+        android:text="key"/>
+
+</LinearLayout>

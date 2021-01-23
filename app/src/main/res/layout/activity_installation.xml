@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_bg_color"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_item"/>
+
+    <RelativeLayout
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="监控主机id" />
+        <TextView
+            android:id="@+id/et_host_id"
+            style="@style/setting_item_value_text_style"
+            android:text=""
+           />
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+       />
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="塔机编号" />
+        <EditText
+            android:id="@+id/et_tower_number"
+            style="@style/setting_item_edit_byte_style"
+            android:text=""
+            />
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="塔机型号" />
+        <EditText
+            android:id="@+id/et_tower_model"
+            style="@style/setting_item_edit_text_style"
+            android:maxLength="15"
+            android:text=""
+            />
+
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="大臂长" />
+        <TextView
+            android:id="@+id/et_big_arm_length"
+            style="@style/setting_item_value_text_style"
+            android:text=""
+            />
+        <TextView
+            style="@style/setting_item_unit_style"
+            android:text="米"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="后臂长" />
+        <EditText
+            android:id="@+id/et_back_arm_length"
+            style="@style/setting_item_edit_text_float_style"
+            android:text=""
+            />
+        <TextView
+            style="@style/setting_item_unit_style"
+            android:text="米"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="塔帽高度" />
+        <EditText
+            android:id="@+id/et_tower_cap_height"
+            style="@style/setting_item_edit_text_float_style"
+            android:text=""
+            />
+        <TextView
+            style="@style/setting_item_unit_style"
+            android:text="米"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="塔身高度" />
+        <EditText
+            android:id="@+id/et_tower_body_height"
+            style="@style/setting_item_edit_text_float_style"
+            android:text=""
+            />
+        <TextView
+            style="@style/setting_item_unit_style"
+            android:text="米"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="倍率" />
+        <TextView
+            android:id="@+id/tv_magnification"
+            style="@style/setting_item_edit_byte_style"
+            android:background="@null"
+            android:text="倍率"
+            android:textColor="@android:color/black"
+            />
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="标准节规格" />
+        <EditText
+            android:id="@+id/et_standard_section"
+            style="@style/setting_item_edit_text_float_style"
+            android:text=""
+            />
+        <TextView
+            style="@style/setting_item_unit_style"
+            android:text="米"/>
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_torque_cruve"
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="力矩曲线" />
+        <ImageView
+            android:layout_width="4dp"
+            android:layout_height="7dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/more"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/setting_save_btn_style"/>
+</LinearLayout>

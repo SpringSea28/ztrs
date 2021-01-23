@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_bg_color"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_item"/>
+
+    <RelativeLayout
+        style="@style/setting_item_style"
+        android:layout_marginTop="7dp">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="数据模板" />
+        <RelativeLayout
+            style="@style/setting_item_edit_text_base_style"
+            android:background="@null"
+            android:paddingEnd="0dp"
+            android:gravity="center_vertical">
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner_model"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:spinnerMode="dropdown"-->
+<!--                android:popupBackground="@android:color/white"-->
+<!--                android:dropDownHorizontalOffset="0dp"-->
+<!--                android:dropDownVerticalOffset = "17dp"-->
+<!--                android:dropDownSelector="@drawable/setting_spinner_dropdown_bg_selector"-->
+<!--                android:background="@drawable/setting_edittext_bg"-->
+<!--                />-->
+            <TextView
+                android:id="@+id/spinner_model"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="7sp"
+                android:textColor="#111D29"
+                android:paddingStart="8dp"
+                android:gravity="center_vertical|start"
+                android:background="@drawable/setting_edittext_bg"
+                />
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="4dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/xuanze"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="大臂长" />
+        <TextView
+            android:id="@+id/tv_big_arm_length"
+            style="@style/setting_item_value_text_style"
+            android:text=""
+            />
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="倍率" />
+        <TextView
+            android:id="@+id/tv_magnification"
+            style="@style/setting_item_edit_byte_style"
+            android:background="@null"
+            android:text=""
+            android:textColor="@android:color/black"
+            />
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_text_style"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/setting_item_key_padding_start"
+            android:text="最大载重" />
+        <TextView
+            android:id="@+id/tv_weight"
+            style="@style/setting_item_value_text_style"
+            android:text=""
+            />
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <TextView
+        style="@style/setting_item_key_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:text="* 系统自带常用的多种塔机型号的力矩曲线，若核对说明书参数与下表不一致的，可依据说明书对表格进行修改，然后点击保存。"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_curve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:layout_marginTop="10dp"/>
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/setting_save_btn_style"/>
+</LinearLayout>
