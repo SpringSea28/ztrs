@@ -1,5 +1,7 @@
 package com.ztrs.zgj.device.protocol;
 
+import android.util.Log;
+
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.device.bean.AmplitudeCalibrationBean;
 import com.ztrs.zgj.device.eventbus.AmplitudeCalibrationMessage;
@@ -65,6 +67,10 @@ public class AmplitudeCalibrationProtocol extends BaseProtocol{
         amplitudeCalibrationBean.setLowWarnValue(lowWarnValue);
         i = 16;
         byte lowAlarmRelayControl = data[i];
+        if(lowAlarmRelayControl >11){
+            Log.e("wch","lowAlarmRelayControl error, reset");
+            lowAlarmRelayControl = 0;
+        }
         amplitudeCalibrationBean.setLowAlarmRelayControl(lowAlarmRelayControl);
         i = i+1;
         byte lowAlarmRelayOutput = data[i];

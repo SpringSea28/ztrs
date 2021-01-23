@@ -57,6 +57,7 @@ public abstract class BaseProtocol {
         if(baseMessage == null){
             return;
         }
+        Log.e("wch","ackReceive");
         resetCountDownTimer();
         BaseMessage msg = baseMessage;
         baseMessage = null;
@@ -69,6 +70,7 @@ public abstract class BaseProtocol {
             return;
         }
         resetCountDownTimer();
+        Log.e("wch","ackReceiveError");
         BaseMessage msg = baseMessage;
         baseMessage = null;
         msg.setResult(BaseMessage.RESULT_FAIL);
