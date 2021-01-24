@@ -1,7 +1,5 @@
 package com.ztrs.zgj.setting;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,22 +12,25 @@ import android.widget.Toast;
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
-import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RegisterInfoBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
+import com.ztrs.zgj.main.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class InstallationActivity extends AppCompatActivity {
+public class InstallationActivity extends BaseActivity {
 
     private static final String TAG = InstallationActivity.class.getSimpleName();
 
@@ -84,6 +85,17 @@ public class InstallationActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(etHostId);
+        list.add(etTowerNumber);
+        list.add(etBackArmLength);
+        list.add(etTowerCapHeight);
+        list.add(etTowerBodyHeight);
+        list.add(etStandardSection);
+        return list;
+    }
 
     private void initData(){
         StaticParameterBean staticParameterBean = DeviceManager.getInstance().getZtrsDevice().getStaticParameterBean();

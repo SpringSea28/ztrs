@@ -65,6 +65,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        stopQuery();
         EventBus.getDefault().unregister(this);
         bind.unbind();
         super.onDestroy();
@@ -144,7 +145,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private long lastClick;
-    @OnClick({R.id.btn_retry})
+    @OnClick({R.id.btn_retry,R.id.btn_test})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_retry:
@@ -164,7 +165,10 @@ public class SplashActivity extends AppCompatActivity {
                     Toast.makeText(SplashActivity.this,"初始化中，请稍后",Toast.LENGTH_SHORT).show();
                 }
                 break;
-
+            case R.id.btn_test:
+                startActivity(new Intent(this,MainActivity.class));
+                finish();
+                break;
         }
     }
 
@@ -198,6 +202,7 @@ public class SplashActivity extends AppCompatActivity {
             return false;
         }
         startActivity(new Intent(this,MainActivity.class));
+        finish();
         return true;
     }
 

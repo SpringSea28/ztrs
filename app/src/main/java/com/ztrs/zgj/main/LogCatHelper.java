@@ -59,8 +59,8 @@ public class LogCatHelper {
         public void start(){
             if(logThread == null){
                 logThread = new Thread(new LogRunnable(appid, dirPath));
+                logThread.start();
             }
-            logThread.start();
         }
 
         public void stop(){

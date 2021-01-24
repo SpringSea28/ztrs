@@ -22,11 +22,14 @@ import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.bean.WeightCalibrationBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
+import com.ztrs.zgj.main.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -36,7 +39,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-public class SlopeCalibrationActivity extends AppCompatActivity {
+public class SlopeCalibrationActivity extends BaseActivity {
 
     static String TAG = SlopeCalibrationActivity.class.getSimpleName();
 
@@ -64,6 +67,16 @@ public class SlopeCalibrationActivity extends AppCompatActivity {
         stopQuery();
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(binding.tvHighWarnValue);
+        list.add(binding.tvHighAlarmValue);
+        list.add(binding.tvHighWarnValueY);
+        list.add(binding.tvHighAlarmValueY);
+        return list;
     }
 
     void initData() {

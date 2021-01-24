@@ -17,17 +17,21 @@ import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.WireRopeDetectionParametersSetBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
+import com.ztrs.zgj.main.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class WireRopeCalibrationActivity extends AppCompatActivity {
+public class WireRopeCalibrationActivity extends BaseActivity {
 
     private static final String TAG = WireRopeCalibrationActivity.class.getSimpleName();
 
@@ -89,6 +93,20 @@ public class WireRopeCalibrationActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
         binder.unbind();
         super.onDestroy();
+    }
+
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(etThreshold);
+        list.add(etLightDamage);
+        list.add(etMiddleDamage);
+        list.add(etSevereDamage);
+        list.add(etDamage);
+        list.add(etScrapped);
+        list.add(etDelay);
+        list.add(etMode);
+        return list;
     }
 
 

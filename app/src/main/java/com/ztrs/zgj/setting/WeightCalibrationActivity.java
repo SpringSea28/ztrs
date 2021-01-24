@@ -21,12 +21,14 @@ import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
 import com.ztrs.zgj.device.eventbus.SensorRealtimeDataMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCurveMessage;
 import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
+import com.ztrs.zgj.main.BaseActivity;
 import com.ztrs.zgj.setting.bean.TorqueCurveBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +39,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-public class WeightCalibrationActivity extends AppCompatActivity {
+public class WeightCalibrationActivity extends BaseActivity {
 
     static String TAG = WeightCalibrationActivity.class.getSimpleName();
 
@@ -66,6 +68,18 @@ public class WeightCalibrationActivity extends AppCompatActivity {
         stopQuery();
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(binding.tvCode1Value);
+        list.add(binding.tvCalibration1Value);
+        list.add(binding.tvCode2Value);
+        list.add(binding.tvCalibration2Value);
+        list.add(binding.tvLowAlarmValue);
+        list.add(binding.tvHighAlarmValue);
+        return list;
     }
 
     void initData() {
@@ -364,6 +378,14 @@ public class WeightCalibrationActivity extends AppCompatActivity {
             Toast.makeText(this,"力矩曲线未获取，高度标定失败",Toast.LENGTH_LONG).show();
             return;
         }
+
+        byte highControl = (byte) binding.spinnerHighControl.getSelectedItemPosition();
+        byte highOutput = (byte) binding.spinnerHighOutput.getSelectedItemPosition();
+        if(highControl != 0 && highOutput == 2){
+            Toast.makeText(this,"高报警动作不能为NC",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         calibrationBean = new WeightCalibrationBean();
         calibrationBean.setCurrent1(code1);
         calibrationBean.setCalibration1((int) (calibration1 * 100));
@@ -375,12 +397,13 @@ public class WeightCalibrationActivity extends AppCompatActivity {
         calibrationBean.setHighWarnValue(highWarnSend);
         int highAlarmSend = (int)(1.0*currentRatedLoad*highAlarm/100);
         calibrationBean.setHighAlarmValue(highAlarmSend);
-        calibrationBean.setHighAlarmRelayControl((byte) binding.spinnerHighControl.getSelectedItemPosition());
-        calibrationBean.setHighAlarmRelayOutput((byte) binding.spinnerHighOutput.getSelectedItemPosition());
+        calibrationBean.setHighAlarmRelayControl(highControl);
+        calibrationBean.setHighAlarmRelayOutput(highOutput);
         DeviceManager.getInstance().weightCalibration(calibrationBean);
     }
 
     //-----------------------------------------------------------//
+    int i= 0;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSensorRealTime(SensorRealtimeDataMessage msg){
         LogUtils.LogI(TAG,"onSensorRealTime: "+msg.getCmdType());
@@ -388,8 +411,12 @@ public class WeightCalibrationActivity extends AppCompatActivity {
         if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 updateCurSensorValue(getSensorValue());
+                i= 0;
             }else {
-                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_SHORT).show();
+                if(i%4== 0) {
+                    Toast.makeText(this, "获取传感器实时数据失败", Toast.LENGTH_SHORT).show();
+                }
+                i++;
             }
         }
     }

@@ -21,14 +21,18 @@ import com.ztrs.zgj.device.bean.HeightCalibrationBean;
 import com.ztrs.zgj.device.bean.TorqueCalibrationBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCalibrationMessage;
+import com.ztrs.zgj.main.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.annotations.NonNull;
 
-public class TorqueCalibrationActivity extends AppCompatActivity {
+public class TorqueCalibrationActivity extends BaseActivity {
 
     TorqueCalibrationBean calibrationBean;
     ActivityTorqueCalibrationBinding binding;
@@ -42,6 +46,14 @@ public class TorqueCalibrationActivity extends AppCompatActivity {
         initData();
         initUi();
         DeviceManager.getInstance().queryTorqueCalibration();
+    }
+
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(binding.tvLowAlarmValue);
+        list.add(binding.tvHighAlarmValue);
+        return list;
     }
 
     private void initData(){
@@ -122,6 +134,20 @@ public class TorqueCalibrationActivity extends AppCompatActivity {
             highAlarm = Integer.valueOf(highAlarmStr);
         } catch (NumberFormatException e) {
             binding.tvHighAlarmValue.setHint(reInput);
+            return;
+        }
+
+        byte lowControl = (byte) binding.spinnerLowControl.getSelectedItemPosition();
+        byte lowOutput = (byte) binding.spinnerLowOutput.getSelectedItemPosition();
+        if(lowControl != 0 && lowOutput == 2){
+            Toast.makeText(this,"低报警动作不能为NC",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        byte highControl = (byte) binding.spinnerHighControl.getSelectedItemPosition();
+        byte highOutput = (byte) binding.spinnerHighOutput.getSelectedItemPosition();
+        if(highControl != 0 && highOutput == 2){
+            Toast.makeText(this,"高报警动作不能为NC",Toast.LENGTH_LONG).show();
             return;
         }
 

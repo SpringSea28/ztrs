@@ -186,6 +186,7 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
     }
 
     //-----------------------------------------------------------//
+    int i= 0;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSensorRealTime(SensorRealtimeDataMessage msg){
         LogUtils.LogI(TAG,"onSensorRealTime: "+msg.getCmdType());
@@ -193,8 +194,12 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
         if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 updateCurSensorValue(getSensorValue());
+                i= 0;
             }else {
-                Toast.makeText(this,"获取传感器实时数据失败",Toast.LENGTH_SHORT).show();
+                if (i % 4 == 0) {
+                    Toast.makeText(this, "获取传感器实时数据失败", Toast.LENGTH_SHORT).show();
+                }
+                i++;
             }
         }
     }

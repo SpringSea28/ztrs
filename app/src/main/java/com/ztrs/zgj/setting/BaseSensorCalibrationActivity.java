@@ -8,14 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.ActivityBaseSensorCalibrationBinding;
 import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.bean.CalibrationBean;
+import com.ztrs.zgj.main.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -25,7 +29,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-public abstract class BaseSensorCalibrationActivity extends AppCompatActivity {
+public abstract class BaseSensorCalibrationActivity extends BaseActivity {
 
     static String TAG;
 
@@ -80,6 +84,18 @@ public abstract class BaseSensorCalibrationActivity extends AppCompatActivity {
         stopQuery();
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(binding.tvCode1Value);
+        list.add(binding.tvCalibration1Value);
+        list.add(binding.tvCode2Value);
+        list.add(binding.tvCalibration2Value);
+        list.add(binding.tvLowAlarmValue);
+        list.add(binding.tvHighAlarmValue);
+        return list;
     }
 
 
@@ -334,6 +350,20 @@ public abstract class BaseSensorCalibrationActivity extends AppCompatActivity {
             highAlarm = Float.valueOf(highAlarmStr);
         } catch (NumberFormatException e) {
             binding.tvHighAlarmValue.setHint(reInput);
+            return;
+        }
+
+        byte lowControl = (byte) binding.spinnerLowControl.getSelectedItemPosition();
+        byte lowOutput = (byte) binding.spinnerLowOutput.getSelectedItemPosition();
+        if(lowControl != 0 && lowOutput == 2){
+            Toast.makeText(this,"低报警动作不能为NC",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        byte highControl = (byte) binding.spinnerHighControl.getSelectedItemPosition();
+        byte highOutput = (byte) binding.spinnerHighOutput.getSelectedItemPosition();
+        if(highControl != 0 && highOutput == 2){
+            Toast.makeText(this,"高报警动作不能为NC",Toast.LENGTH_LONG).show();
             return;
         }
 
