@@ -913,6 +913,16 @@ public class Test {
         DeviceManager.getInstance().onDataReceive(byteFromStr);
     }
 
+    public void testVersion() {
+        String str = "b0 0f 00 00 50 21 01 24 21 05 25 10 10 56 ae";
+        byte[] byteFromStr = getByteFromStr(str);
+        LogUtils.LogE(TAG, " bytefrom str: " + byteFromStr.length);
+        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+    }
+
 
     private byte[] getByteFromStr(String str) {
         String[] s = str.split(" ");

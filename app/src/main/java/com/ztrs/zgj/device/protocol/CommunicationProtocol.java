@@ -61,6 +61,8 @@ public class CommunicationProtocol{
     public WireRopeOrderSetProtocol wireRopeOrderSetProtocol;
     public PreventCollisionCalibrationProtocol preventCollisionCalibrationProtocol;
     public PreventCollisionNearProtocol preventCollisionNearProtocol;
+    public DeviceUpdateProtocol deviceUpdateProtocol;
+    public DeviceVersionCheckProtocol deviceVersionCheckProtocol;
 
 
     public CommunicationProtocol(DeviceOperateInterface deviceOperateInterface){
@@ -89,6 +91,8 @@ public class CommunicationProtocol{
         wireRopeOrderSetProtocol = new WireRopeOrderSetProtocol(deviceOperateInterface);
         preventCollisionCalibrationProtocol = new PreventCollisionCalibrationProtocol(deviceOperateInterface);
         preventCollisionNearProtocol = new PreventCollisionNearProtocol(deviceOperateInterface);
+        deviceUpdateProtocol = new DeviceUpdateProtocol(deviceOperateInterface);
+        deviceVersionCheckProtocol = new DeviceVersionCheckProtocol(deviceOperateInterface);
     }
 
     public void dataParse(byte[] data) {
@@ -213,6 +217,9 @@ public class CommunicationProtocol{
             case PreventCollisionNearProtocol.CMD_NEAR:
                 preventCollisionNearProtocol.parseCmd(data);
                 break;
+            case DeviceVersionCheckProtocol.CMD_VERSION_CHECK:
+                deviceVersionCheckProtocol.parseCmd(data);
+                break;
         }
     }
 
@@ -278,6 +285,12 @@ public class CommunicationProtocol{
                 break;
             case PreventCollisionCalibrationProtocol.CMD_PREVENT_COLLISION_CALIBRATION:
                 preventCollisionCalibrationProtocol.parseAck(data);
+                break;
+            case DeviceUpdateProtocol.CMD_UPDATE:
+                deviceUpdateProtocol.parseAck(data);
+                break;
+            case DeviceVersionCheckProtocol.CMD_VERSION_CHECK:
+                deviceVersionCheckProtocol.parseAck(data);
                 break;
         }
     }

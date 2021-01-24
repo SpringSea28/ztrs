@@ -23,6 +23,7 @@ public class ZtrsDevice {
     TorqueCurveApplyBean torqueCurveApplyBean = new TorqueCurveApplyBean();
     PreventCollisionCalibrationBean preventCollisionCalibrationBean = new PreventCollisionCalibrationBean();
     PreventCollisionNearBean preventCollisionNearBean = new PreventCollisionNearBean();
+    DeviceVersionBean deviceVersionBean = new DeviceVersionBean();
 
     public UnLockCarBean getUnLockCarBean() {
         return unLockCarBean;
@@ -190,5 +191,13 @@ public class ZtrsDevice {
 
     public void setPreventCollisionNearBean(PreventCollisionNearBean preventCollisionNearBean) {
         this.preventCollisionNearBean = preventCollisionNearBean;
+    }
+
+    public DeviceVersionBean getDeviceVersionBean() {
+        return deviceVersionBean;
+    }
+
+    public void setDeviceVersionBean(DeviceVersionBean deviceVersionBean) {
+        this.deviceVersionBean = deviceVersionBean;
     }
 }

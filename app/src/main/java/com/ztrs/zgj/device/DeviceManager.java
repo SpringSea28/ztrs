@@ -304,6 +304,16 @@ public class DeviceManager implements DeviceOperateInterface {
         communicationProtocol.preventCollisionCalibrationProtocol.preventCollisionCalibration(bean);
     }
 
+    //3.24 设备升级
+    public void deviceUpdate(){
+        communicationProtocol.deviceUpdateProtocol.deviceUpdate();
+    }
+
+    //3.25 设备版本号
+    public void deviceVersionCheck(){
+        communicationProtocol.deviceVersionCheckProtocol.deviceVersionCheck();
+    }
+
     @Override
     public void sendDataToDevice(byte[] data){
         LogUtils.LogE(TAG,"send: "+LogUtils.toHexString(data));
