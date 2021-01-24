@@ -153,39 +153,8 @@ public class MainActivity extends AppCompatActivity  {
         EventBus.getDefault().register(this);
         initView();
         display();
-        DeviceManager.getInstance().openSerial();
-        requestPermission();
     }
 
-    private void requestPermission(){
-        if (ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            //没有权限则申请权限
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-        }else {
-            LogCatHelper.getInstance(this,null).start();
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == 1 ){
-            if (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Log.e("wch","get permission");
-                LogCatHelper.getInstance(this,null).start();
-                //用户允许该权限
-
-            } else {
-                Log.e("wch","not get permission");
-                //用户拒绝该权限
-
-            }
-            return;
-        }
-    }
 
 
 
@@ -276,22 +245,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-    private int QUERY_IDLE = 0;
-    private int QUERY_START = 1;
-    private int QUERY_FINISH_SUCCESS = 2;
-    private int QUERY_FINISH_FAIL = 3;
-    private int queryStaticParameterResult;
-    private int isInitQuerySuccess(){
-        if(queryStaticParameterResult==QUERY_FINISH_FAIL){
-            return QUERY_FINISH_FAIL;
-        }
 
-        if(queryStaticParameterResult == QUERY_FINISH_SUCCESS){
-            return QUERY_FINISH_SUCCESS;
-        }
-
-        return 0;
-    }
     //----------------------subscribe------------------------------//
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSerialOpen(SerialPortOpenResultMsg msg){
@@ -309,12 +263,10 @@ public class MainActivity extends AppCompatActivity  {
         LogUtils.LogI(TAG,"onStaticParameter: "+msg.getResult());
         if(msg.getCmdType() == BaseMessage.TYPE_QUERY) {
             if (msg.getResult() == BaseMessage.RESULT_OK) {
-                queryStaticParameterResult = QUERY_FINISH_SUCCESS;
+
             } else {
-                queryStaticParameterResult = QUERY_FINISH_FAIL;
                 Toast.makeText(this, "查询静态参数查询命令发送失败", Toast.LENGTH_LONG).show();
             }
-            isInitQuerySuccess();
         }
     }
 

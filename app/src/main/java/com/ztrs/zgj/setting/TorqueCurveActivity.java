@@ -385,6 +385,14 @@ public class TorqueCurveActivity extends AppCompatActivity {
 
                 Toast.makeText(this,"力矩曲线保存失败",Toast.LENGTH_LONG).show();
             }
+        }else if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+                initData();
+                initView();
+            }else {
+
+                Toast.makeText(this,"力矩曲线查询失败",Toast.LENGTH_LONG).show();
+            }
         }
     }
 
