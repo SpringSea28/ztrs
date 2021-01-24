@@ -106,6 +106,7 @@ public class WindCalibrationActivity extends AppCompatActivity {
                 DeviceManager.getInstance().getZtrsDevice().setStaticParameterBean(saveCalibration);
                 initData();
                 updateCalibration();
+                Toast.makeText(this,"风力标定成功",Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,"风力标定失败",Toast.LENGTH_LONG).show();
             }

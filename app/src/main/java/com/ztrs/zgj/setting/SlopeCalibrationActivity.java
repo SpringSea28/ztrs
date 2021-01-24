@@ -275,6 +275,7 @@ public class SlopeCalibrationActivity extends AppCompatActivity {
                 DeviceManager.getInstance().getZtrsDevice().setStaticParameterBean(saveCalibrationBean);
                 initData();
                 updateCalibration();
+                Toast.makeText(this,"倾角标定成功",Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,"倾角标定失败",Toast.LENGTH_LONG).show();
             }

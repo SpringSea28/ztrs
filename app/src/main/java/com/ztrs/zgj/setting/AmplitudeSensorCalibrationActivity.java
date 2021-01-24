@@ -215,6 +215,7 @@ public class AmplitudeSensorCalibrationActivity extends BaseSensorCalibrationAct
                 DeviceManager.getInstance().getZtrsDevice().setAmplitudeCalibrationBean(amplitudeCalibrationBean);
                 initAmplitudeCalibrationBean();
                 updateCalibration();
+                Toast.makeText(this,"幅度标定成功",Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,"幅度标定失败",Toast.LENGTH_LONG).show();
             }

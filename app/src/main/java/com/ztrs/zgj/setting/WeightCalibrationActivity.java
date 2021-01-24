@@ -412,6 +412,7 @@ public class WeightCalibrationActivity extends AppCompatActivity {
                 DeviceManager.getInstance().getZtrsDevice().setWeightCalibrationBean(calibrationBean);
                 initCalibrationBean();
                 updateCalibration();
+                Toast.makeText(this,"载重标定成功",Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,"载重标定失败",Toast.LENGTH_LONG).show();
             }

@@ -217,6 +217,7 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
                 DeviceManager.getInstance().getZtrsDevice().setAroundCalibrationBean(aroundCalibrationBean);
                 initAroundCalibrationBean();
                 updateCalibration();
+                Toast.makeText(this,"回转标定成功",Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,"回转标定失败",Toast.LENGTH_LONG).show();
             }

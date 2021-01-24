@@ -145,6 +145,7 @@ public class TorqueCalibrationActivity extends AppCompatActivity {
                 DeviceManager.getInstance().getZtrsDevice().setTorqueCalibrationBean(saveCalibration);
                 initData();
                 updateCalibration();
+                Toast.makeText(this,"力矩标定成功",Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this,"力矩标定失败",Toast.LENGTH_LONG).show();
             }
