@@ -35,7 +35,7 @@ public class DeviceVersionCheckProtocol extends BaseProtocol{
     }
 
     public void parseAck(byte[] data){
-        if(data.length == 1){
+        if(data.length == 2){
             ackReceive(data);
         }else {
             LogUtils.LogE(TAG,"data length error");

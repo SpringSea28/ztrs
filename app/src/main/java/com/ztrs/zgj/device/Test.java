@@ -823,7 +823,8 @@ public class Test {
 
     //协议3.27 设备注册信息
     public void testOnReceiveRegisterInfo() {
-        String str = "B0 33 00 00 01 20 11 18 14 43 00 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 54 43 32 30 32 31 30 31 30 30 30 31 01 00 01 00 01 04 01 00 83 23";
+//        String str = "B0 33 00 00 01 20 11 18 14 43 00 31 32 33 34 35 36 37 38 39 30 31 32 33 34 35 36 37 38 54 43 32 30 32 31 30 31 30 30 30 31 01 00 01 00 01 04 01 00 83 23";
+        String str = "B0 33 00 00 01 21 01 28 21 52 06 54 33 41 32 30 32 31 30 31 30 30 30 33 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 10 04 01 07 01 00 E1 9D";
         byte[] byteFromStr = getByteFromStr(str);
         LogUtils.LogE(TAG, " bytefrom str: " + byteFromStr.length);
         int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);

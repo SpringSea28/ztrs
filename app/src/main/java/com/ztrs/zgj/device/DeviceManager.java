@@ -314,6 +314,10 @@ public class DeviceManager implements DeviceOperateInterface {
         communicationProtocol.deviceVersionCheckProtocol.deviceVersionCheck();
     }
 
+    public void queryRegisterInfo(){
+        communicationProtocol.registerInfoProtocol.queryRegisterInfo();
+    }
+
     @Override
     public void sendDataToDevice(byte[] data){
         LogUtils.LogE(TAG,"send: "+LogUtils.toHexString(data));

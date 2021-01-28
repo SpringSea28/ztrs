@@ -5,6 +5,7 @@ import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.RegisterInfoBean;
 import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
 import com.ztrs.zgj.device.eventbus.RegisterInfoMessage;
+import com.ztrs.zgj.device.eventbus.UnlockCarMessage;
 
 public class RegisterInfoProtocol extends BaseProtocol{
     private static final String TAG= RegisterInfoProtocol.class.getSimpleName();
@@ -32,7 +33,12 @@ public class RegisterInfoProtocol extends BaseProtocol{
     }
 
     public void parseAck(byte[] data){
-
+        boolean success = parseData(data);
+        if(!success){
+            ackReceiveError();
+            return;
+        }
+        ackReceive(data);
     }
 
     private boolean parseData(byte[] data){
@@ -50,5 +56,11 @@ public class RegisterInfoProtocol extends BaseProtocol{
         deviceOperateInterface.sendDataToDevice(data);
     }
 
+    public void queryRegisterInfo(){
+        byte[] cmd = CommunicationProtocol.packetCmd(CMD_REGISTER_INFO,new byte[]{});
+        deviceOperateInterface.sendDataToDevice(cmd);
+        RegisterInfoMessage msg = new RegisterInfoMessage(CommunicationProtocol.seq++,cmd);
+        cmdSend(msg);
+    }
 
 }

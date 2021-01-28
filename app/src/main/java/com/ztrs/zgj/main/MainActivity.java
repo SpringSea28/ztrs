@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity  {
 //                test.testOnReceiveTorqueCurve();
 //                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
+//                test.testOnReceiveRegisterInfo();
             }
         });
         EventBus.getDefault().register(this);

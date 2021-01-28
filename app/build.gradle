@@ -10,8 +10,8 @@ android {
         applicationId "com.ztrs.zgj"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 15
-        versionName "1.0.15_test"
+        versionCode 16
+        versionName "1.0.16_test"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -71,6 +71,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    def lifecycle_version = "2.2.0"
+    def arch_version = "2.1.0"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+
     implementation 'org.greenrobot:eventbus:3.2.0'
 
     implementation 'io.reactivex.rxjava2:rxjava:2.2.20'
@@ -79,9 +86,19 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
     implementation  'com.umeng.umsdk:common:9.3.3' // 版本号(必选)
     implementation  'com.umeng.umsdk:asms:1.1.4' // asms包依赖(必选)
     implementation 'com.umeng.umsdk:apm:1.1.0'
+
+
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    implementation 'com.yanzhenjie:permission:2.0.3'
 
     implementation(project(':SerialPortLibrary'))
 }

@@ -7,70 +7,149 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
+import com.ztrs.zgj.databinding.ActivityFirmwareUpdateBinding;
 import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.DeviceVersionBean;
+import com.ztrs.zgj.device.bean.RegisterInfoBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.DeviceUpdateMessage;
 import com.ztrs.zgj.device.eventbus.DeviceVersionMessage;
+import com.ztrs.zgj.device.eventbus.RegisterInfoMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
+import com.ztrs.zgj.setting.dialog.UpdateDialog;
+import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
+import com.ztrs.zgj.setting.viewModel.DeviceUpdateViewModel;
+import com.ztrs.zgj.setting.viewModel.VersionModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
-public class FirmwareUpdateActivity extends AppCompatActivity {
+public class FirmwareUpdateActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
+    ActivityFirmwareUpdateBinding binding;
+    DeviceUpdateViewModel deviceUpdateViewModel;
+    UpdateDialog updateDialog;
 
-    @BindView(R.id.tv_version)
-    TextView tvVersion;
-
-    Unbinder bind;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_firmware_update);
-        bind = ButterKnife.bind(this);
-        tvTitle.setText("固件升级");
-        updateVersion();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_firmware_update);
+        binding.rlTitle.tvTitle.setText("固件升级");
+        binding.rlTitle.tvBack.setOnClickListener(this);
+        binding.rlCheck.setOnClickListener(this);
+        deviceUpdateViewModel = new ViewModelProvider(this).get(DeviceUpdateViewModel.class);
+        LiveData<String> curVersion = deviceUpdateViewModel.getCurVersion();
+        curVersion.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.tvVersion.setText(s);
+            }
+        });
+        LiveData<VersionModel.UpdateState> updateState = deviceUpdateViewModel.getUpdateState();
+        updateState.observe(this, new Observer<VersionModel.UpdateState>() {
+            @Override
+            public void onChanged(VersionModel.UpdateState updateState) {
+                onUpdateStateChange(updateState);
+            }
+        });
         EventBus.getDefault().register(this);
-        DeviceManager.getInstance().deviceVersionCheck();
+        DeviceManager.getInstance().queryRegisterInfo();
+        deviceUpdateViewModel.initVersion(this);
     }
 
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        bind.unbind();
         super.onDestroy();
     }
 
-    @OnClick({R.id.tv_back,R.id.rl_check})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_back:
                 finish();
                 break;
             case R.id.rl_check:
-                DeviceManager.getInstance().deviceUpdate();
+                deviceUpdateViewModel.checkVersion();
                 break;
         }
     }
 
-    private void updateVersion(){
-        DeviceVersionBean deviceVersionBean = DeviceManager.getInstance().getZtrsDevice().getDeviceVersionBean();
-        String version = Integer.toHexString(deviceVersionBean.getVerInt()&0xff)
-                +"."+Integer.toHexString(deviceVersionBean.getVerFloat()&0xff);
-        tvVersion.setText(version);
+    private void onUpdateStateChange(VersionModel.UpdateState updateState){
+        switch (updateState){
+            case IDLE:
+
+                break;
+            case CHECKING:
+                if(updateDialog == null || !updateDialog.isShowing()) {
+                    updateDialog = new UpdateDialog(this);
+                    updateDialog.initText("检测新版本中...");
+                    updateDialog.initButton(false,false);
+                    updateDialog.show();
+                }
+                break;
+            case CHECK_SUCCESS_CAN_UPDATE:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("检测新版本: " + deviceUpdateViewModel.getRemoteVersion());
+                    updateDialog.showButton();
+                    updateDialog.setOnUserClick(() -> {
+                        deviceUpdateViewModel.update(this);
+                    });
+                    updateDialog.show();
+                }
+                break;
+            case CHECK_SUCCESS_NO_UPDATE:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("已经是最新版本");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+            case CHECK_FAIL:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("检测新版本失败");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOADING:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("升级中...");
+                    updateDialog.hideButton();
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOAD_SUCCESS:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("升级成功");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> {
+                        updateDialog.dismiss();
+                    });
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOAD_FAIL:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("抱歉，升级失败");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+        }
     }
 
 
@@ -80,9 +159,9 @@ public class FirmwareUpdateActivity extends AppCompatActivity {
         LogUtils.LogI("wch","onDeviceUpdate: "+msg.getResult());
         if(msg.getCmdType() == BaseMessage.TYPE_CMD){
             if(msg.getResult() == BaseMessage.RESULT_OK) {
-                Toast.makeText(this,"检查更新发送成功",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"升级命令发送成功",Toast.LENGTH_LONG).show();
             }else {
-                Toast.makeText(this,"检查更新发送失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"升级命令发送失败",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -92,16 +171,33 @@ public class FirmwareUpdateActivity extends AppCompatActivity {
         LogUtils.LogI("wch","onDeviceCheck: "+msg.getCmdType());
         LogUtils.LogI("wch","onDeviceCheck: "+msg.getResult());
         if(msg.getResult() == BaseMessage.RESULT_REPORT){
-            updateVersion();
+            deviceUpdateViewModel.onGetRemoteVersion(true);
+            return;
+        }
+        if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+                Toast.makeText(this,"远端版本号查询发送成功",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this,"远端版本号查询发送失败",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRegisterInfo(RegisterInfoMessage msg){
+        LogUtils.LogI("wch","onRegisterInfo: "+msg.getCmdType());
+        LogUtils.LogI("wch","onRegisterInfo: "+msg.getResult());
+        if(msg.getResult() == BaseMessage.RESULT_REPORT){
+            deviceUpdateViewModel.updateCurVersion();
             return;
         }
         if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 Toast.makeText(this,"版本号查询发送成功",Toast.LENGTH_LONG).show();
+                deviceUpdateViewModel.updateCurVersion();
             }else {
                 Toast.makeText(this,"版本号查询发送失败",Toast.LENGTH_LONG).show();
             }
         }
-
     }
 }
