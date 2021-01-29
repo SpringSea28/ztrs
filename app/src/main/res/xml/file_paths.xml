@@ -15,7 +15,7 @@
                               它对应Context#getExternalFilesDir(String) Context.getExternalFilesDir(null)
                               返回的路径。eg:”/storage/emulated/0/Android/data/com.jph.simple/files”
         -->
-        <external-files-path name="download" path="cchipApk/" />
+        <external-files-path name="download" path="Apk/" />
     </paths>
 
 </resources>

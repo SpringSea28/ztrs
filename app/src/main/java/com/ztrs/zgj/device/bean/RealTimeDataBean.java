@@ -106,6 +106,14 @@ public class RealTimeDataBean {
     short torque;
     byte windLevel;
 
+    byte wireRopeState;
+    byte wireRopeDamageMagnification;
+    int wireRopeDamageheight;
+    int wireRopeDamageValue;
+
+    public static final String[] wireRopeStateArray = new String[]{"正常","轻度损伤","中度损伤",
+            "重度损伤","严重损伤","报废"};
+
     public byte getCarNumber() {
         return carNumber;
     }
@@ -840,5 +848,37 @@ public class RealTimeDataBean {
 
     public void setWindLevel(byte windLevel) {
         this.windLevel = windLevel;
+    }
+
+    public byte getWireRopeState() {
+        return wireRopeState;
+    }
+
+    public void setWireRopeState(byte wireRopeState) {
+        this.wireRopeState = wireRopeState;
+    }
+
+    public byte getWireRopeDamageMagnification() {
+        return wireRopeDamageMagnification;
+    }
+
+    public void setWireRopeDamageMagnification(byte wireRopeDamageMagnification) {
+        this.wireRopeDamageMagnification = wireRopeDamageMagnification;
+    }
+
+    public int getWireRopeDamageheight() {
+        return wireRopeDamageheight;
+    }
+
+    public void setWireRopeDamageheight(int wireRopeDamageheight) {
+        this.wireRopeDamageheight = wireRopeDamageheight;
+    }
+
+    public int getWireRopeDamageValue() {
+        return wireRopeDamageValue;
+    }
+
+    public void setWireRopeDamageValue(int wireRopeDamageValue) {
+        this.wireRopeDamageValue = wireRopeDamageValue;
     }
 }

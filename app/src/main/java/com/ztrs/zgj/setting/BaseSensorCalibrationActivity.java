@@ -1,7 +1,6 @@
 package com.ztrs.zgj.setting;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.ActivityBaseSensorCalibrationBinding;
 import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.bean.CalibrationBean;
-import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,7 +28,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-public abstract class BaseSensorCalibrationActivity extends BaseActivity {
+public abstract class BaseSensorCalibrationActivity extends BaseEditAutoHideActivity {
 
     static String TAG;
 

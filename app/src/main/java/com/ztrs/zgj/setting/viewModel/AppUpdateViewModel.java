@@ -90,7 +90,7 @@ public class AppUpdateViewModel extends ViewModel {
     }
 
     private File getApkDir(Context context){
-        String dirPath = context.getExternalFilesDir(null).getAbsolutePath().concat("/zgjApk");
+        String dirPath = context.getExternalFilesDir(null).getAbsolutePath().concat("/Apk");
         File apkDir = new File(dirPath);
         if(!apkDir.exists()){
             apkDir.mkdir();
@@ -105,7 +105,7 @@ public class AppUpdateViewModel extends ViewModel {
     }
 
     public File getApkFileTest(Context context){
-        String apkPath = getApkDir(context).getAbsolutePath()+"/"+"1.4.5"+".apk";
+        String apkPath = getApkDir(context).getAbsolutePath()+"/"+"1.0.17"+".apk";
         File file = new File(apkPath);
         return file;
     }

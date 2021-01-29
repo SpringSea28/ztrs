@@ -11,7 +11,7 @@ public class RealTimeDataProtocol extends BaseProtocol{
     private static final String TAG= RealTimeDataProtocol.class.getSimpleName();
 
     public static final byte CMD_REAL_TIME_DATA = (byte) 0x23;//实时数据
-    private static final int DATA_LENGTH = 46;
+    private static final int DATA_LENGTH = 46+6;
 
     public static final int DIRECTION_STOP = 0;
     public static final int DIRECTION_UP = 1;
@@ -244,6 +244,14 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setTorque(torque);
         byte windLevel = data[45];
         realTimeDataBean.setWindLevel(windLevel);
+        byte wireRopeState = data[46];
+        realTimeDataBean.setWireRopeState(wireRopeState);
+        byte wireRopeDamageMagnification = data[47];
+        realTimeDataBean.setWireRopeDamageMagnification(wireRopeDamageMagnification);
+        int wireRopeDamageheight =  ((data[48]&0xff) << 8) |(data[49]&0x00ff);
+        realTimeDataBean.setWireRopeDamageheight(wireRopeDamageheight);
+        int wireRopeDamageValue = ((data[50]&0x00ff) << 8) |(data[51]&0x00ff);
+        realTimeDataBean.setWireRopeDamageValue(wireRopeDamageValue);
         return true;
     }
 

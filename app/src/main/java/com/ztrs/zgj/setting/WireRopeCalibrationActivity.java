@@ -8,16 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
-import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.WireRopeDetectionParametersSetBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
-import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -31,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class WireRopeCalibrationActivity extends BaseActivity {
+public class WireRopeCalibrationActivity extends BaseEditAutoHideActivity {
 
     private static final String TAG = WireRopeCalibrationActivity.class.getSimpleName();
 

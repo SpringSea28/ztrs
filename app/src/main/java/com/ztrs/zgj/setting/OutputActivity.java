@@ -19,6 +19,7 @@ import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.RelayConfigurationMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
+import com.ztrs.zgj.main.BaseActivity;
 import com.ztrs.zgj.setting.adapter.OutputAdapter;
 import com.ztrs.zgj.setting.bean.RelayBean;
 import com.ztrs.zgj.setting.utils.OutPutChangUtils;
@@ -29,7 +30,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
-public class OutputActivity extends AppCompatActivity {
+public class OutputActivity extends BaseActivity {
 
     RelayConfigurationBean calibrationBean;
     ActivityOutputBinding binding;

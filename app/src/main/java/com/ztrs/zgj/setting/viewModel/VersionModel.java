@@ -90,7 +90,7 @@ public class VersionModel extends ViewModel {
     }
 
     private File getApkDir(Context context){
-        String dirPath = context.getExternalFilesDir(null).getAbsolutePath().concat("/cchipApk");
+        String dirPath = context.getExternalFilesDir(null).getAbsolutePath().concat("/Apk");
         File apkDir = new File(dirPath);
         if(!apkDir.exists()){
             apkDir.mkdir();

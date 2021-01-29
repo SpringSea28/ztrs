@@ -31,6 +31,7 @@ import com.ztrs.zgj.device.eventbus.RegionalRestrictionMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionReportMessage;
+import com.ztrs.zgj.main.BaseActivity;
 import com.ztrs.zgj.setting.adapter.NearAdapter;
 import com.ztrs.zgj.setting.adapter.ObstacleAdapter;
 import com.ztrs.zgj.setting.adapter.TorqueCureAdapter;
@@ -48,7 +49,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class PreventCollisionActivity extends AppCompatActivity {
+public class PreventCollisionActivity extends BaseActivity {
 
     private static final String TAG = PreventCollisionActivity.class.getSimpleName();
 

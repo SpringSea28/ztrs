@@ -25,6 +25,7 @@ import com.ztrs.zgj.device.eventbus.DeviceUpdateMessage;
 import com.ztrs.zgj.device.eventbus.DeviceVersionMessage;
 import com.ztrs.zgj.device.eventbus.RegisterInfoMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
+import com.ztrs.zgj.main.BaseActivity;
 import com.ztrs.zgj.setting.dialog.UpdateDialog;
 import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
 import com.ztrs.zgj.setting.viewModel.DeviceUpdateViewModel;
@@ -35,7 +36,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-public class FirmwareUpdateActivity extends AppCompatActivity implements View.OnClickListener {
+public class FirmwareUpdateActivity extends BaseActivity implements View.OnClickListener {
 
     ActivityFirmwareUpdateBinding binding;
     DeviceUpdateViewModel deviceUpdateViewModel;

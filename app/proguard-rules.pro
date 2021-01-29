@@ -132,3 +132,4 @@
 -keep public class com.ztrs.zgj.R$*{
 public static final int *;
 }
+-keep class com.ztrs.zgj.setting.http.**{ *;}

@@ -6,6 +6,7 @@ public class TowerParameterBean {
     int value;
     String key;
     boolean warn;
+    boolean alarm;
     int type;
 
     public int getValue() {
@@ -38,5 +39,13 @@ public class TowerParameterBean {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public boolean isAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(boolean alarm) {
+        this.alarm = alarm;
     }
 }

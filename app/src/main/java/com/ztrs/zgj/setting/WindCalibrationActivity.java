@@ -17,12 +17,13 @@ import com.ztrs.zgj.device.bean.TorqueCalibrationBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCalibrationMessage;
+import com.ztrs.zgj.main.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class WindCalibrationActivity extends AppCompatActivity {
+public class WindCalibrationActivity extends BaseActivity {
 
     StaticParameterBean calibrationBean;
     ActivityWindCalibrationBinding binding;

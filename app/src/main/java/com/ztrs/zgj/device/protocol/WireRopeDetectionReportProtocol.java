@@ -33,7 +33,7 @@ public class WireRopeDetectionReportProtocol extends BaseProtocol{
     }
 
     private boolean parseData(byte[] data){
-        if(data.length != 4){
+        if(data.length != 5){
             LogUtils.LogE(TAG,"data length error");
             return false;
         }

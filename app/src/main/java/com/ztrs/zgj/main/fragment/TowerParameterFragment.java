@@ -283,11 +283,25 @@ public class TowerParameterFragment extends Fragment {
     }
 
     private void initWireRopeView(){
-        int damageHeight = device.getWireRopeDetectionReportBean().getHeight();
-        tvWireRopeDamagePositionValue.setText(""+damageHeight);
+        byte wireRopeDamageMagnification = device.getRealTimeDataBean().getWireRopeDamageMagnification();
+        int damageHeight = device.getRealTimeDataBean().getWireRopeDamageheight();
+        tvWireRopeDamagePositionValue.setText(String.format("%.1f",1.0*damageHeight*wireRopeDamageMagnification/10));
 
-        tvWireCurrentPositionValue.setText("未知");
-        tvWireRopeStateValue.setText("未知");
+        int wireropeCurPosition = device.getRealTimeDataBean().getHeight() * device.getRealTimeDataBean().getMagnification();
+        tvWireCurrentPositionValue.setText(String.format("%.1f",1.0*wireropeCurPosition/10));
+        byte wireRopeState = device.getRealTimeDataBean().getWireRopeState();
+        if(wireRopeState<=5 && wireRopeState>=0) {
+            if(wireRopeState == 0){
+                tvWireRopeStateValue.setTextColor(getResources().getColor(R.color.tower_parameter_normal_text_color,null));
+            }else {
+                tvWireRopeStateValue.setTextColor(getResources().getColor(R.color.tower_parameter_warn_text_color,null));
+            }
+            int wireRopeDamageValue = device.getRealTimeDataBean().getWireRopeDamageValue();
+            String stateStr = RealTimeDataBean.wireRopeStateArray[wireRopeState] + wireRopeDamageValue * 10;
+            tvWireRopeStateValue.setText(stateStr);
+        }else {
+            tvWireRopeStateValue.setText("未知");
+        }
 
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         int currentRatedLoad = realTimeDataBean.getCurrentRatedLoad();
@@ -297,15 +311,20 @@ public class TowerParameterFragment extends Fragment {
     private List<TowerParameterBean> getParameters(){
         List<TowerParameterBean> list = new ArrayList<>(8);
 
-        WireRopeDetectionReportBean wireRopeDetectionReportBean = device.getWireRopeDetectionReportBean();
-        WireRopeDetectionParametersSetBean wireRopeDetectionParametersSetBean = device.getWireRopeDetectionParametersSetBean();
-        int damageWarn = wireRopeDetectionParametersSetBean.getThreshold();
+//        WireRopeDetectionReportBean wireRopeDetectionReportBean = device.getWireRopeDetectionReportBean();
+//        WireRopeDetectionParametersSetBean wireRopeDetectionParametersSetBean = device.getWireRopeDetectionParametersSetBean();
+//        int damageWarn = wireRopeDetectionParametersSetBean.getThreshold();
+//        int damage = wireRopeDetectionReportBean.getDamageValue();
+        int damage = device.getRealTimeDataBean().getWireRopeDamageValue();
+        byte state = device.getRealTimeDataBean().getWireRopeState();
         TowerParameterBean wireRope = new TowerParameterBean();
         wireRope.setType(TowerParameterAdapter.ALARM_WIRE_ROPE);
         wireRope.setKey(getString(R.string.parameter_wireRope));
-        int damage = wireRopeDetectionReportBean.getDamageValue();
         wireRope.setValue(damage);
-        if(damage>damageWarn){
+//        if(damage>damageWarn){
+//            wireRope.setWarn(true);
+//        }
+        if(state > 0){
             wireRope.setWarn(true);
         }
         list.add(wireRope);

@@ -16,7 +16,7 @@ import com.ztrs.zgj.device.bean.RegisterInfoBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
-import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class InstallationActivity extends BaseActivity {
+public class InstallationActivity extends BaseEditAutoHideActivity {
 
     private static final String TAG = InstallationActivity.class.getSimpleName();
 

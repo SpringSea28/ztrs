@@ -45,6 +45,7 @@ public class TowerParameterAdapter extends RecyclerView.Adapter<TowerParameterAd
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         TowerParameterBean towerParameterBean = towerParameterBeanList.get(position);
         boolean isWarn = towerParameterBean.isWarn();
+        boolean isAlarm = towerParameterBean.isAlarm();
         holder.tvKey.setText(towerParameterBean.getKey());
         if(towerParameterBean.getType()== ALARM_WIND){
             holder.tvValue.setText(String.format("%s级", towerParameterBean.getValue()));
@@ -54,7 +55,7 @@ public class TowerParameterAdapter extends RecyclerView.Adapter<TowerParameterAd
         } else {
             holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 10));
         }
-        if(isWarn){
+        if(isWarn | isAlarm){
             holder.tvWarn.setVisibility(View.VISIBLE);
         }else {
             holder.tvWarn.setVisibility(View.GONE);

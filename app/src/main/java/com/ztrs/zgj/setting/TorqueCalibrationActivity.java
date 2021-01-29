@@ -1,13 +1,7 @@
 package com.ztrs.zgj.setting;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -15,13 +9,10 @@ import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.ActivityTorqueCalibrationBinding;
 import com.ztrs.zgj.device.DeviceManager;
-import com.ztrs.zgj.device.Test;
-import com.ztrs.zgj.device.bean.CalibrationBean;
-import com.ztrs.zgj.device.bean.HeightCalibrationBean;
 import com.ztrs.zgj.device.bean.TorqueCalibrationBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCalibrationMessage;
-import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,9 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.annotations.NonNull;
-
-public class TorqueCalibrationActivity extends BaseActivity {
+public class TorqueCalibrationActivity extends BaseEditAutoHideActivity {
 
     TorqueCalibrationBean calibrationBean;
     ActivityTorqueCalibrationBinding binding;

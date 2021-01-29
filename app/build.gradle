@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('E:\\workdocumnt\\ztrs.jks')
+            storePassword 'ztrs1234'
+            keyAlias 'ztrs'
+            keyPassword 'ztrs1234'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -10,8 +18,8 @@ android {
         applicationId "com.ztrs.zgj"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 16
-        versionName "1.0.16_test"
+        versionCode 18
+        versionName "1.0.18"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,7 +38,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

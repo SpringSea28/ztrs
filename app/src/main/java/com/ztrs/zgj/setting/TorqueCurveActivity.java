@@ -24,6 +24,7 @@ import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.bean.TorqueCurveApplyBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCurveMessage;
+import com.ztrs.zgj.main.BaseActivity;
 import com.ztrs.zgj.setting.adapter.TorqueCureAdapter;
 import com.ztrs.zgj.setting.bean.TorqueCurveBean;
 import com.ztrs.zgj.setting.bean.TorqueModelBean;
@@ -45,7 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class TorqueCurveActivity extends AppCompatActivity {
+public class TorqueCurveActivity extends BaseActivity {
 
     private static final String TAG = TorqueCurveActivity.class.getSimpleName();
 

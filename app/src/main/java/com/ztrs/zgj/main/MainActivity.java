@@ -64,7 +64,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends BaseActivity  {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 

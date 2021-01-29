@@ -112,7 +112,7 @@ public class DeviceUpdateViewModel extends ViewModel {
     public void update(Context context){
         updateState.setValue(VersionModel.UpdateState.DOWNLOADING);
         DeviceManager.getInstance().deviceUpdate();
-        Observable.timer(60, TimeUnit.SECONDS)
+        Observable.timer(120, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override

@@ -22,6 +22,7 @@ import com.yanzhenjie.permission.AndPermission;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.ActivitySoftUpdateBinding;
 import com.ztrs.zgj.device.DeviceManager;
+import com.ztrs.zgj.main.BaseActivity;
 import com.ztrs.zgj.setting.dialog.UpdateDialog;
 import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
 import com.ztrs.zgj.setting.viewModel.VersionModel;
@@ -33,7 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class SoftwareUpdateActivity extends AppCompatActivity implements View.OnClickListener{
+public class SoftwareUpdateActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG = SoftwareUpdateActivity.class.getSimpleName();
 
     ActivitySoftUpdateBinding binding;
@@ -82,6 +83,7 @@ public class SoftwareUpdateActivity extends AppCompatActivity implements View.On
                 String hostId = DeviceManager.getInstance().getZtrsDevice().getRegisterInfoBean().getHostId();
                 Log.e("wch","hostId:"+hostId);
                 versionModel.checkVersion(hostId);
+//                installApk(this,versionModel.getApkFileTest(this));
                 break;
         }
     }
@@ -185,7 +187,7 @@ public class SoftwareUpdateActivity extends AppCompatActivity implements View.On
             intent.setDataAndType(uri, "application/vnd.android.package-archive");
         }
         context.startActivity(intent);
-        android.os.Process.killProcess(android.os.Process.myPid());
+//        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 }

@@ -8,13 +8,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ztrs.zgj.R;
+import com.ztrs.zgj.main.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class SystemSetActivity extends AppCompatActivity {
+public class SystemSetActivity extends BaseActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;

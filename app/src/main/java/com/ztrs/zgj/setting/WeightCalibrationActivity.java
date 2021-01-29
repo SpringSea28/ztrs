@@ -5,13 +5,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.ActivityWeightCalibrationBinding;
 import com.ztrs.zgj.device.DeviceManager;
-import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.SensorRealtimeDataBean;
 import com.ztrs.zgj.device.bean.TorqueCurveApplyBean;
@@ -21,7 +18,7 @@ import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
 import com.ztrs.zgj.device.eventbus.SensorRealtimeDataMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCurveMessage;
 import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
-import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 import com.ztrs.zgj.setting.bean.TorqueCurveBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -39,7 +36,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-public class WeightCalibrationActivity extends BaseActivity {
+public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
 
     static String TAG = WeightCalibrationActivity.class.getSimpleName();
 

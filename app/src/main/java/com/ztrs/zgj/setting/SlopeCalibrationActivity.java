@@ -2,27 +2,18 @@ package com.ztrs.zgj.setting;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
-import com.ztrs.zgj.databinding.ActivityBaseSensorCalibrationBinding;
 import com.ztrs.zgj.databinding.ActivitySlopeCalibrationBinding;
 import com.ztrs.zgj.device.DeviceManager;
-import com.ztrs.zgj.device.bean.CalibrationBean;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.SensorRealtimeDataBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
-import com.ztrs.zgj.device.bean.WeightCalibrationBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
-import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -39,7 +30,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 
-public class SlopeCalibrationActivity extends BaseActivity {
+public class SlopeCalibrationActivity extends BaseEditAutoHideActivity {
 
     static String TAG = SlopeCalibrationActivity.class.getSimpleName();
 
