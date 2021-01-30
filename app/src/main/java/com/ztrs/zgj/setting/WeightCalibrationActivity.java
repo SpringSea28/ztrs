@@ -198,10 +198,14 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
     }
     
     int getHighOutput() {
+        int output = 0;
         if(calibrationBean != null){
-            return calibrationBean.getHighAlarmRelayOutput();
+            output = calibrationBean.getHighAlarmRelayOutput();
+            if(output >=2){
+                output = 0;
+            }
         }
-        return 0;
+        return output;
     }
 
     void updateCurSensorValue(long value) {

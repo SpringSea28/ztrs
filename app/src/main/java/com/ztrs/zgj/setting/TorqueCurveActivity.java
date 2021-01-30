@@ -25,6 +25,7 @@ import com.ztrs.zgj.device.bean.TorqueCurveApplyBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCurveMessage;
 import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 import com.ztrs.zgj.setting.adapter.TorqueCureAdapter;
 import com.ztrs.zgj.setting.bean.TorqueCurveBean;
 import com.ztrs.zgj.setting.bean.TorqueModelBean;
@@ -46,7 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class TorqueCurveActivity extends BaseActivity {
+public class TorqueCurveActivity extends BaseEditAutoHideActivity {
 
     private static final String TAG = TorqueCurveActivity.class.getSimpleName();
 
@@ -96,6 +97,12 @@ public class TorqueCurveActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        list.add(rvCurve);
+        return list;
+    }
     private void initCurveData(){
         TorqueModelBean modeFromSp = getModeFromSp();
         if(modeFromSp != null){

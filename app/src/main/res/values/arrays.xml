@@ -39,6 +39,10 @@
     <string-array name="output">
         <item>关</item>
         <item>开</item>
+    </string-array>
+    <string-array name="action">
+        <item>关</item>
+        <item>开</item>
         <item>NC</item>
     </string-array>
     <string-array name="wind">

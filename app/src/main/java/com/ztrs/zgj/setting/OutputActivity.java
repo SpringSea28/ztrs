@@ -76,7 +76,7 @@ public class OutputActivity extends BaseActivity {
         outputAdapter = new OutputAdapter();
         String[] relay = getResources().getStringArray(R.array.relay);
         String[] use = getResources().getStringArray(R.array.use);
-        String[] action = getResources().getStringArray(R.array.output);
+        String[] action = getResources().getStringArray(R.array.action);
         outputAdapter.setSrc(relay,use,action);
         outputAdapter.setData(relayBeans);
         binding.rvRelay.setAdapter(outputAdapter);

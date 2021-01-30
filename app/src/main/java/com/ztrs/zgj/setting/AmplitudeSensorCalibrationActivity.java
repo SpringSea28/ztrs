@@ -144,10 +144,14 @@ public class AmplitudeSensorCalibrationActivity extends BaseSensorCalibrationAct
 
     @Override
     int getLowOutput() {
+        int output = 0;
         if(amplitudeCalibrationBean != null){
-            return amplitudeCalibrationBean.getLowAlarmRelayOutput();
+            output = amplitudeCalibrationBean.getLowAlarmRelayOutput();
+            if(output >=2){
+                output = 0;
+            }
         }
-        return 0;
+        return output;
     }
 
     @Override
@@ -160,10 +164,14 @@ public class AmplitudeSensorCalibrationActivity extends BaseSensorCalibrationAct
 
     @Override
     int getHighOutput() {
+        int output = 0;
         if(amplitudeCalibrationBean != null){
-            return amplitudeCalibrationBean.getHighAlarmRelayOutput();
+           output = amplitudeCalibrationBean.getHighAlarmRelayOutput();
+           if(output >=2){
+               output = 0;
+           }
         }
-        return 0;
+        return output;
     }
 
     @Override

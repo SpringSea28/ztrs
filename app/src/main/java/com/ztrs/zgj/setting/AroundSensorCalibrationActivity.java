@@ -146,10 +146,14 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
 
     @Override
     int getLowOutput() {
+        int output = 0;
         if(aroundCalibrationBean != null){
-            return aroundCalibrationBean.getLowAlarmRelayOutput();
+            output = aroundCalibrationBean.getLowAlarmRelayOutput();
+            if(output >=2){
+                output = 0;
+            }
         }
-        return 0;
+        return output;
     }
 
     @Override
@@ -162,10 +166,14 @@ public class AroundSensorCalibrationActivity extends BaseSensorCalibrationActivi
 
     @Override
     int getHighOutput() {
+        int output = 0;
         if(aroundCalibrationBean != null){
-            return aroundCalibrationBean.getHighAlarmRelayOutput();
+            output = aroundCalibrationBean.getHighAlarmRelayOutput();
+            if(output >=2){
+                output = 0;
+            }
         }
-        return 0;
+        return output;
     }
 
     @Override

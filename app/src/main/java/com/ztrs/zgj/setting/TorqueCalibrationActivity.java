@@ -99,9 +99,11 @@ public class TorqueCalibrationActivity extends BaseEditAutoHideActivity {
 
     void updateCalibration() {
         binding.spinnerLowControl.setSelection(calibrationBean.getTorqueWarnRelayControl());
-        binding.spinnerLowOutput.setSelection(calibrationBean.getTorqueWarnRelayOutput());
+        binding.spinnerLowOutput.setSelection(
+                calibrationBean.getTorqueWarnRelayOutput()>=2?0:calibrationBean.getTorqueWarnRelayOutput());
         binding.spinnerHighControl.setSelection(calibrationBean.getTorqueAlarmRelayControl());
-        binding.spinnerHighOutput.setSelection(calibrationBean.getTorqueAlarmRelayOutput());
+        binding.spinnerHighOutput.setSelection(
+                calibrationBean.getTorqueAlarmRelayOutput()>=2?0:calibrationBean.getTorqueAlarmRelayOutput());
     }
 
     private void save() {
