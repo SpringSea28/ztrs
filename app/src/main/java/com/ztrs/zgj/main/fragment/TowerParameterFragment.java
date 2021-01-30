@@ -226,7 +226,7 @@ public class TowerParameterFragment extends Fragment {
 
         initWireRopeView();
         initRotationAngle();
-
+        hookupAnimation();
     }
 
     private void initRotationAngle() {
@@ -245,42 +245,29 @@ public class TowerParameterFragment extends Fragment {
     private void hookupAnimation(){
         LogUtils.LogE("WCH","hookupAnimation");
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
-        if(realTimeDataBean.getUpState() == RealTimeDataProtocol.DIRECTION_UP){
-            int height = --heightY;
-            LogUtils.LogE("WCH","up height: "+height);
+        int wireRopeHeight = realTimeDataBean.getHeight() * realTimeDataBean.getWireRopeDamageMagnification();
+        int towerHeight = device.getStaticParameterBean().getTowerHeight();
+        float offsetY = 0;
+        if(towerHeight != 0){
+            offsetY = (float) (1.0*wireRopeHeight/towerHeight);
+            float height = offsetY*30;
             ViewGroup.LayoutParams layoutParams = vHookupLine.getLayoutParams();
             layoutParams.height = ScaleUtils.dip2px(context,height);
             LogUtils.LogE("WCH","layoutParams.height: "+layoutParams.height);
             vHookupLine.setLayoutParams(layoutParams);
-        }else if(realTimeDataBean.getUpState() == RealTimeDataProtocol.DIRECTION_DOWN) {
-            int height = ++heightY;
-            LogUtils.LogE("WCH","down height: "+height);
-            ViewGroup.LayoutParams layoutParams = vHookupLine.getLayoutParams();
-            layoutParams.height = ScaleUtils.dip2px(context,height);
-            vHookupLine.setLayoutParams(layoutParams);
         }
 
-        if(realTimeDataBean.getAmplitudeState() == RealTimeDataProtocol.DIRECTION_BEFORE_OUT){
-            int tranX = ++translationX;
-            LogUtils.LogE("WCH","out tranX: "+tranX);
-            llHookup.setTranslationX( +ScaleUtils.dip2px(context,tranX));
-        }else if(realTimeDataBean.getAmplitudeState() == RealTimeDataProtocol.DIRECTION_AFTER_IN) {
-            int tranX = --translationX;
-            LogUtils.LogE("WCH","in tranX: "+tranX);
-            llHookup.setTranslationX( +ScaleUtils.dip2px(context,tranX));
+
+        int amplitude = realTimeDataBean.getAmplitude();
+        int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
+        float offset = 0;
+        if(upWeightArmLen != 0){
+            offset = (float) (1.0*amplitude/upWeightArmLen*121);
+            float tranX = offset - (121-32);
+            Log.e("wch","tranX: "+tranX);
+            llHookup.setTranslationX(ScaleUtils.dip2px(context,tranX));
         }
-        if(translationX>23){
-            translationX = 23;
-        }
-        if(translationX<-100){
-            translationX = -100;
-        }
-        if(heightY<-30){
-            heightY = -30;
-        }
-        if(heightY>30){
-            heightY = 30;
-        }
+
     }
 
     private void initWireRopeView(){
@@ -498,12 +485,31 @@ public class TowerParameterFragment extends Fragment {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onWireRopeDetectionReport(WireRopeDetectionReportMessage msg){
-        LogUtils.LogI("wch","onWireRopeDetectionReport: "+msg.getResult());
-        if(msg.getResult() == BaseMessage.RESULT_REPORT) {
-            initView();
-            hookupAnimation();
-        }
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onWireRopeDetectionReport(WireRopeDetectionReportMessage msg){
+//        LogUtils.LogI("wch","onWireRopeDetectionReport: "+msg.getResult());
+//        if(msg.getResult() == BaseMessage.RESULT_REPORT) {
+//            initView();
+//            hookupAnimation();
+//        }
+//    }
+//    private void testWireRope(){
+//        device.getRealTimeDataBean().setAmplitude(200);
+//        device.getStaticParameterBean().setUpWeightArmLen(400);
+//        device.getRealTimeDataBean().setHeight((short)100);
+//        device.getRealTimeDataBean().setWireRopeDamageMagnification((byte)2);
+//        device.getStaticParameterBean().setTowerHeight(400);
+//        Observable.interval(2,TimeUnit.SECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<Long>() {
+//                    @Override
+//                    public void accept(Long aLong) throws Exception {
+//                        int amplitude = device.getRealTimeDataBean().getAmplitude();
+//                        device.getRealTimeDataBean().setAmplitude(++amplitude);
+//                        int height = device.getRealTimeDataBean().getHeight();
+//                        device.getRealTimeDataBean().setHeight((short)++height);
+//                        hookupAnimation();
+//                    }
+//                });
+//    }
 }
