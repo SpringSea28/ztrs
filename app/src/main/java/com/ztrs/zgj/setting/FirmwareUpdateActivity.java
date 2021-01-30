@@ -65,8 +65,8 @@ public class FirmwareUpdateActivity extends BaseActivity implements View.OnClick
             }
         });
         EventBus.getDefault().register(this);
-        DeviceManager.getInstance().queryRegisterInfo();
         deviceUpdateViewModel.initVersion(this);
+//        new Test().testOnReceiveRegisterInfo();
     }
 
     @Override

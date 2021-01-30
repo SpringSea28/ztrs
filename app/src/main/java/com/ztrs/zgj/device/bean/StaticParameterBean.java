@@ -170,14 +170,20 @@ public class StaticParameterBean implements Cloneable{
             return "";
         }
         int zeroOffset = 0;
+        boolean cut = false;
         for(int i=0;i<towerCraneType.length;i++){
             if(towerCraneType[i]== 0){
                 zeroOffset = i;
+                cut = true;
                 break;
             }
         }
         String s = new String(towerCraneType);
-        return s.substring(0,zeroOffset);
+        if(cut) {
+            return s.substring(0, zeroOffset);
+        }else {
+            return s;
+        }
     }
 
     public void setTowerCraneType(byte[] towerCraneType) {

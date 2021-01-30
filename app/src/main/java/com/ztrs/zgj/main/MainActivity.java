@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity  {
 //                test.onReceiveWireRopeDetectionReport();
 //                test.testPackage();
 //                test.testOnReceiveRegisterInfo();
-//                test.testOnReceiveRealtimedata();
+                test.testOnReceiveRealtimedata();
 //                test.testOnReceiveTorqueCurve();
 //                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();

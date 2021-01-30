@@ -179,6 +179,7 @@ public class TowerParameterFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        stopAlarm();
         EventBus.getDefault().unregister(this);
         bind.unbind();
         super.onDestroyView();
@@ -194,8 +195,8 @@ public class TowerParameterFragment extends Fragment {
 
     private void initView(){
         StaticParameterBean staticParameterBean = device.getStaticParameterBean();
-        byte towerType = staticParameterBean.getTowerType();
-        tvTowerSerialNumber.setText(String.format(getString(R.string.tower_serial_number),towerType));
+        byte towerNumber = staticParameterBean.getTowerNumber();
+        tvTowerSerialNumber.setText(String.format(getString(R.string.tower_serial_number),towerNumber));
         String craneType = staticParameterBean.getTowerCraneTypeStr();
         if(craneType != null) {
             tvTowerSpecificationModel.setText(String.format(getString(R.string.tower_specification_model), craneType));
@@ -287,7 +288,7 @@ public class TowerParameterFragment extends Fragment {
         int damageHeight = device.getRealTimeDataBean().getWireRopeDamageheight();
         tvWireRopeDamagePositionValue.setText(String.format("%.1f",1.0*damageHeight*wireRopeDamageMagnification/10));
 
-        int wireropeCurPosition = device.getRealTimeDataBean().getHeight() * device.getRealTimeDataBean().getMagnification();
+        int wireropeCurPosition = device.getRealTimeDataBean().getHeight() * device.getRealTimeDataBean().getWireRopeDamageMagnification();
         tvWireCurrentPositionValue.setText(String.format("%.1f",1.0*wireropeCurPosition/10));
         byte wireRopeState = device.getRealTimeDataBean().getWireRopeState();
         if(wireRopeState<=5 && wireRopeState>=0) {
@@ -297,7 +298,7 @@ public class TowerParameterFragment extends Fragment {
                 tvWireRopeStateValue.setTextColor(getResources().getColor(R.color.tower_parameter_warn_text_color,null));
             }
             int wireRopeDamageValue = device.getRealTimeDataBean().getWireRopeDamageValue();
-            String stateStr = RealTimeDataBean.wireRopeStateArray[wireRopeState] + wireRopeDamageValue * 10;
+            String stateStr = RealTimeDataBean.wireRopeStateArray[wireRopeState] + " " +wireRopeDamageValue/10+"%";
             tvWireRopeStateValue.setText(stateStr);
         }else {
             tvWireRopeStateValue.setText("未知");
@@ -326,6 +327,7 @@ public class TowerParameterFragment extends Fragment {
 //        }
         if(state > 0){
             wireRope.setWarn(true);
+            wireRope.setAlarm(true);
         }
         list.add(wireRope);
 
@@ -342,11 +344,12 @@ public class TowerParameterFragment extends Fragment {
         height.setKey(getString(R.string.parameter_height));
         int heightValue = realTimeDataBean.getHeight();
         boolean warn = !realTimeDataBean.isOutputUpuPSlowLimit()
-                | !realTimeDataBean.isOutputUpUpStopLimit()
-                | !realTimeDataBean.isOutputDownUpSlowLimit()
+                | !realTimeDataBean.isOutputDownUpSlowLimit();
+        boolean alarm = !realTimeDataBean.isOutputUpUpStopLimit()
                 | !realTimeDataBean.isOutputDownUpStopLimit();
         height.setValue(heightValue);
         height.setWarn(warn);
+        height.setAlarm(alarm);
         list.add(height);
 
         TowerParameterBean around = new TowerParameterBean();
@@ -354,11 +357,12 @@ public class TowerParameterFragment extends Fragment {
         around.setKey(getString(R.string.parameter_around));
         int aroundValue = realTimeDataBean.getAroundAngle();
         boolean warnAround = !realTimeDataBean.isOutputLeftAroundSlowLimit()
-                | !realTimeDataBean.isOutputLeftAroundStopLimit()
-                | !realTimeDataBean.isOutputRightAroundSlowLimit()
+                | !realTimeDataBean.isOutputRightAroundSlowLimit();
+        boolean alarmAround =  !realTimeDataBean.isOutputLeftAroundStopLimit()
                 | !realTimeDataBean.isOutputRightAroundStopLimit();
         around.setValue(aroundValue);
         around.setWarn(warnAround);
+        around.setAlarm(alarmAround);
         list.add(around);
 
         TowerParameterBean torque = new TowerParameterBean();
@@ -366,20 +370,20 @@ public class TowerParameterFragment extends Fragment {
         torque.setKey(getString(R.string.parameter_torque));
         int torqueValue = realTimeDataBean.getTorque();
         torque.setValue(torqueValue);
-        boolean warnTorque = !realTimeDataBean.isElectronicTorqueLimitState2()
+        boolean alarmTorque = !realTimeDataBean.isElectronicTorqueLimitState2()
                 | !realTimeDataBean.isElectronicTorqueLimitState3()
                 | !realTimeDataBean.isElectronicTorqueLimitState4();
-        torque.setWarn(warnTorque);
+        torque.setAlarm(alarmTorque);
         list.add(torque);
 
         TowerParameterBean load = new TowerParameterBean();
         load.setType(TowerParameterAdapter.ALARM_WEIGHT);
         load.setKey(getString(R.string.parameter_load));
         int upWeight = realTimeDataBean.getUpWeight();
-        boolean warnWeight = !realTimeDataBean.isElectronicWeightLimitState3()
+        boolean alarmWeight = !realTimeDataBean.isElectronicWeightLimitState3()
                 | !realTimeDataBean.isElectronicWeightLimitState4();
         load.setValue(upWeight);
-        load.setWarn(warnWeight);
+        load.setAlarm(alarmWeight);
         list.add(load);
 
 
@@ -387,10 +391,11 @@ public class TowerParameterFragment extends Fragment {
         wind.setType(TowerParameterAdapter.ALARM_WIND);
         wind.setKey(getString(R.string.parameter_wind));
         int windValue = realTimeDataBean.getWindLevel();
-        boolean warnWind = !realTimeDataBean.isElectronicWindWarningLimit()
-                | !realTimeDataBean.isElectronicWindAlarmLimit();
+        boolean warnWind = !realTimeDataBean.isElectronicWindWarningLimit();
+        boolean alarmWind = !realTimeDataBean.isElectronicWindAlarmLimit();
         wind.setValue(windValue);
         wind.setWarn(warnWind);
+        wind.setAlarm(alarmWind);
         list.add(wind);
 
         TowerParameterBean amplitude = new TowerParameterBean();
@@ -398,11 +403,13 @@ public class TowerParameterFragment extends Fragment {
         amplitude.setKey(getString(R.string.parameter_amplitude));
         int amplitudeValue = realTimeDataBean.getAmplitude();
         boolean warnAmplitude = !realTimeDataBean.isOutputOutLuffingSlowLimit()
-                | !realTimeDataBean.isOutputOutLuffingStopLimit()
-                | !realTimeDataBean.isOutputInLuffingSlowLimit()
+                | !realTimeDataBean.isOutputInLuffingSlowLimit();
+
+        boolean alarmAmplitude = !realTimeDataBean.isOutputOutLuffingStopLimit()
                 | !realTimeDataBean.isOutputInLuffingStopLimit();
         amplitude.setValue(amplitudeValue);
         amplitude.setWarn(warnAmplitude);
+        amplitude.setAlarm(alarmAmplitude);
         list.add(amplitude);
 
         return list;
@@ -413,17 +420,15 @@ public class TowerParameterFragment extends Fragment {
         List<TowerParameterBean> parameters = getParameters();
         String[] stringArray = getResources().getStringArray(R.array.alarms);
         for(int i=0;i<parameters.size();i++){
-            if(parameters.get(i).isWarn()){
+            if(parameters.get(i).isAlarm()){
                 alarms.add(stringArray[i]);
             }
         }
         if(alarms.size() == 0){
             llParameterAlarm.removeAllViews();
-            if(alarmTimer !=null && !alarmTimer.isDisposed()){
-                alarmTimer.dispose();
-            }
-            alarmTimer = null;
+            stopAlarm();
         }else {
+            llParameterAlarm.removeAllViews();
             llParameterAlarm.setOrientation(LinearLayout.HORIZONTAL);
             llParameterAlarm.setGravity(Gravity.CENTER);
             for(int i=0;i<alarms.size();i++){
@@ -458,6 +463,13 @@ public class TowerParameterFragment extends Fragment {
                         }
                     });
         }
+    }
+
+    private void stopAlarm(){
+        if(alarmTimer !=null && !alarmTimer.isDisposed()){
+            alarmTimer.dispose();
+        }
+        alarmTimer = null;
     }
 
     //-----------------------------------------------------------//

@@ -64,7 +64,7 @@ public class LogCatHelper {
         }
 
         public void stop(){
-            if(logThread == null){
+            if(logThread != null){
                 logThread.interrupt();
             }
             logThread = null;

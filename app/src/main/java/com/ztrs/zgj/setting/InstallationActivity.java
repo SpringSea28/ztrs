@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
+import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RegisterInfoBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
@@ -68,6 +69,7 @@ public class InstallationActivity extends BaseEditAutoHideActivity {
         binder = ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         initView();
+        initData();
         upDateView();
 //        new Test().testQueryStaticParameter();
     }
@@ -115,7 +117,6 @@ public class InstallationActivity extends BaseEditAutoHideActivity {
     }
 
     private void upDateView(){
-        initData();
         if(tempStaticParameterBean == null){
             return;
         }
@@ -286,6 +287,12 @@ public class InstallationActivity extends BaseEditAutoHideActivity {
                 upDateView();
             }else {
                 Toast.makeText(this,"静态参数保存失败",Toast.LENGTH_LONG).show();
+            }
+        }else if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+                initData();
+                upDateView();
+            }else {
             }
         }
     }

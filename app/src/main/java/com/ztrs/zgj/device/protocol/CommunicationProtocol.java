@@ -292,6 +292,9 @@ public class CommunicationProtocol{
             case DeviceVersionCheckProtocol.CMD_VERSION_CHECK:
                 deviceVersionCheckProtocol.parseAck(data);
                 break;
+            case RegisterInfoProtocol.CMD_REGISTER_INFO:
+                registerInfoProtocol.parseAck(data);
+                break;
         }
     }
 

@@ -1,8 +1,10 @@
 package com.ztrs.zgj.main.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,16 +51,23 @@ public class TowerParameterAdapter extends RecyclerView.Adapter<TowerParameterAd
         holder.tvKey.setText(towerParameterBean.getKey());
         if(towerParameterBean.getType()== ALARM_WIND){
             holder.tvValue.setText(String.format("%s级", towerParameterBean.getValue()));
-
         }else if(towerParameterBean.getType() == ALARM_WEIGHT){
             holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 100));
-        } else {
+        } else if(towerParameterBean.getType() == ALARM_LOAD){
+            holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 10));
+        }else {
             holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 10));
         }
         if(isWarn | isAlarm){
             holder.tvWarn.setVisibility(View.VISIBLE);
+            holder.tvKey.setTextColor(holder.context.getColor(R.color.tower_parameter_warn_text_color));
+            holder.tvValue.setTextColor(holder.context.getColor(R.color.tower_parameter_warn_text_color));
+            holder.llItem.setBackground(holder.context.getDrawable(R.drawable.tower_parameter_alarm_item_bg));
         }else {
             holder.tvWarn.setVisibility(View.GONE);
+            holder.tvKey.setTextColor(holder.context.getColor(R.color.tower_parameter_normal_text_color));
+            holder.tvValue.setTextColor(holder.context.getColor(R.color.tower_parameter_normal_text_color));
+            holder.llItem.setBackground(holder.context.getDrawable(R.drawable.tower_parameter_item_bg));
         }
     }
 
@@ -77,9 +86,14 @@ public class TowerParameterAdapter extends RecyclerView.Adapter<TowerParameterAd
         TextView tvValue;
         @BindView(R.id.tv_warn)
         TextView tvWarn;
+        @BindView(R.id.ll_tower_parameter_item)
+        LinearLayout llItem;
+
+        Context context;
 
         public Holder(View view){
             super(view);
+            context = view.getContext();
             ButterKnife.bind(this,view);
         }
 
