@@ -101,7 +101,7 @@ public class FirmwareUpdateActivity extends BaseActivity implements View.OnClick
                 break;
             case CHECK_SUCCESS_CAN_UPDATE:
                 if(updateDialog.isShowing()) {
-                    updateDialog.setText("检测新版本: " + deviceUpdateViewModel.getRemoteVersion());
+                    updateDialog.setText("检测新版本: " + deviceUpdateViewModel.getRemoteVersion()+"\n"+"确认升级？");
                     updateDialog.showButton();
                     updateDialog.setOnUserClick(() -> {
                         deviceUpdateViewModel.update(this);

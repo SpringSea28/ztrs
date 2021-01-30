@@ -1,8 +1,11 @@
 package com.ztrs.zgj.main;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,10 +21,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.kongqw.serialportlibrary.Device;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
@@ -50,11 +59,16 @@ import com.ztrs.zgj.main.fragment.UploadConverterFragment;
 import com.ztrs.zgj.main.msg.SerialPortOpenResultMsg;
 import com.ztrs.zgj.setting.OutputActivity;
 import com.ztrs.zgj.setting.SettingActivity;
+import com.ztrs.zgj.setting.SoftwareUpdateActivity;
+import com.ztrs.zgj.setting.dialog.UpdateDialog;
+import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
+import com.ztrs.zgj.setting.viewModel.VersionModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -92,7 +106,8 @@ public class MainActivity extends BaseActivity  {
     LuffingConverterFragment luffingConverterFragment;
     AroundConverterFragment aroundConverterFragment;
 
-
+    AppUpdateViewModel versionModel;
+    UpdateDialog updateDialog;
 
     private Device device;
 
@@ -154,9 +169,96 @@ public class MainActivity extends BaseActivity  {
         EventBus.getDefault().register(this);
         initView();
         display();
+        checkUpdate();
     }
 
+    private void checkUpdate(){
+        versionModel = new ViewModelProvider(this).get(AppUpdateViewModel.class);
+        LiveData<String> curVersion = versionModel.getCurVersion();
+        curVersion.observe(this, s -> { });
+        versionModel.initVersion(this);
+        LiveData<VersionModel.UpdateState> updateState = versionModel.getUpdateState();
+        updateState.observe(this, updateState1 -> onUpdateStateChange(updateState1));
+        String hostId = DeviceManager.getInstance().getZtrsDevice().getRegisterInfoBean().getHostId();
+        Log.e(TAG,"hostId:"+hostId);
+        versionModel.checkVersion(hostId);
+    }
 
+    private void onUpdateStateChange(VersionModel.UpdateState updateState){
+        switch (updateState){
+            case CHECK_SUCCESS_CAN_UPDATE:
+                if(updateDialog == null || !updateDialog.isShowing()) {
+                    updateDialog = new UpdateDialog(this);
+                    updateDialog.initText("检测新版本: " + versionModel.getRemoteVersion()+"\n"+"确认升级？");
+                    updateDialog.initButton(true,true);
+                    updateDialog.setOnUserClick(() -> {
+                        versionModel.downLoadApk(this);
+                    });
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOADING:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("新版本下载中...");
+                    updateDialog.hideButton();
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOAD_SUCCESS:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("新版本下载成功，确认安装？");
+                    updateDialog.showButton();
+                    updateDialog.setOnUserClick(() -> {
+                        updateDialog.dismiss();
+                        requestInstallPermission(versionModel.getApkFile(this));
+                    });
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOAD_FAIL:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("抱歉，新版本下载失败");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+        }
+    }
+
+    private void requestInstallPermission(File file){
+        AndPermission.with(this)
+                .install()
+                .onGranted(new Action<File>() {
+                    @Override
+                    public void onAction(File data) {
+                        installApk(MainActivity.this,file);
+                    }
+                })
+                .onDenied(new Action<File>() {
+                    @Override
+                    public void onAction(File data) {
+
+                    }
+                })
+                .start();
+    }
+
+    private  void installApk(Context context, File file) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri apkUri = FileProvider.getUriForFile(context, "com.ztrs.zgj", file);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri = Uri.fromFile(file);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        }
+        context.startActivity(intent);
+//        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 
 
     private void initView(){

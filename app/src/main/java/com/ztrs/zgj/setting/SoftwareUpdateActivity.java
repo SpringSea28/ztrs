@@ -103,7 +103,7 @@ public class SoftwareUpdateActivity extends BaseActivity implements View.OnClick
                 break;
             case CHECK_SUCCESS_CAN_UPDATE:
                 if(updateDialog.isShowing()) {
-                    updateDialog.setText("检测新版本: " + versionModel.getRemoteVersion());
+                    updateDialog.setText("检测新版本: " + versionModel.getRemoteVersion()+"\n"+"确认升级？");
                     updateDialog.showButton();
                     updateDialog.setOnUserClick(() -> {
                         versionModel.downLoadApk(this);

@@ -3,6 +3,7 @@ package com.ztrs.zgj.setting.viewModel;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -50,7 +51,7 @@ public class AppUpdateViewModel extends ViewModel {
             PackageManager manager = context.getPackageManager();
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
             String version = info.versionName;
-            curVersion.postValue(version);
+            curVersion.setValue(version);
         } catch (Exception e) {
             e.printStackTrace();
         }

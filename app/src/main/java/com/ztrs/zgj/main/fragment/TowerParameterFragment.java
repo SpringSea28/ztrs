@@ -249,7 +249,7 @@ public class TowerParameterFragment extends Fragment {
         int towerHeight = device.getStaticParameterBean().getTowerHeight();
         float offsetY = 0;
         if(towerHeight != 0){
-            offsetY = (float) (1.0*wireRopeHeight/towerHeight);
+            offsetY = (float) (1.0*(towerHeight - wireRopeHeight)/towerHeight);
             float height = offsetY*30;
             ViewGroup.LayoutParams layoutParams = vHookupLine.getLayoutParams();
             layoutParams.height = ScaleUtils.dip2px(context,height);
