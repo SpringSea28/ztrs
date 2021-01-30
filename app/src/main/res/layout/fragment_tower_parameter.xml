@@ -177,13 +177,19 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:layout_marginTop="9dp"
-                    android:layout_marginEnd="33dp">
+                    android:layout_marginEnd="33dp"
+                    android:background="@drawable/tower_parameter_rotation_angle_bg">
                     <ImageView
                         android:id="@+id/img_rotation_angle"
                         android:layout_width="54dp"
-                        android:layout_height="54dp"
-                        android:background="@drawable/tower_parameter_rotation_angle_bg"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
                         android:src="@mipmap/zhizhen"/>
+                    <ImageView
+                        android:layout_width="3dp"
+                        android:layout_height="3dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/tower_parameter_rotation_angle_circle"/>
                     <ImageView
                         android:id="@+id/img_car"
                         android:layout_width="6dp"
