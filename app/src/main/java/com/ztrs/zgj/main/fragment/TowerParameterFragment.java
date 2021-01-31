@@ -275,8 +275,8 @@ public class TowerParameterFragment extends Fragment {
         int damageHeight = device.getRealTimeDataBean().getWireRopeDamageheight();
         tvWireRopeDamagePositionValue.setText(String.format("%.1f",1.0*damageHeight*wireRopeDamageMagnification/10));
 
-        int wireropeCurPosition = device.getRealTimeDataBean().getHeight() * device.getRealTimeDataBean().getWireRopeDamageMagnification();
-        tvWireCurrentPositionValue.setText(String.format("%.1f",1.0*wireropeCurPosition/10));
+//        int wireropeCurPosition = device.getRealTimeDataBean().getHeight() * device.getRealTimeDataBean().getWireRopeDamageMagnification();
+//        tvWireCurrentPositionValue.setText(String.format("%.1f",1.0*wireropeCurPosition/10));
         byte wireRopeState = device.getRealTimeDataBean().getWireRopeState();
         if(wireRopeState<=5 && wireRopeState>=0) {
             if(wireRopeState == 0){

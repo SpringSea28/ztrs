@@ -2,9 +2,8 @@ package com.ztrs.zgj.setting.http;
 
 import android.util.Log;
 
-import androidx.lifecycle.ViewModel;
-
 import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
+import com.ztrs.zgj.setting.viewModel.CurveUpdateModel;
 import com.ztrs.zgj.setting.viewModel.VersionModel;
 
 import java.io.File;
@@ -254,6 +253,99 @@ public class HttpRequest {
             }
         }
         return true;
+    }
+
+
+    public void checkCurveVersion(String deviceId, String ver, CurveUpdateModel viewModel){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://t3.wujjc.com:2042/t3/")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        ZjgService zjgService = retrofit.create(ZjgService.class);
+        Observable<TorqueCurveCheckBean> appCheckBeanObservable
+                = zjgService.checkDeviceVersion(deviceId, ver, System.currentTimeMillis());
+        appCheckBeanObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TorqueCurveCheckBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.e(TAG,"curve onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull TorqueCurveCheckBean torqueCurveCheckBean) {
+                        Log.e(TAG,"curve onNext: "+torqueCurveCheckBean);
+                        viewModel.onGetRemoteVersion(true,torqueCurveCheckBean);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG,"curve onError");
+                        e.printStackTrace();
+                        viewModel.onGetRemoteVersion(false,null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                            Log.e(TAG,"curve onComplete");
+                    }
+                });
+    }
+
+    public void downloadCurve(String url,final CurveUpdateModel versionModel,File saveFile){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://120.78.84.188/upgrade/")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        ZjgService apiService = retrofit.create(ZjgService.class);
+        Observable<ResponseBody> versionBeanObservable = apiService.downloadApk(url);
+        versionBeanObservable.subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .map(new Function<ResponseBody, Boolean>() {
+                    @Override
+                    public Boolean apply(ResponseBody responseBody) throws Exception {
+                        return HttpRequest.this.saveFile(responseBody, saveFile);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG,"onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(Boolean result) {
+                        Log.e(TAG,"onNext");
+                        versionModel.onDownApk(true);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG,"onError");
+                        e.printStackTrace();
+                        versionModel.onDownApk(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG,"onComplete");
+                    }
+                });
     }
 
 }

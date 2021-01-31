@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +32,10 @@ import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 import com.ztrs.zgj.setting.adapter.TorqueCureAdapter;
 import com.ztrs.zgj.setting.bean.TorqueCurveBean;
 import com.ztrs.zgj.setting.bean.TorqueModelBean;
+import com.ztrs.zgj.setting.dialog.UpdateDialog;
+import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
+import com.ztrs.zgj.setting.viewModel.CurveUpdateModel;
+import com.ztrs.zgj.setting.viewModel.VersionModel;
 import com.ztrs.zgj.utils.ScaleUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,6 +43,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,6 +77,9 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
     @BindView(R.id.rv_curve)
     RecyclerView rvCurve;
 
+    @BindView(R.id.btn_update)
+    Button btnUpdate;
+
     private PopupWindow popupWindow;
 
     private List<TorqueModelBean> torqueModelBeans = new ArrayList<>();
@@ -75,6 +88,7 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
     private TorqueCurveApplyBean torqueCurveApplyBean;
     private TorqueCurveApplyBean saveTorqueCurveApplyBean;
     private boolean hasAddCustomModel;
+    private String curveVersion;
 
     Unbinder binder;
     @Override
@@ -87,6 +101,7 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
         initData();
         initView();
         DeviceManager.getInstance().queryTorqueCurve();
+        checkUpdate();
 //        new Test().testQueryStaticParameter();
     }
 
@@ -109,11 +124,31 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
             torqueModelBeans.add(modeFromSp);
             hasAddCustomModel = true;
         }
+        String versionSave = getVersion4Sp();
+        InputStream open = null;
+        if(!TextUtils.isEmpty(versionSave)){
+            File file = CurveUpdateModel.getFile(this,versionSave);
+            if(file.exists()){
+                try {
+                    open = new FileInputStream(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         try {
-            InputStream open = getResources().getAssets().open("MementLib.txt");
+            if(open == null) {
+                open = getResources().getAssets().open("MomentLib_1.txt");
+            }
             InputStreamReader inputStreamReader = new InputStreamReader(open);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String head;
+            String version = reader.readLine();
+            if(version !=null) {
+                String[] split = version.split(":");
+                curveVersion = split[1];
+            }
+            Log.e(TAG, "curveVersion:" + curveVersion);
             while ((head = reader.readLine()) != null){
                 if(head.contains("[ML]:")){
                     String ampStr = reader.readLine();
@@ -146,7 +181,7 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
         String[] splitAmp = ampStr.split(",");
         String[] splitWei = weiStr.split(",");
         List<TorqueCurveBean> torqueCurveBeans = new ArrayList<>();
-        for(int i=0;i<splitAmp.length;i++){
+        for(int i=0;i<splitAmp.length && i<splitWei.length;i++){
             String amp =splitAmp[i].replace(" ","");
             String wei =splitWei[i].replace(" ","");
             TorqueCurveBean torqueCurveBean = new TorqueCurveBean();
@@ -265,7 +300,7 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
         return copyList;
     }
 
-    @OnClick({R.id.btn_save,R.id.tv_back,R.id.spinner_model})
+    @OnClick({R.id.btn_save,R.id.tv_back,R.id.spinner_model,R.id.btn_update})
     public void onClick(View view){
         if(view.getId() == R.id.btn_save){
             save();
@@ -277,6 +312,8 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
             }else {
                 showPopWindow();
             }
+        }else if(view.getId() == R.id.btn_update){
+            versionModel.downloadCurve(this);
         }
     }
 
@@ -369,6 +406,73 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
         return torqueModelBean;
     }
 
+    private void saveVersion2Sp(String version){
+        SharedPreferences sp = getSharedPreferences("torqueCurve",MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("version",version);
+        edit.commit();
+    }
+
+    private String getVersion4Sp(){
+        SharedPreferences sp = getSharedPreferences("torqueCurve",MODE_PRIVATE);
+        String version = sp.getString("version",null);
+        return version;
+    }
+
+
+    CurveUpdateModel versionModel;
+    UpdateDialog updateDialog;
+    private void checkUpdate(){
+        versionModel = new ViewModelProvider(this).get(CurveUpdateModel.class);
+        LiveData<String> curVersion = versionModel.getCurVersion();
+        curVersion.observe(this, s -> { });
+        versionModel.initVersion(this,curveVersion);
+        LiveData<VersionModel.UpdateState> updateState = versionModel.getUpdateState();
+        updateState.observe(this, updateState1 -> onUpdateStateChange(updateState1));
+        String hostId = DeviceManager.getInstance().getZtrsDevice().getRegisterInfoBean().getHostId();
+        Log.e(TAG,"hostId:"+hostId);
+        versionModel.checkVersion(hostId);
+    }
+
+    private void onUpdateStateChange(VersionModel.UpdateState updateState){
+        switch (updateState){
+            case CHECK_SUCCESS_CAN_UPDATE:
+                btnUpdate.setVisibility(View.VISIBLE);
+                break;
+            case DOWNLOADING:
+                if(updateDialog == null || !updateDialog.isShowing()) {
+                    updateDialog = new UpdateDialog(this);
+                    updateDialog.initText("下载中...");
+                    updateDialog.initButton(false,false);
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOAD_SUCCESS:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("下载成功");
+                    updateDialog.showButton();
+                    updateDialog.setOnUserClick(() -> {
+                        updateDialog.dismiss();
+                        btnUpdate.setVisibility(View.GONE);
+                        saveVersion2Sp(versionModel.getRemoteVersion());
+                        torqueModelBeans.clear();
+                        initCurveData();
+                        initData();
+                        initView();
+                    });
+                    updateDialog.show();
+                }
+                break;
+            case DOWNLOAD_FAIL:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("抱歉，下载失败");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+        }
+    }
 
 
     //-----------------------------------------------------------//
