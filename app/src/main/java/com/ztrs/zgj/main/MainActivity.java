@@ -4,6 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.LinkProperties;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -98,6 +104,9 @@ public class MainActivity extends BaseActivity  {
     @BindView(R.id.rl_setting)
     RelativeLayout rlSetting;
 
+    @BindView(R.id.img_signal_1)
+    ImageView imgNetwork;
+
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
     private static final int ON_SELECT_AROUND = 2;
@@ -159,7 +168,7 @@ public class MainActivity extends BaseActivity  {
 //                test.onReceiveWireRopeDetectionReport();
 //                test.testPackage();
 //                test.testOnReceiveRegisterInfo();
-                test.testOnReceiveRealtimedata();
+//                test.testOnReceiveRealtimedata();
 //                test.testOnReceiveTorqueCurve();
 //                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
@@ -170,6 +179,7 @@ public class MainActivity extends BaseActivity  {
         initView();
         display();
         checkUpdate();
+        checkNetWorkState();
     }
 
     private void checkUpdate(){
@@ -279,6 +289,8 @@ public class MainActivity extends BaseActivity  {
     @Override
     protected void onDestroy() {
         Log.e(TAG,"onDestroy");
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectivityManager.unregisterNetworkCallback(networkCallback);
         DeviceManager.getInstance().closeOpenSerial();
         EventBus.getDefault().unregister(this);
         LogCatHelper.getInstance(this,null).stop();
@@ -347,6 +359,18 @@ public class MainActivity extends BaseActivity  {
         fragmentTransaction.commit();
     }
 
+    private void checkNetWorkState(){
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if(activeNetworkInfo != null && activeNetworkInfo.isConnected()){
+            imgNetwork.setVisibility(View.VISIBLE);
+        }else {
+            imgNetwork.setVisibility(View.GONE);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connectivityManager.registerDefaultNetworkCallback(networkCallback);
+        }
+    }
 
 
     //----------------------subscribe------------------------------//
@@ -515,4 +539,51 @@ public class MainActivity extends BaseActivity  {
 //            Toast.makeText(this, "钢丝绳检测参数设置命令发送失败", Toast.LENGTH_LONG).show();
 //        }
 //    }
+
+    private ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback(){
+        @Override
+        public void onAvailable(@NonNull Network network) {
+            super.onAvailable(network);
+            Log.e(TAG,"onAvailable");
+            runOnUiThread(() -> imgNetwork.setVisibility(View.VISIBLE));
+
+        }
+
+        @Override
+        public void onLosing(@NonNull Network network, int maxMsToLive) {
+            super.onLosing(network, maxMsToLive);
+            Log.e(TAG,"onLosing");
+        }
+
+        @Override
+        public void onLost(@NonNull Network network) {
+            super.onLost(network);
+            Log.e(TAG,"onLost");
+            runOnUiThread(() -> imgNetwork.setVisibility(View.GONE));
+        }
+
+        @Override
+        public void onUnavailable() {
+            super.onUnavailable();
+            Log.e(TAG,"onUnavailable");
+        }
+
+        @Override
+        public void onCapabilitiesChanged(@NonNull Network network, @NonNull NetworkCapabilities networkCapabilities) {
+            super.onCapabilitiesChanged(network, networkCapabilities);
+            Log.e(TAG,"onCapabilitiesChanged");
+        }
+
+        @Override
+        public void onLinkPropertiesChanged(@NonNull Network network, @NonNull LinkProperties linkProperties) {
+            super.onLinkPropertiesChanged(network, linkProperties);
+            Log.e(TAG,"onLinkPropertiesChanged");
+        }
+
+        @Override
+        public void onBlockedStatusChanged(@NonNull Network network, boolean blocked) {
+            super.onBlockedStatusChanged(network, blocked);
+            Log.e(TAG,"onBlockedStatusChanged");
+        }
+    };
 }
