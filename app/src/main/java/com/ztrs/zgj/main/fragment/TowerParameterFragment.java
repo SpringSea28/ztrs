@@ -2,13 +2,13 @@ package com.ztrs.zgj.main.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -21,28 +21,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
-import com.ztrs.zgj.device.bean.AmplitudeCalibrationBean;
-import com.ztrs.zgj.device.bean.AroundCalibrationBean;
-import com.ztrs.zgj.device.bean.HeightCalibrationBean;
-import com.ztrs.zgj.device.bean.WireRopeDetectionParametersSetBean;
 import com.ztrs.zgj.device.bean.ZtrsDevice;
 import com.ztrs.zgj.main.adapter.TowerParameterAdapter;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
-import com.ztrs.zgj.device.bean.WeightCalibrationBean;
-import com.ztrs.zgj.device.bean.WireRopeDetectionReportBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
-import com.ztrs.zgj.device.eventbus.WireRopeDetectionReportMessage;
 import com.ztrs.zgj.device.protocol.RealTimeDataProtocol;
 import com.ztrs.zgj.main.adapter.TowerParameterAlarmAdapter;
-import com.ztrs.zgj.main.viewbean.TowerParameterAlarmBean;
+import com.ztrs.zgj.setting.HistoryActivity;
 import com.ztrs.zgj.utils.ScaleUtils;
 import com.ztrs.zgj.main.viewbean.TowerParameterBean;
 
@@ -56,6 +48,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -185,6 +178,13 @@ public class TowerParameterFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @OnClick({R.id.tv_history})
+    public void onClick(View view){
+        if(view.getId() == R.id.tv_history){
+            startActivity(new Intent(getContext(), HistoryActivity.class));
+        }
+    }
+
     private void initRecycleView(){
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
         towerParameterAdapter = new TowerParameterAdapter();
@@ -203,6 +203,9 @@ public class TowerParameterFragment extends Fragment {
         }
         byte magnification = staticParameterBean.getMagnification();
         tvTowerMagnification.setText(String.format(getString(R.string.tower_magnification),magnification));
+
+        String hostId = device.getRegisterInfoBean().getHostId();
+//        tvTowerSerialMonitoringNumber.setText(hostId);
 
         towerParameterAdapter.setTowerParameterBeanList(getParameters());
         towerParameterAdapter.notifyDataSetChanged();
@@ -357,20 +360,26 @@ public class TowerParameterFragment extends Fragment {
         torque.setKey(getString(R.string.parameter_torque));
         int torqueValue = realTimeDataBean.getTorque();
         torque.setValue(torqueValue);
-        boolean alarmTorque = !realTimeDataBean.isElectronicTorqueLimitState2()
-                | !realTimeDataBean.isElectronicTorqueLimitState3()
-                | !realTimeDataBean.isElectronicTorqueLimitState4();
+//        boolean alarmTorque = !realTimeDataBean.isElectronicTorqueLimitState2()
+//                | !realTimeDataBean.isElectronicTorqueLimitState3()
+//                | !realTimeDataBean.isElectronicTorqueLimitState4();,
+        boolean alarmTorque = !realTimeDataBean.isTorqueAlarmLimit();
         torque.setAlarm(alarmTorque);
+        boolean warnTorque = !realTimeDataBean.isTorqueWarnLimit();
+        torque.setWarn(warnTorque);
         list.add(torque);
 
         TowerParameterBean load = new TowerParameterBean();
         load.setType(TowerParameterAdapter.ALARM_WEIGHT);
         load.setKey(getString(R.string.parameter_load));
         int upWeight = realTimeDataBean.getUpWeight();
-        boolean alarmWeight = !realTimeDataBean.isElectronicWeightLimitState3()
-                | !realTimeDataBean.isElectronicWeightLimitState4();
         load.setValue(upWeight);
+//        boolean alarmWeight = !realTimeDataBean.isElectronicWeightLimitState3()
+//                | !realTimeDataBean.isElectronicWeightLimitState4();
+        boolean alarmWeight = !realTimeDataBean.isWeightAlarmLimit();
         load.setAlarm(alarmWeight);
+        boolean warnWeight = !realTimeDataBean.isWeightWarnLimit();
+        load.setWarn(warnWeight);
         list.add(load);
 
 

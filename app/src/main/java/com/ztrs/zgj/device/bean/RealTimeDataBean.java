@@ -45,6 +45,11 @@ public class RealTimeDataBean {
     boolean outputInLuffingStopLimit= true;
     boolean outputInLuffingSlowLimit= true;
 
+    boolean torqueWarnLimit = true;
+    boolean torqueAlarmLimit = true;
+    boolean weightWarnLimit = true;
+    boolean weightAlarmLimit = true;
+
     boolean electronicWindAlarmLimit= true;
     boolean electronicWindWarningLimit= true;
 
@@ -408,6 +413,38 @@ public class RealTimeDataBean {
 
     public void setOutputInLuffingSlowLimit(boolean outputInLuffingSlowLimit) {
         this.outputInLuffingSlowLimit = outputInLuffingSlowLimit;
+    }
+
+    public boolean isTorqueWarnLimit() {
+        return torqueWarnLimit;
+    }
+
+    public void setTorqueWarnLimit(boolean torqueWarnLimit) {
+        this.torqueWarnLimit = torqueWarnLimit;
+    }
+
+    public boolean isTorqueAlarmLimit() {
+        return torqueAlarmLimit;
+    }
+
+    public void setTorqueAlarmLimit(boolean torqueAlarmLimit) {
+        this.torqueAlarmLimit = torqueAlarmLimit;
+    }
+
+    public boolean isWeightWarnLimit() {
+        return weightWarnLimit;
+    }
+
+    public void setWeightWarnLimit(boolean weightWarnLimit) {
+        this.weightWarnLimit = weightWarnLimit;
+    }
+
+    public boolean isWeightAlarmLimit() {
+        return weightAlarmLimit;
+    }
+
+    public void setWeightAlarmLimit(boolean weightAlarmLimit) {
+        this.weightAlarmLimit = weightAlarmLimit;
     }
 
     public boolean isElectronicWindAlarmLimit() {

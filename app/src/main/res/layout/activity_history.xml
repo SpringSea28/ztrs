@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_bg_color"
+        android:orientation="vertical">
+
+        <include android:id="@+id/rl_title"
+            layout="@layout/title_bar_item" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical">
+                <Button
+                    android:id="@+id/btn_query"
+                    style="@style/setting_current_value_tv_style"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_centerVertical="true"
+                    android:text="查询"/>
+
+                <TextView
+                    android:id="@+id/tv_start_hint"
+                    style="@style/tower_primary_text_style"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="31dp"
+                    android:text="开始时间"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_start"
+                    android:layout_width="75dp"
+                    android:layout_height="13dp"
+                    android:layout_toRightOf="@id/tv_start_hint"
+                    android:layout_marginStart="5dp"
+                    android:background="@null"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/tv_start_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="7sp"
+                        android:textColor="#111D29"
+                        android:paddingStart="8dp"
+                        android:gravity="center_vertical|start"
+                        android:background="@drawable/history_time_bg"
+                        />
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="4dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:src="@mipmap/xuanze"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_end_hint"
+                    style="@style/tower_primary_text_style"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="27dp"
+                    android:layout_toRightOf="@id/rl_start"
+                    android:text="结束时间"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_end"
+                    android:layout_width="75dp"
+                    android:layout_height="13dp"
+                    android:layout_toRightOf="@id/tv_end_hint"
+                    android:layout_marginStart="5dp"
+                    android:background="@null"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/tv_end_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="7sp"
+                        android:textColor="#111D29"
+                        android:paddingStart="8dp"
+                        android:gravity="center_vertical|start"
+                        android:background="@drawable/history_time_bg"
+                        />
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="4dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:src="@mipmap/xuanze"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="159dp"
+                    android:layout_height="145dp"
+                    android:layout_marginStart="57dp"
+                    android:layout_gravity="bottom">
+
+                    <ImageView
+                        android:layout_width="159dp"
+                        android:layout_height="145dp"
+                        android:src="@mipmap/tadiao" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_hookup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginRight="23dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/v_hookup_line"
+                            android:layout_width="1px"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="#1D1E1D" />
+
+                        <ImageView
+                            android:id="@+id/img_hookup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/diaogou" />
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_after_arm"
+                            style="@style/tower_primary_text_style"
+                            android:layout_alignBottom="@id/tv_after_arm_value"
+                            android:text="后臂长(m)" />
+
+                        <TextView
+                            android:id="@+id/tv_after_arm_value"
+                            style="@style/tower_primary_text_style"
+                            android:layout_toRightOf="@id/tv_after_arm"
+                            android:text="10.0"
+                            android:textColor="@color/tower_parameter_normal_text_color"
+                            android:textSize="@dimen/tower_primary_value_text_dimen" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="30dp">
+
+                        <TextView
+                            android:id="@+id/tv_big_arm"
+                            style="@style/tower_primary_text_style"
+                            android:layout_alignBottom="@id/tv_big_arm_value"
+                            android:text="大臂长(m)" />
+
+                        <TextView
+                            android:id="@+id/tv_big_arm_value"
+                            style="@style/tower_primary_text_style"
+                            android:layout_toRightOf="@id/tv_big_arm"
+                            android:text="55.0"
+                            android:textColor="@color/tower_parameter_normal_text_color"
+                            android:textSize="@dimen/tower_primary_value_text_dimen" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true">
+
+                        <TextView
+                            android:id="@+id/tv_max_height"
+                            style="@style/tower_primary_text_style"
+                            android:text="最高高度(m)" />
+
+                        <TextView
+                            android:id="@+id/tv_max_height_value"
+                            style="@style/tower_primary_text_style"
+                            android:layout_below="@id/tv_max_height"
+                            android:layout_centerHorizontal="true"
+                            android:text="80.0"
+                            android:textColor="@color/tower_parameter_normal_text_color"
+                            android:textSize="@dimen/tower_primary_value_text_dimen" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_rotation_angle"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="48dp"
+                        android:background="@drawable/tower_parameter_rotation_angle_bg">
+
+                        <ImageView
+                            android:id="@+id/img_rotation_angle"
+                            android:layout_width="54dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentBottom="true"
+                            android:src="@mipmap/zhizhen" />
+
+                        <ImageView
+                            android:layout_width="3dp"
+                            android:layout_height="3dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/tower_parameter_rotation_angle_circle" />
+
+                        <ImageView
+                            android:id="@+id/img_car"
+                            android:layout_width="6dp"
+                            android:layout_height="8dp"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/tower_parameter_car_bg" />
+                    </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

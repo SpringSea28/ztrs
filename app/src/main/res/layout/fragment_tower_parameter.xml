@@ -252,6 +252,7 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tv_history"
                     android:layout_width="64dp"
                     android:layout_height="14dp"
                     android:layout_marginTop="7dp"

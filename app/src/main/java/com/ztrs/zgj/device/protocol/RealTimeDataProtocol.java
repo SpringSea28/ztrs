@@ -1,11 +1,8 @@
 package com.ztrs.zgj.device.protocol;
 
-import android.util.Log;
-
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
-import com.ztrs.zgj.device.eventbus.WireRopeDetectionReportMessage;
 
 public class RealTimeDataProtocol extends BaseProtocol{
     private static final String TAG= RealTimeDataProtocol.class.getSimpleName();
@@ -130,6 +127,17 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setOutputInLuffingStopLimit(outputInLuffingStopLimit);
         boolean outputInLuffingSlowLimit= (data[8] &0X10) == 0x10;
         realTimeDataBean.setOutputInLuffingSlowLimit(outputInLuffingSlowLimit);
+
+        //1.27协议
+        boolean torqueWarnLimit = (data[8] &0X08) == 0x08;
+        realTimeDataBean.setTorqueWarnLimit(torqueWarnLimit);
+        boolean torqueAlarmLimit = (data[8] &0X04) == 0x04;
+        realTimeDataBean.setTorqueAlarmLimit(torqueAlarmLimit);
+        boolean weightWarnLimit = (data[8] &0X02) == 0x02;
+        realTimeDataBean.setWeightWarnLimit(weightWarnLimit);
+        boolean weightAlarmLimit = (data[8] &0X01) == 0x01;
+        realTimeDataBean.setWeightAlarmLimit(weightAlarmLimit);
+
         boolean electronicWindAlarmLimit = (data[9] &0X08) == 0x08;
         realTimeDataBean.setElectronicWindAlarmLimit(electronicWindAlarmLimit);
         boolean electronicWindWarningLimit= (data[9] &0X04) == 0x04;
