@@ -1,5 +1,6 @@
 package com.ztrs.zgj.main.fragment;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -167,6 +169,7 @@ public class TowerParameterFragment extends Fragment {
         EventBus.getDefault().register(this);
         initRecycleView();
         initView();
+        initRotationAngle();
         return view;
     }
 
@@ -228,7 +231,7 @@ public class TowerParameterFragment extends Fragment {
         tvMaxHeightValue.setText(String.format("%.1f",1.0*towerHeight/10));
 
         initWireRopeView();
-        initRotationAngle();
+        initRotationAngleCar();
         hookupAnimation();
     }
 
@@ -236,6 +239,27 @@ public class TowerParameterFragment extends Fragment {
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         int aroundValue = realTimeDataBean.getAroundAngle();
         rlRotationAngle.setRotation((float) (aroundValue * 1.0 / 10));
+    }
+
+    ObjectAnimator rotationAnimator;
+    private void updateRotationAngle(){
+        float startAngle = rlRotationAngle.getRotation();
+        RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
+        float stopAngle = (float)(realTimeDataBean.getAroundAngle()/10.0);
+        if(rotationAnimator != null ){
+            startAngle = (float)rotationAnimator.getAnimatedValue();
+            rotationAnimator.cancel();
+            rotationAnimator.setFloatValues(startAngle,stopAngle);
+        }else {
+            rotationAnimator = ObjectAnimator.ofFloat(rlRotationAngle,"rotation",startAngle,stopAngle);
+            rotationAnimator.setInterpolator(new LinearInterpolator());
+            rotationAnimator.setDuration(2000);
+        }
+        rotationAnimator.start();
+    }
+
+    private void initRotationAngleCar() {
+        RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         int amplitude = realTimeDataBean.getAmplitude();
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
@@ -491,6 +515,7 @@ public class TowerParameterFragment extends Fragment {
         if(msg.getResult() == BaseMessage.RESULT_REPORT
             || msg.getResult() == BaseMessage.RESULT_OK) {
             initView();
+            updateRotationAngle();
         }
     }
 
@@ -502,23 +527,26 @@ public class TowerParameterFragment extends Fragment {
 //            hookupAnimation();
 //        }
 //    }
-//    private void testWireRope(){
-//        device.getRealTimeDataBean().setAmplitude(200);
-//        device.getStaticParameterBean().setUpWeightArmLen(400);
-//        device.getRealTimeDataBean().setHeight((short)100);
-//        device.getRealTimeDataBean().setWireRopeDamageMagnification((byte)2);
-//        device.getStaticParameterBean().setTowerHeight(400);
-//        Observable.interval(2,TimeUnit.SECONDS)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<Long>() {
-//                    @Override
-//                    public void accept(Long aLong) throws Exception {
-//                        int amplitude = device.getRealTimeDataBean().getAmplitude();
-//                        device.getRealTimeDataBean().setAmplitude(++amplitude);
-//                        int height = device.getRealTimeDataBean().getHeight();
-//                        device.getRealTimeDataBean().setHeight((short)++height);
-//                        hookupAnimation();
-//                    }
-//                });
-//    }
+    private void testWireRope(){
+        device.getRealTimeDataBean().setAmplitude(200);
+        device.getStaticParameterBean().setUpWeightArmLen(400);
+        device.getRealTimeDataBean().setHeight((short)100);
+        device.getRealTimeDataBean().setWireRopeDamageMagnification((byte)2);
+        device.getStaticParameterBean().setTowerHeight(400);
+        Observable.interval(2,TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        int aroundAngle = device.getRealTimeDataBean().getAroundAngle();
+                        device.getRealTimeDataBean().setAroundAngle(aroundAngle+900);
+                        int amplitude = device.getRealTimeDataBean().getAmplitude();
+                        device.getRealTimeDataBean().setAmplitude(++amplitude);
+                        int height = device.getRealTimeDataBean().getHeight();
+                        device.getRealTimeDataBean().setHeight((short)++height);
+                        hookupAnimation();
+                        updateRotationAngle();
+                    }
+                });
+    }
 }

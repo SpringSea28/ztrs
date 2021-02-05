@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testOnReceiveRegisterInfo();
 //                test.testOnReceiveRealtimedata();
 //                test.testOnReceiveTorqueCurve();
-//                test.testQueryStaticParameter();
+                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
 //                test.testOnReceiveRegisterInfo();
             }
