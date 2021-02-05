@@ -14,17 +14,6 @@
             android:layout_centerVertical="true"
             android:paddingStart="@dimen/setting_item_key_padding_start"
             android:text="数据模板" />
-        <Button
-            android:id="@+id/btn_update"
-            style="@style/setting_save_btn_style"
-            android:layout_width="30dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="0dp"
-            android:layout_toLeftOf="@id/rl_mode"
-            android:layout_marginEnd="10dp"
-            android:text="更新"
-            android:visibility="gone"/>
         <RelativeLayout
             android:id="@+id/rl_mode"
             style="@style/setting_item_edit_text_base_style"
@@ -60,6 +49,11 @@
                 android:layout_marginEnd="10dp"
                 android:src="@mipmap/xuanze"/>
         </RelativeLayout>
+        <Button
+            android:id="@+id/btn_update"
+            style="@style/setting_current_value_tv_style"
+            android:text="更新"
+            android:visibility="visible"/>
     </RelativeLayout>
 
     <ImageView

@@ -20,6 +20,7 @@ import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
+import com.ztrs.zgj.device.eventbus.RegisterInfoMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
 import com.ztrs.zgj.device.eventbus.TorqueCurveMessage;
 import com.ztrs.zgj.main.msg.SerialPortOpenResultMsg;
@@ -160,12 +161,15 @@ public class SplashActivity extends BaseActivity {
                         DeviceManager.getInstance().queryStaticParameter();
                     }else if(!queryTorqueResult){
                         DeviceManager.getInstance().queryTorqueCurve();
+                    }else if(!queryRegisterInfo){
+                        DeviceManager.getInstance().queryRegisterInfo();
                     }
                 }else {
                     Toast.makeText(SplashActivity.this,"初始化中，请稍后",Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_test:
+                Log.e("wch","onclick");
                 startActivity(new Intent(this,MainActivity.class));
                 finish();
                 break;
@@ -180,6 +184,7 @@ public class SplashActivity extends BaseActivity {
             isOpen = true;
             DeviceManager.getInstance().queryStaticParameter();
             DeviceManager.getInstance().queryTorqueCurve();
+            DeviceManager.getInstance().queryRegisterInfo();
         }else {
             isOpen = false;
             Toast.makeText(this, "串口打开失败", Toast.LENGTH_LONG).show();
@@ -193,6 +198,7 @@ public class SplashActivity extends BaseActivity {
     private int QUERY_FINISH_FAIL = 3;
     private boolean queryStaticParameterResult;
     private boolean queryTorqueResult;
+    private boolean queryRegisterInfo;
     private boolean isInitQuerySuccess(){
         if(queryStaticParameterResult==false){
             return false;
@@ -201,6 +207,11 @@ public class SplashActivity extends BaseActivity {
         if(queryTorqueResult == false){
             return false;
         }
+
+        if(queryRegisterInfo == false){
+            return false;
+        }
+
         startActivity(new Intent(this,MainActivity.class));
         finish();
         return true;
@@ -234,5 +245,20 @@ public class SplashActivity extends BaseActivity {
             }
             isInitQuerySuccess();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRegisterInfo(RegisterInfoMessage msg){
+        LogUtils.LogI(TAG,"onRegisterInfo: "+msg.getCmdType());
+        LogUtils.LogI(TAG,"onRegisterInfo: "+msg.getResult());
+        if(msg.getCmdType() == BaseMessage.TYPE_QUERY){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+                queryRegisterInfo = true;
+            }else {
+                queryRegisterInfo = false;
+                Toast.makeText(this,"设备注册信息查询发送失败",Toast.LENGTH_LONG).show();
+            }
+        }
+        isInitQuerySuccess();
     }
 }

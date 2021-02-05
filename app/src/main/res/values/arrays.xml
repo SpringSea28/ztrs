@@ -4,10 +4,10 @@
         <item>荷载报警</item>
         <item>高度报警</item>
         <item>回转报警</item>
-        <item>力矩绳报警</item>
-        <item>载重绳报警</item>
-        <item>风力绳报警</item>
-        <item>幅度绳报警</item>
+        <item>力矩报警</item>
+        <item>载重报警</item>
+        <item>风力报警</item>
+        <item>幅度报警</item>
     </string-array>
 
     <string-array name="tower_model">

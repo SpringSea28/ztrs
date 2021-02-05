@@ -313,7 +313,9 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
                 showPopWindow();
             }
         }else if(view.getId() == R.id.btn_update){
-            versionModel.downloadCurve(this);
+            String hostId = DeviceManager.getInstance().getZtrsDevice().getRegisterInfoBean().getHostId();
+            Log.e(TAG,"hostId:"+hostId);
+            versionModel.checkVersion(hostId);
         }
     }
 
@@ -429,21 +431,53 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
         versionModel.initVersion(this,curveVersion);
         LiveData<VersionModel.UpdateState> updateState = versionModel.getUpdateState();
         updateState.observe(this, updateState1 -> onUpdateStateChange(updateState1));
-        String hostId = DeviceManager.getInstance().getZtrsDevice().getRegisterInfoBean().getHostId();
-        Log.e(TAG,"hostId:"+hostId);
-        versionModel.checkVersion(hostId);
+//        String hostId = DeviceManager.getInstance().getZtrsDevice().getRegisterInfoBean().getHostId();
+//        Log.e(TAG,"hostId:"+hostId);
+//        versionModel.checkVersion(hostId);
     }
 
     private void onUpdateStateChange(VersionModel.UpdateState updateState){
+        Log.e(TAG,""+updateState);
         switch (updateState){
-            case CHECK_SUCCESS_CAN_UPDATE:
-                btnUpdate.setVisibility(View.VISIBLE);
-                break;
-            case DOWNLOADING:
+            case CHECKING:
                 if(updateDialog == null || !updateDialog.isShowing()) {
                     updateDialog = new UpdateDialog(this);
-                    updateDialog.initText("下载中...");
+                    updateDialog.initText("检测新版本中...");
                     updateDialog.initButton(false,false);
+                    updateDialog.show();
+                }
+                break;
+            case CHECK_SUCCESS_CAN_UPDATE:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("检测新版本: " + versionModel.getRemoteVersion()+"\n"+"确认升级？");
+                    updateDialog.showButton();
+                    updateDialog.setOnUserClick(() -> {
+                        versionModel.downloadCurve(this);
+                    });
+                    updateDialog.show();
+                }
+                break;
+            case CHECK_SUCCESS_NO_UPDATE:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("已经是最新版本");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+            case CHECK_FAIL:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("检测新版本失败");
+                    updateDialog.showConfirm();
+                    updateDialog.setOnUserClick(() -> updateDialog.dismiss());
+                    updateDialog.show();
+                }
+                break;
+
+            case DOWNLOADING:
+                if(updateDialog.isShowing()) {
+                    updateDialog.setText("新版本下载中...");
+                    updateDialog.hideButton();
                     updateDialog.show();
                 }
                 break;
@@ -453,12 +487,12 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
                     updateDialog.showButton();
                     updateDialog.setOnUserClick(() -> {
                         updateDialog.dismiss();
-                        btnUpdate.setVisibility(View.GONE);
                         saveVersion2Sp(versionModel.getRemoteVersion());
                         torqueModelBeans.clear();
                         initCurveData();
                         initData();
                         initView();
+                        versionModel.initVersion(this,curveVersion);
                     });
                     updateDialog.show();
                 }

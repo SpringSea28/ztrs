@@ -205,7 +205,7 @@ public class TowerParameterFragment extends Fragment {
         tvTowerMagnification.setText(String.format(getString(R.string.tower_magnification),magnification));
 
         String hostId = device.getRegisterInfoBean().getHostId();
-//        tvTowerSerialMonitoringNumber.setText(hostId);
+        tvTowerSerialMonitoringNumber.setText(hostId);
 
         towerParameterAdapter.setTowerParameterBeanList(getParameters());
         towerParameterAdapter.notifyDataSetChanged();
