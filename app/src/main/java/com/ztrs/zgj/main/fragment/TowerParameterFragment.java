@@ -562,7 +562,7 @@ public class TowerParameterFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRealTimeData(RealTimeDataMessage msg){
-        LogUtils.LogI("wch","onRealTimeData: "+msg.getResult());
+        LogUtils.LogI(TAG,"onRealTimeData: "+msg.getResult());
         if(msg.getResult() == BaseMessage.RESULT_REPORT
             || msg.getResult() == BaseMessage.RESULT_OK) {
             initView();

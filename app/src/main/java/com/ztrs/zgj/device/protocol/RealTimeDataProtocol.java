@@ -66,6 +66,9 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setConnectStateByDeviceWithRemoteCenter(connectStateByDeviceWithRemoteCenter);
         boolean plcState = (data[2] &0X08) == 0x08;
         realTimeDataBean.setPlcState(plcState);
+        boolean network = (data[2] &0X04) == 0x04;
+        realTimeDataBean.setNetwork(network);
+
         byte upWeightSensorState = (byte)((data[3] &0X00C0)>>6);
         realTimeDataBean.setUpWeightSensorState(upWeightSensorState);
         byte heightSensorState = (byte)((data[3] &0X0030)>>4);

@@ -41,6 +41,7 @@ import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.Test;
+import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.eventbus.AmplitudeCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.AroundCalibrationMessage;
@@ -106,6 +107,9 @@ public class MainActivity extends BaseActivity  {
 
     @BindView(R.id.img_signal_1)
     ImageView imgNetwork;
+
+    @BindView(R.id.img_signal_3)
+    ImageView imgDeviceNetwork;
 
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
@@ -272,7 +276,16 @@ public class MainActivity extends BaseActivity  {
 
 
     private void initView(){
-
+        RealTimeDataBean realTimeDataBean = DeviceManager.getInstance().getZtrsDevice().getRealTimeDataBean();
+        boolean connectRemote = realTimeDataBean.isConnectStateByDeviceWithRemoteCenter();
+        boolean network = realTimeDataBean.isNetwork();
+        if(!network && !connectRemote){
+            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_2));
+        }else if(!network){
+            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_3));
+        }else {
+            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_3));
+        }
     }
 
     private void display(){
@@ -429,15 +442,14 @@ public class MainActivity extends BaseActivity  {
 //    }
 
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onRealTimeData(RealTimeDataMessage msg){
-//        LogUtils.LogI("wch","onRealTimeData: "+msg.getResult());
-//        if(msg.getResult() == BaseMessage.RESULT_OK) {
-//            Toast.makeText(this, "实时数据命令发送成功", Toast.LENGTH_LONG).show();
-//        }else if(msg.getResult() == BaseMessage.RESULT_FAIL){
-//            Toast.makeText(this, "实时数据命令发送失败", Toast.LENGTH_LONG).show();
-//        }
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRealTimeData(RealTimeDataMessage msg){
+        LogUtils.LogI(TAG,"onRealTimeData: "+msg.getResult());
+        if(msg.getResult() == BaseMessage.RESULT_REPORT
+                || msg.getResult() == BaseMessage.RESULT_OK) {
+            initView();
+        }
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWorkCycleData(WorkCycleDataMessage msg){

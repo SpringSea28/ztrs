@@ -9,6 +9,7 @@ public class RealTimeDataBean {
     boolean bypassState;
     boolean connectStateByDeviceWithRemoteCenter;
     boolean plcState;
+    boolean network;
     byte upWeightSensorState;
     byte heightSensorState;
     byte turnAroundSensorState;
@@ -173,6 +174,14 @@ public class RealTimeDataBean {
 
     public void setPlcState(boolean plcState) {
         this.plcState = plcState;
+    }
+
+    public boolean isNetwork() {
+        return network;
+    }
+
+    public void setNetwork(boolean network) {
+        this.network = network;
     }
 
     public byte getUpWeightSensorState() {
