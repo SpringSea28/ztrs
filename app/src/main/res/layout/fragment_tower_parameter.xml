@@ -69,26 +69,31 @@
                     android:layout_width="159dp"
                     android:layout_height="145dp"
                     android:src="@mipmap/tadiao" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="22dp">
                 <LinearLayout
                     android:id="@+id/ll_hookup"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
+                    android:layout_height="122dp"
                     android:layout_marginRight="23dp"
                     android:layout_alignParentEnd="true"
                     android:orientation="vertical">
                     <View
                         android:id="@+id/v_hookup_line"
-                        android:layout_width="1px"
-                        android:layout_height="30dp"
+                        android:layout_width="1dp"
+                        android:layout_height="92dp"
                         android:layout_gravity="center_horizontal"
                         android:background="#1D1E1D"/>
                     <ImageView
                         android:id="@+id/img_hookup"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:visibility="visible"
                         android:src="@mipmap/diaogou"/>
                 </LinearLayout>
+                </RelativeLayout>
 
 
                 <RelativeLayout

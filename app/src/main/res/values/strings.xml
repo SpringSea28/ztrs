@@ -5,7 +5,7 @@
     <!--tower parameter-->
     <string name="tower_serial_number">吊塔编号：%x</string>
     <string name="tower_specification_model">规格型号：%s</string>
-    <string name="tower_monitoring_number">监控编号：%x</string>
+    <string name="tower_monitoring_number">监控编号：%s</string>
     <string name="tower_magnification">倍率:%d</string>
     <string name="tower_warn">报警</string>
 
