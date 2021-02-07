@@ -54,7 +54,7 @@ public class TowerParameterAdapter extends RecyclerView.Adapter<TowerParameterAd
         }else if(towerParameterBean.getType() == ALARM_WEIGHT){
             holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 100));
         } else if(towerParameterBean.getType() == ALARM_LOAD){
-            holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 10));
+            holder.tvValue.setText(String.format("%.2f", 1.0 * towerParameterBean.getValue() / 100));
         }else {
             holder.tvValue.setText(String.format("%.1f", 1.0 * towerParameterBean.getValue() / 10));
         }

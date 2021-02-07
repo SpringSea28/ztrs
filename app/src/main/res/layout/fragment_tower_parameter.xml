@@ -116,7 +116,7 @@
                         android:id="@+id/tv_after_arm"
                         style="@style/tower_primary_text_style"
                         android:layout_alignBottom="@id/tv_after_arm_value"
-                        android:text="后臂长(m)" />
+                        android:text="后臂长(m):" />
 
                     <TextView
                         android:id="@+id/tv_after_arm_value"
@@ -137,7 +137,7 @@
                         android:id="@+id/tv_big_arm"
                         style="@style/tower_primary_text_style"
                         android:layout_alignBottom="@id/tv_big_arm_value"
-                        android:text="大臂长(m)" />
+                        android:text="大臂长(m)：" />
 
                     <TextView
                         android:id="@+id/tv_big_arm_value"
@@ -156,7 +156,7 @@
                     <TextView
                         android:id="@+id/tv_max_height"
                         style="@style/tower_primary_text_style"
-                        android:text="最高高度(m)" />
+                        android:text="最高高度(m):" />
 
                     <TextView
                         android:id="@+id/tv_max_height_value"
@@ -189,7 +189,7 @@
                         android:id="@+id/tv_current_max_load"
                         style="@style/tower_primary_text_style"
                         android:layout_alignBottom="@id/tv_current_max_load_value"
-                        android:text="当前位置最大载重(t)" />
+                        android:text="当前位置最大载重(t)：" />
 
                     <TextView
                         android:id="@+id/tv_current_max_load_value"

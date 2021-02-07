@@ -125,13 +125,19 @@ public class RealTimeDataProtocol extends BaseProtocol{
         boolean outputRightAroundSlowLimit = (data[7] &0X01) == 0x01;
         realTimeDataBean.setOutputRightAroundSlowLimit(outputRightAroundSlowLimit);
         boolean outputOutLuffingStopLimit= (data[8] &0X80) == 0x80;
-        realTimeDataBean.setOutputInLuffingStopLimit(outputOutLuffingStopLimit);
+        realTimeDataBean.setOutputOutLuffingStopLimit(outputOutLuffingStopLimit);
         boolean outputOutLuffingSlowLimit = (data[8] &0X40) == 0x40;
         realTimeDataBean.setOutputOutLuffingSlowLimit(outputOutLuffingSlowLimit);
         boolean outputInLuffingStopLimit  = (data[8] &0X20) == 0x20;
         realTimeDataBean.setOutputInLuffingStopLimit(outputInLuffingStopLimit);
         boolean outputInLuffingSlowLimit= (data[8] &0X10) == 0x10;
         realTimeDataBean.setOutputInLuffingSlowLimit(outputInLuffingSlowLimit);
+        Log.e(TAG,"outputOutLuffingStopLimit:"+outputOutLuffingStopLimit);
+        Log.e(TAG,"outputOutLuffingSlowLimit:"+outputOutLuffingSlowLimit);
+        Log.e(TAG,"outputInLuffingStopLimit:"+outputInLuffingStopLimit);
+        Log.e(TAG,"outputInLuffingSlowLimit:"+outputInLuffingSlowLimit);
+        Log.e(TAG,"data8:"+LogUtils.toHexString(data[8]));
+
 
         //1.27协议
         boolean torqueWarnLimit = (data[8] &0X08) == 0x08;
@@ -226,6 +232,9 @@ public class RealTimeDataProtocol extends BaseProtocol{
 
         int upWeightTorquePercent = ((data[16]&0xffffffff) << 8) |(data[17]&0x00ff);
         realTimeDataBean.setUpWeightTorquePercent(upWeightTorquePercent);
+//                Log.e(TAG,"upWeightTorquePercent:"+upWeightTorquePercent);
+//        Log.e(TAG,"data16:"+LogUtils.toHexString(data[16]));
+//        Log.e(TAG,"data[17]:"+LogUtils.toHexString(data[17]));
         int upWeight= ((data[18]&0xffffffff) << 8) |(data[19]&0x00ff);
         realTimeDataBean.setUpWeight(upWeight);
         short height= (short) (((data[20]&0xffffffff) << 8) |(data[21]&0x00ff));
@@ -259,6 +268,9 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setySlope(ySlope);
         short torque = (short)(((data[43]&0xffffffff) << 8) |(data[44]&0x00ff));
         realTimeDataBean.setTorque(torque);
+        Log.e(TAG,"torque:"+torque);
+        Log.e(TAG,"data43:"+LogUtils.toHexString(data[43]));
+        Log.e(TAG,"data[44]:"+LogUtils.toHexString(data[44]));
         byte windLevel = data[45];
         realTimeDataBean.setWindLevel(windLevel);
         byte wireRopeState = data[46];

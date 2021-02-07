@@ -13,7 +13,7 @@
     <string name="parameter_max_load">荷载(%)</string>
     <string name="parameter_height">高度(m)</string>
     <string name="parameter_around">回转(°)</string>
-    <string name="parameter_torque">力矩(KN.m)</string>
+    <string name="parameter_torque">力矩(KN·m)</string>
     <string name="parameter_load">载重(t)</string>
     <string name="parameter_wind">风力</string>
     <string name="parameter_amplitude">幅度(m)</string>

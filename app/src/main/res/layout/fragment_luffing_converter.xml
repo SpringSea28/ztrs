@@ -232,15 +232,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
-
+                <ImageView
+                    android:id="@+id/img_go_ahead_reduce_speed_limit_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="前进减速限位：" />
+                    android:text="前进减速限位" />
 
                 <TextView
                     android:id="@+id/tv_go_ahead_reduce_speed_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
             </LinearLayout>
 
@@ -249,15 +252,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1">
-
+                <ImageView
+                    android:id="@+id/img_back_end_limit_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="后退终点限位：" />
+                    android:text="后退终点限位" />
 
                 <TextView
                     android:id="@+id/tv_back_end_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
 
             </LinearLayout>
@@ -268,6 +274,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1">
 
+                <ImageView
+                    android:id="@+id/img_torque_80_limit_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
                     android:text="力矩80\%限位：" />
@@ -276,6 +285,7 @@
                     android:id="@+id/tv_torque_80_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
 
             </LinearLayout>
@@ -291,15 +301,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
-
+                <ImageView
+                    android:id="@+id/img_back_reduce_speed_limit_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="后退减速限位：" />
+                    android:text="后退减速限位" />
 
                 <TextView
                     android:id="@+id/tv_back_reduce_speed_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
             </LinearLayout>
 
@@ -308,6 +321,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/img_torque_100_limit_value"
+                    style="@style/converter_limit_value_img_style" />
 
                 <TextView
                     style="@style/tower_converter_text_style"
@@ -317,6 +333,7 @@
                     android:id="@+id/tv_torque_100_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
             </LinearLayout>
 
