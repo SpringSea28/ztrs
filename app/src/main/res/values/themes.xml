@@ -159,6 +159,13 @@
         <item name="android:text">当前值</item>
     </style>
 
+    <style name="converter_limit_value_img_style">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:src">@drawable/tower_converter_normal_bg</item>
+    </style>
 
 
 </resources>

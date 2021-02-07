@@ -211,7 +211,8 @@ public class SplashActivity extends BaseActivity {
         if(queryRegisterInfo == false){
             return false;
         }
-
+        stopQuery();
+        Log.e(TAG,"start MainActivity");
         startActivity(new Intent(this,MainActivity.class));
         finish();
         return true;

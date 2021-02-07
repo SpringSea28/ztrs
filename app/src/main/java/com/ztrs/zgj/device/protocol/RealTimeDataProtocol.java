@@ -1,5 +1,7 @@
 package com.ztrs.zgj.device.protocol;
 
+import android.util.Log;
+
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
@@ -140,6 +142,7 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setWeightWarnLimit(weightWarnLimit);
         boolean weightAlarmLimit = (data[8] &0X01) == 0x01;
         realTimeDataBean.setWeightAlarmLimit(weightAlarmLimit);
+//        Log.e(TAG,"data[8]: "+LogUtils.toHexString(data[8]));
 
         boolean electronicWindAlarmLimit = (data[9] &0X08) == 0x08;
         realTimeDataBean.setElectronicWindAlarmLimit(electronicWindAlarmLimit);
@@ -230,6 +233,9 @@ public class RealTimeDataProtocol extends BaseProtocol{
         int aroundAngle= ((data[22]&0xffffffff) << 8) |(data[23]&0x00ff);
         realTimeDataBean.setAroundAngle(aroundAngle);
         int amplitude = ((data[24]&0xffffffff) << 8) |(data[25]&0x00ff);
+//        Log.e(TAG,"amplitude:"+amplitude);
+//        Log.e(TAG,"data24:"+LogUtils.toHexString(data[24]));
+//        Log.e(TAG,"data[25]:"+LogUtils.toHexString(data[25]));
         realTimeDataBean.setAmplitude(amplitude);
         int boomUpAngle= ((data[26]&0xffffffff) << 8) |(data[27]&0x00ff);
         realTimeDataBean.setBoomUpAngle(boomUpAngle);

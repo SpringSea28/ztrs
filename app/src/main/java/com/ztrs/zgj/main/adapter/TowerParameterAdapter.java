@@ -60,6 +60,11 @@ public class TowerParameterAdapter extends RecyclerView.Adapter<TowerParameterAd
         }
         if(isWarn | isAlarm){
             holder.tvWarn.setVisibility(View.VISIBLE);
+            if(isAlarm){
+                holder.tvWarn.setText("报警");
+            }else{
+                holder.tvWarn.setText("预警");
+            }
             holder.tvKey.setTextColor(holder.context.getColor(R.color.tower_parameter_warn_text_color));
             holder.tvValue.setTextColor(holder.context.getColor(R.color.tower_parameter_warn_text_color));
             holder.llItem.setBackground(holder.context.getDrawable(R.drawable.tower_parameter_alarm_item_bg));

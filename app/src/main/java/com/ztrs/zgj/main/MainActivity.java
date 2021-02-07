@@ -282,9 +282,9 @@ public class MainActivity extends BaseActivity  {
         if(!network && !connectRemote){
             imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_2));
         }else if(!network){
-            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_3));
+            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.network_unable2));
         }else {
-            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_3));
+            imgDeviceNetwork.setImageDrawable(getDrawable(R.mipmap.network_wrong));
         }
     }
 
@@ -376,9 +376,9 @@ public class MainActivity extends BaseActivity  {
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if(activeNetworkInfo != null && activeNetworkInfo.isConnected()){
-            imgNetwork.setVisibility(View.VISIBLE);
+            imgNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_1));
         }else {
-            imgNetwork.setVisibility(View.GONE);
+            imgNetwork.setImageDrawable(getDrawable(R.mipmap.network_unable));
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(networkCallback);
@@ -557,7 +557,7 @@ public class MainActivity extends BaseActivity  {
         public void onAvailable(@NonNull Network network) {
             super.onAvailable(network);
             Log.e(TAG,"onAvailable");
-            runOnUiThread(() -> imgNetwork.setVisibility(View.VISIBLE));
+            runOnUiThread(() -> imgNetwork.setImageDrawable(getDrawable(R.mipmap.xinhao_1)));
 
         }
 
@@ -571,7 +571,7 @@ public class MainActivity extends BaseActivity  {
         public void onLost(@NonNull Network network) {
             super.onLost(network);
             Log.e(TAG,"onLost");
-            runOnUiThread(() -> imgNetwork.setVisibility(View.GONE));
+            runOnUiThread(() -> imgNetwork.setImageDrawable(getDrawable(R.mipmap.network_unable)));
         }
 
         @Override

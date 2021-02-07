@@ -113,8 +113,10 @@ public class TowerParameterFragment extends Fragment {
     ImageView imgCar;
     @BindView(R.id.ll_hookup)
     LinearLayout llHookup;
-    @BindView(R.id.v_hookup_line)
-    View vHookupLine;
+//    @BindView(R.id.v_hookup_line)
+//    View vHookupLine;
+    @BindView(R.id.img_tower_wirerope_car)
+    ImageView imgWireRopeCar;
 
     @BindView(R.id.ll_parameter_alarm)
     LinearLayout llParameterAlarm;
@@ -277,7 +279,7 @@ public class TowerParameterFragment extends Fragment {
         float scaleY = 0;
         if(towerHeight != 0){
             scaleY = (float) (1.0*(towerHeight - wireRopeHeight)/towerHeight);
-            vHookupLine.setScaleY(scaleY);
+            llHookup.setScaleY(scaleY);
         }
 
 
@@ -285,28 +287,30 @@ public class TowerParameterFragment extends Fragment {
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*121);
-            float tranX = offset - (121-32);
+            offset = (float) (1.0*amplitude/upWeightArmLen*100);
+            float tranX = offset - (100-32+16);
             Log.e("wch","tranX: "+tranX);
             llHookup.setTranslationX(ScaleUtils.dip2px(context,tranX));
+            imgWireRopeCar.setTranslationX(ScaleUtils.dip2px(context,tranX));
         }
     }
 
     private ObjectAnimator transXAnimator;
     private ObjectAnimator transYAnimator;
+    private ObjectAnimator transXCarAnimator;
     private void hookupAnimation(){
-        LogUtils.LogE("WCH","hookupAnimation");
+//        LogUtils.LogE("WCH","hookupAnimation");
 
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
-        int wireRopeHeight = realTimeDataBean.getHeight() * realTimeDataBean.getWireRopeDamageMagnification();
+        int height = realTimeDataBean.getHeight();
         int towerHeight = device.getStaticParameterBean().getTowerHeight();
         float offsetY = 0;
         float translationYBefore = llHookup.getTranslationY();
         float translationY = 0;
         if(towerHeight != 0){
-            offsetY = (float) (1.0*(towerHeight - wireRopeHeight)/towerHeight);
-            Log.e("wch","offsetY:"+offsetY);
-            translationY = -ScaleUtils.dip2px(context,(1-offsetY)*92);
+            offsetY = (float) (1.0*(height)/towerHeight);
+//            Log.e("wch","offsetY:"+offsetY);
+            translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
         }
         if(transYAnimator != null ){
             translationYBefore = (float) transYAnimator.getAnimatedValue();
@@ -317,8 +321,8 @@ public class TowerParameterFragment extends Fragment {
             transYAnimator.setInterpolator(new LinearInterpolator());
             transYAnimator.setDuration(2000);
         }
-        Log.e("wch","translationYBefore:"+translationYBefore);
-        Log.e("wch","translationY:"+translationY);
+//        Log.e("wch","translationYBefore:"+translationYBefore);
+//        Log.e("wch","translationY:"+translationY);
         transYAnimator.start();
 
 
@@ -327,8 +331,8 @@ public class TowerParameterFragment extends Fragment {
         float offset = 0;
         float tranX = 0;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*121);
-            float tranXDp = offset - (121-32);
+            offset = (float) (1.0*amplitude/upWeightArmLen*85);
+            float tranXDp = offset - (85-32+16);
             tranX = ScaleUtils.dip2px(context,tranXDp);
         }
         float translationXBefore = llHookup.getTranslationX();
@@ -341,9 +345,20 @@ public class TowerParameterFragment extends Fragment {
             transXAnimator.setInterpolator(new LinearInterpolator());
             transXAnimator.setDuration(2000);
         }
-        Log.e("wch","translationXBefore:"+translationXBefore);
-        Log.e("wch","tranX:"+tranX);
+//        Log.e("wch","translationXBefore:"+translationXBefore);
+//        Log.e("wch","tranX:"+tranX);
         transXAnimator.start();
+
+        if(transXCarAnimator != null ){
+            translationXBefore = (float)transXCarAnimator.getAnimatedValue();
+            transXCarAnimator.cancel();
+            transXCarAnimator.setFloatValues(translationXBefore,tranX);
+        }else {
+            transXCarAnimator = ObjectAnimator.ofFloat(imgWireRopeCar,"translationX",translationXBefore,tranX);
+            transXCarAnimator.setInterpolator(new LinearInterpolator());
+            transXCarAnimator.setDuration(2000);
+        }
+        transXCarAnimator.start();
 
     }
 

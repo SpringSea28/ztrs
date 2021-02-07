@@ -43,8 +43,6 @@ public abstract class SerialPortReadThread extends Thread {
                 byte[] readBytes = new byte[size];
 
                 System.arraycopy(mReadBuffer, 0, readBytes, 0, size);
-
-                Log.i(TAG, "run: readBytes = " + new String(readBytes));
                 onDataReceived(readBytes);
 
             } catch (IOException e) {

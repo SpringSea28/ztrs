@@ -188,7 +188,7 @@ public class CommunicationProtocol{
     }
 
     private void parseCmd(byte cmd,byte[] data){
-        LogUtils.LogI(TAG,"parseCMD:"+LogUtils.toHexString(cmd));
+        LogUtils.LogI(TAG,"parseCMD:"+LogUtils.toHexString(cmd)+"  "+getCmdName(cmd));
         switch (cmd){
             case CMD_UNLOCK_CAR:
                 unlockCarProtocol.parseCmd(data);
@@ -224,7 +224,7 @@ public class CommunicationProtocol{
     }
 
     private void parseAck(byte cmd,byte[] data){
-        LogUtils.LogI(TAG,"parseACK:"+LogUtils.toHexString(cmd));
+        LogUtils.LogI(TAG,"parseACK:"+LogUtils.toHexString(cmd)+"  "+getCmdName(cmd));
         switch (cmd){
             case CMD_UNLOCK_CAR:
                 unlockCarProtocol.parseAck(data);
@@ -342,5 +342,81 @@ public class CommunicationProtocol{
         data[data.length -2] =(byte)(crc>>8);
         data[data.length -1] =(byte)crc;
         return data;
+    }
+
+    private String getCmdName(byte cmd) {
+        String cmdName = "unknown";
+        switch (cmd) {
+            case CMD_UNLOCK_CAR:
+                cmdName = "解锁车";
+                break;
+            case SwitchMachineProtocol.CMD_SWITCH_MACHINE:
+                cmdName = "开关机";
+                break;
+            case RegionalRestrictionProtocol.CMD_REGIONAL_RESTRICTION:
+                cmdName = "区域限制";
+                break;
+            case StaticParametersProtocol.CMD_STATIC_PARAMETER:
+                cmdName = "静态参数";
+                break;
+            case RealTimeDataProtocol.CMD_REAL_TIME_DATA:
+                cmdName = "实时数据";
+                break;
+            case WorkCycleDataProtocol.CMD_WORK_CYCLE_DATA:
+                cmdName = "工作循环数据";
+                break;
+            case CommunicationErrorProtocol.CMD_COMMUNICATION_ERROR:
+                cmdName = "通讯异常";
+                break;
+            case RelayConfigurationProtocol.CMD_RELAY_CONFIGURATION:
+                cmdName = "继电器配置";
+                break;
+            case RelayOutputControlProtocol.CMD_RELAY_OUTPUT_CONTROL:
+                cmdName = "继电器输出控制";
+                break;
+            case EmergencyCallProtocol.CMD_EMERGENCY_CALL:
+                cmdName = "紧急呼叫";
+                break;
+            case SensorRealtimeDataProtocol.CMD_SENSOR_REAL_TIME:
+                cmdName = "传感器实时数据";
+                break;
+            case HeightCalibrationProtocol.CMD_HEIGHT_CALIBRATION:
+                cmdName = "高度标定";
+                break;
+            case AmplitudeCalibrationProtocol.CMD_AMPLITUDE_CALIBRATION:
+                cmdName = "幅度标定";
+                break;
+            case AroundCalibrationProtocol.CMD_AROUND_CALIBRATION:
+                cmdName = "回转标定";
+                break;
+            case WeightCalibrationProtocol.CMD_WEIGHT_CALIBRATION:
+                cmdName = "载重标定";
+                break;
+            case WireRopeDetectionParametersSetProtocol.CMD_WIREROPE_DETECTION_PARAMETERS_SET:
+                cmdName = "钢丝绳检测参数设置";
+                break;
+            case TorqueCalibrationProtocol.CMD_TORQUE_CALIBRATION:
+                cmdName = "力矩标定";
+                break;
+            case TorqueCurveProtocol.CMD_TORQUE_CURVE:
+                cmdName = "力矩曲线";
+                break;
+            case WireRopeOrderSetProtocol.CMD_WIREROPE_ORDER_SET:
+                cmdName = "钢丝绳命令设置";
+                break;
+            case PreventCollisionCalibrationProtocol.CMD_PREVENT_COLLISION_CALIBRATION:
+                cmdName = "防碰撞设置";
+                break;
+            case DeviceUpdateProtocol.CMD_UPDATE:
+                cmdName = "设备升级";
+                break;
+            case DeviceVersionCheckProtocol.CMD_VERSION_CHECK:
+                cmdName = "设备版本号查询";
+                break;
+            case RegisterInfoProtocol.CMD_REGISTER_INFO:
+                cmdName = "设备注册信息";
+                break;
+        }
+        return cmdName;
     }
 }

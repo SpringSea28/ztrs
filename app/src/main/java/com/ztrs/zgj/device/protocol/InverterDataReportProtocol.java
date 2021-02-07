@@ -79,9 +79,9 @@ public class InverterDataReportProtocol extends BaseProtocol{
         inverterData.setTowerCraftCardDI23(towerCraftCardDI23);
         int towerCraftCardDO8=((data[offset+36]&0x00ff) << 8) |(data[offset+37]&0x00ff);
         inverterData.setTowerCraftCardDO8(towerCraftCardDO8);
-        int towerCraftCardStateInstructionMSW=((data[offset+38]&0x00ff) << 8) |(data[offset+39]&0x00ff);
+        int towerCraftCardStateInstructionMSW=((data[offset+38]&0xffffffff) << 8) |(data[offset+39]&0x00ff);
         inverterData.setTowerCraftCardStateInstructionMSW(towerCraftCardStateInstructionMSW);
-        int towerCraftCardStateInstructionLSW=((data[offset+40]&0x00ff) << 8) |(data[offset+41]&0x00ff);
+        int towerCraftCardStateInstructionLSW=((data[offset+40]&0xffffffff) << 8) |(data[offset+41]&0x00ff);
         inverterData.setTowerCraftCardStateInstructionLSW(towerCraftCardStateInstructionLSW);
         int towerCraftCardStateValue=((data[offset+42]&0x00ff) << 8) |(data[offset+43]&0x00ff);
         inverterData.setTowerCraftCardStateValue(towerCraftCardStateValue);
