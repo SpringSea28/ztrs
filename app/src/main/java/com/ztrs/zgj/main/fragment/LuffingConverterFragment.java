@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -47,26 +48,47 @@ public class LuffingConverterFragment extends Fragment {
 
     @BindView(R.id.tv_go_ahead_reduce_speed_limit_value)
     TextView tvGoAheadReduceSpeedLimitValue;
+    @BindView(R.id.img_go_ahead_reduce_speed_limit_value)
+    ImageView imgGoAheadReduceSpeedLimitValue;
     @BindView(R.id.tv_back_reduce_speed_limit_value)
     TextView tvBackReduceSpeedLimitValue;
+    @BindView(R.id.img_back_reduce_speed_limit_value)
+    ImageView imgBackReduceSpeedLimitValue;
     @BindView(R.id.tv_go_ahead_end_limit_value)
     TextView tvGoAheadEndLimitValue;
+    @BindView(R.id.img_go_ahead_end_limit_value)
+    ImageView imgGoAheadEndLimitValue;
 
     @BindView(R.id.tv_back_end_limit_value)
     TextView tvBackEndLimitValue;
+    @BindView(R.id.img_back_end_limit_value)
+    ImageView imgBackEndLimitValue;
+
     @BindView(R.id.tv_torque_100_limit_value)
     TextView tvTorque100LimitValue;
+    @BindView(R.id.img_torque_100_limit_value)
+    ImageView imgTorque100LimitValue;
+
     @BindView(R.id.tv_torque_90_limit_value)
     TextView tvTorque90LimitValue;
+    @BindView(R.id.img_torque_90_limit_value)
+    ImageView imgTorque90LimitValue;
 
     @BindView(R.id.tv_torque_80_limit_value)
     TextView tvTorque80LimitValue;
+    @BindView(R.id.img_torque_80_limit_value)
+    ImageView imgTorque80LimitValue;
 
     @BindView(R.id.tv_brake_unit_error_value)
     TextView tvBrakeUnitErrorValue;
+    @BindView(R.id.img_brake_unit_error_value)
+    ImageView imgBrakeUnitErrorValue;
 
     @BindView(R.id.tv_slow_running_value)
     TextView tvSlowRunningValue;
+    @BindView(R.id.img_slow_running_value)
+    ImageView imgSlowRunningValue;
+
 
 
 
@@ -111,7 +133,12 @@ public class LuffingConverterFragment extends Fragment {
         InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
                 .getInverterDataReportBean().getAmplitudeInverterData();
 
-        tvRunningStateValue.setText("未知");
+        int run = inverterData.getRun();
+        if(run==0){
+            tvRunningStateValue.setText("停止");
+        }else if(run == 1){
+            tvRunningStateValue.setText("运行");
+        }
 
         int frequency = inverterData.getFrequency();
         tvRunningFrequencyValue.setText(String.format("%.1fHZ",1.0*frequency/10));
@@ -126,17 +153,94 @@ public class LuffingConverterFragment extends Fragment {
         int maximumTemperature = inverterData.getMaximumTemperature();
         tvTemperatureValue.setText(String.format("%.1f℃",1.0*maximumTemperature/10));
 
-        tvGoAheadReduceSpeedLimitValue.setText("未知");
-        tvBackReduceSpeedLimitValue.setText("未知");
-        tvGoAheadEndLimitValue.setText("未知");
+        int towerCraftCardStateInstructionMSW = inverterData.getTowerCraftCardStateInstructionMSW();
+        int towerCraftCardStateInstructionLSW = inverterData.getTowerCraftCardStateInstructionLSW();
+        if((towerCraftCardStateInstructionLSW & 0x04) != 0) {
+            imgGoAheadReduceSpeedLimitValue.setImageDrawable(getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvGoAheadReduceSpeedLimitValue.setText("异常");
+        }else {
+            imgGoAheadReduceSpeedLimitValue.setImageDrawable(getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvGoAheadReduceSpeedLimitValue.setText("正常");
+        }
 
-        tvBackEndLimitValue.setText("未知");
-        tvTorque100LimitValue.setText("未知");
-        tvTorque90LimitValue.setText("未知");
+        if((towerCraftCardStateInstructionLSW & 0x08) != 0) {
+            imgBackReduceSpeedLimitValue.setImageDrawable(getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvBackReduceSpeedLimitValue.setText("异常");
+        }else {
+            imgBackReduceSpeedLimitValue.setImageDrawable(getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvBackReduceSpeedLimitValue.setText("正常");
+        }
 
-        tvTorque80LimitValue.setText("未知");
-        tvBrakeUnitErrorValue.setText("未知");
-        tvSlowRunningValue.setText("未知");
+
+        if((towerCraftCardStateInstructionLSW & 0x10) != 0) {
+            imgGoAheadEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvGoAheadEndLimitValue.setText("异常");
+        }else {
+            imgGoAheadEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvGoAheadEndLimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & 0x20) != 0) {
+            imgBackEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvBackEndLimitValue.setText("异常");
+        }else {
+            imgBackEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvBackEndLimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & (0x01<<7)) != 0) {
+            imgTorque100LimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvTorque100LimitValue.setText("异常");
+        }else {
+            imgTorque100LimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvTorque100LimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & (0x01<<8)) != 0) {
+            imgTorque90LimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvTorque90LimitValue.setText("异常");
+        }else {
+            imgTorque90LimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvTorque90LimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionMSW & (0x01<<0)) != 0) {
+            imgTorque80LimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvTorque80LimitValue.setText("异常");
+        }else {
+            imgTorque80LimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvTorque80LimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & (0x01<<13)) != 0) {
+            imgBrakeUnitErrorValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvBrakeUnitErrorValue.setText("异常");
+        }else {
+            imgBrakeUnitErrorValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvBrakeUnitErrorValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & (0x01<<15)) != 0) {
+            imgSlowRunningValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvSlowRunningValue.setText("异常");
+        }else {
+            imgSlowRunningValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvSlowRunningValue.setText("正常");
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

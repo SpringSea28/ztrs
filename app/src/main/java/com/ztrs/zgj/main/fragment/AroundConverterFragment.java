@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -47,15 +48,23 @@ public class AroundConverterFragment extends Fragment {
 
     @BindView(R.id.tv_left_end_limit_value)
     TextView tvLeftEndLimitValue;
+    @BindView(R.id.img_left_end_limit_value)
+    ImageView imgLeftEndLimitValue;
 
     @BindView(R.id.tv_right_end_limit_value)
     TextView tvRightEndLimitValue;
+    @BindView(R.id.img_right_end_limit_value)
+    ImageView imgRightEndLimitValue;
 
     @BindView(R.id.tv_brake_unit_error_value)
     TextView tvBrakeUnitErrorValue;
+    @BindView(R.id.img_brake_unit_error_value)
+    ImageView imgBrakeUnitErrorValue;
 
     @BindView(R.id.tv_slow_running_value)
     TextView tvSlowRunningValue;
+    @BindView(R.id.img_slow_running_value)
+    ImageView imgSlowRunningValue;
 
 
     public AroundConverterFragment() {
@@ -99,7 +108,12 @@ public class AroundConverterFragment extends Fragment {
         InverterDataReportBean.InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
                 .getInverterDataReportBean().getAmplitudeInverterData();
 
-        tvRunningStateValue.setText("未知");
+        int run = inverterData.getRun();
+        if(run==0){
+            tvRunningStateValue.setText("停止");
+        }else if(run == 1){
+            tvRunningStateValue.setText("运行");
+        }
 
         int frequency = inverterData.getFrequency();
         tvRunningFrequencyValue.setText(String.format("%.1fHZ",1.0*frequency/10));
@@ -114,8 +128,48 @@ public class AroundConverterFragment extends Fragment {
         int maximumTemperature = inverterData.getMaximumTemperature();
         tvTemperatureValue.setText(String.format("%.1f℃",1.0*maximumTemperature/10));
 
-        tvLeftEndLimitValue.setText("未知");
-        tvRightEndLimitValue.setText("未知");
+        int towerCraftCardStateInstructionMSW = inverterData.getTowerCraftCardStateInstructionMSW();
+        int towerCraftCardStateInstructionLSW = inverterData.getTowerCraftCardStateInstructionLSW();
+
+        if((towerCraftCardStateInstructionLSW & 0x10) != 0) {
+            imgLeftEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvLeftEndLimitValue.setText("异常");
+        }else {
+            imgLeftEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvLeftEndLimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & 0x20) != 0) {
+            imgRightEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvRightEndLimitValue.setText("异常");
+        }else {
+            imgRightEndLimitValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvRightEndLimitValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & (0x01<<13)) != 0) {
+            imgBrakeUnitErrorValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvBrakeUnitErrorValue.setText("异常");
+        }else {
+            imgBrakeUnitErrorValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvBrakeUnitErrorValue.setText("正常");
+        }
+
+        if((towerCraftCardStateInstructionLSW & (0x01<<15)) != 0) {
+            imgSlowRunningValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_error_bg,null));
+            tvSlowRunningValue.setText("异常");
+        }else {
+            imgSlowRunningValue.setImageDrawable(
+                    getResources().getDrawable(R.drawable.tower_converter_normal_bg,null));
+            tvSlowRunningValue.setText("正常");
+        }
         tvBrakeUnitErrorValue.setText("未知");
         tvSlowRunningValue.setText("未知");
     }

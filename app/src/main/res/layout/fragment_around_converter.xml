@@ -231,15 +231,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
-
+                <ImageView
+                    android:id="@+id/img_left_end_limit_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="左旋终点限位：" />
+                    android:text="左旋终点限位" />
 
                 <TextView
                     android:id="@+id/tv_left_end_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
 
             </LinearLayout>
@@ -250,15 +253,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1">
-
+                <ImageView
+                    android:id="@+id/img_slow_running_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="慢速运行：" />
+                    android:text="慢速运行" />
 
                 <TextView
                     android:id="@+id/tv_slow_running_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
 
             </LinearLayout>
@@ -274,15 +280,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/img_right_end_limit_value"
+                    style="@style/converter_limit_value_img_style" />
 
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="右旋终点限位：" />
+                    android:text="右旋终点限位" />
 
                 <TextView
                     android:id="@+id/tv_right_end_limit_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
 
             </LinearLayout>
@@ -302,14 +312,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
+                <ImageView
+                    android:id="@+id/img_brake_unit_error_value"
+                    style="@style/converter_limit_value_img_style" />
                 <TextView
                     style="@style/tower_converter_text_style"
-                    android:text="制动单元故障：" />
+                    android:text="制动单元故障" />
 
                 <TextView
                     android:id="@+id/tv_brake_unit_error_value"
                     style="@style/tower_converter_text_style"
                     android:text="正常"
+                    android:visibility="gone"
                     android:textColor="@color/tower_primary_normal_text_color_blue" />
 
             </LinearLayout>
