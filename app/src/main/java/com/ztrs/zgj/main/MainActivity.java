@@ -59,6 +59,7 @@ import com.ztrs.zgj.device.eventbus.UnlockCarMessage;
 import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WorkCycleDataMessage;
+import com.ztrs.zgj.main.dialog.OutputDialog;
 import com.ztrs.zgj.main.fragment.AroundConverterFragment;
 import com.ztrs.zgj.main.fragment.LuffingConverterFragment;
 import com.ztrs.zgj.main.fragment.TowerParameterFragment;
@@ -336,7 +337,9 @@ public class MainActivity extends BaseActivity  {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
             case R.id.rl_output:
-                startActivity(new Intent(MainActivity.this, OutputActivity.class));
+                OutputDialog outputDialog = new OutputDialog(this);
+                outputDialog.show();
+//                startActivity(new Intent(MainActivity.this, OutputActivity.class));
                 break;
         }
     }

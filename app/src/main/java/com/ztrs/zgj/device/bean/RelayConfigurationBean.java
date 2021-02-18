@@ -41,6 +41,8 @@ public class RelayConfigurationBean {
     byte relay11State=2;
     byte relay12Use;
     byte relay12State=2;
+
+    byte[] data = new byte[24];
 //    byte load25;
 //    byte load25OutputState;
 //    byte load50;
@@ -266,5 +268,13 @@ public class RelayConfigurationBean {
 
     public void setRelay12State(byte relay12State) {
         this.relay12State = relay12State;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }

@@ -88,4 +88,29 @@
         <item>人脸识别锁机控制</item>
         <item>无控制</item>
     </string-array>
+    <string-array name="output_all">
+        <item>K1关</item>
+        <item>K2关</item>
+        <item>K3关</item>
+        <item>K4关</item>
+        <item>K5关</item>
+        <item>K6关</item>
+        <item>K7关</item>
+        <item>K8关</item>
+        <item>K9关</item>
+        <item>K10关</item>
+        <item>K11关</item>
+        <item>K1开</item>
+        <item>K2开</item>
+        <item>K3开</item>
+        <item>K4开</item>
+        <item>K5开</item>
+        <item>K6开</item>
+        <item>K7开</item>
+        <item>K8开</item>
+        <item>K9开</item>
+        <item>K10开</item>
+        <item>K11开</item>
+        <item>NC</item>
+    </string-array>
 </resources>
