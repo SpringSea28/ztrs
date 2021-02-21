@@ -11,9 +11,12 @@ import android.widget.Toast;
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
+import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.WireRopeDetectionParametersSetBean;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
+import com.ztrs.zgj.device.eventbus.WireRopeOrderSetMessage;
+import com.ztrs.zgj.device.protocol.WireRopeOrderSetProtocol;
 import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -354,6 +357,43 @@ public class WireRopeCalibrationActivity extends BaseEditAutoHideActivity {
                 upDateView();
             }else {
                 Toast.makeText(this,"钢丝绳参数查询失败",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWireRopeOrder(WireRopeOrderSetMessage msg){
+        LogUtils.LogI(TAG,"onWireRopeOrder: "+msg.getCmdType());
+        LogUtils.LogI(TAG,"onWireRopeOrder: "+msg.getResult());
+        if(msg.getCmdType() == BaseMessage.TYPE_CMD){
+            if(msg.getResult() == BaseMessage.RESULT_OK) {
+                byte[] cmdBytes = msg.getCmdBytes();
+                byte cmd = cmdBytes[cmdBytes.length - 1 - 2];
+                if(cmd == WireRopeOrderSetProtocol.TYPE_START_DETECT){
+                    Toast.makeText(this,"开始检测设置保存成功",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_STOP_DETECT){
+                    Toast.makeText(this,"停止检测设置保存成功",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_QUERY){
+                    Toast.makeText(this,"查询状态设置保存成功",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_RESET){
+                    Toast.makeText(this,"复位设置保存成功",Toast.LENGTH_LONG).show();
+                } else if(cmd == WireRopeOrderSetProtocol.TYPE_CLEAR){
+                    Toast.makeText(this,"清除设置保存成功",Toast.LENGTH_LONG).show();
+                }
+            }else {
+                byte[] cmdBytes = msg.getCmdBytes();
+                byte cmd = cmdBytes[cmdBytes.length - 1 - 2];
+                if(cmd == WireRopeOrderSetProtocol.TYPE_START_DETECT){
+                    Toast.makeText(this,"开始检测设置保存失败",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_STOP_DETECT){
+                    Toast.makeText(this,"停止检测设置保存失败",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_QUERY){
+                        Toast.makeText(this,"查询状态设置保存失败",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_RESET){
+                    Toast.makeText(this,"复位设置保存失败",Toast.LENGTH_LONG).show();
+                }else if(cmd == WireRopeOrderSetProtocol.TYPE_CLEAR){
+                    Toast.makeText(this,"清除设置保存失败",Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

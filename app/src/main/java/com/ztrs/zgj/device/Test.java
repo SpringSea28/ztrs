@@ -952,6 +952,16 @@ public class Test {
         DeviceManager.getInstance().onDataReceive(byteFromStr);
     }
 
+    public void testOnReceiveWireropeOrder() {
+        String str = "b3 10 00 00 47 21 02 21 16 07 40 03 01 01 80 a5";
+        byte[] byteFromStr = getByteFromStr(str);
+        LogUtils.LogE(TAG, " bytefrom str: " + byteFromStr.length);
+        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+    }
+
 
     private byte[] getByteFromStr(String str) {
         String[] s = str.split(" ");

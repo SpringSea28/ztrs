@@ -27,6 +27,9 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.webview)
     WebView webView;
 
+    @BindView(R.id.tv_loading)
+    TextView tvLoading;
+
     Unbinder bind;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class WebActivity extends BaseActivity {
                 view.loadUrl(url);
                 //返回true
                 return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                tvLoading.setVisibility(View.GONE);
             }
         });
     }
