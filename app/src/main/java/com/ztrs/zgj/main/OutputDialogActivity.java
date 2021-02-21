@@ -23,6 +23,7 @@ import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.RelayConfigurationMessage;
 import com.ztrs.zgj.main.adapter.OutputMainAdapter;
 import com.ztrs.zgj.main.viewbean.OutputBean;
+import com.ztrs.zgj.setting.SystemSetActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutputDialogActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = OutputDialogActivity.class.getSimpleName();
 
     String[] outputItemValue;
     OutputMainAdapter outputMainAdapter;
@@ -337,16 +339,16 @@ public class OutputDialogActivity extends BaseActivity implements View.OnClickLi
             }
         }
         saveBean = RelayConfigurationBean.getRelayConfiguration(des);
-//        DeviceManager.getInstance()
-//                .setRelayConfiguration(saveBean);
-        new Test().setRelayConfiguration(saveBean);
+        DeviceManager.getInstance()
+                .setRelayConfiguration(saveBean);
+//        new Test().setRelayConfiguration(saveBean);
     }
 
     RelayConfigurationBean saveBean;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRelayConfig(RelayConfigurationMessage msg){
-        LogUtils.LogI("wch","onRelayConfig: "+msg.getCmdType());
-        LogUtils.LogI("wch","onRelayConfig: "+msg.getResult());
+        LogUtils.LogI(TAG,"onRelayConfig: "+msg.getCmdType());
+        LogUtils.LogI(TAG,"onRelayConfig: "+msg.getResult());
         if(msg.getCmdType() == BaseMessage.TYPE_CMD){
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 DeviceManager.getInstance().getZtrsDevice().setRelayConfigurationBean(saveBean);

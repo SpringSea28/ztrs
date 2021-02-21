@@ -63,6 +63,7 @@ public class CommunicationProtocol{
     public PreventCollisionNearProtocol preventCollisionNearProtocol;
     public DeviceUpdateProtocol deviceUpdateProtocol;
     public DeviceVersionCheckProtocol deviceVersionCheckProtocol;
+    public VolumeProtocol volumeProtocol;
 
 
     public CommunicationProtocol(DeviceOperateInterface deviceOperateInterface){
@@ -93,6 +94,7 @@ public class CommunicationProtocol{
         preventCollisionNearProtocol = new PreventCollisionNearProtocol(deviceOperateInterface);
         deviceUpdateProtocol = new DeviceUpdateProtocol(deviceOperateInterface);
         deviceVersionCheckProtocol = new DeviceVersionCheckProtocol(deviceOperateInterface);
+        volumeProtocol = new VolumeProtocol(deviceOperateInterface);
     }
 
     public void dataParse(byte[] data) {
@@ -294,6 +296,9 @@ public class CommunicationProtocol{
                 break;
             case RegisterInfoProtocol.CMD_REGISTER_INFO:
                 registerInfoProtocol.parseAck(data);
+                break;
+            case VolumeProtocol.CMD_VOLUME:
+                volumeProtocol.parseAck(data);
                 break;
         }
     }

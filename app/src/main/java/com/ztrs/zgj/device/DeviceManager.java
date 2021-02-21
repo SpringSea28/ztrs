@@ -318,6 +318,15 @@ public class DeviceManager implements DeviceOperateInterface {
         communicationProtocol.registerInfoProtocol.queryRegisterInfo();
     }
 
+    //3.33
+    public void queryVolume(){
+        communicationProtocol.volumeProtocol.queryVolume();
+    }
+
+    public void setVolume(byte volume){
+        communicationProtocol.volumeProtocol.setVolume(volume);
+    }
+
     @Override
     public void sendDataToDevice(byte[] data){
         LogUtils.LogE(TAG,"send: "+LogUtils.toHexString(data));

@@ -13,8 +13,10 @@
             style="@style/setting_item_key_text_style"
             android:text="音量设置"/>
         <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/sb_volume"
             android:layout_width="151dp"
             android:layout_height="match_parent"
+            android:max="15"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>

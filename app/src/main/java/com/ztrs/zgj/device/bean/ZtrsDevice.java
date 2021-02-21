@@ -24,6 +24,7 @@ public class ZtrsDevice {
     PreventCollisionCalibrationBean preventCollisionCalibrationBean = new PreventCollisionCalibrationBean();
     PreventCollisionNearBean preventCollisionNearBean = new PreventCollisionNearBean();
     DeviceVersionBean deviceVersionBean = new DeviceVersionBean();
+    VolumeBean volumeBean = new VolumeBean();
 
     public UnLockCarBean getUnLockCarBean() {
         return unLockCarBean;
@@ -199,5 +200,13 @@ public class ZtrsDevice {
 
     public void setDeviceVersionBean(DeviceVersionBean deviceVersionBean) {
         this.deviceVersionBean = deviceVersionBean;
+    }
+
+    public VolumeBean getVolumeBean() {
+        return volumeBean;
+    }
+
+    public void setVolumeBean(VolumeBean volumeBean) {
+        this.volumeBean = volumeBean;
     }
 }
