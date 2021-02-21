@@ -68,6 +68,7 @@ import com.ztrs.zgj.main.msg.SerialPortOpenResultMsg;
 import com.ztrs.zgj.setting.OutputActivity;
 import com.ztrs.zgj.setting.SettingActivity;
 import com.ztrs.zgj.setting.SoftwareUpdateActivity;
+import com.ztrs.zgj.setting.WebActivity;
 import com.ztrs.zgj.setting.dialog.UpdateDialog;
 import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
 import com.ztrs.zgj.setting.viewModel.VersionModel;
@@ -112,6 +113,10 @@ public class MainActivity extends BaseActivity  {
     @BindView(R.id.img_signal_3)
     ImageView imgDeviceNetwork;
 
+
+    @BindView(R.id.tv_tower_market)
+    TextView tvTowerMarket;
+
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
     private static final int ON_SELECT_AROUND = 2;
@@ -155,7 +160,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testOnReceiveRealtimedata();
 //                test.testQueryWorkCycleData();
 //                test.setRelayConfiguration();
-                test.queryRelayConfiguration();
+//                test.queryRelayConfiguration();
 //                test.setRelayOutputControl();
 //                test.queryRelayOutputControl();
 //                test.emergencyCall();
@@ -179,6 +184,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
 //                test.testOnReceiveRegisterInfo();
+                DeviceManager.getInstance().emergencyCall();
             }
         });
         EventBus.getDefault().register(this);
@@ -322,7 +328,7 @@ public class MainActivity extends BaseActivity  {
     }
 
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
-        R.id.rl_setting,R.id.rl_output})
+        R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_upload_converter:
@@ -341,6 +347,12 @@ public class MainActivity extends BaseActivity  {
 //                OutputDialog outputDialog = new OutputDialog(this);
 //                outputDialog.show();
                 startActivity(new Intent(MainActivity.this, OutputDialogActivity.class));
+                break;
+            case R.id.tv_tower_market:
+                Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                intent.putExtra("title","建机商城");
+                intent.putExtra("url","http://mall.gxntp.com/");
+                startActivity(intent);
                 break;
         }
     }

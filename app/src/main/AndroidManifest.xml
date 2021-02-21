@@ -81,6 +81,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/dialog_style">
         </activity>
+        <activity android:name=".setting.WebActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
