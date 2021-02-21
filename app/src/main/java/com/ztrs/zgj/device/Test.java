@@ -441,8 +441,23 @@ public class Test {
     //3.9
     public void setRelayConfiguration() {
         RelayConfigurationBean relayConfigurationBean = new RelayConfigurationBean();
-        relayConfigurationBean.setRelay1State((byte) 2);
-        relayConfigurationBean.setRelay1Use((byte) 1);
+        relayConfigurationBean.setRelay1State((byte) 1);
+        relayConfigurationBean.setRelay1Use((byte) 12);
+        DeviceManager.getInstance().setRelayConfiguration(relayConfigurationBean);
+        Observable.timer(200, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        String str = "B3 0E 00 00 31 20 11 18 14 42 52 00 0D 4E";
+                        byte[] byteFromStr = getByteFromStr(str);
+                        DeviceManager.getInstance().onDataReceive(byteFromStr);
+                    }
+                });
+    }
+
+    //3.9
+    public void setRelayConfiguration(RelayConfigurationBean relayConfigurationBean) {
         DeviceManager.getInstance().setRelayConfiguration(relayConfigurationBean);
         Observable.timer(200, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -463,7 +478,7 @@ public class Test {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        String str = "b3 25 00 00 31 21 01 23 14 07 57 01 01 0a 02 08 01 00 02 00 02 00 02 00 02 00 02 00 02 00 02 00 02 00 00 8d 67";
+                        String str = "b3 25 00 00 31 21 01 23 14 07 57 0c 01 10 00 08 01 0f 02 00 02 00 02 00 02 00 02 00 02 00 02 00 02 00 00 8d 67";
 
                         byte[] byteFromStr = getByteFromStr(str);
                         int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);

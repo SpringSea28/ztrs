@@ -1,11 +1,13 @@
 package com.ztrs.zgj.main.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +18,9 @@ import com.ztrs.zgj.databinding.OutputRecycleItemBinding;
 import com.ztrs.zgj.databinding.SettingOutputRecycleItemBinding;
 import com.ztrs.zgj.main.viewbean.OutputBean;
 import com.ztrs.zgj.setting.bean.RelayBean;
+import com.ztrs.zgj.utils.ScaleUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 public class OutputMainAdapter extends RecyclerView.Adapter<OutputMainAdapter.OutputHolder> {
@@ -69,7 +73,6 @@ public class OutputMainAdapter extends RecyclerView.Adapter<OutputMainAdapter.Ou
 
             }
         });
-
 
     }
 

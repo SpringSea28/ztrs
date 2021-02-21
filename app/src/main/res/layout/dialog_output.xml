@@ -50,6 +50,7 @@
             android:layout_margin="8dp">
         </androidx.recyclerview.widget.RecyclerView>
         <Button
+            android:id="@+id/btn_save"
             style="@style/setting_save_btn_style"
             android:layout_width="match_parent"
             android:layout_marginStart="8dp"

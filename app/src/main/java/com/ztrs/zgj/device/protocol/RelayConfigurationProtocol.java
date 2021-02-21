@@ -65,7 +65,6 @@ public class RelayConfigurationProtocol extends BaseProtocol{
         relayConfigurationBean.setRelay11Use(data[20]);
         relayConfigurationBean.setRelay11State(data[21]);
 
-        relayConfigurationBean.setData(data);
 
         return true;
     }
@@ -115,5 +114,4 @@ public class RelayConfigurationProtocol extends BaseProtocol{
         RelayConfigurationMessage msg = new RelayConfigurationMessage(CommunicationProtocol.seq++,cmd);
         cmdSend(msg);
     }
-
 }

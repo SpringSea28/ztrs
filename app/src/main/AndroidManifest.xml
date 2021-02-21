@@ -77,6 +77,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.OutputDialogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/dialog_style">
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

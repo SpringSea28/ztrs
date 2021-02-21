@@ -155,6 +155,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testOnReceiveRealtimedata();
 //                test.testQueryWorkCycleData();
 //                test.setRelayConfiguration();
+                test.queryRelayConfiguration();
 //                test.setRelayOutputControl();
 //                test.queryRelayOutputControl();
 //                test.emergencyCall();
@@ -175,7 +176,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testOnReceiveRegisterInfo();
 //                test.testOnReceiveRealtimedata();
 //                test.testOnReceiveTorqueCurve();
-                test.testQueryStaticParameter();
+//                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
 //                test.testOnReceiveRegisterInfo();
             }
@@ -337,9 +338,9 @@ public class MainActivity extends BaseActivity  {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
             case R.id.rl_output:
-                OutputDialog outputDialog = new OutputDialog(this);
-                outputDialog.show();
-//                startActivity(new Intent(MainActivity.this, OutputActivity.class));
+//                OutputDialog outputDialog = new OutputDialog(this);
+//                outputDialog.show();
+                startActivity(new Intent(MainActivity.this, OutputDialogActivity.class));
                 break;
         }
     }
