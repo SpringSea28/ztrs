@@ -84,7 +84,7 @@ public class TorqueCurveProtocol extends BaseProtocol{
                     |(data[CURVE_LIST_OFFSET+4*i+3]&0x00ff);
             TorqueCurveBean torqueCurveBean = new TorqueCurveBean();
             torqueCurveBean.setAmplitude(amplitude);
-            torqueCurveBean.setWeight(weight);
+            torqueCurveBean.setWeight(weight*10);
             beans.add(torqueCurveBean);
         }
         torqueCurveApplyBean.setTorqueCurveBeanList(beans);
@@ -125,7 +125,7 @@ public class TorqueCurveProtocol extends BaseProtocol{
             int amplitude = beans.get(i).getAmplitude();
             data[CURVE_LIST_OFFSET+4*i] = (byte)(amplitude>>8);
             data[CURVE_LIST_OFFSET+4*i+1] = (byte)(amplitude);
-            int weight = beans.get(i).getWeight();
+            int weight = beans.get(i).getWeight()/10;
             data[CURVE_LIST_OFFSET+4*i+2] = (byte)(weight>>8);
             data[CURVE_LIST_OFFSET+4*i+3] = (byte)(weight);
         }
