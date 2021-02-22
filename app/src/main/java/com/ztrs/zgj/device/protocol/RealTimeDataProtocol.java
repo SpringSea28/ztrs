@@ -10,7 +10,7 @@ public class RealTimeDataProtocol extends BaseProtocol{
     private static final String TAG= RealTimeDataProtocol.class.getSimpleName();
 
     public static final byte CMD_REAL_TIME_DATA = (byte) 0x23;//实时数据
-    private static final int DATA_LENGTH = 46+6;
+    private static final int DATA_LENGTH = 46+6+2;
 
     public static final int DIRECTION_STOP = 0;
     public static final int DIRECTION_UP = 1;
@@ -266,20 +266,19 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setxSlope(xSlope);
         int ySlope= ((data[41]&0xffffffff) << 8) |(data[42]&0x00ff);
         realTimeDataBean.setySlope(ySlope);
-        short torque = (short)(((data[43]&0xffffffff) << 8) |(data[44]&0x00ff));
+        int torque = ((data[43]&0xffffffff) << 24) |((data[44]&0x00ff)<<16)
+                |((data[45]&0x00ff)<<8)|(data[46]&0x00ff);
         realTimeDataBean.setTorque(torque);
         Log.e(TAG,"torque:"+torque);
-        Log.e(TAG,"data43:"+LogUtils.toHexString(data[43]));
-        Log.e(TAG,"data[44]:"+LogUtils.toHexString(data[44]));
-        byte windLevel = data[45];
+        byte windLevel = data[47];
         realTimeDataBean.setWindLevel(windLevel);
-        byte wireRopeState = data[46];
+        byte wireRopeState = data[48];
         realTimeDataBean.setWireRopeState(wireRopeState);
-        byte wireRopeDamageMagnification = data[47];
+        byte wireRopeDamageMagnification = data[49];
         realTimeDataBean.setWireRopeDamageMagnification(wireRopeDamageMagnification);
-        int wireRopeDamageheight =  ((data[48]&0xff) << 8) |(data[49]&0x00ff);
+        int wireRopeDamageheight =  ((data[50]&0xff) << 8) |(data[51]&0x00ff);
         realTimeDataBean.setWireRopeDamageheight(wireRopeDamageheight);
-        int wireRopeDamageValue = ((data[50]&0x00ff) << 8) |(data[51]&0x00ff);
+        int wireRopeDamageValue = ((data[52]&0x00ff) << 8) |(data[53]&0x00ff);
         realTimeDataBean.setWireRopeDamageValue(wireRopeDamageValue);
         return true;
     }

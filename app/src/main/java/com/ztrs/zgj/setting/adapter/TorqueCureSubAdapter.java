@@ -38,7 +38,7 @@ public class TorqueCureSubAdapter extends RecyclerView.Adapter<TorqueCureSubAdap
     public void onBindViewHolder(@NonNull CurveHolder holder, int position) {
         TorqueCurveBean torqueCurveBean = torqueCurveBeans.get(position);
         holder.edtAmp.setText(String.format("%.2f",torqueCurveBean.getAmplitude()/100.0));
-        holder.edtWei.setText(String.format("%.2f",torqueCurveBean.getWeight()/100.0));
+        holder.edtWei.setText(String.format("%.3f",torqueCurveBean.getWeight()/1000.0));
         holder.edtAmp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -53,7 +53,7 @@ public class TorqueCureSubAdapter extends RecyclerView.Adapter<TorqueCureSubAdap
             @Override
             public void afterTextChanged(Editable s) {
                 float amp = Float.valueOf(s.toString());
-                torqueCurveBean.setAmplitude((int)(amp*100));
+                torqueCurveBean.setAmplitude((int)(amp*1000));
             }
         });
 

@@ -109,7 +109,7 @@ public class RealTimeDataBean {
     int xSlope;
     int ySlope;
 
-    short torque;
+    int torque;
     byte windLevel;
 
     byte wireRopeState;
@@ -880,11 +880,11 @@ public class RealTimeDataBean {
         this.ySlope = ySlope;
     }
 
-    public short getTorque() {
+    public int getTorque() {
         return torque;
     }
 
-    public void setTorque(short torque) {
+    public void setTorque(int torque) {
         this.torque = torque;
     }
 
