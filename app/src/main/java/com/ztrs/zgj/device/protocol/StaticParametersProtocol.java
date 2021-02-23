@@ -54,12 +54,15 @@ public class StaticParametersProtocol extends BaseProtocol{
     }
 
     public void parseCmd(byte[] data){
-//        boolean success = parseData(data);
-//        if(!success){
-//            return;
-//        }
-//        byte[] ack = CommunicationProtocol.packetAck(CMD_STATIC_PARAMETER, new byte[]{0});
-//        deviceOperateInterface.sendDataToDevice(ack);
+        boolean success = parseData(data);
+        if(!success){
+            return;
+        }
+        StaticParameterMessage msg = new StaticParameterMessage();
+        notifyDeviceReport(msg);
+
+        byte[] ack = CommunicationProtocol.packetAck(CMD_STATIC_PARAMETER, new byte[]{0});
+        deviceOperateInterface.sendDataToDevice(ack);
     }
 
     public void parseAck(byte[] data){

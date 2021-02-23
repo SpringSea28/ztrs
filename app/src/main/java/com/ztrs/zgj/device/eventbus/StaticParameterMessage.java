@@ -8,4 +8,8 @@ public class StaticParameterMessage extends BaseMessage{
     public StaticParameterMessage(long seq, byte[] cmdbytes){
         super(seq, StaticParametersProtocol.CMD_STATIC_PARAMETER, cmdbytes);
     }
+
+    public StaticParameterMessage(){
+        super( StaticParametersProtocol.CMD_STATIC_PARAMETER);
+    }
 }

@@ -69,7 +69,7 @@ public class RegionalRestrictionProtocol extends BaseProtocol{
         }
         byte number = data[NUMBER_OFFSET];
         byte type = data[TYPE_OFFSET];
-        int obstacleHigh = ((data[OBSTACLE_HIGH_OFFSET]&0x00ff) << 8)
+        int obstacleHigh = ((data[OBSTACLE_HIGH_OFFSET]&0xffffffff) << 8)
                 |(data[OBSTACLE_HIGH_OFFSET+1]&0x00ff);
         switch (type){
             case TYPE_SECTOR:

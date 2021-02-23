@@ -562,6 +562,9 @@ public class TowerParameterFragment extends Fragment {
     public void onStaticParameter(StaticParameterMessage msg){
         LogUtils.LogI(TAG,"onStaticParameter: "+msg.getCmdType());
         LogUtils.LogI(TAG,"onStaticParameter: "+msg.getResult());
+        if(msg.getResult() == BaseMessage.RESULT_REPORT){
+            initView();
+        }
         if(msg.getCmdType() == BaseMessage.TYPE_QUERY) {
             if(msg.getResult() == BaseMessage.RESULT_OK) {
                 initView();

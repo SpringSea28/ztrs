@@ -184,6 +184,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testQueryStaticParameter();
 //                test.testQueryOrthogonalRegionalRestriction();
 //                test.testOnReceiveRegisterInfo();
+//                test.testOnReceiveStaticParameter();
                 DeviceManager.getInstance().emergencyCall();
             }
         });
@@ -420,7 +421,7 @@ public class MainActivity extends BaseActivity  {
         if(msg.getCmdType() == BaseMessage.TYPE_QUERY) {
             if (msg.getResult() == BaseMessage.RESULT_OK) {
 
-            } else {
+            } else if(msg.getResult() == BaseMessage.RESULT_FAIL) {
                 Toast.makeText(this, "查询静态参数查询命令发送失败", Toast.LENGTH_LONG).show();
             }
         }

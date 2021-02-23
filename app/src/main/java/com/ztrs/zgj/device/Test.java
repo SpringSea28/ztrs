@@ -260,7 +260,7 @@ public class Test {
                         DeviceManager.getInstance().onDataReceive(byteFromStr);
 
 
-                        str = "b3 21 00 00 21 21 01 18 23 17 57 01 03 00 05 00 0a 00 14 00 1e 00 28 00 32 00 3c 00 46 ff f6 73 4a";
+                        str = "b3 21 00 00 21 21 01 18 23 17 57 01 03 D1 20 00 0a 00 14 00 1e 00 28 00 32 00 3c 00 46 ff f6 73 4a";
                         byteFromStr = getByteFromStr(str);
                         crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
                         byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
@@ -377,6 +377,29 @@ public class Test {
 //                        }
                     }
                 });
+    }
+
+    public void testOnReceiveStaticParameter(){
+        String str = "b0 48 00 00 22 21 01 21 22 34 25 00 00 00 00 64 00 00 00 00 01 f4 01 90 00 00 00 00 00 00 00 00";
+//        byte[] byteFromStr = getByteFromStr(str);
+//                        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+//                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+//                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+//        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str =str+ " 01 2c 00 c8 00 00 00 54 43 37 30 34 32 00 00 00 00 00 00 00 00 00 00 00 08 00 05 00 96 00 64 00";
+//        byteFromStr = getByteFromStr(str);
+//                        crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+//                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+//                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+//        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str =str+ " 96 00 64 00 00 1e 67 3c";
+        byte[] byteFromStr = getByteFromStr(str);
+                        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
     }
 
 

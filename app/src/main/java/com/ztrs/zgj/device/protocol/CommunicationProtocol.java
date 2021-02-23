@@ -198,6 +198,9 @@ public class CommunicationProtocol{
             case SwitchMachineProtocol.CMD_SWITCH_MACHINE:
                 switchMachineProtocol.parseCmd(data);
                 break;
+            case StaticParametersProtocol.CMD_STATIC_PARAMETER:
+                staticParametersProtocol.parseCmd(data);
+                break;
             case RealTimeDataProtocol.CMD_REAL_TIME_DATA:
                 realTimeDataProtocol.parseCmd(data);
                 break;
