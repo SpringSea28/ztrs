@@ -21,4 +21,5 @@
     <color name="tower_parameter_converter_error_text_color">#FF3702</color>
     <color name="tower_primary_normal_text_color_blue">#0182FF</color>
     <color name="primary_background_color_blue">#0182FF</color>
+    <color name="primary_background_pressed_color_blue">#7f0182FF</color>
 </resources>

@@ -133,3 +133,5 @@
 public static final int *;
 }
 -keep class com.ztrs.zgj.setting.http.**{ *;}
+
+-keep class org.videolan.libvlc.**{*;}

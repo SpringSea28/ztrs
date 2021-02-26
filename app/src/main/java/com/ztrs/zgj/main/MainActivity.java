@@ -12,6 +12,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -79,6 +81,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -116,6 +119,12 @@ public class MainActivity extends BaseActivity  {
 
     @BindView(R.id.tv_tower_market)
     TextView tvTowerMarket;
+
+//    @BindView(R.id.video_layout)
+//    VLCVideoLayout videoLayout;
+
+    @BindView(R.id.rl_video)
+    RelativeLayout rlVideo;
 
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
@@ -401,6 +410,87 @@ public class MainActivity extends BaseActivity  {
             connectivityManager.registerDefaultNetworkCallback(networkCallback);
         }
     }
+
+//    private LibVLC mLibVLC = null;
+//    private MediaPlayer mMediaPlayer = null;
+//    private final int UPDATE_SCREEN = 0;
+//    private final int UPDATE_FULL_SCREEN = 1;
+//    private Handler mHandler = new Handler(new Handler.Callback() {
+//
+//        @Override
+//        public boolean handleMessage(Message msg) {
+//            switch (msg.what) {
+//                case UPDATE_SCREEN:
+//                    //frame的屏幕大小
+//                    int screen_width = rlVideo.getWidth();
+//                    int screen_height = rlVideo.getHeight();
+//                    Log.d(TAG, "screen_width:" + screen_width + " screen_height:" + screen_height);
+//                    mMediaPlayer.getVLCVout().setWindowSize(screen_width, screen_height);
+//                    mMediaPlayer.setAspectRatio(screen_width + ":" + screen_height);//设置屏幕比例
+//                    mMediaPlayer.setScale(0);
+//                    break;
+//
+//            }
+//            return false;
+//        }
+//    });
+//
+//    private void initVlc(){
+//        final ArrayList<String> args = new ArrayList<>();//VLC参数
+//        args.add("--rtsp-tcp");//强制rtsp-tcp，加快加载视频速度
+//        args.add("--live-caching=0");
+//        args.add("--file-caching=0");
+//        args.add("--network-caching=0");//增加实时性，延时大概2-3秒
+//        mLibVLC = new LibVLC(this, args);
+//        mMediaPlayer = new MediaPlayer(mLibVLC);
+//        mMediaPlayer.setEventListener(new MediaPlayer.EventListener() {
+//            @Override
+//            public void onEvent(MediaPlayer.Event event) {
+//                if (event.type == MediaPlayer.Event.Opening) {
+//                    Log.d(TAG, "VLC Opening");
+//                }
+//                else if (event.type == MediaPlayer.Event.Buffering){
+//                    Log.d(TAG, "VLC Buffering：" + event.getBuffering());
+//
+//                }
+//                else if (event.type == MediaPlayer.Event.Playing){
+//                    Log.d(TAG, "VLC Playing");
+//                }
+//                else if (event.type == MediaPlayer.Event.Stopped){
+//                    Log.d(TAG, "VLC Stopped");
+//                }
+//                else if (event.type == MediaPlayer.Event.EncounteredError){
+//                    Log.d(TAG, "VLC EncounteredError");
+//                }
+//                else if (event.type == MediaPlayer.Event.Vout){
+//                    Log.d(TAG, "VLC Vout"+ event.getVoutCount());
+//                    mHandler.sendEmptyMessageDelayed(UPDATE_SCREEN, 100);
+//                }
+//                else if (event.type == MediaPlayer.Event.RecordChanged){
+//                    Log.d(TAG, "VLC RecordChanged");
+//                }
+//            }
+//        });
+//    }
+//    private void startPlay(){
+//        initVlc();
+//        mMediaPlayer.attachViews(videoLayout, null, true, false);
+//        mMediaPlayer.setVideoScale(MediaPlayer.ScaleType.SURFACE_BEST_FIT);
+//        Uri uri = Uri.parse("rtsp://admin:ztrs12345@192.168.0.7:554/h264/ch1/main/av_stream");//rtsp流地址或其他流地址
+//        //final Media media = new Media(mLibVLC, getAssets().openFd(ASSET_FILENAME));
+//        final Media media = new Media(mLibVLC, uri);
+//        media.setHWDecoderEnabled(false, false);//设置后才可以录制和截屏
+//        mMediaPlayer.setMedia(media);
+//        media.release();
+//        mMediaPlayer.play();
+//    }
+//
+//    private void stopPlay(){
+//        mMediaPlayer.stop();
+//        mMediaPlayer.detachViews();
+//        mMediaPlayer.release();
+//        mLibVLC.release();
+//    }
 
 
     //----------------------subscribe------------------------------//

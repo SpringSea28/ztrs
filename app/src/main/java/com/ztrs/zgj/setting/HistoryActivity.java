@@ -24,6 +24,7 @@ public class HistoryActivity extends BaseActivity {
 
         binding  = DataBindingUtil.setContentView(this, R.layout.activity_history);
         binding.rlTitle.tvTitle.setText("塔机监控历史回放");
+        binding.rlTitle.tvBack.setOnClickListener(v -> finish());
         binding.rlStart.setOnClickListener(v -> showStartCalendar());
     }
 

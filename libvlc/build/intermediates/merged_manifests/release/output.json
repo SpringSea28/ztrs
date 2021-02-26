@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "applicationId": "org.videolan",
+  "variantType": "LIBRARY",
+  "elements": [
+    {
+      "outputType": {
+        "type": "MERGED_MANIFESTS"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 2,
+        "versionName": "3.0.0",
+        "outputFile": "libvlc-release.aar",
+        "fullName": "release",
+        "baseName": "release",
+        "dirName": ""
+      },
+      "path": "../../library_manifest/release/AndroidManifest.xml",
+      "properties": {
+        "packageId": "org.videolan",
+        "split": ""
+      }
+    }
+  ]
+}

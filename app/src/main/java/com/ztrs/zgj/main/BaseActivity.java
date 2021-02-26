@@ -20,7 +20,7 @@ import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private static final int MIN_CLICK_DELAY_TIME = 1000;
+    private static final int MIN_CLICK_DELAY_TIME = 500;
     private long lastClickTime;
 
     @Override

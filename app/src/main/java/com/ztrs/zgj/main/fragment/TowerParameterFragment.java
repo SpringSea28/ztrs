@@ -274,12 +274,18 @@ public class TowerParameterFragment extends Fragment {
     private void initHookup(){
         LogUtils.LogE(TAG,"init hookup");
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
-        int wireRopeHeight = realTimeDataBean.getHeight() * realTimeDataBean.getWireRopeDamageMagnification();
+        int height = realTimeDataBean.getHeight();
         int towerHeight = device.getStaticParameterBean().getTowerHeight();
-        float scaleY = 0;
+        float offsetY = 0;
+        float translationY = 0;
         if(towerHeight != 0){
-            scaleY = (float) (1.0*(towerHeight - wireRopeHeight)/towerHeight);
-            llHookup.setScaleY(scaleY);
+            offsetY = (float) (1.0*(height)/towerHeight);
+            if(offsetY < 0){
+                offsetY = 0;
+            }
+//            Log.e("wch","offsetY:"+offsetY);
+            translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
+            llHookup.setTranslationY(translationY);
         }
 
 
@@ -287,8 +293,11 @@ public class TowerParameterFragment extends Fragment {
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*100);
-            float tranX = offset - (100-32+16);
+            offset = (float) (1.0*amplitude/upWeightArmLen*85);
+            if(offset<0){
+                offset = 0;
+            }
+            float tranX = offset - (85-32+16);
             Log.e("wch","tranX: "+tranX);
             llHookup.setTranslationX(ScaleUtils.dip2px(context,tranX));
             imgWireRopeCar.setTranslationX(ScaleUtils.dip2px(context,tranX));
@@ -309,6 +318,9 @@ public class TowerParameterFragment extends Fragment {
         float translationY = 0;
         if(towerHeight != 0){
             offsetY = (float) (1.0*(height)/towerHeight);
+            if(offsetY <0 ){
+                offsetY = 0;
+            }
 //            Log.e("wch","offsetY:"+offsetY);
             translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
         }
@@ -332,6 +344,9 @@ public class TowerParameterFragment extends Fragment {
         float tranX = 0;
         if(upWeightArmLen != 0){
             offset = (float) (1.0*amplitude/upWeightArmLen*85);
+            if(offset<0){
+                offset = 0;
+            }
             float tranXDp = offset - (85-32+16);
             tranX = ScaleUtils.dip2px(context,tranXDp);
         }
