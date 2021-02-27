@@ -17,6 +17,7 @@ import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -62,6 +63,7 @@ import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WorkCycleDataMessage;
 import com.ztrs.zgj.main.dialog.OutputDialog;
+import com.ztrs.zgj.main.dialog.VideoInputDialog;
 import com.ztrs.zgj.main.fragment.AroundConverterFragment;
 import com.ztrs.zgj.main.fragment.LuffingConverterFragment;
 import com.ztrs.zgj.main.fragment.TowerParameterFragment;
@@ -78,17 +80,25 @@ import com.ztrs.zgj.setting.viewModel.VersionModel;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.videolan.libvlc.LibVLC;
+import org.videolan.libvlc.Media;
+import org.videolan.libvlc.MediaPlayer;
+import org.videolan.libvlc.util.VLCVideoLayout;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity  {
 
@@ -120,11 +130,22 @@ public class MainActivity extends BaseActivity  {
     @BindView(R.id.tv_tower_market)
     TextView tvTowerMarket;
 
-//    @BindView(R.id.video_layout)
-//    VLCVideoLayout videoLayout;
+    @BindView(R.id.video_layout)
+    VLCVideoLayout videoLayout;
 
     @BindView(R.id.rl_video)
     RelativeLayout rlVideo;
+    @BindView(R.id.rl_video_bg)
+    RelativeLayout rlVideoBg;
+
+    @BindView(R.id.btn_play)
+    Button btnPlay;
+    @BindView(R.id.tv_v1)
+    TextView tvV1;
+    @BindView(R.id.tv_v2)
+    TextView tvV2;
+    @BindView(R.id.tv_v3)
+    TextView tvV3;
 
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
@@ -138,6 +159,19 @@ public class MainActivity extends BaseActivity  {
     UpdateDialog updateDialog;
 
     private Device device;
+
+    private static final int PLAYER_STATE_IDLE = 0;
+    private static final int PLAYER_STATE_PREPARING = 1;
+    private static final int PLAYER_STATE_PREPARED = 2;
+    private static final int PLAYER_STATE_PLAYING = 3;
+    private static final int PLAYER_STATE_PAUSE = 4;
+    private static final int PLAYER_STATE_STOP = 5;
+    private static final int PLAYER_STATE_ERROR = 6;
+
+    private int playerState;
+    private boolean isPauseByUser;
+
+    private String url = "rtsp://admin:ztrs12345@192.168.0.8:554/h264/ch1/main/av_stream";
 
     Unbinder bind;
     @Override
@@ -202,6 +236,7 @@ public class MainActivity extends BaseActivity  {
         display();
         checkUpdate();
         checkNetWorkState();
+        initVlc();
     }
 
     private void checkUpdate(){
@@ -318,8 +353,26 @@ public class MainActivity extends BaseActivity  {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isPauseByUser && playerState == PLAYER_STATE_STOP){
+            startPlay();
+        }
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopPlay();
+        rlVideoBg.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     protected void onDestroy() {
         Log.e(TAG,"onDestroy");
+        stopPlay();
+        releasePlay();
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         connectivityManager.unregisterNetworkCallback(networkCallback);
         DeviceManager.getInstance().closeOpenSerial();
@@ -338,7 +391,8 @@ public class MainActivity extends BaseActivity  {
     }
 
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
-        R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market})
+        R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market,R.id.btn_play,R.id.tv_v1,
+        R.id.tv_v2,R.id.tv_v3})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_upload_converter:
@@ -364,8 +418,78 @@ public class MainActivity extends BaseActivity  {
                 intent.putExtra("url","http://mall.gxntp.com/");
                 startActivity(intent);
                 break;
+            case R.id.btn_play:
+                if(playerState == PLAYER_STATE_IDLE
+                || playerState == PLAYER_STATE_STOP){
+                    startPlay();
+                    return;
+                }
+                if(mMediaPlayer.isPlaying()) {
+                    mMediaPlayer.pause();
+                    isPauseByUser = true;
+                }else {
+                    isPauseByUser = false;
+                    mMediaPlayer.play();
+                }
+                break;
+            case R.id.tv_v1:
+                showUrlDialog(0);
+                break;
+            case R.id.tv_v2:
+                showUrlDialog(1);
+                break;
+            case R.id.tv_v3:
+                showUrlDialog(2);
+                break;
         }
     }
+
+    private void showUrlDialog(int position){
+        VideoInputDialog viDialog = new VideoInputDialog(this);
+        viDialog.setUrl(url);
+        viDialog.setOnUserClick(new VideoInputDialog.OnUserClick() {
+            @Override
+            public void onConfirm(String url) {
+                MainActivity.this.url = url;
+                if(playerState == PLAYER_STATE_IDLE
+                        || playerState == PLAYER_STATE_STOP){
+                    startPlay();
+                }else {
+                    stopPlay();
+                    Observable.timer(100, TimeUnit.MILLISECONDS)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Long>() {
+                                @Override
+                                public void accept(Long aLong) throws Exception {
+                                    startPlay();
+                                }
+                            });
+                }
+                switchVideo(position);
+            }
+        });
+        viDialog.show();
+    }
+
+    private void switchVideo(int position){
+        tvV1.setBackgroundColor(getColor(R.color.main_color_url_input_bg_normal));
+        tvV1.setTextColor(getColor(R.color.main_color_url_input_text_normal));
+        tvV2.setBackgroundColor(getColor(R.color.main_color_url_input_bg_normal));
+        tvV2.setTextColor(getColor(R.color.main_color_url_input_text_normal));
+        tvV3.setBackgroundColor(getColor(R.color.main_color_url_input_bg_normal));
+        tvV3.setTextColor(getColor(R.color.main_color_url_input_text_normal));
+        if(position == 0){
+            tvV1.setBackgroundColor(getColor(R.color.main_color_url_input_bg_selected));
+            tvV1.setTextColor(getColor(R.color.main_color_url_input_text_selected));
+        } else  if(position == 1){
+            tvV2.setBackgroundColor(getColor(R.color.main_color_url_input_bg_selected));
+            tvV2.setTextColor(getColor(R.color.main_color_url_input_text_selected));
+        }else  if(position == 2){
+            tvV3.setBackgroundColor(getColor(R.color.main_color_url_input_bg_selected));
+            tvV3.setTextColor(getColor(R.color.main_color_url_input_text_selected));
+        }
+    }
+
 
     private void switchConverterTab(int type){
         tvUploadConverter.setSelected(false);
@@ -411,86 +535,128 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
-//    private LibVLC mLibVLC = null;
-//    private MediaPlayer mMediaPlayer = null;
-//    private final int UPDATE_SCREEN = 0;
-//    private final int UPDATE_FULL_SCREEN = 1;
-//    private Handler mHandler = new Handler(new Handler.Callback() {
-//
-//        @Override
-//        public boolean handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case UPDATE_SCREEN:
-//                    //frame的屏幕大小
-//                    int screen_width = rlVideo.getWidth();
-//                    int screen_height = rlVideo.getHeight();
-//                    Log.d(TAG, "screen_width:" + screen_width + " screen_height:" + screen_height);
-//                    mMediaPlayer.getVLCVout().setWindowSize(screen_width, screen_height);
-//                    mMediaPlayer.setAspectRatio(screen_width + ":" + screen_height);//设置屏幕比例
-//                    mMediaPlayer.setScale(0);
-//                    break;
-//
-//            }
-//            return false;
-//        }
-//    });
-//
-//    private void initVlc(){
-//        final ArrayList<String> args = new ArrayList<>();//VLC参数
-//        args.add("--rtsp-tcp");//强制rtsp-tcp，加快加载视频速度
-//        args.add("--live-caching=0");
-//        args.add("--file-caching=0");
-//        args.add("--network-caching=0");//增加实时性，延时大概2-3秒
-//        mLibVLC = new LibVLC(this, args);
-//        mMediaPlayer = new MediaPlayer(mLibVLC);
-//        mMediaPlayer.setEventListener(new MediaPlayer.EventListener() {
-//            @Override
-//            public void onEvent(MediaPlayer.Event event) {
-//                if (event.type == MediaPlayer.Event.Opening) {
-//                    Log.d(TAG, "VLC Opening");
-//                }
-//                else if (event.type == MediaPlayer.Event.Buffering){
-//                    Log.d(TAG, "VLC Buffering：" + event.getBuffering());
-//
-//                }
-//                else if (event.type == MediaPlayer.Event.Playing){
-//                    Log.d(TAG, "VLC Playing");
-//                }
-//                else if (event.type == MediaPlayer.Event.Stopped){
-//                    Log.d(TAG, "VLC Stopped");
-//                }
-//                else if (event.type == MediaPlayer.Event.EncounteredError){
-//                    Log.d(TAG, "VLC EncounteredError");
-//                }
-//                else if (event.type == MediaPlayer.Event.Vout){
-//                    Log.d(TAG, "VLC Vout"+ event.getVoutCount());
-//                    mHandler.sendEmptyMessageDelayed(UPDATE_SCREEN, 100);
-//                }
-//                else if (event.type == MediaPlayer.Event.RecordChanged){
-//                    Log.d(TAG, "VLC RecordChanged");
-//                }
-//            }
-//        });
-//    }
-//    private void startPlay(){
-//        initVlc();
-//        mMediaPlayer.attachViews(videoLayout, null, true, false);
-//        mMediaPlayer.setVideoScale(MediaPlayer.ScaleType.SURFACE_BEST_FIT);
-//        Uri uri = Uri.parse("rtsp://admin:ztrs12345@192.168.0.7:554/h264/ch1/main/av_stream");//rtsp流地址或其他流地址
-//        //final Media media = new Media(mLibVLC, getAssets().openFd(ASSET_FILENAME));
-//        final Media media = new Media(mLibVLC, uri);
-//        media.setHWDecoderEnabled(false, false);//设置后才可以录制和截屏
-//        mMediaPlayer.setMedia(media);
-//        media.release();
-//        mMediaPlayer.play();
-//    }
-//
-//    private void stopPlay(){
-//        mMediaPlayer.stop();
-//        mMediaPlayer.detachViews();
-//        mMediaPlayer.release();
-//        mLibVLC.release();
-//    }
+    private LibVLC mLibVLC = null;
+    private MediaPlayer mMediaPlayer = null;
+    private final int UPDATE_SCREEN = 0;
+    private final int UPDATE_FULL_SCREEN = 1;
+    private Handler mHandler = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPDATE_SCREEN:
+                    //frame的屏幕大小
+                    int screen_width = rlVideo.getWidth();
+                    int screen_height = rlVideo.getHeight();
+                    Log.d(TAG, "screen_width:" + screen_width + " screen_height:" + screen_height);
+                    mMediaPlayer.getVLCVout().setWindowSize(screen_width, screen_height);
+                    mMediaPlayer.setAspectRatio(screen_width + ":" + screen_height);//设置屏幕比例
+                    mMediaPlayer.setScale(0);
+                    break;
+
+            }
+            return false;
+        }
+    });
+
+    private void initVlc(){
+        final ArrayList<String> args = new ArrayList<>();//VLC参数
+        args.add("--rtsp-tcp");//强制rtsp-tcp，加快加载视频速度
+        args.add("--live-caching=0");
+        args.add("--file-caching=0");
+        args.add("--network-caching=0");//增加实时性，延时大概2-3秒
+        mLibVLC = new LibVLC(this, args);
+        mMediaPlayer = new MediaPlayer(mLibVLC);
+        mMediaPlayer.setEventListener(new MediaPlayer.EventListener() {
+            @Override
+            public void onEvent(MediaPlayer.Event event) {
+                if (event.type == MediaPlayer.Event.Opening) {
+                    Log.d(TAG, "VLC Opening");
+                }
+                else if (event.type == MediaPlayer.Event.Buffering){
+                    Log.d(TAG, "VLC Buffering：" + event.getBuffering());
+
+                }
+                else if (event.type == MediaPlayer.Event.Playing){
+                    Log.d(TAG, "VLC Playing");
+                    playerState = PLAYER_STATE_PLAYING;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            rlVideoBg.setVisibility(View.GONE);
+                            btnPlay.setText("暂停");
+                        }
+                    });             }
+                else if (event.type == MediaPlayer.Event.Paused){
+                    Log.d(TAG, "VLC Pause");
+                    playerState = PLAYER_STATE_PAUSE;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            btnPlay.setText("播放");
+                        }
+                    });
+                }
+                else if (event.type == MediaPlayer.Event.Stopped){
+                    Log.d(TAG, "VLC Stopped");
+                    playerState = PLAYER_STATE_STOP;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Log.d(TAG, "VLC Stopped detachViews");
+                                mMediaPlayer.detachViews();
+                            btnPlay.setText("播放");
+                        }
+                    });
+                }
+                else if (event.type == MediaPlayer.Event.EncounteredError){
+                    Log.d(TAG, "VLC EncounteredError");
+                    Toast.makeText(MainActivity.this, "播放失败", Toast.LENGTH_LONG).show();
+                }
+                else if (event.type == MediaPlayer.Event.Vout){
+                    Log.d(TAG, "VLC Vout"+ event.getVoutCount());
+                    if(event.getVoutCount() >0) {
+                        mHandler.sendEmptyMessageDelayed(UPDATE_SCREEN, 100);
+                    }
+                }
+                else if (event.type == MediaPlayer.Event.RecordChanged){
+                    Log.d(TAG, "VLC RecordChanged");
+                }
+                else if (event.type == MediaPlayer.Event.EndReached){
+                    Log.d(TAG, "VLC EndReached");
+                }
+            }
+        });
+    }
+    private void startPlay(){
+        Log.e(TAG,"startPlay");
+        playerState = PLAYER_STATE_PREPARING;
+        mMediaPlayer.attachViews(videoLayout, null, true, false);
+        mMediaPlayer.setVideoScale(MediaPlayer.ScaleType.SURFACE_BEST_FIT);
+        Uri uri = Uri.parse(url);//rtsp流地址或其他流地址
+        //final Media media = new Media(mLibVLC, getAssets().openFd(ASSET_FILENAME));
+        final Media media = new Media(mLibVLC, uri);
+        media.setHWDecoderEnabled(false, false);//设置后才可以录制和截屏
+        mMediaPlayer.setMedia(media);
+        media.release();
+        mMediaPlayer.play();
+
+    }
+
+    private void pausePlay(){
+        mMediaPlayer.pause();
+    }
+
+    private void stopPlay(){
+        mMediaPlayer.stop();
+        mMediaPlayer.detachViews();
+    }
+
+    private void releasePlay(){
+        mMediaPlayer.release();
+        mLibVLC.release();
+    }
 
 
     //----------------------subscribe------------------------------//

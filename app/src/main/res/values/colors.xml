@@ -22,4 +22,10 @@
     <color name="tower_primary_normal_text_color_blue">#0182FF</color>
     <color name="primary_background_color_blue">#0182FF</color>
     <color name="primary_background_pressed_color_blue">#7f0182FF</color>
+
+    <color name="main_color_url_input_bg_selected">#4AA5FE</color>
+    <color name="main_color_url_input_text_selected">#FED456</color>
+    <color name="main_color_url_input_bg_normal">#B24AA5FE</color>
+    <color name="main_color_url_input_text_normal">#FFFFFF</color>
+
 </resources>

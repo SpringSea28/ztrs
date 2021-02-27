@@ -172,19 +172,26 @@
         android:id="@+id/rl_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@mipmap/pic">
-<!--        <org.videolan.libvlc.util.VLCVideoLayout-->
-<!--            android:id="@+id/video_layout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            android:fitsSystemWindows="false"/>-->
+        android:layout_weight="1">
+
+        <org.videolan.libvlc.util.VLCVideoLayout
+            android:id="@+id/video_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="false" />
+
+        <RelativeLayout
+            android:id="@+id/rl_video_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/pic"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="18dp"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tv_v1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -198,6 +205,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"/>
             <TextView
+                android:id="@+id/tv_v2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -211,6 +219,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"/>
             <TextView
+                android:id="@+id/tv_v3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -220,6 +229,23 @@
                 android:textColor="#FFFFFF"
                 android:text="驾驶室监控视频"/>
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_alignParentBottom="true"
+            android:background="#7f000000">
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:stateListAnimator="@null"
+                android:textColor="@android:color/white"
+                android:background="@drawable/setting_save_btn_bg_selector"
+                android:textSize="7sp"
+                android:text="播放"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -50,7 +50,7 @@ public class VLCVideoLayout extends FrameLayout {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-//        setBackgroundResource(R.color.transparent);
+        setBackgroundResource(R.color.transparent);
         final ViewGroup.LayoutParams lp = getLayoutParams();
         lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
         lp.width = ViewGroup.LayoutParams.MATCH_PARENT;

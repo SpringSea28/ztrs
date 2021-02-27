@@ -122,5 +122,5 @@ dependencies {
 
 //    implementation(name: 'libvlc-all-3.3.0-eap17', ext: 'aar')
     implementation(project(':SerialPortLibrary'))
-//    implementation(project(':libvlc'))
+    implementation(project(':libvlc'))
 }

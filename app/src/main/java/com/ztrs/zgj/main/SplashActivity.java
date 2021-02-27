@@ -40,6 +40,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class SplashActivity extends BaseActivity {
 
@@ -183,8 +184,23 @@ public class SplashActivity extends BaseActivity {
         if(msg.isSuccess()) {
             isOpen = true;
             DeviceManager.getInstance().queryStaticParameter();
-            DeviceManager.getInstance().queryTorqueCurve();
-            DeviceManager.getInstance().queryRegisterInfo();
+            Observable.timer(100, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Long>() {
+                        @Override
+                        public void accept(Long aLong) throws Exception {
+                            DeviceManager.getInstance().queryTorqueCurve();
+                        }
+                    });
+            Observable.timer(200, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Long>() {
+                        @Override
+                        public void accept(Long aLong) throws Exception {
+                            DeviceManager.getInstance().queryRegisterInfo();
+                        }
+                    });
+
         }else {
             isOpen = false;
             Toast.makeText(this, "串口打开失败", Toast.LENGTH_LONG).show();
