@@ -364,8 +364,10 @@ public class MainActivity extends BaseActivity  {
     @Override
     protected void onStop() {
         super.onStop();
-        stopPlay();
-        rlVideoBg.setVisibility(View.VISIBLE);
+        if(playerState != PLAYER_STATE_IDLE) {
+            stopPlay();
+            rlVideoBg.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

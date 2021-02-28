@@ -27,6 +27,7 @@ int color primary_text_default_material_dark 0x0
 int color ripple_material_light 0x0
 int color secondary_text_default_material_dark 0x0
 int color secondary_text_default_material_light 0x0
+int color transparent 0x0
 int dimen compat_button_inset_horizontal_material 0x0
 int dimen compat_button_inset_vertical_material 0x0
 int dimen compat_button_padding_horizontal_material 0x0

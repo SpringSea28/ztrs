@@ -18,14 +18,14 @@ android {
         applicationId "com.ztrs.zgj"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 27
-        versionName "1.0.27"
+        versionCode 28
+        versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi-v7a','x86'
+            abiFilters 'armeabi-v7a'
         }
     }
 
