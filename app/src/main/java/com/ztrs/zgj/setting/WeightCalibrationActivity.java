@@ -1,6 +1,7 @@
 package com.ztrs.zgj.setting;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -376,14 +377,16 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
 //        }
         List<TorqueCurveBean> torqueCurveBeanList = torqueCurveApplyBean.getTorqueCurveBeanList();
         if(torqueCurveBeanList == null || torqueCurveBeanList.size()<1){
-            Toast.makeText(this,"力矩曲线未获取，高度标定失败",Toast.LENGTH_LONG).show();
+            Log.i(TAG,"torqueCurveBeanList null or size 0");
+            Toast.makeText(this,"力矩曲线未获取，载重标定失败",Toast.LENGTH_LONG).show();
             return;
         }
 
         byte highControl = (byte) binding.spinnerHighControl.getSelectedItemPosition();
         byte highOutput = (byte) binding.spinnerHighOutput.getSelectedItemPosition();
         if(highControl != 0 && highOutput == 2){
-            Toast.makeText(this,"高报警动作不能为NC",Toast.LENGTH_LONG).show();
+            Log.i(TAG,"nc ");
+            Toast.makeText(this,"载重警动作不能为NC",Toast.LENGTH_LONG).show();
             return;
         }
 

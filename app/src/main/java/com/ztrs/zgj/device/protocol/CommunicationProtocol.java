@@ -424,6 +424,9 @@ public class CommunicationProtocol{
             case RegisterInfoProtocol.CMD_REGISTER_INFO:
                 cmdName = "设备注册信息";
                 break;
+            case InverterDataReportProtocol.CMD_INVERTER_DATA_REPORT:
+                cmdName = "变频器数据上报";
+                break;
         }
         return cmdName;
     }

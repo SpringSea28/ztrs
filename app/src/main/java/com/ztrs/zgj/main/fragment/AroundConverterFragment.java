@@ -106,7 +106,7 @@ public class AroundConverterFragment extends Fragment {
 
     private void initView(){
         InverterDataReportBean.InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
-                .getInverterDataReportBean().getAmplitudeInverterData();
+                .getInverterDataReportBean().getAroundInverterData();
 
         int run = inverterData.getRun();
         if(run==0){

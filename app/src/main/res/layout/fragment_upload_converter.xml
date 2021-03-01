@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="165dp"
     android:orientation="vertical"
     tools:context=".main.fragment.UploadConverterFragment">
 
@@ -43,7 +43,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_running_state_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="运行状态" />
         </RelativeLayout>
@@ -69,7 +69,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_brake_detect_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="刹车制动力检测" />
         </RelativeLayout>
@@ -95,7 +95,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_bus_voltage_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="母线电压" />
         </RelativeLayout>
@@ -128,7 +128,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_output_voltage_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="输出电压" />
         </RelativeLayout>
@@ -154,7 +154,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_output_current_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="输出电流" />
         </RelativeLayout>
@@ -180,7 +180,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_running_frequency_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="运行频率" />
         </RelativeLayout>
@@ -206,7 +206,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_motor_speed_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="电机转速" />
         </RelativeLayout>
@@ -232,7 +232,7 @@
                 style="@style/tower_converter_text_style"
                 android:layout_width="match_parent"
                 android:layout_below="@id/tv_temperature_value"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
                 android:gravity="center_horizontal"
                 android:text="变温器温度" />
         </RelativeLayout>

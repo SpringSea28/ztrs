@@ -166,7 +166,8 @@ public class UploadConverterFragment extends Fragment {
     }
 
     private void initView(){
-        InverterData inverterData = DeviceManager.getInstance().getZtrsDevice().getInverterDataReportBean().getUpInverterData();
+        InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
+                .getInverterDataReportBean().getUpInverterData();
         int run = inverterData.getRun();
         if(run==0){
             tvRunningStateValue.setText("停止");

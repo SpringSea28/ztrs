@@ -841,23 +841,44 @@ public class Test {
 
     //3.23
     public void onReceiveInverterData() {
-        byte[] data = new byte[204];
-        data[66] = 1;
-        data[66+68] =1;
-        byte[] bytes = CommunicationProtocol.packetData((byte) 0xB0, (byte) 0x46, data);
-//        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
-//        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
-//        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
-        DeviceManager.getInstance().onDataReceive(bytes);
-        InverterDataReportBean.InverterData upInverterData = DeviceManager.getInstance().getZtrsDevice()
-                .getInverterDataReportBean().getUpInverterData();
-        int currentLuffingPositionCurrentUpWeight = upInverterData.getCurrentLuffingPositionCurrentUpWeight();
-        if(currentLuffingPositionCurrentUpWeight != 256){
-            LogUtils.LogE(TAG, " onReceiveInverterData B0 error");
-        }
-        LogUtils.LogE(TAG, " test onReceive getCurrentLuffingPositionCurrentUpWeight:"+DeviceManager.getInstance().getZtrsDevice()
-                .getInverterDataReportBean().getAroundInverterData()
-                .getCurrentLuffingPositionCurrentUpWeight());
+        String str = "b0 d9 00 00 46 21 03 01 16 46 49 00 01 00 00 00 50 00 f0 00 00 14 a3 02 6a 02 1e 00 02 01 4f 00";
+        byte[] byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str = "00 00 00 48 de ff d7 00 00 00 00 88 01 00 00 00 01 00 00 00 02 00 01 02 5a 00 00 00 00 00 00 00";
+        byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str = "00 00 00 00 00 00 00 27 10 00 00 13 88 00 00 00 00 00 01 00 00 00 00 00 00 14 cb 00 00 00 00 00";
+        byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str = "00 01 21 00 00 00 00 00 00 00 00 e3 6c ff d6 c8 00 00 13 00 00 00 00 00 01 00 00 00 65 00 00 00";
+        byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str = "00 00 00 00 00 00 00 00 00 00 00 27 10 00 00 13 88 00 00 00 00 00 01 00 00 00 00 00 00 14 c8 00";
+        byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str = "00 00 00 00 00 01 30 00 00 00 00 00 00 00 00 55 ae ff d6 00 80 00 00 00 00 00 00 00 01 00 00 00";
+        byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+        str = "65 00 00 00 00 00 00 00 00 00 00 00 00 00 00 27 10 00 00 13 88 00 00 cd 71";
+        byteFromStr = getByteFromStr(str);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+
+
+//        InverterDataReportBean.InverterData upInverterData = DeviceManager.getInstance().getZtrsDevice()
+//                .getInverterDataReportBean().getUpInverterData();
+//        int currentLuffingPositionCurrentUpWeight = upInverterData.getCurrentLuffingPositionCurrentUpWeight();
+//        if(currentLuffingPositionCurrentUpWeight != 256){
+//            LogUtils.LogE(TAG, " onReceiveInverterData B0 error");
+//        }
+//        LogUtils.LogE(TAG, " test onReceive getCurrentLuffingPositionCurrentUpWeight:"+DeviceManager.getInstance().getZtrsDevice()
+//                .getInverterDataReportBean().getAroundInverterData()
+//                .getCurrentLuffingPositionCurrentUpWeight());
     }
 
     //协议3.27 设备注册信息

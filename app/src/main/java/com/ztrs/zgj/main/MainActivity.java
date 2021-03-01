@@ -228,6 +228,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testQueryOrthogonalRegionalRestriction();
 //                test.testOnReceiveRegisterInfo();
 //                test.testOnReceiveStaticParameter();
+//                test.onReceiveInverterData();
                 DeviceManager.getInstance().emergencyCall();
             }
         });
