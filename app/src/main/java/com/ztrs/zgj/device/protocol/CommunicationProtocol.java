@@ -159,6 +159,7 @@ public class CommunicationProtocol{
         if(!b){
             return;
         }
+        LogUtils.LogE(TAG,"receive: "+LogUtils.toHexString(data));
         if (data[0] == FRAME_HEAD_B0) {
             parseCmd(cmd,loadData);
         } else if (data[0] == FRAME_HEAD_B3) {

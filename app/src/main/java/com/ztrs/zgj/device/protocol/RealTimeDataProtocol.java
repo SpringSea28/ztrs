@@ -132,11 +132,11 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setOutputInLuffingStopLimit(outputInLuffingStopLimit);
         boolean outputInLuffingSlowLimit= (data[8] &0X10) == 0x10;
         realTimeDataBean.setOutputInLuffingSlowLimit(outputInLuffingSlowLimit);
-        Log.e(TAG,"outputOutLuffingStopLimit:"+outputOutLuffingStopLimit);
-        Log.e(TAG,"outputOutLuffingSlowLimit:"+outputOutLuffingSlowLimit);
-        Log.e(TAG,"outputInLuffingStopLimit:"+outputInLuffingStopLimit);
-        Log.e(TAG,"outputInLuffingSlowLimit:"+outputInLuffingSlowLimit);
-        Log.e(TAG,"data8:"+LogUtils.toHexString(data[8]));
+//        Log.e(TAG,"outputOutLuffingStopLimit:"+outputOutLuffingStopLimit);
+//        Log.e(TAG,"outputOutLuffingSlowLimit:"+outputOutLuffingSlowLimit);
+//        Log.e(TAG,"outputInLuffingStopLimit:"+outputInLuffingStopLimit);
+//        Log.e(TAG,"outputInLuffingSlowLimit:"+outputInLuffingSlowLimit);
+//        Log.e(TAG,"data8:"+LogUtils.toHexString(data[8]));
 
 
         //1.27协议
@@ -237,15 +237,16 @@ public class RealTimeDataProtocol extends BaseProtocol{
 //        Log.e(TAG,"data[17]:"+LogUtils.toHexString(data[17]));
         int upWeight= ((data[18]&0xffffffff) << 8) |(data[19]&0x00ff);
         realTimeDataBean.setUpWeight(upWeight);
+        Log.e(TAG,"receive upWeight:"+upWeight);
         short height= (short) (((data[20]&0xffffffff) << 8) |(data[21]&0x00ff));
         realTimeDataBean.setHeight(height);
+        Log.e(TAG,"receive height:"+height);
         int aroundAngle= ((data[22]&0xffffffff) << 8) |(data[23]&0x00ff);
         realTimeDataBean.setAroundAngle(aroundAngle);
+        Log.e(TAG,"receive aroundAngle:"+aroundAngle);
         int amplitude = ((data[24]&0xffffffff) << 8) |(data[25]&0x00ff);
-//        Log.e(TAG,"amplitude:"+amplitude);
-//        Log.e(TAG,"data24:"+LogUtils.toHexString(data[24]));
-//        Log.e(TAG,"data[25]:"+LogUtils.toHexString(data[25]));
         realTimeDataBean.setAmplitude(amplitude);
+        Log.e(TAG,"receive amplitude:"+amplitude);
         int boomUpAngle= ((data[26]&0xffffffff) << 8) |(data[27]&0x00ff);
         realTimeDataBean.setBoomUpAngle(boomUpAngle);
         int windSpeed= ((data[28]&0xffffffff) << 8) |(data[29]&0x00ff);
@@ -269,7 +270,7 @@ public class RealTimeDataProtocol extends BaseProtocol{
         int torque = ((data[43]&0xffffffff) << 24) |((data[44]&0x00ff)<<16)
                 |((data[45]&0x00ff)<<8)|(data[46]&0x00ff);
         realTimeDataBean.setTorque(torque);
-        Log.e(TAG,"torque:"+torque);
+//        Log.e(TAG,"torque:"+torque);
         byte windLevel = data[47];
         realTimeDataBean.setWindLevel(windLevel);
         byte wireRopeState = data[48];

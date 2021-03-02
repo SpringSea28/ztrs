@@ -45,21 +45,25 @@ public class SensorRealtimeDataProtocol extends BaseProtocol{
                 | ((data[2]&0x00ff) << 8)
                 | (data[3]&0x00ff))&0x00FFFFFFFFl;
         sensorRealtimeDataBean.setHeightSensor(heightSensor);
+        LogUtils.LogE(TAG,"heightSensor: "+heightSensor);
         long amplitudeSensor = (((data[4]&0x00ff) << 24)
                 | ((data[5]&0x00ff) << 16)
                 | ((data[6]&0x00ff) << 8)
                 | (data[7]&0x00ff))&0x00FFFFFFFFl;
         sensorRealtimeDataBean.setAmplitudeSensor(amplitudeSensor);
+        LogUtils.LogE(TAG,"amplitudeSensor: "+amplitudeSensor);
         long aroundSensor = (((data[8]&0x00ff) << 24)
                 | ((data[9]&0x00ff) << 16)
                 | ((data[10]&0x00ff) << 8)
                 | (data[11]&0x00ff))&0x00FFFFFFFFl;
         sensorRealtimeDataBean.setAroundSensor(aroundSensor);
+        LogUtils.LogE(TAG,"aroundSensor: "+aroundSensor);
         long weightSensor = (((data[12]&0x00ff) << 24)
                 | ((data[13]&0x00ff) << 16)
                 | ((data[14]&0x00ff) << 8)
                 | (data[15]&0x00ff))&0x00FFFFFFFFl;
         sensorRealtimeDataBean.setWeightSensor(weightSensor);
+        LogUtils.LogE(TAG,"weightSensor: "+weightSensor);
         long slopeSensorX = (((data[16]&0x00ff) << 24)
                 | ((data[17]&0x00ff) << 16)
                 | ((data[18]&0x00ff) << 8)

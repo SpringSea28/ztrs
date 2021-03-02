@@ -340,7 +340,7 @@ public class DeviceManager implements DeviceOperateInterface {
     }
 
     public void onDataReceive(byte[] data){
-        LogUtils.LogE(TAG,"receive: "+LogUtils.toHexString(data));
+//        LogUtils.LogE(TAG,"receive: "+LogUtils.toHexString(data));
         communicationProtocol.dataParse(data);
     }
 }
