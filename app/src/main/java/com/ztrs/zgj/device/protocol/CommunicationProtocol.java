@@ -29,7 +29,7 @@ public class CommunicationProtocol{
     private static final byte FRAME_HEAD_B2 = (byte) 0XB2;//上位机主动发送数据到下位机帧头
     private static final byte FRAME_HEAD_B3 = (byte) 0xB3;//下位机应答应位机主到发送数据帧头
 
-    public static final int ACK_TIME_OUT = 1*1000;//MS
+    public static final int ACK_TIME_OUT = 2*1000;//MS
     public static final int RETRY_NUMBER = 2;
     public static final byte CMD_IDENTIFY = (byte) 0x13;//身份数据识别
 

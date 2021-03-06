@@ -350,21 +350,24 @@ public class Test {
 //                        String str = "b3 48 00 00 22 21 01 10 00 03 24 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 fc 18 00 19 fe 0c 00 00 00 a6 f1";
                        //塔机坐标
 //                        String str = "b3 48 00 00 22 21 01 17 22 15 03 00 00 00 00 00 00 00 00 00 00 00 03 20 00 00 00 00 00 00 00 00 00 01 ff f1 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 32 cc";
-                        String str = "b3 48 00 00 22 21 01 21 22 34 25 00 00 00 00 64 00 00 00 00 01 f4 01 90 00 00 00 00 00 00 00 00";
+//                        String str = "b3 48 00 00 22 21 01 21 22 34 25 00 00 00 00 64 00 00 00 00 01 f4 01 90 00 00 00 00 00 00 00 00";
+                        String str = "b3 48 00 00 22 20 11 18 14 42 52 00 02 bc 00 c8 00 00 00 00 00 32 05 78 00 00 00 00 00 00 00 00";
                         byte[] byteFromStr = getByteFromStr(str);
 //                        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
 //                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
 //                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
                         DeviceManager.getInstance().onDataReceive(byteFromStr);
 
-                        str = "01 2c 00 c8 00 00 00 54 43 37 30 34 32 00 00 00 00 00 00 00 00 00 00 00 08 00 05 00 96 00 64 00";
+//                        str = "01 2c 00 c8 00 00 00 54 43 37 30 34 32 00 00 00 00 00 00 00 00 00 00 00 08 00 05 00 96 00 64 00";
+                        str = "00 00 00 00 00 00 00 51 54 5a 35 35 31 33 00 00 00 00 00 00 00 00 02 00 03 01 f4 01 2c 01 f4 01";
                         byteFromStr = getByteFromStr(str);
 //                        crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
 //                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
 //                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
                         DeviceManager.getInstance().onDataReceive(byteFromStr);
 
-                        str = "96 00 64 00 00 1e 67 3c";
+//                        str = "96 00 64 00 00 1e 67 3c";
+                        str = "2c ff 03 1e ff ff 67 9c";
                         byteFromStr = getByteFromStr(str);
 //                        crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
 //                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);

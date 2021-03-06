@@ -77,8 +77,10 @@ public class WindCalibrationActivity extends BaseActivity {
     }
 
     void updateCalibration() {
-        binding.spinnerLowControl.setSelection(calibrationBean.getWindSpeedWarningValue());
-        binding.spinnerHighControl.setSelection(calibrationBean.getWindSpeedAlarmValue());
+        int warnLevel = calibrationBean.getWindSpeedWarningValue();
+        binding.spinnerLowControl.setSelection(warnLevel > 12?12:warnLevel);
+        int alarmLevel = calibrationBean.getWindSpeedAlarmValue();
+        binding.spinnerHighControl.setSelection(alarmLevel> 12?12:alarmLevel);
     }
 
     private void save() {

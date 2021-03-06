@@ -136,9 +136,11 @@ public class StaticParametersProtocol extends BaseProtocol{
         staticParameterBean.setMagnification(magnification);
         int windSpeedAlarmValue = ((data[WIND_SPEED_ALARM_VALUE_OFFSET]&0xffffffff) << 8)
                 |(data[WIND_SPEED_ALARM_VALUE_OFFSET+1]&0x00ff);
+        Log.e(TAG,"windSpeedAlarmValue: "+windSpeedAlarmValue);
         staticParameterBean.setWindSpeedAlarmValue(windSpeedAlarmValue);
         int windSpeedWarningValue = ((data[WIND_SPEED_WARNING_VALUE_OFFSET]&0xffffffff) << 8)
                 |(data[WIND_SPEED_WARNING_VALUE_OFFSET+1]&0x00ff);
+        Log.e(TAG,"windSpeedWarningValue: "+windSpeedWarningValue);
         staticParameterBean.setWindSpeedWarningValue(windSpeedWarningValue);
         int slopeXAlarmValue = ((data[SLOPE_X_ALARM_VALUE_OFFSET]&0xffffffff) << 8)
                 |(data[SLOPE_X_ALARM_VALUE_OFFSET+1]&0x00ff);

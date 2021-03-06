@@ -76,7 +76,7 @@ public class SplashActivity extends BaseActivity {
     private Disposable disposable;
 
     private void queryInit() {
-        Observable.timer(2000, TimeUnit.MILLISECONDS)
+        Observable.timer(4000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -152,7 +152,7 @@ public class SplashActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.btn_retry:
                 long cur = System.currentTimeMillis();
-                if(cur - lastClick > 2000) {
+                if(cur - lastClick > 4000) {
                     lastClick = cur;
                     tvInit.setText("初始化中，请稍后");
                     queryInit();
@@ -184,7 +184,7 @@ public class SplashActivity extends BaseActivity {
         if(msg.isSuccess()) {
             isOpen = true;
             DeviceManager.getInstance().queryStaticParameter();
-            Observable.timer(100, TimeUnit.MILLISECONDS)
+            Observable.timer(200, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Long>() {
                         @Override
@@ -192,7 +192,7 @@ public class SplashActivity extends BaseActivity {
                             DeviceManager.getInstance().queryTorqueCurve();
                         }
                     });
-            Observable.timer(200, TimeUnit.MILLISECONDS)
+            Observable.timer(400, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Long>() {
                         @Override
