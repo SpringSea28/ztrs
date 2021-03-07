@@ -35,6 +35,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 
 public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
@@ -58,7 +59,14 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
         initUi();
         querySensor();
         DeviceManager.getInstance().queryWeightCalibration();
-        DeviceManager.getInstance().queryTorqueCurve();
+        Observable.timer(300, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        DeviceManager.getInstance().queryTorqueCurve();
+                    }
+                });
     }
 
     @Override
@@ -281,7 +289,7 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
     private Disposable disposable;
 
     private void querySensor() {
-        Observable.interval(100,Constants.SENSOR_QUERY_INTERVAL, TimeUnit.MILLISECONDS)
+        Observable.interval(600,Constants.SENSOR_QUERY_INTERVAL, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override

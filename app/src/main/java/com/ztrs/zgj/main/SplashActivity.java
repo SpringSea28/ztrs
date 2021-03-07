@@ -184,7 +184,7 @@ public class SplashActivity extends BaseActivity {
         if(msg.isSuccess()) {
             isOpen = true;
             DeviceManager.getInstance().queryStaticParameter();
-            Observable.timer(200, TimeUnit.MILLISECONDS)
+            Observable.timer(300, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Long>() {
                         @Override
@@ -192,7 +192,7 @@ public class SplashActivity extends BaseActivity {
                             DeviceManager.getInstance().queryTorqueCurve();
                         }
                     });
-            Observable.timer(400, TimeUnit.MILLISECONDS)
+            Observable.timer(600, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Long>() {
                         @Override

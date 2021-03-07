@@ -243,7 +243,7 @@ public abstract class BaseSensorCalibrationActivity extends BaseEditAutoHideActi
     private Disposable disposable;
 
     private void querySensor() {
-        Observable.interval(100,Constants.SENSOR_QUERY_INTERVAL, TimeUnit.MILLISECONDS)
+        Observable.interval(300,Constants.SENSOR_QUERY_INTERVAL, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override

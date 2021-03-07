@@ -63,6 +63,7 @@ import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WorkCycleDataMessage;
 import com.ztrs.zgj.main.dialog.OutputDialog;
+import com.ztrs.zgj.main.dialog.SettingSecretDialog;
 import com.ztrs.zgj.main.dialog.VideoInputDialog;
 import com.ztrs.zgj.main.fragment.AroundConverterFragment;
 import com.ztrs.zgj.main.fragment.LuffingConverterFragment;
@@ -408,7 +409,18 @@ public class MainActivity extends BaseActivity  {
                 switchConverterTab(ON_SELECT_AROUND);
                 break;
             case R.id.rl_setting:
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+//                SettingSecretDialog settingSecretDialog = new SettingSecretDialog(this);
+//                settingSecretDialog.setOnSecretListener(
+//                        new SettingSecretDialog.OnSecretListener() {
+//                            @Override
+//                            public void onSecretRight() {
+//                                MainActivity.this.startActivity(new Intent(MainActivity.this,
+//                                        SettingActivity.class));
+//                            }
+//                        });
+//                settingSecretDialog.show();
+                MainActivity.this.startActivity(new Intent(MainActivity.this,
+                        SettingActivity.class));
                 break;
             case R.id.rl_output:
 //                OutputDialog outputDialog = new OutputDialog(this);

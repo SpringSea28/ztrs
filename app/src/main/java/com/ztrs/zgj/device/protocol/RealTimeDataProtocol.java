@@ -259,10 +259,13 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setCurrentRatedLoad(currentRatedLoad);
         byte upState = data[36];
         realTimeDataBean.setUpState(upState);
+        Log.e(TAG,"receive upState:"+upState);
         byte amplitudeState= data[37];
         realTimeDataBean.setAmplitudeState(amplitudeState);
+        Log.e(TAG,"receive amplitudeState:"+amplitudeState);
         byte aroundState= data[38];
         realTimeDataBean.setAroundState(aroundState);
+        Log.e(TAG,"receive aroundState:"+aroundState);
         int xSlope= ((data[39]&0xffffffff) << 8) |(data[40]&0x00ff);
         realTimeDataBean.setxSlope(xSlope);
         int ySlope= ((data[41]&0xffffffff) << 8) |(data[42]&0x00ff);

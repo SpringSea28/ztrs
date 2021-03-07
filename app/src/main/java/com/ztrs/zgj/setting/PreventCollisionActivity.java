@@ -43,11 +43,15 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class PreventCollisionActivity extends BaseActivity {
 
@@ -122,7 +126,14 @@ public class PreventCollisionActivity extends BaseActivity {
         initData();
         upDateView();
         DeviceManager.getInstance().queryRegionalRestriction();
-        DeviceManager.getInstance().queryPreventCollisionCalibration();
+        Observable.timer(300, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        DeviceManager.getInstance().queryPreventCollisionCalibration();
+                    }
+                });
     }
 
     @Override
