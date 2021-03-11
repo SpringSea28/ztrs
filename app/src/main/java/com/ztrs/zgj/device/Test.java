@@ -1009,6 +1009,16 @@ public class Test {
         DeviceManager.getInstance().onDataReceive(byteFromStr);
     }
 
+    public void testOnReceiveAnnouncement() {
+        String str = "b0 1b 00 00 42 21 02 21 16 07 40 e6 88 91 0a e7 88 b1 0a e4 b8 ad e5 9b bd 80 a5";
+        byte[] byteFromStr = getByteFromStr(str);
+        LogUtils.LogE(TAG, " bytefrom str: " + byteFromStr.length);
+        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+    }
+
 
     private byte[] getByteFromStr(String str) {
         String[] s = str.split(" ");

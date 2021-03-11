@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="122dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginRight="23dp"
+                        android:layout_marginRight="90dp"
                         android:orientation="vertical">
 
                         <View
@@ -103,7 +103,7 @@
                         android:layout_width="16dp"
                         android:layout_height="3dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginRight="23dp"
+                        android:layout_marginRight="90dp"
                         android:src="@drawable/tower_parameter_wirerope_car_rectange" />
                 </RelativeLayout>
 

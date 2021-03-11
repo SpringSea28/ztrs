@@ -278,11 +278,16 @@ public class TowerParameterFragment extends Fragment {
         int towerHeight = device.getStaticParameterBean().getTowerHeight();
         float offsetY = 0;
         float translationY = 0;
+        height = 1;
+        towerHeight = 2;
         if(towerHeight != 0){
             offsetY = (float) (1.0*(height)/towerHeight);
             if(offsetY < 0){
                 offsetY = 0;
             }
+            if(offsetY >1){
+                offsetY = 1;
+             }
 //            Log.e("wch","offsetY:"+offsetY);
             translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
             llHookup.setTranslationY(translationY);
@@ -292,12 +297,17 @@ public class TowerParameterFragment extends Fragment {
         int amplitude = realTimeDataBean.getAmplitude();
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
+        amplitude = 1;
+        upWeightArmLen = 2;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*85);
+            offset = (float) (1.0*amplitude/upWeightArmLen);
             if(offset<0){
                 offset = 0;
             }
-            float tranX = offset - (85-32+16);
+            if(offset >1){
+                offset = 1;
+            }
+            float tranX = offset*82;
             Log.e("wch","tranX: "+tranX);
             llHookup.setTranslationX(ScaleUtils.dip2px(context,tranX));
             imgWireRopeCar.setTranslationX(ScaleUtils.dip2px(context,tranX));
@@ -321,6 +331,9 @@ public class TowerParameterFragment extends Fragment {
             if(offsetY <0 ){
                 offsetY = 0;
             }
+            if(offsetY >1){
+                offsetY = 1;
+            }
 //            Log.e("wch","offsetY:"+offsetY);
             translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
         }
@@ -343,11 +356,14 @@ public class TowerParameterFragment extends Fragment {
         float offset = 0;
         float tranX = 0;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*85);
+            offset = (float) (1.0*amplitude/upWeightArmLen*82);
             if(offset<0){
                 offset = 0;
             }
-            float tranXDp = offset - (85-32+16);
+            if(offset >1){
+                offset = 1;
+            }
+            float tranXDp = offset*82;
             tranX = ScaleUtils.dip2px(context,tranXDp);
         }
         float translationXBefore = llHookup.getTranslationX();

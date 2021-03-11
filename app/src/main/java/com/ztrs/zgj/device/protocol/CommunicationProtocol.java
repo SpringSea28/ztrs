@@ -64,6 +64,7 @@ public class CommunicationProtocol{
     public DeviceUpdateProtocol deviceUpdateProtocol;
     public DeviceVersionCheckProtocol deviceVersionCheckProtocol;
     public VolumeProtocol volumeProtocol;
+    public AnnouncementProtocol announcementProtocol;
 
 
     public CommunicationProtocol(DeviceOperateInterface deviceOperateInterface){
@@ -95,6 +96,7 @@ public class CommunicationProtocol{
         deviceUpdateProtocol = new DeviceUpdateProtocol(deviceOperateInterface);
         deviceVersionCheckProtocol = new DeviceVersionCheckProtocol(deviceOperateInterface);
         volumeProtocol = new VolumeProtocol(deviceOperateInterface);
+        announcementProtocol = new AnnouncementProtocol(deviceOperateInterface);
     }
 
     public void dataParse(byte[] data) {
@@ -225,6 +227,9 @@ public class CommunicationProtocol{
                 break;
             case DeviceVersionCheckProtocol.CMD_VERSION_CHECK:
                 deviceVersionCheckProtocol.parseCmd(data);
+                break;
+            case AnnouncementProtocol.CMD_ANNOUNCEMENT:
+                announcementProtocol.parseCmd(data);
                 break;
         }
     }

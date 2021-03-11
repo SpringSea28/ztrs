@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ztrs.zgj.R;
+import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.main.BaseActivity;
 
 import butterknife.BindView;

@@ -47,6 +47,7 @@ import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.eventbus.AmplitudeCalibrationMessage;
+import com.ztrs.zgj.device.eventbus.AnnouncementMessage;
 import com.ztrs.zgj.device.eventbus.AroundCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.EmergencyCallMessage;
@@ -62,6 +63,7 @@ import com.ztrs.zgj.device.eventbus.UnlockCarMessage;
 import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WorkCycleDataMessage;
+import com.ztrs.zgj.main.dialog.AnnouncementDialog;
 import com.ztrs.zgj.main.dialog.OutputDialog;
 import com.ztrs.zgj.main.dialog.SettingSecretDialog;
 import com.ztrs.zgj.main.dialog.VideoInputDialog;
@@ -396,7 +398,7 @@ public class MainActivity extends BaseActivity  {
 
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
         R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market,R.id.btn_play,R.id.tv_v1,
-        R.id.tv_v2,R.id.tv_v3})
+        R.id.tv_v2,R.id.tv_v3,R.id.rl_identity,R.id.rl_announcement})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_upload_converter:
@@ -409,23 +411,30 @@ public class MainActivity extends BaseActivity  {
                 switchConverterTab(ON_SELECT_AROUND);
                 break;
             case R.id.rl_setting:
-//                SettingSecretDialog settingSecretDialog = new SettingSecretDialog(this);
-//                settingSecretDialog.setOnSecretListener(
-//                        new SettingSecretDialog.OnSecretListener() {
-//                            @Override
-//                            public void onSecretRight() {
-//                                MainActivity.this.startActivity(new Intent(MainActivity.this,
-//                                        SettingActivity.class));
-//                            }
-//                        });
-//                settingSecretDialog.show();
-                MainActivity.this.startActivity(new Intent(MainActivity.this,
-                        SettingActivity.class));
+                SettingSecretDialog settingSecretDialog = new SettingSecretDialog(this);
+                settingSecretDialog.setOnSecretListener(
+                        new SettingSecretDialog.OnSecretListener() {
+                            @Override
+                            public void onSecretRight() {
+                                MainActivity.this.startActivity(new Intent(MainActivity.this,
+                                        SettingActivity.class));
+                            }
+                        });
+                settingSecretDialog.show();
+//                MainActivity.this.startActivity(new Intent(MainActivity.this,
+//                        SettingActivity.class));
                 break;
             case R.id.rl_output:
 //                OutputDialog outputDialog = new OutputDialog(this);
 //                outputDialog.show();
                 startActivity(new Intent(MainActivity.this, OutputDialogActivity.class));
+                break;
+            case R.id.rl_identity:
+
+                break;
+            case R.id.rl_announcement:
+                AnnouncementDialog announcementDialog = new AnnouncementDialog(this);
+                announcementDialog.show();
                 break;
             case R.id.tv_tower_market:
                 Intent intent = new Intent(MainActivity.this, WebActivity.class);
@@ -736,6 +745,15 @@ public class MainActivity extends BaseActivity  {
         if(msg.getResult() == BaseMessage.RESULT_REPORT
                 || msg.getResult() == BaseMessage.RESULT_OK) {
             initView();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAnnouncement(AnnouncementMessage msg){
+        LogUtils.LogI(TAG,"onAnnouncement: "+msg.getResult());
+        if(msg.getResult() == BaseMessage.RESULT_REPORT) {
+            AnnouncementDialog announcementDialog = new AnnouncementDialog(this);
+            announcementDialog.show();
         }
     }
 
