@@ -77,6 +77,7 @@ import com.ztrs.zgj.setting.SettingActivity;
 import com.ztrs.zgj.setting.SoftwareUpdateActivity;
 import com.ztrs.zgj.setting.WebActivity;
 import com.ztrs.zgj.setting.dialog.UpdateDialog;
+import com.ztrs.zgj.setting.eventbus.SettingEventBus;
 import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
 import com.ztrs.zgj.setting.viewModel.VersionModel;
 
@@ -420,9 +421,9 @@ public class MainActivity extends BaseActivity  {
                                         SettingActivity.class));
                             }
                         });
-                settingSecretDialog.show();
-//                MainActivity.this.startActivity(new Intent(MainActivity.this,
-//                        SettingActivity.class));
+//                settingSecretDialog.show();
+                MainActivity.this.startActivity(new Intent(MainActivity.this,
+                        SettingActivity.class));
                 break;
             case R.id.rl_output:
 //                OutputDialog outputDialog = new OutputDialog(this);
@@ -684,6 +685,18 @@ public class MainActivity extends BaseActivity  {
 
 
     //----------------------subscribe------------------------------//
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSystemSetting(SettingEventBus msg){
+        LogUtils.LogI(TAG,"onSystemSetting: "+msg.getAction());
+        if(msg.getAction() == SettingEventBus.ACTION_LIGHT_CHANGE){
+            updateLight();
+        }
+        if(msg.getAction() == SettingEventBus.ACTION_VOLUME_CHANGE){
+
+        }
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSerialOpen(SerialPortOpenResultMsg msg){
         LogUtils.LogI(TAG,"onSerialOpen: "+msg.isSuccess());

@@ -3,6 +3,8 @@ package com.ztrs.zgj.main.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -28,17 +30,36 @@ public class SettingSecretDialog extends Dialog implements View.OnClickListener 
         binding = DialogInputSecretBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setCanceledOnTouchOutside(false);
-        binding.btnSave.setOnClickListener(this);
         binding.imgClose.setOnClickListener(this);
+        binding.edtInputSecret.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().length() == 6){
+                    if(s.toString().equals("123456")){
+                        verifySecret();
+                    }else {
+                        s.clear();
+                    }
+                }
+            }
+        });
     }
 
 
 
     @Override
     public void onClick(View v) {
-        if(R.id.btn_save == v.getId()){
-            verifySecret();
-        }else if(R.id.img_close == v.getId()){
+        if(R.id.img_close == v.getId()){
             dismiss();
         }
     }

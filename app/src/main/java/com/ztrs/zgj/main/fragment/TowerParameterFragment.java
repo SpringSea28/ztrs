@@ -278,8 +278,6 @@ public class TowerParameterFragment extends Fragment {
         int towerHeight = device.getStaticParameterBean().getTowerHeight();
         float offsetY = 0;
         float translationY = 0;
-        height = 1;
-        towerHeight = 2;
         if(towerHeight != 0){
             offsetY = (float) (1.0*(height)/towerHeight);
             if(offsetY < 0){
@@ -297,8 +295,6 @@ public class TowerParameterFragment extends Fragment {
         int amplitude = realTimeDataBean.getAmplitude();
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
-        amplitude = 1;
-        upWeightArmLen = 2;
         if(upWeightArmLen != 0){
             offset = (float) (1.0*amplitude/upWeightArmLen);
             if(offset<0){

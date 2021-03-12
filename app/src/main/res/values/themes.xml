@@ -63,7 +63,7 @@
 
     <style name="setting_item_style" >
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">27dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">4dp</item>
@@ -74,7 +74,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">@color/tower_primary_text_color</item>
-        <item name="android:textSize">7sp</item>
+        <item name="android:textSize">8sp</item>
     </style>
 
     <style name="setting_item_key_text_style" parent="setting_item_text_style">

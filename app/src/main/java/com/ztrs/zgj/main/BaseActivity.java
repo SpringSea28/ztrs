@@ -2,8 +2,10 @@ package com.ztrs.zgj.main;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +41,15 @@ public class BaseActivity extends AppCompatActivity {
             layoutParams.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
             getWindow().setAttributes(layoutParams);
         }
+        updateLight();
+    }
+
+    public void updateLight(){
+//        SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
+//        int light = sp.getInt("light",-1);
+//        WindowManager.LayoutParams lp = getWindow().getAttributes();
+//        lp.screenBrightness = light/100f;
+//        getWindow().setAttributes(lp);
     }
 
     @Override

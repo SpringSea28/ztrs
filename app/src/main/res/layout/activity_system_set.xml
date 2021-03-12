@@ -14,10 +14,50 @@
             android:text="音量设置"/>
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/sb_volume"
-            android:layout_width="151dp"
+            android:layout_width="163dp"
             android:layout_height="match_parent"
-            android:max="15"
+            android:max="100"
+            android:layout_marginEnd="35dp"
             android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/tv_vol_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="9dp"
+            android:textColor="#0784FF"
+            android:text="50"/>
+
+    </RelativeLayout>
+    <ImageView
+        style="@style/setting_item_divide_line_style"
+        />
+    <RelativeLayout
+        style="@style/setting_item_style">
+        <TextView
+            style="@style/setting_item_key_text_style"
+            android:text="屏幕亮度"/>
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/sb_light"
+            android:layout_width="163dp"
+            android:layout_height="match_parent"
+            android:max="100"
+            android:layout_marginEnd="35dp"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/tv_light_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="9dp"
+            android:textColor="#0784FF"
+            android:text="50"/>
 
     </RelativeLayout>
     <ImageView
