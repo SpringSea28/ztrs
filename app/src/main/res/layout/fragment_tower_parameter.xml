@@ -274,7 +274,8 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp">
 
                     <TextView
                         android:id="@+id/tv_wire_rope_damage_position"
@@ -301,7 +302,8 @@
                     android:gravity="center"
                     android:text="历史回放"
                     android:textColor="#0182FF"
-                    android:textSize="5sp" />
+                    android:textSize="5sp"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -34,49 +34,64 @@ public class Test {
     private static final String TAG = Test.class.getSimpleName();
 
     boolean DEBUG = false;
-    //协议3.2 解锁车 下位机请求
-    public void testUnLockCarCmd() {
-        DeviceManager.getInstance().lockCar();
-        Observable.timer(2000, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Long>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+//    //协议3.2 解锁车 下位机请求
+//    public void testUnLockCarCmd() {
+//        DeviceManager.getInstance().lockCar();
+//        Observable.timer(2000, TimeUnit.MILLISECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<Long>() {
+//                    @Override
+//                    public void onSubscribe(@NonNull Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(@NonNull Long aLong) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(@NonNull Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+////                        String str = "B3 0E 00 00 14 20 11 18 14 42 46 4C DF 82";
+////                        byte[] byteFromStr = getByteFromStr(str);
+////        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+////        byteFromStr[byteFromStr.length-2] = (byte)(crc>>8);
+////        byteFromStr[byteFromStr.length-1] = (byte)(crc);
+////                        DeviceManager.getInstance().onDataReceive(byteFromStr);
+////                        if (DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean().getState() != 0X4C) {
+////                            LogUtils.LogE(TAG, " testUnlockCarCmd B3 error");
+////                        }
+//                    }
+//                });
+//    }
 
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Long aLong) {
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-//                        String str = "B3 0E 00 00 14 20 11 18 14 42 46 4C DF 82";
-//                        byte[] byteFromStr = getByteFromStr(str);
-//        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
-//        byteFromStr[byteFromStr.length-2] = (byte)(crc>>8);
-//        byteFromStr[byteFromStr.length-1] = (byte)(crc);
-//                        DeviceManager.getInstance().onDataReceive(byteFromStr);
-//                        if (DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean().getState() != 0X4C) {
-//                            LogUtils.LogE(TAG, " testUnlockCarCmd B3 error");
-//                        }
-                    }
-                });
+    public void testOnReceiveLockCar() {
+        String str = "B0 11 00 00 14 20 11 18 14 42 46 55 00 05 4C 11 47";
+        byte[] byteFromStr = getByteFromStr(str);
+        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+        DeviceManager.getInstance().onDataReceive(byteFromStr);
+//        if (DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean().getState() != 0X55) {
+//            LogUtils.LogE(TAG, " testOnReceiveUnLockCar B0 error");
+//        }
     }
 
     public void testOnReceiveUnLockCar() {
-        String str = "B0 0E 00 00 14 20 11 18 14 42 46 55 11 47";
+        String str = "B0 11 00 00 14 20 11 18 14 42 46 55 00 05 55 11 47";
         byte[] byteFromStr = getByteFromStr(str);
+        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
         DeviceManager.getInstance().onDataReceive(byteFromStr);
-        if (DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean().getState() != 0X55) {
-            LogUtils.LogE(TAG, " testOnReceiveUnLockCar B0 error");
-        }
+//        if (DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean().getState() != 0X55) {
+//            LogUtils.LogE(TAG, " testOnReceiveUnLockCar B0 error");
+//        }
     }
 
     //协议3.3 开关机

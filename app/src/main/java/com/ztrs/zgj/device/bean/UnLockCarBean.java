@@ -5,6 +5,7 @@ import com.ztrs.zgj.LogUtils;
 public class UnLockCarBean {
     private static final String TAG = UnLockCarBean.class.getSimpleName();
     byte state;
+    int delayTime;
 
     public byte getState() {
         return state;
@@ -13,5 +14,13 @@ public class UnLockCarBean {
     public void setState(byte state) {
         this.state = state;
         LogUtils.LogE(TAG,"set state: "+state);
+    }
+
+    public int getDelayTime() {
+        return delayTime;
+    }
+
+    public void setDelayTime(int delayTime) {
+        this.delayTime = delayTime;
     }
 }

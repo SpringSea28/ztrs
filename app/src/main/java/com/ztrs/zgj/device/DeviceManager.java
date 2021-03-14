@@ -128,18 +128,18 @@ public class DeviceManager implements DeviceOperateInterface {
         mSerialPortManager.closeSerialPort();
     }
 
-    // //协议3.2
-    public void queryUnlockCar(){
-        communicationProtocol.unlockCarProtocol.queryUnLockCar();
-    }
-
-    public void unlockCar(){
-        communicationProtocol.unlockCarProtocol.unLockCar();
-    }
-
-    public void lockCar(){
-        communicationProtocol.unlockCarProtocol.lockCar();
-    }
+//    // //协议3.2
+//    public void queryUnlockCar(){
+//        communicationProtocol.unlockCarProtocol.queryUnLockCar();
+//    }
+//
+//    public void unlockCar(){
+//        communicationProtocol.unlockCarProtocol.unLockCar();
+//    }
+//
+//    public void lockCar(){
+//        communicationProtocol.unlockCarProtocol.lockCar();
+//    }
 
     //协议3.3
     public void querySwitchMachine(){

@@ -237,9 +237,6 @@ public class CommunicationProtocol{
     private void parseAck(byte cmd,byte[] data){
         LogUtils.LogI(TAG,"parseACK:"+LogUtils.toHexString(cmd)+"  "+getCmdName(cmd));
         switch (cmd){
-            case CMD_UNLOCK_CAR:
-                unlockCarProtocol.parseAck(data);
-                break;
             case SwitchMachineProtocol.CMD_SWITCH_MACHINE:
                 switchMachineProtocol.parseAck(data);
                 break;

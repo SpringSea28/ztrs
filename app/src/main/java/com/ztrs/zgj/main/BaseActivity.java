@@ -45,11 +45,11 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void updateLight(){
-//        SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
-//        int light = sp.getInt("light",-1);
-//        WindowManager.LayoutParams lp = getWindow().getAttributes();
-//        lp.screenBrightness = light/100f;
-//        getWindow().setAttributes(lp);
+        SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
+        int light = sp.getInt("light",-1);
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = light/100f;
+        getWindow().setAttributes(lp);
     }
 
     @Override

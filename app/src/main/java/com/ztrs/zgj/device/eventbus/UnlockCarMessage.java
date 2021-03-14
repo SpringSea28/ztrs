@@ -7,4 +7,8 @@ public class UnlockCarMessage extends BaseMessage{
     public UnlockCarMessage(long seq, byte[] cmdbytes){
         super(seq,UnlockCarProtocol.CMD_UNLOCK_CAR, cmdbytes);
     }
+
+    public UnlockCarMessage(){
+        super(UnlockCarProtocol.CMD_UNLOCK_CAR);
+    }
 }

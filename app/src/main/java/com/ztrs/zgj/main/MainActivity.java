@@ -55,6 +55,7 @@ import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
 import com.ztrs.zgj.device.bean.StaticParameterBean;
+import com.ztrs.zgj.device.bean.UnLockCarBean;
 import com.ztrs.zgj.device.eventbus.AmplitudeCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.AnnouncementMessage;
 import com.ztrs.zgj.device.eventbus.AroundCalibrationMessage;
@@ -76,6 +77,7 @@ import com.ztrs.zgj.main.adapter.VideoAdapter;
 import com.ztrs.zgj.main.dialog.AnnouncementDialog;
 import com.ztrs.zgj.main.dialog.OutputDialog;
 import com.ztrs.zgj.main.dialog.SettingSecretDialog;
+import com.ztrs.zgj.main.dialog.UnlockCarDialog;
 import com.ztrs.zgj.main.dialog.VideoInputDialog;
 import com.ztrs.zgj.main.fragment.AroundConverterFragment;
 import com.ztrs.zgj.main.fragment.LuffingConverterFragment;
@@ -250,6 +252,15 @@ public class MainActivity extends BaseActivity  {
 //                test.testOnReceiveRegisterInfo();
 //                test.testOnReceiveStaticParameter();
 //                test.onReceiveInverterData();
+//                test.testOnReceiveLockCar();
+//                Observable.timer(6,TimeUnit.SECONDS)
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Consumer<Long>() {
+//                            @Override
+//                            public void accept(Long aLong) throws Exception {
+//                                test.testOnReceiveUnLockCar();
+//                            }
+//                        });
                 DeviceManager.getInstance().emergencyCall();
             }
         });
@@ -439,9 +450,9 @@ public class MainActivity extends BaseActivity  {
                                         SettingActivity.class));
                             }
                         });
-//                settingSecretDialog.show();
-                MainActivity.this.startActivity(new Intent(MainActivity.this,
-                        SettingActivity.class));
+                settingSecretDialog.show();
+//                MainActivity.this.startActivity(new Intent(MainActivity.this,
+//                        SettingActivity.class));
                 break;
             case R.id.rl_output:
 //                OutputDialog outputDialog = new OutputDialog(this);
@@ -814,15 +825,33 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
-
+    private UnlockCarDialog unlockCarDialog;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUnlock(UnlockCarMessage unlockCarMessage){
         LogUtils.LogI("wch","unlockmessage: "+unlockCarMessage.getResult());
-        if(unlockCarMessage.getResult() == BaseMessage.RESULT_OK) {
-            Toast.makeText(this, "开关锁命令发送成功", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "开关锁命令发送失败", Toast.LENGTH_LONG).show();
-        }
+//        if(unlockCarMessage.getResult() == BaseMessage.RESULT_REPORT) {
+//            UnLockCarBean unLockCarBean = DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean();
+//            if(unLockCarBean.getState() == 'L') {
+//                if(unlockCarDialog == null) {
+//                    unlockCarDialog = new UnlockCarDialog(this);
+//                    unlockCarDialog.show();
+//                }else if(unlockCarDialog.isShowing()){
+//                    unlockCarDialog.dismiss();
+//                    unlockCarDialog = new UnlockCarDialog(this);
+//                    unlockCarDialog.show();
+//                }else {
+//                    unlockCarDialog = new UnlockCarDialog(this);
+//                    unlockCarDialog.show();
+//                }
+//
+//            }else if(unLockCarBean.getState() == 'U'){
+//                if(unlockCarDialog != null && unlockCarDialog.isShowing()){
+//                    unlockCarDialog.dismiss();
+//                }
+//            }
+//        }else {
+//
+//        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
