@@ -3,7 +3,9 @@ package com.ztrs.zgj.main;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -14,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +39,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kongqw.serialportlibrary.Device;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
@@ -63,6 +72,7 @@ import com.ztrs.zgj.device.eventbus.UnlockCarMessage;
 import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WorkCycleDataMessage;
+import com.ztrs.zgj.main.adapter.VideoAdapter;
 import com.ztrs.zgj.main.dialog.AnnouncementDialog;
 import com.ztrs.zgj.main.dialog.OutputDialog;
 import com.ztrs.zgj.main.dialog.SettingSecretDialog;
@@ -76,10 +86,13 @@ import com.ztrs.zgj.setting.OutputActivity;
 import com.ztrs.zgj.setting.SettingActivity;
 import com.ztrs.zgj.setting.SoftwareUpdateActivity;
 import com.ztrs.zgj.setting.WebActivity;
+import com.ztrs.zgj.setting.adapter.AddressAdapter;
+import com.ztrs.zgj.setting.bean.AddressBean;
 import com.ztrs.zgj.setting.dialog.UpdateDialog;
 import com.ztrs.zgj.setting.eventbus.SettingEventBus;
 import com.ztrs.zgj.setting.viewModel.AppUpdateViewModel;
 import com.ztrs.zgj.setting.viewModel.VersionModel;
+import com.ztrs.zgj.utils.ScaleUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -94,6 +107,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -150,6 +164,9 @@ public class MainActivity extends BaseActivity  {
     TextView tvV2;
     @BindView(R.id.tv_v3)
     TextView tvV3;
+    @BindView(R.id.rv_video)
+    RecyclerView rvVideo;
+    VideoAdapter videoAdapter;
 
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
@@ -241,6 +258,7 @@ public class MainActivity extends BaseActivity  {
         display();
         checkUpdate();
         checkNetWorkState();
+        initVideoTab();
         initVlc();
     }
 
@@ -560,6 +578,77 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
+    private void initVideoTab(){
+        SharedPreferences sp = getSharedPreferences("Address",MODE_PRIVATE);
+        String addressJson = sp.getString("address",null);
+        Log.e("wch","addressJson:"+addressJson);
+        List<AddressBean> videoAddressList = new ArrayList<>();
+        if(TextUtils.isEmpty(addressJson)){
+
+        }else {
+            Gson gson = new Gson();
+            List<AddressBean> addressBeans =gson.fromJson(addressJson,
+                    new TypeToken<List<AddressBean>>(){}.getType());
+            for(int i=0;i<addressBeans.size();i++){
+                if(!TextUtils.isEmpty(addressBeans.get(i).getAddress())){
+                    videoAddressList.add(addressBeans.get(i));
+                }
+            }
+        }
+
+        videoAdapter = new VideoAdapter();
+        videoAdapter.setData(videoAddressList);
+        videoAdapter.setOnVideoSelectListener(new VideoAdapter.OnVideoSelectListener() {
+            @Override
+            public void onVideoSelected(int position,String address) {
+                videoAdapter.notifyDataSetChanged();
+                MainActivity.this.url = address;
+                if(playerState == PLAYER_STATE_IDLE
+                        || playerState == PLAYER_STATE_STOP){
+                    startPlay();
+                }else {
+                    stopPlay();
+                    Observable.timer(100, TimeUnit.MILLISECONDS)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Long>() {
+                                @Override
+                                public void accept(Long aLong) throws Exception {
+                                    startPlay();
+                                }
+                            });
+                }
+            }
+        });
+        if(videoAddressList.size() == 0){
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            rvVideo.setLayoutManager(linearLayoutManager);
+        }else {
+            GridLayoutManager gridLayoutManager
+                    = new GridLayoutManager(this, videoAddressList.size());
+            rvVideo.setLayoutManager(gridLayoutManager);
+        }
+        rvVideo.setAdapter(videoAdapter);
+        int itemNum = videoAddressList.size();
+        RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                int position = parent.getResources().getDisplayMetrics().widthPixels;
+                //int position = parent.getChildAdapterPosition(view);
+                if (parent.getChildCount() > 0) {
+                    if (position % itemNum == 0) {                  //最左边Item
+                        outRect.right = ScaleUtils.dip2px(MainActivity.this,1);
+                    } else if (position % itemNum == itemNum - 1) { //最右边Item
+                        outRect.left = ScaleUtils.dip2px(MainActivity.this,1);
+                    } else {                                        //中间Item
+                        outRect.left = ScaleUtils.dip2px(MainActivity.this,1);
+                        outRect.right = ScaleUtils.dip2px(MainActivity.this,1);
+                    }
+                }
+            }
+        };
+        rvVideo.addItemDecoration(itemDecoration);
+    }
+
     private LibVLC mLibVLC = null;
     private MediaPlayer mMediaPlayer = null;
     private final int UPDATE_SCREEN = 0;
@@ -691,9 +780,14 @@ public class MainActivity extends BaseActivity  {
         LogUtils.LogI(TAG,"onSystemSetting: "+msg.getAction());
         if(msg.getAction() == SettingEventBus.ACTION_LIGHT_CHANGE){
             updateLight();
-        }
-        if(msg.getAction() == SettingEventBus.ACTION_VOLUME_CHANGE){
+        }else if(msg.getAction() == SettingEventBus.ACTION_VOLUME_CHANGE){
 
+        }else if(msg.getAction() == SettingEventBus.ACTION_VIDEO_URL_INPUT_CHANGE){
+            if(playerState != PLAYER_STATE_IDLE) {
+                stopPlay();
+                rlVideoBg.setVisibility(View.VISIBLE);
+            }
+            initVideoTab();
         }
     }
 

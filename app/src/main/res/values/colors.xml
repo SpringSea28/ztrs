@@ -26,6 +26,7 @@
     <color name="main_color_url_input_bg_selected">#4AA5FE</color>
     <color name="main_color_url_input_text_selected">#FED456</color>
     <color name="main_color_url_input_bg_normal">#B24AA5FE</color>
+    <color name="main_color_url_input_bg_pressed">#2b4AA5FE</color>
     <color name="main_color_url_input_text_normal">#FFFFFF</color>
 
     <color name="index_color_bg_selected">#22000000</color>

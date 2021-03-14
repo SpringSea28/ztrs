@@ -78,6 +78,9 @@ public class VideoInputActivity extends BaseActivity {
                 SharedPreferences.Editor edit = sp.edit();
                 edit.putString("address",addressStr);
                 edit.commit();
+                SettingEventBus settingEventBus =
+                        new SettingEventBus(SettingEventBus.ACTION_VIDEO_URL_INPUT_CHANGE);
+                EventBus.getDefault().post(settingEventBus);
                 break;
 
         }

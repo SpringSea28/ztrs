@@ -193,7 +193,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="18dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
             <TextView
                 android:id="@+id/tv_v1"
                 android:layout_width="0dp"
@@ -233,6 +234,11 @@
                 android:textColor="#FFFFFF"
                 android:text="驾驶室监控视频"/>
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_video"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
