@@ -84,6 +84,8 @@
         <activity android:name=".setting.WebActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".setting.VideoInputActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

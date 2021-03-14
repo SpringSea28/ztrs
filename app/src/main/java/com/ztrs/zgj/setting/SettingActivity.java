@@ -67,7 +67,7 @@ public class SettingActivity extends BaseActivity {
                 startActivity(new Intent(SettingActivity.this, SystemSetActivity.class));
                 break;
             case R.id.rl_video:
-//                startActivity(new Intent(SettingActivity.this, SystemSetActivity.class));
+                startActivity(new Intent(SettingActivity.this, VideoInputActivity.class));
                 break;
         }
     }
