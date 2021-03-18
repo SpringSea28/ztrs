@@ -56,7 +56,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.AddressHolde
             public void onClick(View v) {
                 if(onVideoSelectListener != null){
                     selected = position;
-                    onVideoSelectListener.onVideoSelected(position,addressBean.getAddress());
+                    onVideoSelectListener.onVideoSelected(position,addressBean);
                 }
             }
         });
@@ -82,7 +82,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.AddressHolde
         this.onVideoSelectListener = onVideoSelectListener;
     }
     public interface OnVideoSelectListener{
-        void onVideoSelected(int position,String address);
+        void onVideoSelected(int position,AddressBean address);
     }
 
 }

@@ -238,7 +238,7 @@ public class TorqueCurveActivity extends BaseEditAutoHideActivity {
         tvMagnification.setText((magnification&0x00ff)+"倍率");
 
         int weight = torqueModelBean.getTorqueCurveBeanList().get(0).getWeight();
-        tvWeight.setText(String.format("%.2f",weight/100.0));
+        tvWeight.setText(String.format("%.3f",weight/1000.0));
     }
 
     private void initCurve(List<TorqueCurveBean> torqueCurveBeans){

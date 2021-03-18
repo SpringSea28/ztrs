@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="4dp"
@@ -97,7 +98,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:format24Hour="yyyy年MM月dd日 HH:mm:ss"
+            android:format24Hour="yyyy年MM月dd日 HH:mm:ss EEEE"
             android:textColor="#475771"/>
 
     </RelativeLayout>
@@ -254,6 +255,26 @@
                 android:background="@drawable/setting_save_btn_bg_selector"
                 android:textSize="7sp"
                 android:text="播放"/>
+
+            <ImageView
+                android:id="@+id/img_full_screen"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/quanping"
+                android:scaleType="center"/>
+
+            <ImageView
+                android:id="@+id/img_volume"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="30dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/yinliang"
+                android:scaleType="center"/>
 
         </RelativeLayout>
 

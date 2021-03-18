@@ -170,6 +170,9 @@ public class MainActivity extends BaseActivity  {
     RecyclerView rvVideo;
     VideoAdapter videoAdapter;
 
+    @BindView(R.id.img_volume)
+    ImageView imgVol;
+
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
     private static final int ON_SELECT_AROUND = 2;
@@ -183,18 +186,20 @@ public class MainActivity extends BaseActivity  {
 
     private Device device;
 
-    private static final int PLAYER_STATE_IDLE = 0;
-    private static final int PLAYER_STATE_PREPARING = 1;
-    private static final int PLAYER_STATE_PREPARED = 2;
-    private static final int PLAYER_STATE_PLAYING = 3;
-    private static final int PLAYER_STATE_PAUSE = 4;
-    private static final int PLAYER_STATE_STOP = 5;
-    private static final int PLAYER_STATE_ERROR = 6;
+    public static final int PLAYER_STATE_IDLE = 0;
+    public static final int PLAYER_STATE_PREPARING = 1;
+    public static final int PLAYER_STATE_PREPARED = 2;
+    public static final int PLAYER_STATE_PLAYING = 3;
+    public static final int PLAYER_STATE_PAUSE = 4;
+    public static final int PLAYER_STATE_STOP = 5;
+    public static final int PLAYER_STATE_ERROR = 6;
 
     private int playerState;
     private boolean isPauseByUser;
 
-    private String url = "rtsp://admin:ztrs12345@192.168.0.8:554/h264/ch1/main/av_stream";
+    private String url = "";
+//            "rtsp://admin:ztrs12345@192.168.0.8:554/h264/ch1/main/av_stream";
+    private String videoTitle;
 
     Unbinder bind;
     @Override
@@ -428,7 +433,8 @@ public class MainActivity extends BaseActivity  {
 
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
         R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market,R.id.btn_play,R.id.tv_v1,
-        R.id.tv_v2,R.id.tv_v3,R.id.rl_identity,R.id.rl_announcement})
+        R.id.tv_v2,R.id.tv_v3,R.id.rl_identity,R.id.rl_announcement,R.id.img_volume,
+            R.id.img_full_screen})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_upload_converter:
@@ -494,6 +500,23 @@ public class MainActivity extends BaseActivity  {
                 break;
             case R.id.tv_v3:
                 showUrlDialog(2);
+                break;
+            case R.id.img_volume:
+                if(mute){
+                    mute = false;
+                    updateVolume();
+                    imgVol.setBackgroundColor(getColor(R.color.transparent));
+                }else {
+                    mute = true;
+                    mute();
+                    imgVol.setBackgroundColor(getColor(R.color.primary_background_color_blue));
+                }
+                break;
+            case R.id.img_full_screen:
+                Intent intentFullScreen = new Intent(this,FullScreenActivity.class);
+                intentFullScreen.putExtra("title",videoTitle);
+                intentFullScreen.putExtra("url",url);
+                startActivity(intentFullScreen);
                 break;
         }
     }
@@ -611,9 +634,10 @@ public class MainActivity extends BaseActivity  {
         videoAdapter.setData(videoAddressList);
         videoAdapter.setOnVideoSelectListener(new VideoAdapter.OnVideoSelectListener() {
             @Override
-            public void onVideoSelected(int position,String address) {
+            public void onVideoSelected(int position,AddressBean address) {
                 videoAdapter.notifyDataSetChanged();
-                MainActivity.this.url = address;
+                MainActivity.this.url = address.getAddress();
+                MainActivity.this.videoTitle = address.getName();
                 if(playerState == PLAYER_STATE_IDLE
                         || playerState == PLAYER_STATE_STOP){
                     startPlay();
@@ -685,6 +709,7 @@ public class MainActivity extends BaseActivity  {
     });
 
     private void initVlc(){
+
         final ArrayList<String> args = new ArrayList<>();//VLC参数
         args.add("--rtsp-tcp");//强制rtsp-tcp，加快加载视频速度
         args.add("--live-caching=0");
@@ -692,6 +717,7 @@ public class MainActivity extends BaseActivity  {
         args.add("--network-caching=0");//增加实时性，延时大概2-3秒
         mLibVLC = new LibVLC(this, args);
         mMediaPlayer = new MediaPlayer(mLibVLC);
+        updateVolume();
         mMediaPlayer.setEventListener(new MediaPlayer.EventListener() {
             @Override
             public void onEvent(MediaPlayer.Event event) {
@@ -783,6 +809,21 @@ public class MainActivity extends BaseActivity  {
         mLibVLC.release();
     }
 
+    private void updateVolume(){
+        if(mMediaPlayer != null){
+            SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
+            int volume = sp.getInt("volume",50);
+            mMediaPlayer.setVolume(volume);
+        }
+    }
+
+    private boolean mute = false;
+    private void mute(){
+        if(mMediaPlayer != null){
+            mMediaPlayer.setVolume(0);
+        }
+    }
+
 
     //----------------------subscribe------------------------------//
 
@@ -792,7 +833,7 @@ public class MainActivity extends BaseActivity  {
         if(msg.getAction() == SettingEventBus.ACTION_LIGHT_CHANGE){
             updateLight();
         }else if(msg.getAction() == SettingEventBus.ACTION_VOLUME_CHANGE){
-
+            updateVolume();
         }else if(msg.getAction() == SettingEventBus.ACTION_VIDEO_URL_INPUT_CHANGE){
             if(playerState != PLAYER_STATE_IDLE) {
                 stopPlay();

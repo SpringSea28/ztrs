@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.main.BaseActivity;
+import com.ztrs.zgj.main.BaseEditAutoHideActivity;
 import com.ztrs.zgj.setting.adapter.AddressAdapter;
 import com.ztrs.zgj.setting.bean.AddressBean;
 import com.ztrs.zgj.setting.eventbus.SettingEventBus;
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class VideoInputActivity extends BaseActivity {
+public class VideoInputActivity extends BaseEditAutoHideActivity {
     private static final String TAG = VideoInputActivity.class.getSimpleName();
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -44,6 +45,13 @@ public class VideoInputActivity extends BaseActivity {
     List<AddressBean> addressBeans;
 
     Unbinder bind;
+
+    @Override
+    protected List<View> getExcludeTouchHideInputViews() {
+        List<View> list = new ArrayList<>();
+        return list;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

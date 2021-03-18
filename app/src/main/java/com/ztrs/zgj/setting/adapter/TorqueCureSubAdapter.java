@@ -53,7 +53,7 @@ public class TorqueCureSubAdapter extends RecyclerView.Adapter<TorqueCureSubAdap
             @Override
             public void afterTextChanged(Editable s) {
                 float amp = Float.valueOf(s.toString());
-                torqueCurveBean.setAmplitude((int)(amp*1000));
+                torqueCurveBean.setAmplitude((int)(amp*100));
             }
         });
 
@@ -71,7 +71,7 @@ public class TorqueCureSubAdapter extends RecyclerView.Adapter<TorqueCureSubAdap
             @Override
             public void afterTextChanged(Editable s) {
                 float wei = Float.valueOf(s.toString());
-                torqueCurveBean.setWeight((int)(wei*100));
+                torqueCurveBean.setWeight((int)(wei*1000));
             }
         });
     }
