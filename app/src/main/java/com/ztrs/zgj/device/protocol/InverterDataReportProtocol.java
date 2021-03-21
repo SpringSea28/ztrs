@@ -73,7 +73,7 @@ public class InverterDataReportProtocol extends BaseProtocol{
         inverterData.setEncoder2LSW(encoder2LSW);
         int encoder2MSW=((data[offset+30]&0x00ff) << 8) |(data[offset+31]&0x00ff);
         inverterData.setEncoder2MSW(encoder2MSW);
-        int towerCraftCardDI16=((data[offset+32]&0x00ff) << 8) |(data[offset+33]&0x00ff);
+        int towerCraftCardDI16=((data[offset+32]&0xffffffff) << 8) |(data[offset+33]&0x00ff);
         inverterData.setTowerCraftCardDI16(towerCraftCardDI16);
         int towerCraftCardDI23=((data[offset+34]&0x00ff) << 8) |(data[offset+35]&0x00ff);
         inverterData.setTowerCraftCardDI23(towerCraftCardDI23);

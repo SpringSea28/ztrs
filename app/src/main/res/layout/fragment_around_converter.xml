@@ -28,6 +28,32 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_gear_value"
+                style="@style/tower_converter_text_style"
+                android:layout_width="51dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/tower_parameter_converter_item_text_bg_selector"
+                android:gravity="bottom|center_horizontal"
+                android:text="左2档"
+                android:textColor="@color/tower_primary_normal_text_color_blue" />
+
+            <TextView
+                android:id="@+id/tv_gear_state"
+                style="@style/tower_converter_text_style"
+                android:layout_width="match_parent"
+                android:layout_below="@id/tv_gear_value"
+                android:layout_marginTop="@dimen/tower_converter_text_margintop"
+                android:gravity="center_horizontal"
+                android:text="档位" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
                 android:id="@+id/tv_running_state_value"
                 style="@style/tower_converter_text_style"
                 android:layout_width="51dp"
@@ -48,31 +74,7 @@
                 android:text="运行状态" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_output_voltage_value"
-                style="@style/tower_converter_text_style"
-                android:layout_width="51dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/tower_parameter_converter_item_text_bg_selector"
-                android:gravity="bottom|center_horizontal"
-                android:text="500.0V"
-                android:textColor="@color/tower_primary_normal_text_color_blue" />
-
-            <TextView
-                android:id="@+id/tv_output_voltage"
-                style="@style/tower_converter_text_style"
-                android:layout_width="match_parent"
-                android:layout_below="@id/tv_output_voltage_value"
-                android:layout_marginTop="7dp"
-                android:gravity="center_horizontal"
-                android:text="输出电压" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -107,6 +109,31 @@
         android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_output_voltage_value"
+                style="@style/tower_converter_text_style"
+                android:layout_width="51dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/tower_parameter_converter_item_text_bg_selector"
+                android:gravity="bottom|center_horizontal"
+                android:text="500.0V"
+                android:textColor="@color/tower_primary_normal_text_color_blue" />
+
+            <TextView
+                android:id="@+id/tv_output_voltage"
+                style="@style/tower_converter_text_style"
+                android:layout_width="match_parent"
+                android:layout_below="@id/tv_output_voltage_value"
+                android:layout_marginTop="7dp"
+                android:gravity="center_horizontal"
+                android:text="输出电压" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"

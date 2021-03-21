@@ -31,6 +31,9 @@ import butterknife.Unbinder;
  */
 public class AroundConverterFragment extends Fragment {
 
+    @BindView(R.id.tv_gear_value)
+    TextView tvGearValue;
+
     @BindView(R.id.tv_running_state_value)
     TextView tvRunningStateValue;
     @BindView(R.id.tv_bus_voltage_value)
@@ -103,11 +106,34 @@ public class AroundConverterFragment extends Fragment {
         bind.unbind();
         super.onDestroyView();
     }
-
+    private void initGear(InverterDataReportBean.InverterData inverterData){
+        int towerCraftCardDI16 = inverterData.getTowerCraftCardDI16();
+        if((towerCraftCardDI16&0x01) == 1){
+            if((towerCraftCardDI16&0x36) == 0){
+                tvGearValue.setText("左1档");
+            }else if((towerCraftCardDI16&0x04) == 0x04){
+                tvGearValue.setText("左2档");
+            }else if((towerCraftCardDI16&0x08) == 0x08){
+                tvGearValue.setText("左3档");
+            }else if((towerCraftCardDI16&0x10) == 0x10){
+                tvGearValue.setText("左4档");
+            }
+        }else if((towerCraftCardDI16&0x02) == 2){
+            if((towerCraftCardDI16&0x36) == 0){
+                tvGearValue.setText("右1档");
+            }else if((towerCraftCardDI16&0x04) == 0x04){
+                tvGearValue.setText("右2档");
+            }else if((towerCraftCardDI16&0x08) == 0x08){
+                tvGearValue.setText("右3档");
+            }else if((towerCraftCardDI16&0x10) == 0x10){
+                tvGearValue.setText("右4档");
+            }
+        }
+    }
     private void initView(){
         InverterDataReportBean.InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
                 .getInverterDataReportBean().getAroundInverterData();
-
+        initGear(inverterData);
         int run = inverterData.getRun();
         if(run==0){
             tvRunningStateValue.setText("停止");

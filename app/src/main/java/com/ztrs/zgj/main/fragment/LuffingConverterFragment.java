@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
+import com.ztrs.zgj.device.bean.InverterDataReportBean;
 import com.ztrs.zgj.device.bean.InverterDataReportBean.InverterData;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.InverterDataReportMessage;
@@ -30,6 +31,9 @@ import butterknife.Unbinder;
  * create an instance of this fragment.
  */
 public class LuffingConverterFragment extends Fragment {
+
+    @BindView(R.id.tv_gear_value)
+    TextView tvGearValue;
 
     @BindView(R.id.tv_running_state_value)
     TextView tvRunningStateValue;
@@ -128,11 +132,34 @@ public class LuffingConverterFragment extends Fragment {
         bind.unbind();
         super.onDestroyView();
     }
-
+    private void initGear(InverterDataReportBean.InverterData inverterData){
+        int towerCraftCardDI16 = inverterData.getTowerCraftCardDI16();
+        if((towerCraftCardDI16&0x01) == 1){
+            if((towerCraftCardDI16&0x36) == 0){
+                tvGearValue.setText("前1档");
+            }else if((towerCraftCardDI16&0x04) == 0x04){
+                tvGearValue.setText("前2档");
+            }else if((towerCraftCardDI16&0x08) == 0x08){
+                tvGearValue.setText("前3档");
+            }else if((towerCraftCardDI16&0x10) == 0x10){
+                tvGearValue.setText("前4档");
+            }
+        }else if((towerCraftCardDI16&0x02) == 2){
+            if((towerCraftCardDI16&0x36) == 0){
+                tvGearValue.setText("后1档");
+            }else if((towerCraftCardDI16&0x04) == 0x04){
+                tvGearValue.setText("后2档");
+            }else if((towerCraftCardDI16&0x08) == 0x08){
+                tvGearValue.setText("后3档");
+            }else if((towerCraftCardDI16&0x10) == 0x10){
+                tvGearValue.setText("后4档");
+            }
+        }
+    }
     private void initView(){
         InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
                 .getInverterDataReportBean().getAmplitudeInverterData();
-
+        initGear(inverterData);
         int run = inverterData.getRun();
         if(run==0){
             tvRunningStateValue.setText("停止");

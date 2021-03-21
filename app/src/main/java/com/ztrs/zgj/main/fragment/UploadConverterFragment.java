@@ -35,6 +35,9 @@ import butterknife.Unbinder;
  */
 public class UploadConverterFragment extends Fragment {
 
+    @BindView(R.id.tv_gear_value)
+    TextView tvGearValue;
+
     @BindView(R.id.tv_running_state_value)
     TextView tvRunningStateValue;
     @BindView(R.id.tv_brake_detect)
@@ -165,9 +168,39 @@ public class UploadConverterFragment extends Fragment {
         super.onDestroyView();
     }
 
+    private void initGear(InverterData inverterData){
+        int towerCraftCardDI16 = inverterData.getTowerCraftCardDI16();
+        if((towerCraftCardDI16&0x01) == 1){
+            if((towerCraftCardDI16&0x36) == 0){
+                tvGearValue.setText("升1档");
+            }else if((towerCraftCardDI16&0x04) == 0x04){
+                tvGearValue.setText("升2档");
+            }else if((towerCraftCardDI16&0x08) == 0x08){
+                tvGearValue.setText("升3档");
+            }else if((towerCraftCardDI16&0x10) == 0x10){
+                tvGearValue.setText("升4档");
+            }else if((towerCraftCardDI16&0x20) == 0x20){
+                tvGearValue.setText("升5档");
+            }
+        }else if((towerCraftCardDI16&0x02) == 2){
+            if((towerCraftCardDI16&0x36) == 0){
+                tvGearValue.setText("降1档");
+            }else if((towerCraftCardDI16&0x04) == 0x04){
+                tvGearValue.setText("降2档");
+            }else if((towerCraftCardDI16&0x08) == 0x08){
+                tvGearValue.setText("降3档");
+            }else if((towerCraftCardDI16&0x10) == 0x10){
+                tvGearValue.setText("降4档");
+            }else if((towerCraftCardDI16&0x20) == 0x20){
+                tvGearValue.setText("降5档");
+            }
+        }
+    }
+
     private void initView(){
         InverterData inverterData = DeviceManager.getInstance().getZtrsDevice()
                 .getInverterDataReportBean().getUpInverterData();
+        initGear(inverterData);
         int run = inverterData.getRun();
         if(run==0){
             tvRunningStateValue.setText("停止");
