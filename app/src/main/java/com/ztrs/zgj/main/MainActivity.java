@@ -1,10 +1,8 @@
 package com.ztrs.zgj.main;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
@@ -24,22 +22,15 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,28 +45,17 @@ import com.ztrs.zgj.R;
 import com.ztrs.zgj.device.DeviceManager;
 import com.ztrs.zgj.device.Test;
 import com.ztrs.zgj.device.bean.RealTimeDataBean;
-import com.ztrs.zgj.device.bean.StaticParameterBean;
 import com.ztrs.zgj.device.bean.UnLockCarBean;
-import com.ztrs.zgj.device.eventbus.AmplitudeCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.AnnouncementMessage;
-import com.ztrs.zgj.device.eventbus.AroundCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.BaseMessage;
 import com.ztrs.zgj.device.eventbus.EmergencyCallMessage;
-import com.ztrs.zgj.device.eventbus.HeightCalibrationMessage;
 import com.ztrs.zgj.device.eventbus.RealTimeDataMessage;
-import com.ztrs.zgj.device.eventbus.RegionalRestrictionMessage;
-import com.ztrs.zgj.device.eventbus.RelayConfigurationMessage;
-import com.ztrs.zgj.device.eventbus.RelayOutputControlMessage;
-import com.ztrs.zgj.device.eventbus.SensorRealtimeDataMessage;
 import com.ztrs.zgj.device.eventbus.StaticParameterMessage;
 import com.ztrs.zgj.device.eventbus.SwitchMachineMessage;
 import com.ztrs.zgj.device.eventbus.UnlockCarMessage;
-import com.ztrs.zgj.device.eventbus.WeightCalibrationMessage;
-import com.ztrs.zgj.device.eventbus.WireRopeDetectionParametersSetMessage;
 import com.ztrs.zgj.device.eventbus.WorkCycleDataMessage;
 import com.ztrs.zgj.main.adapter.VideoAdapter;
 import com.ztrs.zgj.main.dialog.AnnouncementDialog;
-import com.ztrs.zgj.main.dialog.OutputDialog;
 import com.ztrs.zgj.main.dialog.SettingSecretDialog;
 import com.ztrs.zgj.main.dialog.UnlockCarDialog;
 import com.ztrs.zgj.main.dialog.VideoInputDialog;
@@ -84,11 +64,8 @@ import com.ztrs.zgj.main.fragment.LuffingConverterFragment;
 import com.ztrs.zgj.main.fragment.TowerParameterFragment;
 import com.ztrs.zgj.main.fragment.UploadConverterFragment;
 import com.ztrs.zgj.main.msg.SerialPortOpenResultMsg;
-import com.ztrs.zgj.setting.OutputActivity;
 import com.ztrs.zgj.setting.SettingActivity;
-import com.ztrs.zgj.setting.SoftwareUpdateActivity;
 import com.ztrs.zgj.setting.WebActivity;
-import com.ztrs.zgj.setting.adapter.AddressAdapter;
 import com.ztrs.zgj.setting.bean.AddressBean;
 import com.ztrs.zgj.setting.dialog.UpdateDialog;
 import com.ztrs.zgj.setting.eventbus.SettingEventBus;
@@ -105,10 +82,7 @@ import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.VLCVideoLayout;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -172,6 +146,9 @@ public class MainActivity extends BaseActivity  {
 
     @BindView(R.id.img_volume)
     ImageView imgVol;
+
+    @BindView(R.id.img_announcement_unread)
+    ImageView imgAnnouncementUnRead;
 
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
@@ -257,7 +234,7 @@ public class MainActivity extends BaseActivity  {
 //                test.testOnReceiveRegisterInfo();
 //                test.testOnReceiveStaticParameter();
 //                test.onReceiveInverterData();
-//                test.testOnReceiveLockCar();
+                test.testOnReceiveLockCar();
 //                Observable.timer(6,TimeUnit.SECONDS)
 //                        .observeOn(AndroidSchedulers.mainThread())
 //                        .subscribe(new Consumer<Long>() {
@@ -271,6 +248,7 @@ public class MainActivity extends BaseActivity  {
         });
         EventBus.getDefault().register(this);
         initView();
+        initAnnouncementUnread();
         display();
         checkUpdate();
         checkNetWorkState();
@@ -380,6 +358,15 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
+    private void initAnnouncementUnread(){
+        boolean read = DeviceManager.getInstance().getZtrsDevice().getAnnounecmentBean().isRead();
+        if(read){
+            imgAnnouncementUnRead.setVisibility(View.GONE);
+        }else{
+            imgAnnouncementUnRead.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void display(){
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         Log.e("wch","density: "+displayMetrics.density);
@@ -469,6 +456,8 @@ public class MainActivity extends BaseActivity  {
 
                 break;
             case R.id.rl_announcement:
+                DeviceManager.getInstance().getZtrsDevice().getAnnounecmentBean().setRead(true);
+                initAnnouncementUnread();
                 AnnouncementDialog announcementDialog = new AnnouncementDialog(this);
                 announcementDialog.show();
                 break;
@@ -616,17 +605,38 @@ public class MainActivity extends BaseActivity  {
         SharedPreferences sp = getSharedPreferences("Address",MODE_PRIVATE);
         String addressJson = sp.getString("address",null);
         Log.e("wch","addressJson:"+addressJson);
-        List<AddressBean> videoAddressList = new ArrayList<>();
+        List<AddressBean> addressBeans = new ArrayList<>();
         if(TextUtils.isEmpty(addressJson)){
-
+            addressBeans = new ArrayList<>(5);
+            for(int i=0;i<5;i++){
+                AddressBean addressBean = new AddressBean();
+                addressBean.setNumber(i);
+                addressBean.setName("");
+                addressBean.setAddress("");
+                addressBeans.add(addressBean);
+            }
+            addressBeans.get(0).setName("吊钩可视化");
+            addressBeans.get(0)
+                    .setAddress("rtsp://admin:ztrs12345@192.168.0.17:554/h264/ch1/main/av_stream");
+            addressBeans.get(1).setName("驾驶室");
+            addressBeans.get(1)
+                    .setAddress("rtsp://admin:ztrs12345@192.168.10.2:554/h264/ch1/main/av_stream");
+            addressBeans.get(2).setName("起升排绳");
+            addressBeans.get(2)
+                    .setAddress("rtsp://admin:ztrs12345@192.168.10.3:554/h264/ch1/main/av_stream");
+            addressBeans.get(3).setName("视频4");
+            addressBeans.get(4).setName("视频5");
         }else {
             Gson gson = new Gson();
-            List<AddressBean> addressBeans =gson.fromJson(addressJson,
+            addressBeans =gson.fromJson(addressJson,
                     new TypeToken<List<AddressBean>>(){}.getType());
-            for(int i=0;i<addressBeans.size();i++){
-                if(!TextUtils.isEmpty(addressBeans.get(i).getAddress())){
-                    videoAddressList.add(addressBeans.get(i));
-                }
+        }
+
+        List<AddressBean> videoAddressList = new ArrayList<>();
+
+        for(int i=0;i<addressBeans.size();i++){
+            if(!TextUtils.isEmpty(addressBeans.get(i).getAddress())){
+                videoAddressList.add(addressBeans.get(i));
             }
         }
 
@@ -643,6 +653,7 @@ public class MainActivity extends BaseActivity  {
                     startPlay();
                 }else {
                     stopPlay();
+                    rlVideoBg.setVisibility(View.VISIBLE);
                     Observable.timer(100, TimeUnit.MILLISECONDS)
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Consumer<Long>() {
@@ -792,6 +803,7 @@ public class MainActivity extends BaseActivity  {
         mMediaPlayer.setMedia(media);
         media.release();
         mMediaPlayer.play();
+        updateVolume();
 
     }
 
@@ -814,6 +826,7 @@ public class MainActivity extends BaseActivity  {
             SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
             int volume = sp.getInt("volume",50);
             mMediaPlayer.setVolume(volume);
+            Log.e("wch","updatevolume:"+volume);
         }
     }
 
@@ -870,29 +883,29 @@ public class MainActivity extends BaseActivity  {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUnlock(UnlockCarMessage unlockCarMessage){
         LogUtils.LogI("wch","unlockmessage: "+unlockCarMessage.getResult());
-//        if(unlockCarMessage.getResult() == BaseMessage.RESULT_REPORT) {
-//            UnLockCarBean unLockCarBean = DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean();
-//            if(unLockCarBean.getState() == 'L') {
-//                if(unlockCarDialog == null) {
-//                    unlockCarDialog = new UnlockCarDialog(this);
-//                    unlockCarDialog.show();
-//                }else if(unlockCarDialog.isShowing()){
-//                    unlockCarDialog.dismiss();
-//                    unlockCarDialog = new UnlockCarDialog(this);
-//                    unlockCarDialog.show();
-//                }else {
-//                    unlockCarDialog = new UnlockCarDialog(this);
-//                    unlockCarDialog.show();
-//                }
-//
-//            }else if(unLockCarBean.getState() == 'U'){
-//                if(unlockCarDialog != null && unlockCarDialog.isShowing()){
-//                    unlockCarDialog.dismiss();
-//                }
-//            }
-//        }else {
-//
-//        }
+        if(unlockCarMessage.getResult() == BaseMessage.RESULT_REPORT) {
+            UnLockCarBean unLockCarBean = DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean();
+            if(unLockCarBean.getState() == 'L') {
+                if(unlockCarDialog == null) {
+                    unlockCarDialog = new UnlockCarDialog(this);
+                    unlockCarDialog.show();
+                }else if(unlockCarDialog.isShowing()){
+                    unlockCarDialog.dismiss();
+                    unlockCarDialog = new UnlockCarDialog(this);
+                    unlockCarDialog.show();
+                }else {
+                    unlockCarDialog = new UnlockCarDialog(this);
+                    unlockCarDialog.show();
+                }
+
+            }else if(unLockCarBean.getState() == 'U'){
+                if(unlockCarDialog != null && unlockCarDialog.isShowing()){
+                    unlockCarDialog.dismiss();
+                }
+            }
+        }else {
+
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -929,8 +942,9 @@ public class MainActivity extends BaseActivity  {
     public void onAnnouncement(AnnouncementMessage msg){
         LogUtils.LogI(TAG,"onAnnouncement: "+msg.getResult());
         if(msg.getResult() == BaseMessage.RESULT_REPORT) {
-            AnnouncementDialog announcementDialog = new AnnouncementDialog(this);
-            announcementDialog.show();
+//            AnnouncementDialog announcementDialog = new AnnouncementDialog(this);
+//            announcementDialog.show();
+            initAnnouncementUnread();
         }
     }
 

@@ -18,6 +18,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
+        android:background="@color/transparent"
         android:orientation="vertical">
         <ImageView
             android:layout_width="60dp"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="14sp"
             android:text="已锁机" />
         <TextView
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="11sp"
             android:text="解锁请联系服务商" />
 
@@ -50,6 +51,7 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:gravity="center"
+            android:background="@color/white"
             android:visibility="visible">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,12 +62,14 @@
                     android:id="@+id/tv_hour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="28sp"/>
+                    android:textSize="28sp"
+                    android:visibility="gone"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="28sp"
-                    android:text="时"/>
+                    android:text="时"
+                    android:visibility="gone"/>
                 <TextView
                     android:id="@+id/tv_minute"
                     android:layout_width="wrap_content"

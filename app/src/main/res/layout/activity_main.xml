@@ -72,6 +72,12 @@
                 android:drawableLeft="@mipmap/gonggao"
                 android:drawablePadding="2dp"
                 android:text="公告"/>
+            <ImageView
+                android:id="@+id/img_announcement_unread"
+                android:layout_width="2dp"
+                android:layout_height="2dp"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/announcement_unread_bg"/>
         </RelativeLayout>
         <ImageView
             android:id="@+id/img_signal_3"

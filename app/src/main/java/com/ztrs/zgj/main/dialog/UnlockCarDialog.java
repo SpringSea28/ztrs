@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 
+import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.DialogUnclockCarBinding;
 import com.ztrs.zgj.databinding.DialogVideoInputBinding;
 import com.ztrs.zgj.device.DeviceManager;
@@ -29,8 +30,9 @@ public class UnlockCarDialog extends Dialog {
 
     private int delay = 0;
     public UnlockCarDialog(Context context){
-        super(context);
+        super(context, R.style.dialog_lockcar);
     }
+
 
     DialogUnclockCarBinding binding;
     @Override

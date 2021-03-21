@@ -2,6 +2,7 @@ package com.ztrs.zgj.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class FullScreenActivity extends BaseActivity implements View.OnClickList
         binding.rlTitle.tvBack.setOnClickListener(this);
         binding.btnPlay.setOnClickListener(this);
         initVlc();
+        startPlay();
     }
 
     @Override
@@ -79,6 +81,17 @@ public class FullScreenActivity extends BaseActivity implements View.OnClickList
                     mMediaPlayer.pause();
                 }else {
                     mMediaPlayer.play();
+                }
+                break;
+            case R.id.img_volume:
+                if(mute){
+                    mute = false;
+                    updateVolume();
+                    binding.imgVolume.setBackgroundColor(getColor(R.color.transparent));
+                }else {
+                    mute = true;
+                    mute();
+                    binding.imgVolume.setBackgroundColor(getColor(R.color.primary_background_color_blue));
                 }
                 break;
         }
@@ -205,5 +218,21 @@ public class FullScreenActivity extends BaseActivity implements View.OnClickList
     private void releasePlay(){
         mMediaPlayer.release();
         mLibVLC.release();
+    }
+
+    private void updateVolume(){
+        if(mMediaPlayer != null){
+            SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
+            int volume = sp.getInt("volume",50);
+            mMediaPlayer.setVolume(volume);
+            Log.e("wch","updatevolume:"+volume);
+        }
+    }
+
+    private boolean mute = false;
+    private void mute(){
+        if(mMediaPlayer != null){
+            mMediaPlayer.setVolume(0);
+        }
     }
 }

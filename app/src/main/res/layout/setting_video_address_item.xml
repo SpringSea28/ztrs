@@ -1,61 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="18dp"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:orientation="horizontal"
-        android:background="@drawable/setting_video_address_bg">
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:gravity="center_vertical"
-            android:paddingStart="14dp"
-            android:textSize="10sp"
-            android:textColor="#666666"
-            android:text="视频1名称：" />
-        <EditText
-            android:id="@+id/edt_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:textSize="10sp"
-            android:textColor="#666666"
-            android:background="@null"
-            android:hint="请输入名称"/>
-    </LinearLayout>
+    android:layout_height="77dp"
+    android:layout_marginTop="14dp"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="14dp"
+        android:textSize="12sp"
+        android:textColor="#111D29"
+        android:text="视频1"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/setting_video_address_bg">
+        android:layout_marginTop="10dp">
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingStart="14dp"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#666666"
-            android:text="视频1地址：" />
+            android:text="地址：" />
         <EditText
             android:id="@+id/edt_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="2dp"
+            android:paddingStart="5dp"
             android:gravity="center_vertical"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textColor="#666666"
-            android:background="@null"
-            android:hint="请输入地址"/>
+            android:background="@drawable/setting_edittext_bg"
+            android:hint="请输入地址"
+            />
     </LinearLayout>
 </LinearLayout>
