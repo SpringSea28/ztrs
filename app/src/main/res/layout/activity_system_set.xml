@@ -65,7 +65,7 @@
         />
     <RelativeLayout
         android:id="@+id/rl_firmware_update"
-        style="@style/setting_item_style">
+        style="@style/setting_item_clickable_style">
         <TextView
             style="@style/setting_item_key_text_style"
             android:text="固件升级"/>
@@ -82,7 +82,7 @@
         />
     <RelativeLayout
         android:id="@+id/rl_soft_update"
-        style="@style/setting_item_style">
+        style="@style/setting_item_clickable_style">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -100,7 +100,7 @@
         />
     <RelativeLayout
         android:id="@+id/rl_reset"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         >
         <TextView
             style="@style/setting_item_key_text_style"

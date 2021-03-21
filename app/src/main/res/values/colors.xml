@@ -34,4 +34,12 @@
 
     <color name="attendance_text_unclickable">#C0C0C0</color>
 
+    <color name="emergency_call_btn_bg_normal">#FD3C01</color>
+    <color name="emergency_call_btn_bg_pressed">#80FD3C01</color>
+
+    <color name="setting_item_clickable_bg_normal">@android:color/white</color>
+    <color name="setting_item_clickable_bg_pressed">#30ffffff</color>
+
+    <color name="setting_clickable_title_bg_normal">#0784FF</color>
+    <color name="setting_clickable_title_bg_pressed">#800784FF</color>
 </resources>

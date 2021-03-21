@@ -69,6 +69,15 @@
         <item name="android:paddingStart">4dp</item>
         <item name="android:paddingEnd">4dp</item>
     </style>
+
+    <style name="setting_item_clickable_style" parent="setting_item_style" >
+        <item name="android:background">@drawable/setting_item_clickable_bg_selector</item>
+    </style>
+    <style name="setting_item_clickable_title_style" parent="setting_item_style" >
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/setting_item_clickable_title_bg_selector</item>
+    </style>
+
     <style name="setting_item_text_style" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

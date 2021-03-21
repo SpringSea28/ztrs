@@ -180,7 +180,7 @@
 
     <RelativeLayout
         android:id="@+id/rl_torque_cruve"
-        style="@style/setting_item_style">
+        style="@style/setting_item_clickable_style">
         <TextView
             style="@style/setting_item_text_style"
             android:layout_centerVertical="true"

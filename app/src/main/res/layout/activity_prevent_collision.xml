@@ -9,9 +9,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_self"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -94,9 +93,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_regional_restriction"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -129,9 +127,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_near_prevent_collision"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -217,9 +214,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_alarm_setting"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"

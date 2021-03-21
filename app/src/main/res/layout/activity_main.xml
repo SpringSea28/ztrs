@@ -178,7 +178,7 @@
             android:gravity="center"
             android:textSize="7sp"
             android:textColor="@android:color/white"
-            android:background="#FD3C01"
+            android:background="@drawable/tower_emergency_call_btn_bg_selector"
             android:text="紧急呼叫"/>
     </LinearLayout>
 

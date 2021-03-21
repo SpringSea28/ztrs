@@ -9,9 +9,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_wirerope_parameter"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -238,9 +237,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_wirerope_detect"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -307,9 +305,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_wirerope_system"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"
@@ -328,9 +325,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_wirerope_work"
-        style="@style/setting_item_style"
-        android:layout_marginTop="7dp"
-        android:background="#0784FF">
+        style="@style/setting_item_clickable_title_style"
+        android:layout_marginTop="7dp">
 
         <TextView
             style="@style/setting_item_key_text_style"

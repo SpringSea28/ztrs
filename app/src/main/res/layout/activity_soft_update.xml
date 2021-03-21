@@ -37,7 +37,7 @@
         />
     <RelativeLayout
         android:id="@+id/rl_check"
-        style="@style/setting_item_style">
+        style="@style/setting_item_clickable_style">
         <TextView
             style="@style/setting_item_key_text_style"
             android:textColor="#0784FF"

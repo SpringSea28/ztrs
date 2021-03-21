@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/rl_installation"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         android:layout_marginTop="7dp"
         android:orientation="horizontal">
         <ImageView
@@ -32,7 +32,7 @@
      />
     <LinearLayout
         android:id="@+id/rl_sensor"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="8dp"
@@ -55,7 +55,7 @@
         />
     <LinearLayout
         android:id="@+id/rl_collision"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="8dp"
@@ -78,7 +78,7 @@
         />
     <LinearLayout
         android:id="@+id/rl_output"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="8dp"
@@ -101,7 +101,7 @@
         />
     <LinearLayout
         android:id="@+id/rl_video"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="8dp"
@@ -124,7 +124,7 @@
         />
     <LinearLayout
         android:id="@+id/rl_system"
-        style="@style/setting_item_style"
+        style="@style/setting_item_clickable_style"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="8dp"
