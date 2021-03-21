@@ -32,4 +32,6 @@
     <color name="index_color_bg_selected">#22000000</color>
     <color name="announcement_content">#111F2C</color>
 
+    <color name="attendance_text_unclickable">#C0C0C0</color>
+
 </resources>

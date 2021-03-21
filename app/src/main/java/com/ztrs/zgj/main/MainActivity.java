@@ -150,6 +150,13 @@ public class MainActivity extends BaseActivity  {
     @BindView(R.id.img_announcement_unread)
     ImageView imgAnnouncementUnRead;
 
+    @BindView(R.id.tv_attendance_onwork)
+    TextView tvOnwork;
+    @BindView(R.id.tv_attendance_offwork)
+    TextView tvOffwork;
+    @BindView(R.id.tv_attendance_workhistory)
+    TextView tvWorkhistory;
+
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
     private static final int ON_SELECT_AROUND = 2;
@@ -178,6 +185,8 @@ public class MainActivity extends BaseActivity  {
 //            "rtsp://admin:ztrs12345@192.168.0.8:554/h264/ch1/main/av_stream";
     private String videoTitle;
 
+    private boolean onWork = true;
+
     Unbinder bind;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,59 +199,6 @@ public class MainActivity extends BaseActivity  {
             @Override
             public void onClick(View v) {
                 Test test = new Test();
-//                byte[] bytes =new byte[10];
-//                int i= bytes[-4];
-//                Log.e("wch","testUnLockCarCmd");
-//                test.testUnLockCarCmd();
-//                test.testSwitchMachineCmd();
-//                test.testOnReceiveSwitchMachine();
-//                test.testSectorRegionalRestriction();
-//                test.testPolarRegionalRestriction();
-//                test.testOrthogonalRegionalRestriction();
-//                test.testQueryOrthogonalRegionalRestriction();
-//                test.testQueryPolarRegionalRestriction();
-//                test.testQuerySectorRegionalRestriction();
-
-//                test.testStaticParameter();
-//                test.testQueryStaticParameter();
-//                test.testOnReceiveRealtimedata();
-//                test.testQueryWorkCycleData();
-//                test.setRelayConfiguration();
-//                test.queryRelayConfiguration();
-//                test.setRelayOutputControl();
-//                test.queryRelayOutputControl();
-//                test.emergencyCall();
-//                test.querySensorRealtimeData();
-//                test.onReceiveSensorRealtimeData();
-//                test.heightCalibration();
-//                test.queryHeightCalibration();
-//                test.amplitudeCalibration();
-//                test.queryAmplitudeCalibration();
-//                test.aroundCalibration();
-//                test.queryAroundCalibration();
-//                test.weightCalibration();
-//                test.queryWeightCalibration();
-//                test.onReceiveInverterData();
-//                test.queryWireRopeDetectionParameters();
-//                test.onReceiveWireRopeDetectionReport();
-//                test.testPackage();
-//                test.testOnReceiveRegisterInfo();
-//                test.testOnReceiveRealtimedata();
-//                test.testOnReceiveTorqueCurve();
-//                test.testQueryStaticParameter();
-//                test.testQueryOrthogonalRegionalRestriction();
-//                test.testOnReceiveRegisterInfo();
-//                test.testOnReceiveStaticParameter();
-//                test.onReceiveInverterData();
-                test.testOnReceiveLockCar();
-//                Observable.timer(6,TimeUnit.SECONDS)
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new Consumer<Long>() {
-//                            @Override
-//                            public void accept(Long aLong) throws Exception {
-//                                test.testOnReceiveUnLockCar();
-//                            }
-//                        });
                 DeviceManager.getInstance().emergencyCall();
             }
         });
@@ -254,6 +210,7 @@ public class MainActivity extends BaseActivity  {
         checkNetWorkState();
         initVideoTab();
         initVlc();
+        initAttendance();
     }
 
     private void checkUpdate(){
@@ -598,6 +555,22 @@ public class MainActivity extends BaseActivity  {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(networkCallback);
+        }
+    }
+
+    private void initAttendance(){
+        tvWorkhistory.setSelected(true);
+        tvWorkhistory.setClickable(true);
+        if(onWork){
+            tvOnwork.setSelected(true);
+            tvOnwork.setClickable(true);
+            tvOffwork.setSelected(false);
+            tvOffwork.setClickable(false);
+        }else {
+            tvOnwork.setSelected(false);
+            tvOnwork.setClickable(false);
+            tvOffwork.setSelected(true);
+            tvOffwork.setClickable(true);
         }
     }
 

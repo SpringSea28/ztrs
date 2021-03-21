@@ -154,14 +154,17 @@
                 android:text="本月收入: 3000元"/>
         </RelativeLayout>
         <TextView
+            android:id="@+id/tv_attendance_onwork"
             style="@style/tower_attendance_text_style"
             android:layout_marginEnd="5dp"
             android:text="上班"/>
         <TextView
+            android:id="@+id/tv_attendance_offwork"
             style="@style/tower_attendance_text_style"
             android:layout_marginStart="5dp"
             android:text="下班"/>
         <TextView
+            android:id="@+id/tv_attendance_workhistory"
             style="@style/tower_attendance_text_style"
             android:layout_width="49dp"
             android:layout_marginStart="5dp"
