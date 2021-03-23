@@ -222,6 +222,7 @@
     <RelativeLayout
         style="@style/setting_item_style">
         <TextView
+            android:id="@+id/tv_high_warn_key"
             style="@style/setting_item_key_text_style"
             android:text="高预警值"/>
         <EditText
@@ -240,6 +241,7 @@
     <RelativeLayout
         style="@style/setting_item_style">
         <TextView
+            android:id="@+id/tv_high_alarm_key"
             style="@style/setting_item_key_text_style"
             android:text="高报警值"/>
         <EditText

@@ -266,9 +266,15 @@ public class TowerParameterFragment extends Fragment {
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*ScaleUtils.dip2px(context,27));
+            offset = (float) (1.0*amplitude/upWeightArmLen);
+            if(offset <0){
+                offset = 0;
+            }
+            if(offset>1){
+                offset = 1;
+            }
         }
-        imgCar.setTranslationY(offset);
+        imgCar.setTranslationY(offset*ScaleUtils.dip2px(context,24));
     }
 
     private void initHookup(){
@@ -352,7 +358,7 @@ public class TowerParameterFragment extends Fragment {
         float offset = 0;
         float tranX = 0;
         if(upWeightArmLen != 0){
-            offset = (float) (1.0*amplitude/upWeightArmLen*82);
+            offset = (float) (1.0*amplitude/upWeightArmLen);
             if(offset<0){
                 offset = 0;
             }
@@ -372,10 +378,9 @@ public class TowerParameterFragment extends Fragment {
             transXAnimator.setInterpolator(new LinearInterpolator());
             transXAnimator.setDuration(2000);
         }
-//        Log.e("wch","translationXBefore:"+translationXBefore);
-//        Log.e("wch","tranX:"+tranX);
         transXAnimator.start();
 
+        translationXBefore = imgWireRopeCar.getTranslationX();
         if(transXCarAnimator != null ){
             translationXBefore = (float)transXCarAnimator.getAnimatedValue();
             transXCarAnimator.cancel();
@@ -625,12 +630,12 @@ public class TowerParameterFragment extends Fragment {
 //        }
 //    }
     private void testWireRope(){
-        device.getRealTimeDataBean().setAmplitude(2000);
+        device.getRealTimeDataBean().setAmplitude(0);
         device.getStaticParameterBean().setUpWeightArmLen(4000);
         device.getRealTimeDataBean().setHeight((short)1000);
         device.getRealTimeDataBean().setWireRopeDamageMagnification((byte)2);
         device.getStaticParameterBean().setTowerHeight(4000);
-        Observable.interval(2,TimeUnit.SECONDS)
+        Observable.interval(1,TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
@@ -641,7 +646,9 @@ public class TowerParameterFragment extends Fragment {
                         device.getRealTimeDataBean().setAmplitude(amplitude);
                         int height = device.getRealTimeDataBean().getHeight()+50;
                         device.getRealTimeDataBean().setHeight((short)height);
+                        Log.e("wch","hookupAnimation start");
                         hookupAnimation();
+                        Log.e("wch","hookupAnimation end");
                         updateRotationAngle();
                     }
                 });

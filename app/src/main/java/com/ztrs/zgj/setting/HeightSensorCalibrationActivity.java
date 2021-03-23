@@ -29,6 +29,8 @@ public class HeightSensorCalibrationActivity extends BaseSensorCalibrationActivi
         TAG = HeightSensorCalibrationActivity.class.getSimpleName();
         super.onCreate(savedInstanceState);
         DeviceManager.getInstance().queryHeightCalibration();
+        binding.tvHighWarnKey.setText("高预警差值");
+        binding.tvHighAlarmKey.setText("高报警差值");
     }
 
     @Override
