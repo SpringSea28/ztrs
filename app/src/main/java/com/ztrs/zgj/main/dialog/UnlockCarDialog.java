@@ -65,12 +65,12 @@ public class UnlockCarDialog extends Dialog {
     }
 
     private void updateTime(){
-        int hour = delay/3600;
         int minute = (delay%3600)/60;
         int second = (delay%60);
-        binding.tvHour.setText(""+hour);
-        binding.tvMinute.setText(""+minute);
-        binding.tvSecond.setText(""+second);
+        binding.tvMinute1.setText(""+minute/10);
+        binding.tvMinute2.setText(""+minute%10);
+        binding.tvSecond1.setText(""+second/10);
+        binding.tvSecond2.setText(""+second%10);
         if(delay == 0){
             stopTimer();
             binding.llLock.setVisibility(View.VISIBLE);

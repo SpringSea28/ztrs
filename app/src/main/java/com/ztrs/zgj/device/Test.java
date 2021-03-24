@@ -1,5 +1,7 @@
 package com.ztrs.zgj.device;
 
+import android.util.Log;
+
 import com.ztrs.zgj.LogUtils;
 import com.ztrs.zgj.device.bean.AmplitudeCalibrationBean;
 import com.ztrs.zgj.device.bean.AroundCalibrationBean;
@@ -779,14 +781,17 @@ public class Test {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        String str = "b3 25 00 00 38 21 01 09 19 32 50 00 01 e2 40 07 d0 00 09 fb f1 03 e8 03 84 00 00 00 02 04 1a 00 00 01 00 de 62";
+//                        String str = "b3 25 00 00 38 21 01 09 19 32 50 00 01 e2 40 07 d0 00 09 fb f1 03 e8 03 84 00 00 00 02 04 1a 00 00 01 00 de 62";
+                        String str = "b3 25 00 00 38 21 03 24 15 55 02 00 0f 2b f9 00 00 00 0f 65 78 01 0e 00 00 00 00 ff ff 18 e7 14 82 01 01 16 6f";
                         byte[] byteFromStr = getByteFromStr(str);
                         int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
                         byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
                         byteFromStr[byteFromStr.length - 1] = (byte) (crc);
                         DeviceManager.getInstance().onDataReceive(byteFromStr);
-                        AroundCalibrationBean calibrationBean = DeviceManager.getInstance()
-                                .getZtrsDevice().getAroundCalibrationBean();
+                        WeightCalibrationBean calibrationBean = DeviceManager.getInstance()
+                                .getZtrsDevice().getWeightCalibrationBean();
+                        Log.e("wch","high alarm:"+calibrationBean.getHighAlarmValue());
+                        Log.e("wch","high warn:"+calibrationBean.getHighWarnValue());
 //                        if (calibrationBean.getHighAlarmValue() != 0) {
 //                            LogUtils.LogE(TAG, " queryWeightCalibration B2 error");
 //                        }
@@ -933,20 +938,24 @@ public class Test {
     }
 
     public void testOnReceiveTorqueCurve() {
-        String str = "b3 7f 00 00 53 21 01 12 21 39 36 54 43 54 37 30 34 30 00 00 00 00 00 00 00 00 00 46 04 09 ec 36 b0 0a 28 35 52 0a f0 31 06 0b b8 2d 50 0c 80 2a 12 0d 48 27 33 0e 10 24 a4 0e d8 22 60 0f a0 20 53 10 68 1e 78 11 30 1c ca 11 f8 1b 3a 12 c0 19 d2 13 88 18 88 14 50 17 52 15 18 16 3a 15 e0 15 31 16 a8 14 3c 17 70 13 56 18 38 12 7f 19 00 11 b2 19 c8 10 f9 1a 90 10 45 1b 58 0f a0 4a e7";
+//        String str = "b3 7f 00 00 53 21 01 12 21 39 36 54 43 54 37 30 34 30 00 00 00 00 00 00 00 00 00 46 04 09 ec 36 b0 0a 28 35 52 0a f0 31 06 0b b8 2d 50 0c 80 2a 12 0d 48 27 33 0e 10 24 a4 0e d8 22 60 0f a0 20 53 10 68 1e 78 11 30 1c ca 11 f8 1b 3a 12 c0 19 d2 13 88 18 88 14 50 17 52 15 18 16 3a 15 e0 15 31 16 a8 14 3c 17 70 13 56 18 38 12 7f 19 00 11 b2 19 c8 10 f9 1a 90 10 45 1b 58 0f a0 4a e7";
+        String str = "b3 9b 00 00 53 21 03 24 15 55 03 54 43 54 37 35 33 35 00 00 00 00 00 00 00 00 02 ee 04 06 36 1d 4c 07 08 00 ae 07 d0 00 9b 08 98 00 8b 09 60 00 7e 0a 28 00 73 0a f0 00 69 0b b8 03 ce 0c 80 03 85 0d 48 03 46 0e 10 03 0d 0e d8 02 da 0f a0 02 ad 10 68 02 83 11 30 02 5e 11 f8 02 3c 12 c0 02 1c 13 88 01 ff 14 50 01 e5 15 18 01 cc 15 e0 01 b5 16 a8 01 a0 17 70 01 8c 18 38 01 79 19 00 01 68 19 c8 01 57 1a 90 01 48 1b 58 01 39 1c 20 01 2c 1c e8 01 1e 1d 4c 00 00 b2 c9";
         byte[] byteFromStr = getByteFromStr(str);
 //        byte[] byteFromStr2 = getByteFromStr(str2);
 
         LogUtils.LogE(TAG, " bytefrom str: " + byteFromStr.length);
-        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
-        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
-        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+//        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
+//        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
+//        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
         DeviceManager.getInstance().onDataReceive(byteFromStr);
 //        DeviceManager.getInstance().onDataReceive(byteFromStr2);
 //        if (DeviceManager.getInstance().getZtrsDevice()
 //                .getRealTimeDataBean().getySlope() != 256) {
 //            LogUtils.LogE(TAG, " testOnReceiveRealtimedata B0 error");
 //        }
+        int weight = DeviceManager.getInstance().getZtrsDevice().getTorqueCurveApplyBean()
+                .getTorqueCurveBeanList().get(0).getWeight();
+        Log.e("wch","weight:"+weight);
     }
 
     //

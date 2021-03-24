@@ -63,7 +63,7 @@
 
     <style name="setting_item_style" >
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_height">36dp</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">4dp</item>
@@ -83,7 +83,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">@color/tower_primary_text_color</item>
-        <item name="android:textSize">8sp</item>
+        <item name="android:textSize">@dimen/setting_content_text_dimen</item>
     </style>
 
     <style name="setting_item_key_text_style" parent="setting_item_text_style">
@@ -214,5 +214,23 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
+    <style name="lockcar_countdown_style">
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+        <item name="android:textSize">28dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/lockcar_countdown_bg</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="setting_index_item_icon_style">
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+    </style>
 
 </resources>

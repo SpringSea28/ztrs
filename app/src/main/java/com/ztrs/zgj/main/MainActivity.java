@@ -855,30 +855,30 @@ public class MainActivity extends BaseActivity  {
     private UnlockCarDialog unlockCarDialog;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUnlock(UnlockCarMessage unlockCarMessage){
-//        LogUtils.LogI("wch","unlockmessage: "+unlockCarMessage.getResult());
-//        if(unlockCarMessage.getResult() == BaseMessage.RESULT_REPORT) {
-//            UnLockCarBean unLockCarBean = DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean();
-//            if(unLockCarBean.getState() == 'L') {
-//                if(unlockCarDialog == null) {
-//                    unlockCarDialog = new UnlockCarDialog(this);
-//                    unlockCarDialog.show();
-//                }else if(unlockCarDialog.isShowing()){
-//                    unlockCarDialog.dismiss();
-//                    unlockCarDialog = new UnlockCarDialog(this);
-//                    unlockCarDialog.show();
-//                }else {
-//                    unlockCarDialog = new UnlockCarDialog(this);
-//                    unlockCarDialog.show();
-//                }
-//
-//            }else if(unLockCarBean.getState() == 'U'){
-//                if(unlockCarDialog != null && unlockCarDialog.isShowing()){
-//                    unlockCarDialog.dismiss();
-//                }
-//            }
-//        }else {
-//
-//        }
+        LogUtils.LogI("wch","unlockmessage: "+unlockCarMessage.getResult());
+        if(unlockCarMessage.getResult() == BaseMessage.RESULT_REPORT) {
+            UnLockCarBean unLockCarBean = DeviceManager.getInstance().getZtrsDevice().getUnLockCarBean();
+            if(unLockCarBean.getState() == 'L') {
+                if(unlockCarDialog == null) {
+                    unlockCarDialog = new UnlockCarDialog(this);
+                    unlockCarDialog.show();
+                }else if(unlockCarDialog.isShowing()){
+                    unlockCarDialog.dismiss();
+                    unlockCarDialog = new UnlockCarDialog(this);
+                    unlockCarDialog.show();
+                }else {
+                    unlockCarDialog = new UnlockCarDialog(this);
+                    unlockCarDialog.show();
+                }
+
+            }else if(unLockCarBean.getState() == 'U'){
+                if(unlockCarDialog != null && unlockCarDialog.isShowing()){
+                    unlockCarDialog.dismiss();
+                }
+            }
+        }else {
+
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

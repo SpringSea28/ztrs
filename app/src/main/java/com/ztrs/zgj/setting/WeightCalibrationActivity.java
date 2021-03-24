@@ -248,7 +248,7 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
         if(torqueCurveBeanList == null || torqueCurveBeanList.size()<1){
             currentRatedLoad = 0;
         }else {
-            currentRatedLoad = torqueCurveBeanList.get(0).getWeight();
+            currentRatedLoad = torqueCurveBeanList.get(0).getWeight()/10;
         }
         int percent;
         if(currentRatedLoad == 0){
@@ -266,7 +266,7 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
         if(torqueCurveBeanList == null || torqueCurveBeanList.size()<1){
             currentRatedLoad = 0;
         }else {
-            currentRatedLoad = torqueCurveBeanList.get(0).getWeight();
+            currentRatedLoad = torqueCurveBeanList.get(0).getWeight()/10;
         }
         int percent;
         if(currentRatedLoad == 0){
@@ -404,7 +404,8 @@ public class WeightCalibrationActivity extends BaseEditAutoHideActivity {
         calibrationBean.setCurrent2(code2);
         calibrationBean.setCalibration2((int) (calibration2 * 100));
         int currentRatedLoad = 0;
-        currentRatedLoad = torqueCurveBeanList.get(0).getWeight();
+        currentRatedLoad = torqueCurveBeanList.get(0).getWeight();//0.001t
+        currentRatedLoad = currentRatedLoad/10;
         int highWarnSend = (int)(1.0*currentRatedLoad*lowAlarm/100);
         calibrationBean.setHighWarnValue(highWarnSend);
         int highAlarmSend = (int)(1.0*currentRatedLoad*highAlarm/100);
