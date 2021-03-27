@@ -35,7 +35,7 @@
                 android:id="@+id/spinner_model"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="7sp"
+                android:textSize="@dimen/setting_content_text_dimen"
                 android:textColor="#111D29"
                 android:paddingStart="8dp"
                 android:gravity="center_vertical|start"

@@ -133,7 +133,7 @@ public class LogCatHelper {
         private static class FormatDate{
 
             public static String getFormatDate(){
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
                 return sdf.format(System.currentTimeMillis());
             }
 

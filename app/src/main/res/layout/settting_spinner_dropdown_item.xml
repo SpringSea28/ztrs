@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="17dp"
     android:ellipsize="marquee"
-    android:textSize="7sp"
+    android:textSize="@dimen/setting_content_text_dimen"
     android:gravity="center_vertical"
     android:singleLine="true"/>

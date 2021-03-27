@@ -400,9 +400,9 @@ public class MainActivity extends BaseActivity  {
                                         SettingActivity.class));
                             }
                         });
-                settingSecretDialog.show();
-//                MainActivity.this.startActivity(new Intent(MainActivity.this,
-//                        SettingActivity.class));
+//                settingSecretDialog.show();
+                MainActivity.this.startActivity(new Intent(MainActivity.this,
+                        SettingActivity.class));
                 break;
             case R.id.rl_output:
 //                OutputDialog outputDialog = new OutputDialog(this);

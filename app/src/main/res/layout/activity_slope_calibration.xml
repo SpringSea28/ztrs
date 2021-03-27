@@ -16,7 +16,7 @@
         android:gravity="center_vertical"
         android:paddingStart="15dp"
         android:textColor="@android:color/white"
-        android:textSize="7sp"
+        android:textSize="@dimen/setting_content_text_dimen"
         android:text="倾角X标定（与大臂平行方向） ）"/>
     <RelativeLayout
         style="@style/setting_item_style">
@@ -56,7 +56,7 @@
         android:layout_marginBottom="9dp"
         android:layout_marginStart="12dp"
         android:textColor="#111D29"
-        android:textSize="7sp"
+        android:textSize="@dimen/setting_content_text_dimen"
         android:text="角度预警、报警设置"/>
     <RelativeLayout
         style="@style/setting_item_style">
@@ -103,7 +103,7 @@
         android:gravity="center_vertical"
         android:paddingStart="30dp"
         android:textColor="@android:color/white"
-        android:textSize="7sp"
+        android:textSize="@dimen/setting_content_text_dimen"
         android:text="倾角Y标定（与大臂垂直方向） ）"/>
     <RelativeLayout
         style="@style/setting_item_style">
@@ -143,7 +143,7 @@
         android:layout_marginBottom="9dp"
         android:layout_marginStart="12dp"
         android:textColor="#111D29"
-        android:textSize="7sp"
+        android:textSize="@dimen/setting_content_text_dimen"
         android:text="角度预警、报警设置"/>
     <RelativeLayout
         style="@style/setting_item_style">

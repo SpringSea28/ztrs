@@ -102,15 +102,15 @@
         <item name="android:layout_width">@dimen/setting_item_value_width</item>
         <item name="android:layout_height">@dimen/setting_item_value_height</item>
         <item name="android:layout_alignParentEnd">true</item>
-        <item name="android:layout_marginEnd">34dp</item>
-        <item name="android:paddingEnd">5dp</item>
+        <item name="android:layout_marginEnd">50dp</item>
+        <item name="android:paddingEnd">15dp</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/setting_edittext_bg</item>
         <item name="android:gravity">center_vertical|end</item>
         <item name="android:singleLine">true</item>
         <item name="android:maxLength">8</item>
         <item name="android:textColorHint">@android:color/holo_red_light</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">@dimen/setting_content_text_dimen</item>
     </style>
     <style name="setting_item_edit_text_style" parent="setting_item_edit_text_base_style">
         <item name="android:digits">0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</item>
@@ -146,26 +146,26 @@
 
     <style name="setting_save_btn_style" >
         <item name="android:layout_width">329dp</item>
-        <item name="android:layout_height">27dp</item>
+        <item name="android:layout_height">36dp</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/setting_save_btn_bg_selector</item>
-        <item name="android:textSize">7sp</item>
+        <item name="android:textSize">@dimen/setting_content_text_dimen</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:text">保存</item>
     </style>
 
     <style name="setting_current_value_tv_style">
-        <item name="android:layout_width">27dp</item>
-        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_width">41dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_marginEnd">4dp</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">#0784FF</item>
-        <item name="android:textSize">7sp</item>
+        <item name="android:textSize">@dimen/setting_content_text_dimen</item>
         <item name="android:text">当前值</item>
     </style>
 

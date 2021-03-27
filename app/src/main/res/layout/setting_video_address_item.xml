@@ -36,10 +36,14 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:gravity="center_vertical"
             android:textSize="12sp"
             android:textColor="#666666"
             android:background="@drawable/setting_edittext_bg"
+            android:inputType="text"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:hint="请输入地址"
             />
     </LinearLayout>

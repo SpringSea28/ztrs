@@ -346,11 +346,11 @@
     <TextView
         android:id="@+id/tv_clear"
         android:layout_width="match_parent"
-        android:layout_height="27dp"
+        android:layout_height="36dp"
         android:layout_marginTop="7dp"
         android:gravity="center"
         android:background="@android:color/white"
         android:textColor="#FD3C01"
-        android:textSize="7sp"
+        android:textSize="@dimen/setting_content_text_dimen"
         android:text="清除参数"/>
 </LinearLayout>
