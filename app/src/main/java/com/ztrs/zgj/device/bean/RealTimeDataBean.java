@@ -51,6 +51,11 @@ public class RealTimeDataBean {
     boolean weightWarnLimit = true;
     boolean weightAlarmLimit = true;
 
+    boolean slopeXAlarmLimit= true;
+    boolean slopeXWarnLimit= true;
+    boolean slopeYAlarmLimit= true;
+    boolean slopeYWarnLimit= true;
+
     boolean electronicWindAlarmLimit= true;
     boolean electronicWindWarningLimit= true;
 
@@ -454,6 +459,38 @@ public class RealTimeDataBean {
 
     public void setWeightAlarmLimit(boolean weightAlarmLimit) {
         this.weightAlarmLimit = weightAlarmLimit;
+    }
+
+    public boolean isSlopeXAlarmLimit() {
+        return slopeXAlarmLimit;
+    }
+
+    public void setSlopeXAlarmLimit(boolean slopeXAlarmLimit) {
+        this.slopeXAlarmLimit = slopeXAlarmLimit;
+    }
+
+    public boolean isSlopeXWarnLimit() {
+        return slopeXWarnLimit;
+    }
+
+    public void setSlopeXWarnLimit(boolean slopeXWarnLimit) {
+        this.slopeXWarnLimit = slopeXWarnLimit;
+    }
+
+    public boolean isSlopeYAlarmLimit() {
+        return slopeYAlarmLimit;
+    }
+
+    public void setSlopeYAlarmLimit(boolean slopeYAlarmLimit) {
+        this.slopeYAlarmLimit = slopeYAlarmLimit;
+    }
+
+    public boolean isSlopeYWarnLimit() {
+        return slopeYWarnLimit;
+    }
+
+    public void setSlopeYWarnLimit(boolean slopeYWarnLimit) {
+        this.slopeYWarnLimit = slopeYWarnLimit;
     }
 
     public boolean isElectronicWindAlarmLimit() {

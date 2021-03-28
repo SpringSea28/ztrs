@@ -150,6 +150,15 @@ public class RealTimeDataProtocol extends BaseProtocol{
         realTimeDataBean.setWeightAlarmLimit(weightAlarmLimit);
 //        Log.e(TAG,"data[8]: "+LogUtils.toHexString(data[8]));
 
+        boolean slopeXAlarmLimit= (data[9] &0X80) == 0x80;
+        realTimeDataBean.setSlopeXAlarmLimit(slopeXAlarmLimit);
+        boolean slopeXWarnLimit = (data[9] &0X40) == 0x40;
+        realTimeDataBean.setSlopeXWarnLimit(slopeXWarnLimit);
+        boolean slopeYAlarmLimit  = (data[9] &0X20) == 0x20;
+        realTimeDataBean.setSlopeYAlarmLimit(slopeYAlarmLimit);
+        boolean slopeYWarnLimit= (data[9] &0X10) == 0x10;
+        realTimeDataBean.setSlopeYWarnLimit(slopeYWarnLimit);
+
         boolean electronicWindAlarmLimit = (data[9] &0X08) == 0x08;
         realTimeDataBean.setElectronicWindAlarmLimit(electronicWindAlarmLimit);
         boolean electronicWindWarningLimit= (data[9] &0X04) == 0x04;

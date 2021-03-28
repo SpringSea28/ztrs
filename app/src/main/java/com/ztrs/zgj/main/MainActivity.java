@@ -1,8 +1,10 @@
 package com.ztrs.zgj.main;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,6 +38,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kongqw.serialportlibrary.Device;
@@ -82,7 +86,9 @@ import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.VLCVideoLayout;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -156,6 +162,12 @@ public class MainActivity extends BaseActivity  {
     TextView tvOffwork;
     @BindView(R.id.tv_attendance_workhistory)
     TextView tvWorkhistory;
+    @BindView(R.id.tv_name)
+    TextView tvName;
+    @BindView(R.id.tv_start_work_time)
+    TextView tvStartWorkTime;
+    @BindView(R.id.img_header)
+    ImageView imgHeader;
 
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
@@ -200,6 +212,7 @@ public class MainActivity extends BaseActivity  {
             public void onClick(View v) {
                 Test test = new Test();
                 DeviceManager.getInstance().emergencyCall();
+                test.testOnReceiveRealtimedata();
             }
         });
         EventBus.getDefault().register(this);
@@ -211,6 +224,8 @@ public class MainActivity extends BaseActivity  {
         initVideoTab();
         initVlc();
         initAttendance();
+        SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
+        volume = sp.getInt("volume",50);
     }
 
     private void checkUpdate(){
@@ -367,6 +382,56 @@ public class MainActivity extends BaseActivity  {
         super.onDestroy();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode ==RESULT_OK){
+            if(requestCode == 1){
+                Toast.makeText(this,"身份采集成功",Toast.LENGTH_SHORT).show();
+            }else if(requestCode == 2){
+                int code = data.getIntExtra("requestCode",-1);
+                String name = data.getStringExtra("name");
+                String idCard = data.getStringExtra("idCard");
+                String fileName = data.getStringExtra("fileName");
+                tvName.setText(name);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
+                String time = dateFormat.format(Calendar.getInstance().getTime());
+                tvStartWorkTime.setText(time);
+                onWork = false;
+                initAttendance();
+                Toast.makeText(this,"上班打卡成功",Toast.LENGTH_SHORT).show();
+//                String ROOT_PATH = getFilesDir().getAbsolutePath();
+//                ROOT_PATH = ROOT_PATH.replace("com.ztrs.zgj","com.arcsoft.arcfacedemo");
+//                String SAVE_IMG_DIR = "register" + File.separator + "imgs";
+//                String IMG_SUFFIX = ".jpg";
+//                File imgFile = new File(ROOT_PATH + File.separator
+//                        + SAVE_IMG_DIR + File.separator
+//                        + fileName + IMG_SUFFIX);
+//                Log.e("wch","imgFile:"+imgFile);
+//                Glide.with(this)
+//                        .load(imgFile)
+//                        .error(R.mipmap.logo_2)
+//                        .into(imgHeader);
+            }else if(requestCode == 3){
+                int code = data.getIntExtra("requestCode",-1);
+                String name = data.getStringExtra("name");
+                String idCard = data.getStringExtra("idCard");
+                String fileName = data.getStringExtra("fileName");
+                tvName.setText(name);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
+                String time = dateFormat.format(Calendar.getInstance().getTime());
+                tvStartWorkTime.setText(time);
+                onWork = true;
+                initAttendance();
+                Toast.makeText(this,"下班打卡成功",Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            if(requestCode == 1){
+                Toast.makeText(this,"身份采集失败",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void addTowerParameterFragment(){
         TowerParameterFragment towerParameterFragment = TowerParameterFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -378,7 +443,7 @@ public class MainActivity extends BaseActivity  {
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
         R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market,R.id.btn_play,R.id.tv_v1,
         R.id.tv_v2,R.id.tv_v3,R.id.rl_identity,R.id.rl_announcement,R.id.img_volume,
-            R.id.img_full_screen})
+            R.id.img_full_screen,R.id.tv_attendance_onwork,R.id.tv_attendance_offwork})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_upload_converter:
@@ -410,7 +475,13 @@ public class MainActivity extends BaseActivity  {
                 startActivity(new Intent(MainActivity.this, OutputDialogActivity.class));
                 break;
             case R.id.rl_identity:
-
+                identity();
+                break;
+            case R.id.tv_attendance_onwork:
+                onWork();
+                break;
+            case R.id.tv_attendance_offwork:
+                offWork();
                 break;
             case R.id.rl_announcement:
                 DeviceManager.getInstance().getZtrsDevice().getAnnounecmentBean().setRead(true);
@@ -464,6 +535,57 @@ public class MainActivity extends BaseActivity  {
                 intentFullScreen.putExtra("url",url);
                 startActivity(intentFullScreen);
                 break;
+        }
+    }
+
+    private void identity(){
+        Intent intentIdentity = new Intent();
+        //第一种方式
+        ComponentName cn = new ComponentName("com.arcsoft.arcfacedemo",
+                "com.arcsoft.arcfacedemo.activity.InitActivity");
+        try {
+            intentIdentity.setComponent(cn);
+            //第二种方式
+            //intent.setClassName("com.example.fm", "com.example.fm.MainFragmentActivity");
+            intentIdentity.putExtra("requestCode",1);
+            startActivityForResult(intentIdentity,1);
+        } catch (Exception e) {
+            //TODO  可以在这里提示用户没有安装应用或找不到指定Activity，或者是做其他的操作
+            Toast.makeText(this,"人脸注册启动失败",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void onWork(){
+        Intent intent = new Intent();
+        //第一种方式
+        ComponentName cn = new ComponentName("com.arcsoft.arcfacedemo",
+                "com.arcsoft.arcfacedemo.activity.InitActivity");
+        try {
+            intent.setComponent(cn);
+            //第二种方式
+            //intent.setClassName("com.example.fm", "com.example.fm.MainFragmentActivity");
+            intent.putExtra("requestCode",2);
+            startActivityForResult(intent,2);
+        } catch (Exception e) {
+            //TODO  可以在这里提示用户没有安装应用或找不到指定Activity，或者是做其他的操作
+            Toast.makeText(this,"打卡启动失败",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void offWork(){
+        Intent intent = new Intent();
+        //第一种方式
+        ComponentName cn = new ComponentName("com.arcsoft.arcfacedemo",
+                "com.arcsoft.arcfacedemo.activity.InitActivity");
+        try {
+            intent.setComponent(cn);
+            //第二种方式
+            //intent.setClassName("com.example.fm", "com.example.fm.MainFragmentActivity");
+            intent.putExtra("requestCode",3);
+            startActivityForResult(intent,3);
+        } catch (Exception e) {
+            //TODO  可以在这里提示用户没有安装应用或找不到指定Activity，或者是做其他的操作
+            Toast.makeText(this,"打卡启动失败",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -810,7 +932,117 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
+    private void playVoice(){
+        boolean playerPlaying = PlayerManager.getInstance().isPlayerPlaying();
+        if(playerPlaying){
+            return;
+        }
 
+        int resId = getVoiceId();
+        AssetFileDescriptor afd = getResources().openRawResourceFd(resId);
+        PlayerManager.getInstance().playerPrepare(afd);
+        PlayerManager.getInstance().setVolume(volume);
+    }
+    private int getVoiceId(){
+        RealTimeDataBean realTimeDataBean = DeviceManager.getInstance().getZtrsDevice().getRealTimeDataBean();
+        boolean alarmWind = !realTimeDataBean.isElectronicWindAlarmLimit();
+        if(alarmWind){
+            return R.raw.wind_alarm_1;
+        }
+        boolean torque110 = !realTimeDataBean.isElectronicTorqueLimitState3();
+        if(torque110){
+            return R.raw.torque_alarm_2;
+        }
+        boolean alarmWeight = !realTimeDataBean.isWeightAlarmLimit();
+        if(alarmWeight){
+            return R.raw.weight_alarm_3;
+        }
+
+        boolean alarmAround =  !realTimeDataBean.isOutputLeftAroundStopLimit()
+                | !realTimeDataBean.isOutputRightAroundStopLimit();
+        if(alarmAround){
+            return R.raw.around_alarm_4;
+        }
+        boolean heightAlarm = !realTimeDataBean.isOutputUpUpStopLimit()
+                | !realTimeDataBean.isOutputDownUpStopLimit();
+        if(heightAlarm){
+            return R.raw.height_alarm_5;
+        }
+        boolean alarmAmplitude = !realTimeDataBean.isOutputOutLuffingStopLimit()
+                | !realTimeDataBean.isOutputInLuffingStopLimit();
+        if(alarmAmplitude){
+            return R.raw.amplitude_alarm_6;
+        }
+
+
+        boolean torque95 = !realTimeDataBean.isElectronicTorqueLimitState2();
+        if(torque95){
+            return R.raw.torque_warn_7;
+        }
+        boolean torque80 = !realTimeDataBean.isElectronicTorqueLimitState1();
+        if(torque80){
+            return R.raw.torque_warn_8;
+        }
+
+        boolean warnWeight = !realTimeDataBean.isWeightWarnLimit();
+        if(warnWeight){
+            return R.raw.weight_warn_9;
+        }
+        boolean warnAround = !realTimeDataBean.isOutputLeftAroundSlowLimit()
+                | !realTimeDataBean.isOutputRightAroundSlowLimit();
+        if(warnAround){
+            return R.raw.around_warn_10;
+        }
+
+        boolean heightWarn = !realTimeDataBean.isOutputUpuPSlowLimit()
+                | !realTimeDataBean.isOutputDownUpSlowLimit();
+        if(heightWarn){
+            return R.raw.height_warn_11;
+        }
+
+        boolean warnAmplitude = !realTimeDataBean.isOutputOutLuffingSlowLimit()
+                | !realTimeDataBean.isOutputInLuffingSlowLimit();
+        if(warnAmplitude){
+            return R.raw.amplitude_warn_12;
+        }
+
+        boolean warnWind = !realTimeDataBean.isElectronicWindWarningLimit();
+        if(warnWind){
+            return R.raw.wind_warn_13;
+        }
+
+        boolean alarmSlope = !realTimeDataBean.isSlopeXAlarmLimit()
+                | !realTimeDataBean.isSlopeYAlarmLimit();
+        if(alarmSlope){
+            return R.raw.slope_alarm_14;
+        }
+        boolean warnSlope = !realTimeDataBean.isSlopeXWarnLimit()
+                | !realTimeDataBean.isSlopeYWarnLimit();
+        if(warnSlope){
+            return R.raw.slope_warn_15;
+        }
+        byte state = realTimeDataBean.getWireRopeState();
+        if(state == 5){
+            return  R.raw.wirerope_scrapped_16;
+        }
+        if(state == 4){
+            return  R.raw.wirerope_serious_17;
+        }
+        if(state == 3){
+            return  R.raw.wirerope_severe_18;
+        }
+        if(state == 2){
+            return  R.raw.wirerope_middle_19;
+        }
+        if(state == 1){
+            return  R.raw.wirerope_lihgt_20;
+        }
+
+
+        return 0;
+    }
+
+    int volume;
     //----------------------subscribe------------------------------//
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -820,6 +1052,8 @@ public class MainActivity extends BaseActivity  {
             updateLight();
         }else if(msg.getAction() == SettingEventBus.ACTION_VOLUME_CHANGE){
             updateVolume();
+            SharedPreferences sp = getSharedPreferences("SystemSetting",MODE_PRIVATE);
+            volume = sp.getInt("volume",50);
         }else if(msg.getAction() == SettingEventBus.ACTION_VIDEO_URL_INPUT_CHANGE){
             if(playerState != PLAYER_STATE_IDLE) {
                 stopPlay();
@@ -908,6 +1142,7 @@ public class MainActivity extends BaseActivity  {
         if(msg.getResult() == BaseMessage.RESULT_REPORT
                 || msg.getResult() == BaseMessage.RESULT_OK) {
             initView();
+            playVoice();
         }
     }
 
