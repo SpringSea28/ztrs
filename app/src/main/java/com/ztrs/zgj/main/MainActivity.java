@@ -212,7 +212,6 @@ public class MainActivity extends BaseActivity  {
             public void onClick(View v) {
                 Test test = new Test();
                 DeviceManager.getInstance().emergencyCall();
-                test.testOnReceiveRealtimedata();
             }
         });
         EventBus.getDefault().register(this);
@@ -465,9 +464,9 @@ public class MainActivity extends BaseActivity  {
                                         SettingActivity.class));
                             }
                         });
-//                settingSecretDialog.show();
-                MainActivity.this.startActivity(new Intent(MainActivity.this,
-                        SettingActivity.class));
+                settingSecretDialog.show();
+//                MainActivity.this.startActivity(new Intent(MainActivity.this,
+//                        SettingActivity.class));
                 break;
             case R.id.rl_output:
 //                OutputDialog outputDialog = new OutputDialog(this);
@@ -939,9 +938,12 @@ public class MainActivity extends BaseActivity  {
         }
 
         int resId = getVoiceId();
+        if(resId == 0){
+            return;
+        }
         AssetFileDescriptor afd = getResources().openRawResourceFd(resId);
         PlayerManager.getInstance().playerPrepare(afd);
-        PlayerManager.getInstance().setVolume(volume);
+        PlayerManager.getInstance().setVolume(volume/100.0f);
     }
     private int getVoiceId(){
         RealTimeDataBean realTimeDataBean = DeviceManager.getInstance().getZtrsDevice().getRealTimeDataBean();

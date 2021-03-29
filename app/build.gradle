@@ -18,8 +18,8 @@ android {
         applicationId "com.ztrs.zgj"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 38
-        versionName "1.2.0"
+        versionCode 39
+        versionName "1.2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

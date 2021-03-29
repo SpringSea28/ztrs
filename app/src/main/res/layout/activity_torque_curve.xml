@@ -8,7 +8,8 @@
 
     <RelativeLayout
         style="@style/setting_item_style"
-        android:layout_marginTop="7dp">
+        android:layout_marginTop="7dp"
+        android:layout_height="32dp">
         <TextView
             style="@style/setting_item_text_style"
             android:layout_centerVertical="true"
@@ -61,7 +62,8 @@
         />
 
     <RelativeLayout
-        style="@style/setting_item_style">
+        style="@style/setting_item_style"
+        android:layout_height="32dp">
         <TextView
             style="@style/setting_item_text_style"
             android:layout_centerVertical="true"
@@ -81,7 +83,8 @@
         />
 
     <RelativeLayout
-        style="@style/setting_item_style">
+        style="@style/setting_item_style"
+        android:layout_height="32dp">
         <TextView
             style="@style/setting_item_text_style"
             android:layout_centerVertical="true"
@@ -100,7 +103,8 @@
         />
 
     <RelativeLayout
-        style="@style/setting_item_style">
+        style="@style/setting_item_style"
+        android:layout_height="32dp">
         <TextView
             style="@style/setting_item_text_style"
             android:layout_centerVertical="true"
@@ -122,16 +126,18 @@
         style="@style/setting_item_key_text_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="5dp"
         android:text="* 系统自带常用的多种塔机型号的力矩曲线，若核对说明书参数与下表不一致的，可依据说明书对表格进行修改，然后点击保存。"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_curve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="4dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
     <Button
         android:id="@+id/btn_save"
-        style="@style/setting_save_btn_style"/>
+        style="@style/setting_save_btn_style"
+        android:layout_height="24dp"
+        android:layout_marginTop="5dp"/>
 </LinearLayout>

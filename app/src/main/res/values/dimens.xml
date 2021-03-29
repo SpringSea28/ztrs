@@ -14,4 +14,5 @@
     <dimen name="setting_content_text_dimen">12sp</dimen>
 
     <dimen name="drop_down_vertical_offset">@dimen/setting_item_value_height</dimen>
+    <dimen name="dialog_title_height_dimen">30dp</dimen>
 </resources>
