@@ -212,6 +212,7 @@ public class MainActivity extends BaseActivity  {
             public void onClick(View v) {
                 Test test = new Test();
                 DeviceManager.getInstance().emergencyCall();
+//                test.testOnReceiveRealtimedata();
             }
         });
         EventBus.getDefault().register(this);

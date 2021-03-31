@@ -6,7 +6,13 @@
     android:orientation="vertical">
 
     <include layout="@layout/title_bar_item" />
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/rl_self"
         style="@style/setting_item_clickable_title_style"
@@ -345,6 +351,9 @@
             android:id="@+id/btn_save_alarm"
             style="@style/setting_save_btn_style"
             android:layout_width="40dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

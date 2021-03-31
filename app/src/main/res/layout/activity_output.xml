@@ -29,9 +29,10 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="8sp"
+            android:textSize="11sp"
             android:drawableLeft="@mipmap/back"
             android:drawablePadding="12dp"
+            android:background="@drawable/main_item_text_bg_selector"
             android:text="返回"/>
 
         <TextView
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="8sp"
+            android:textSize="14sp"
             android:textColor="#111D29"
             android:text="标题" />
         >

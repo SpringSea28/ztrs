@@ -6,6 +6,13 @@
     android:orientation="vertical">
 
     <include layout="@layout/title_bar_item" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_wirerope_parameter"
@@ -352,5 +359,8 @@
         android:background="@android:color/white"
         android:textColor="#FD3C01"
         android:textSize="@dimen/setting_content_text_dimen"
-        android:text="清除参数"/>
+        android:text="清除参数"
+        android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

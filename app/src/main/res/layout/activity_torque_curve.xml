@@ -5,6 +5,13 @@
     android:background="@color/primary_bg_color"
     android:orientation="vertical">
     <include layout="@layout/title_bar_item"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <RelativeLayout
         style="@style/setting_item_style"
@@ -126,18 +133,19 @@
         style="@style/setting_item_key_text_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
         android:text="* 系统自带常用的多种塔机型号的力矩曲线，若核对说明书参数与下表不一致的，可依据说明书对表格进行修改，然后点击保存。"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_curve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="4dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="10dp"/>
     <Button
         android:id="@+id/btn_save"
         style="@style/setting_save_btn_style"
-        android:layout_height="24dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
