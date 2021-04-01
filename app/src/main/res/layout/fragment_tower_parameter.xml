@@ -1,73 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
-    <LinearLayout
+    android:paddingStart="7dp"
+    android:paddingEnd="7dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="29dp"
+        >
+        <LinearLayout
+            android:id="@+id/ll_parameter_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:layout_toLeftOf="@id/img_parameter_alarm"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_parameter_alarm"
+            android:layout_width="13dp"
+            android:layout_height="14dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@mipmap/baojing"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_parameter"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/ll_tower_model"
-                    android:layout_width="71dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="6dp"
-                    android:paddingTop="2dp">
-
-                    <TextView
-                        android:id="@+id/tv_tower_serial_number"
-                        style="@style/tower_primary_text_style"
-                        android:text="@string/tower_serial_number" />
-
-                    <TextView
-                        android:id="@+id/tv_tower_specification_model"
-                        style="@style/tower_primary_text_style"
-                        android:text="@string/tower_specification_model" />
-
-                    <TextView
-                        android:id="@+id/tv_tower_monitoring_number"
-                        style="@style/tower_primary_text_style"
-                        android:text="@string/tower_monitoring_number" />
-
-                    <TextView
-                        android:id="@+id/tv_tower_magnification"
-                        style="@style/tower_primary_text_style"
-                        android:text="@string/tower_magnification" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_parameter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ll_tower_model"
-                    android:layout_marginTop="3dp" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <RelativeLayout
-                android:layout_width="159dp"
-                android:layout_height="145dp"
-
+                android:layout_width="190dp"
+                android:layout_height="155dp"
                 android:layout_gravity="bottom">
 
                 <ImageView
-                    android:layout_width="159dp"
-                    android:layout_height="145dp"
+                    android:layout_width="171dp"
+                    android:layout_height="155dp"
+                    android:layout_alignParentEnd="true"
                     android:src="@mipmap/tadiao" />
 
                 <RelativeLayout
@@ -78,7 +60,7 @@
                     <LinearLayout
                         android:id="@+id/ll_hookup"
                         android:layout_width="wrap_content"
-                        android:layout_height="122dp"
+                        android:layout_height="132dp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginRight="90dp"
                         android:orientation="vertical">
@@ -86,7 +68,7 @@
                         <View
                             android:id="@+id/v_hookup_line"
                             android:layout_width="1dp"
-                            android:layout_height="89dp"
+                            android:layout_height="99dp"
                             android:layout_gravity="center_horizontal"
                             android:background="#C0C0C0" />
 
@@ -176,9 +158,8 @@
 
             <LinearLayout
                 android:id="@+id/ll_wire_rope"
-                android:layout_width="90dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -202,16 +183,16 @@
 
                 <RelativeLayout
                     android:id="@+id/rl_rotation_angle"
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginEnd="33dp"
                     android:background="@drawable/tower_parameter_rotation_angle_bg">
 
                     <ImageView
                         android:id="@+id/img_rotation_angle"
-                        android:layout_width="54dp"
-                        android:layout_height="40dp"
+                        android:layout_width="72dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentBottom="true"
                         android:src="@mipmap/zhizhen" />
 
@@ -274,7 +255,7 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginBottom="20dp">
 
                     <TextView
@@ -307,133 +288,86 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_direction"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="visible">
 
-            <TextView
-                android:id="@+id/tv_direction_up"
-                style="@style/tower_primary_text_style"
-                android:layout_width="32dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:drawableLeft="@drawable/tower_parameter_direction_up_text_drawable_left_selector"
-                android:drawablePadding="0dp"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:text="上行"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
 
-            <TextView
-                android:id="@+id/tv_direction_down"
-                style="@style/tower_primary_text_style"
-                android:layout_width="32dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:drawableLeft="@drawable/tower_parameter_direction_down_text_drawable_left_selector"
-                android:drawablePadding="0dp"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:text="下行"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+    <LinearLayout
+        android:id="@+id/ll_tower_model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
 
-            <TextView
-                android:id="@+id/tv_direction_left"
-                style="@style/tower_primary_text_style"
-                android:layout_width="32dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:drawableLeft="@drawable/tower_parameter_direction_left_text_drawable_left_selector"
-                android:drawablePadding="0dp"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:text="左转"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+        <TextView
+            android:id="@+id/tv_tower_serial_number"
+            style="@style/tower_primary_text_style"
+            android:layout_weight="1"
+            android:text="@string/tower_serial_number" />
 
-            <TextView
-                android:id="@+id/tv_direction_right"
-                style="@style/tower_primary_text_style"
-                android:layout_width="32dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:drawableLeft="@drawable/tower_parameter_direction_right_text_drawable_left_selector"
-                android:drawablePadding="0dp"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:text="右转"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+        <TextView
+            android:id="@+id/tv_tower_specification_model"
+            style="@style/tower_primary_text_style"
+            android:layout_weight="1"
+            android:text="@string/tower_specification_model" />
 
-            <TextView
-                android:id="@+id/tv_direction_before"
-                style="@style/tower_primary_text_style"
-                android:layout_width="32dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:drawableLeft="@drawable/tower_parameter_direction_before_text_drawable_left_selector"
-                android:drawablePadding="0dp"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:text="前行"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
+        <TextView
+            android:id="@+id/tv_tower_monitoring_number"
+            style="@style/tower_primary_text_style"
+            android:layout_weight="1"
+            android:text="@string/tower_monitoring_number" />
 
-            <TextView
-                android:id="@+id/tv_direction_after"
-                style="@style/tower_primary_text_style"
-                android:layout_width="32dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tower_parameter_direction_text_bg_selector"
-                android:drawableLeft="@drawable/tower_parameter_direction_after_text_drawable_left_selector"
-                android:drawablePadding="0dp"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:paddingEnd="4dp"
-                android:text="后行"
-                android:textColor="@drawable/tower_parameter_direction_text_color_selector" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_tower_magnification"
+            style="@style/tower_primary_text_style"
+            android:layout_weight="1"
+            android:text="@string/tower_magnification" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_parameter_alarm"
+        android:id="@+id/ll_direction"
         android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="36dp"
-        android:orientation="horizontal">
+        android:layout_height="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="9dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_direction_up"
+            style="@style/tower_primary_direction_text_style"
+            android:drawableLeft="@drawable/tower_parameter_direction_up_text_drawable_left_selector"
+            android:text="上行" />
+
+        <TextView
+            android:id="@+id/tv_direction_down"
+            style="@style/tower_primary_direction_text_style"
+            android:drawableLeft="@drawable/tower_parameter_direction_down_text_drawable_left_selector"
+            android:text="下行"/>
+
+        <TextView
+            android:id="@+id/tv_direction_left"
+            style="@style/tower_primary_direction_text_style"
+            android:drawableLeft="@drawable/tower_parameter_direction_left_text_drawable_left_selector"
+            android:text="左转"/>
+
+        <TextView
+            android:id="@+id/tv_direction_right"
+            style="@style/tower_primary_direction_text_style"
+            android:drawableLeft="@drawable/tower_parameter_direction_right_text_drawable_left_selector"
+            android:text="右转"/>
+
+        <TextView
+            android:id="@+id/tv_direction_before"
+            style="@style/tower_primary_direction_text_style"
+            android:drawableLeft="@drawable/tower_parameter_direction_before_text_drawable_left_selector"
+            android:text="前行"/>
+
+        <TextView
+            android:id="@+id/tv_direction_after"
+            style="@style/tower_primary_direction_text_style"
+            android:drawableLeft="@drawable/tower_parameter_direction_after_text_drawable_left_selector"
+            android:text="后行"/>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_parameter_alarm"
-        android:layout_width="11dp"
-        android:layout_height="11dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="12dp"
-        android:layout_alignParentEnd="true"
-        android:src="@mipmap/baojing"/>
 
-
-
-</RelativeLayout>
+</LinearLayout>

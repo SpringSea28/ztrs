@@ -104,8 +104,6 @@ public class MainActivity extends BaseActivity  {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.fl_tower_parameter)
-    FrameLayout flTowerParameter;
 
     @BindView(R.id.tv_upload_converter)
     TextView tvUploadConverter;
@@ -113,6 +111,8 @@ public class MainActivity extends BaseActivity  {
     TextView tvLuffingConverter;
     @BindView(R.id.tv_around_converter)
     TextView tvAroundConverter;
+    @BindView(R.id.tv_real_state)
+    TextView tvRealState;
 
     @BindView(R.id.tv_emergency_call)
     TextView tvCall;
@@ -172,10 +172,12 @@ public class MainActivity extends BaseActivity  {
     private static final int ON_SELECT_UPLOAD = 0;
     private static final int ON_SELECT_LUFFING = 1;
     private static final int ON_SELECT_AROUND = 2;
-    private int onSelect;
+    private static final int ON_SELECT_REAL_STATE = 3;
+    private int onSelect = ON_SELECT_REAL_STATE;
     UploadConverterFragment uploadConverterFragment;
     LuffingConverterFragment luffingConverterFragment;
     AroundConverterFragment aroundConverterFragment;
+    TowerParameterFragment towerParameterFragment;
 
     AppUpdateViewModel versionModel;
     UpdateDialog updateDialog;
@@ -205,14 +207,13 @@ public class MainActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bind = ButterKnife.bind(this);
-        addTowerParameterFragment();
         switchConverterTab(onSelect);
         tvCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Test test = new Test();
                 DeviceManager.getInstance().emergencyCall();
-//                test.testOnReceiveRealtimedata();
+                test.testOnReceiveRealtimedata();
             }
         });
         EventBus.getDefault().register(this);
@@ -432,20 +433,16 @@ public class MainActivity extends BaseActivity  {
         }
     }
 
-    private void addTowerParameterFragment(){
-        TowerParameterFragment towerParameterFragment = TowerParameterFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fl_tower_parameter,towerParameterFragment);
-        fragmentTransaction.commit();
-    }
-
     @OnClick({R.id.tv_upload_converter,R.id.tv_luffing_converter,R.id.tv_around_converter,
         R.id.rl_setting,R.id.rl_output,R.id.tv_tower_market,R.id.btn_play,R.id.tv_v1,
         R.id.tv_v2,R.id.tv_v3,R.id.rl_identity,R.id.rl_announcement,R.id.img_volume,
-            R.id.img_full_screen,R.id.tv_attendance_onwork,R.id.tv_attendance_offwork})
+            R.id.img_full_screen,R.id.tv_attendance_onwork,R.id.tv_attendance_offwork,
+            R.id.tv_real_state})
     public void onClick(View view){
         switch (view.getId()){
+            case R.id.tv_real_state:
+                switchConverterTab(ON_SELECT_REAL_STATE);
+                break;
             case R.id.tv_upload_converter:
                 switchConverterTab(ON_SELECT_UPLOAD);
                 break;
@@ -640,6 +637,7 @@ public class MainActivity extends BaseActivity  {
         tvUploadConverter.setSelected(false);
         tvLuffingConverter.setSelected(false);
         tvAroundConverter.setSelected(false);
+        tvRealState.setSelected(false);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -663,6 +661,12 @@ public class MainActivity extends BaseActivity  {
             }
             fragmentTransaction.replace(R.id.fl_frequency_converter,aroundConverterFragment);
             tvAroundConverter.setSelected(true);
+        }else if(type == ON_SELECT_REAL_STATE){
+            if(towerParameterFragment == null){
+                towerParameterFragment = TowerParameterFragment.newInstance();
+            }
+            fragmentTransaction.replace(R.id.fl_frequency_converter,towerParameterFragment);
+            tvRealState.setSelected(true);
         }
         fragmentTransaction.commit();
     }

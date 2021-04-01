@@ -233,4 +233,17 @@
         <item name="android:layout_marginStart">12dp</item>
     </style>
 
+    <style name="tower_primary_direction_text_style" >
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:background">@drawable/tower_parameter_direction_text_bg_selector</item>
+        <item name="android:textColor">@drawable/tower_parameter_direction_text_color_selector</item>
+        <item name="android:textSize">@dimen/main_content_text_dimen</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 </resources>

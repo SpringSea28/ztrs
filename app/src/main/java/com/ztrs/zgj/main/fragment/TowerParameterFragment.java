@@ -192,7 +192,7 @@ public class TowerParameterFragment extends Fragment {
     }
 
     private void initRecycleView(){
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,8);
         towerParameterAdapter = new TowerParameterAdapter();
         rvParameter.setLayoutManager(gridLayoutManager);
         rvParameter.setAdapter(towerParameterAdapter);
@@ -274,7 +274,7 @@ public class TowerParameterFragment extends Fragment {
                 offset = 1;
             }
         }
-        imgCar.setTranslationY(offset*ScaleUtils.dip2px(context,24));
+        imgCar.setTranslationY(offset*ScaleUtils.dip2px(context,33));
     }
 
     private void initHookup(){
@@ -293,7 +293,7 @@ public class TowerParameterFragment extends Fragment {
                 offsetY = 1;
              }
 //            Log.e("wch","offsetY:"+offsetY);
-            translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
+            translationY = -ScaleUtils.dip2px(context,(offsetY)*99);
             llHookup.setTranslationY(translationY);
         }
 
@@ -337,7 +337,7 @@ public class TowerParameterFragment extends Fragment {
                 offsetY = 1;
             }
 //            Log.e("wch","offsetY:"+offsetY);
-            translationY = -ScaleUtils.dip2px(context,(offsetY)*92);
+            translationY = -ScaleUtils.dip2px(context,(offsetY)*99);
         }
         if(transYAnimator != null ){
             translationYBefore = (float) transYAnimator.getAnimatedValue();
@@ -551,7 +551,7 @@ public class TowerParameterFragment extends Fragment {
             for(int i=0;i<alarms.size();i++){
                 TextView alarm = new TextView(context);
                 alarm.setText(alarms.get(i));
-                alarm.setTextSize(TypedValue.COMPLEX_UNIT_SP,6);
+                alarm.setTextSize(TypedValue.COMPLEX_UNIT_SP,11);
                 alarm.setBackground(getResources().getDrawable(R.drawable.tower_parameter_alarm_item_bg,null));
                 alarm.setTextColor(Color.parseColor("#FF3702"));
                 alarm.setGravity(Gravity.CENTER);

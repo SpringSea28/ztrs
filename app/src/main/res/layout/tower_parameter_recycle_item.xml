@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_tower_parameter_item"
-    android:layout_width="36dp"
+    android:layout_width="42dp"
     android:layout_height="32dp"
     android:gravity="center"
     android:background="@drawable/tower_parameter_item_bg"
@@ -10,15 +10,15 @@
         android:id="@+id/tv_value"
         style="@style/tower_primary_text_style"
         android:textColor="@color/tower_parameter_normal_text_color"
-        android:textSize="8dp"
+        android:textSize="9sp"
         android:text="value"/>
     <TextView
         android:id="@+id/tv_warn"
         style="@style/tower_primary_text_style"
         android:textColor="@color/tower_parameter_warn_text_color"
-        android:textSize="6dp"
+        android:textSize="7sp"
         android:text="@string/tower_warn"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/tv_key"

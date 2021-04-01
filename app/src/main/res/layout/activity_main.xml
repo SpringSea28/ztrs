@@ -185,8 +185,7 @@
     <RelativeLayout
         android:id="@+id/rl_video"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="192dp">
 
         <org.videolan.libvlc.util.VLCVideoLayout
             android:id="@+id/video_layout"
@@ -250,7 +249,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_video"
             android:layout_width="match_parent"
-            android:layout_height="16dp"/>
+            android:layout_height="20dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -291,23 +290,38 @@
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/fl_tower_parameter"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="185dp"
-        android:background="@color/white"></FrameLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="295dp"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
         android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_real_state"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="@dimen/main_content_text_dimen"
+            android:textColor="@drawable/tower_parameter_converter_text_color_selector"
+            android:background="@drawable/tower_parameter_converter_text_bg_selector"
+            android:text="实时工况"/>
         <TextView
             android:id="@+id/tv_upload_converter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="1"
-            android:textSize="10sp"
+            android:textSize="@dimen/main_content_text_dimen"
             android:textColor="@drawable/tower_parameter_converter_text_color_selector"
             android:background="@drawable/tower_parameter_converter_text_bg_selector"
             android:text="起升变频器"/>
@@ -317,7 +331,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="1"
-            android:textSize="10sp"
+            android:textSize="@dimen/main_content_text_dimen"
             android:textColor="@drawable/tower_parameter_converter_text_color_selector"
             android:background="@drawable/tower_parameter_converter_text_bg_selector"
             android:text="变幅变频器"/>
@@ -327,7 +341,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="1"
-            android:textSize="10sp"
+            android:textSize="@dimen/main_content_text_dimen"
             android:textColor="@drawable/tower_parameter_converter_text_color_selector"
             android:background="@drawable/tower_parameter_converter_text_bg_selector"
             android:text="回转变频器"/>
@@ -341,10 +355,12 @@
     <FrameLayout
         android:id="@+id/fl_frequency_converter"
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@color/white">
 
     </FrameLayout>
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="24dp">
