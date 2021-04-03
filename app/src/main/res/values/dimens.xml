@@ -5,6 +5,7 @@
 
     <dimen name="tower_converter_text_dimen">8sp</dimen>t
     <dimen name="tower_converter_text_margintop">3dp</dimen>
+    <dimen name="tower_converter_text_state_limit_margintop">13dp</dimen>
 
     <dimen name="setting_item_key_padding_start">12dp</dimen>
     <dimen name="setting_item_value_width">140dp</dimen>

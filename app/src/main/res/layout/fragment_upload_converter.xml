@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="165dp"
+    android:layout_height="265dp"
     android:orientation="vertical"
     tools:context=".main.fragment.UploadConverterFragment">
 
     <TextView
         android:id="@+id/tv_error"
-        style="@style/tower_converter_text_style"
+        style="@style/tower_converter_text_style_number"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="11dp"
         android:text="变频器通讯异常"
         android:textColor="@color/tower_parameter_converter_error_text_color"
         android:visibility="invisible" />
@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/tv_gear_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -55,7 +55,7 @@
 
             <TextView
                 android:id="@+id/tv_running_state_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -81,7 +81,7 @@
 
             <TextView
                 android:id="@+id/tv_brake_detect_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -107,7 +107,7 @@
 
             <TextView
                 android:id="@+id/tv_bus_voltage_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -130,7 +130,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -140,7 +140,7 @@
 
             <TextView
                 android:id="@+id/tv_output_voltage_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -166,7 +166,7 @@
 
             <TextView
                 android:id="@+id/tv_output_current_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -192,7 +192,7 @@
 
             <TextView
                 android:id="@+id/tv_running_frequency_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -218,7 +218,7 @@
 
             <TextView
                 android:id="@+id/tv_motor_speed_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -244,7 +244,7 @@
 
             <TextView
                 android:id="@+id/tv_temperature_value"
-                style="@style/tower_converter_text_style"
+                style="@style/tower_converter_text_style_number"
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
@@ -266,9 +266,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="12dp"
         android:orientation="horizontal">
 
@@ -287,7 +287,7 @@
                     style="@style/converter_limit_value_img_style" />
 
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="上升减速限位" />
 
                 <TextView
@@ -302,14 +302,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_down_end_limit_value"
                     style="@style/converter_limit_value_img_style" />
 
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="下降终点限位" />
 
                 <TextView
@@ -324,13 +324,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_weight_50_limit_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="载重量50\%限位" />
 
                 <TextView
@@ -344,13 +344,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_brake_failure_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="制动器失效" />
 
                 <TextView
@@ -365,13 +365,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_limit_switch_shield_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="限位开关屏蔽" />
 
                 <TextView
@@ -398,7 +398,7 @@
                     android:id="@+id/img_down_reduce_speed_limit_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="下降减速限位" />
 
                 <TextView
@@ -412,13 +412,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_weight_100_limit_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="载重量100\%限位" />
 
                 <TextView
@@ -432,13 +432,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_weight_25_limit_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="载重量25\%限位" />
 
                 <TextView
@@ -453,14 +453,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
 
                 <ImageView
                     android:id="@+id/img_slow_running_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="慢速运行" />
 
                 <TextView
@@ -488,7 +488,7 @@
                     android:id="@+id/img_up_end_limit_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="上升终点限位" />
 
                 <TextView
@@ -503,13 +503,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_weight_90_limit_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="载重量90\%限位" />
 
                 <TextView
@@ -524,13 +524,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_brake_unit_error_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="制动单元故障" />
 
                 <TextView
@@ -545,13 +545,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/tower_converter_text_state_limit_margintop"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/img_brake_close_value"
                     style="@style/converter_limit_value_img_style" />
                 <TextView
-                    style="@style/tower_converter_text_style"
+                    style="@style/tower_converter_text_style_state_limit"
                     android:text="制动器未打开" />
 
                 <TextView

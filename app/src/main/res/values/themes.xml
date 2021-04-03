@@ -60,6 +60,14 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="tower_converter_text_style_number" parent="tower_converter_text_style" >
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="tower_converter_text_style_state_limit" parent="tower_converter_text_style_number" >
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
 
     <style name="setting_item_style" >
         <item name="android:layout_width">match_parent</item>

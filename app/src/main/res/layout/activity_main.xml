@@ -1,185 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingLeft="4dp"
-    android:paddingRight="4dp"
-    android:orientation="vertical">
+    android:paddingRight="4dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="27dp"
         android:gravity="center_vertical">
+
         <ImageView
             android:id="@+id/img_logo"
             android:layout_width="80dp"
             android:layout_height="14dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/logo"/>
+            android:src="@mipmap/logo" />
+
         <RelativeLayout
             android:id="@+id/rl_setting"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:gravity="center_vertical"
-            android:background="@drawable/main_item_text_bg_selector">
+            android:background="@drawable/main_item_text_bg_selector"
+            android:gravity="center_vertical">
+
             <TextView
                 style="@style/tower_primary_title_text_style"
                 android:drawableLeft="@mipmap/shezhi"
                 android:drawablePadding="2dp"
-                android:text="设置"/>
+                android:text="设置" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rl_identity"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/rl_setting"
             android:layout_marginRight="5dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/main_item_text_bg_selector">
+            android:layout_toLeftOf="@id/rl_setting"
+            android:background="@drawable/main_item_text_bg_selector"
+            android:gravity="center_vertical">
+
             <TextView
                 style="@style/tower_primary_title_text_style"
                 android:drawableLeft="@mipmap/shenfencaiji"
                 android:drawablePadding="2dp"
-                android:text="身份采集"/>
+                android:text="身份采集" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_output"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/rl_identity"
             android:layout_marginRight="5dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/main_item_text_bg_selector">
+            android:layout_toLeftOf="@id/rl_identity"
+            android:background="@drawable/main_item_text_bg_selector"
+            android:gravity="center_vertical">
+
             <TextView
                 style="@style/tower_primary_title_text_style"
                 android:drawableLeft="@mipmap/shuchukongzhi"
                 android:drawablePadding="2dp"
-                android:text="输出控制"/>
+                android:text="输出控制" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_announcement"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/rl_output"
             android:layout_marginRight="5dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/main_item_text_bg_selector">
+            android:layout_toLeftOf="@id/rl_output"
+            android:background="@drawable/main_item_text_bg_selector"
+            android:gravity="center_vertical">
+
             <TextView
                 style="@style/tower_primary_title_text_style"
                 android:drawableLeft="@mipmap/gonggao"
                 android:drawablePadding="2dp"
-                android:text="公告"/>
+                android:text="公告" />
+
             <ImageView
                 android:id="@+id/img_announcement_unread"
                 android:layout_width="2dp"
                 android:layout_height="2dp"
                 android:layout_marginLeft="4dp"
-                android:src="@drawable/announcement_unread_bg"/>
+                android:src="@drawable/announcement_unread_bg" />
         </RelativeLayout>
+
         <ImageView
             android:id="@+id/img_signal_3"
             android:layout_width="9dp"
             android:layout_height="9dp"
-            android:layout_toLeftOf="@id/rl_announcement"
-            android:layout_marginRight="19dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/xinhao_3"/>
+            android:layout_marginRight="19dp"
+            android:layout_toLeftOf="@id/rl_announcement"
+            android:src="@mipmap/xinhao_3" />
+
         <ImageView
             android:id="@+id/img_signal_1"
             android:layout_width="10dp"
             android:layout_height="8dp"
-            android:layout_toLeftOf="@id/img_signal_3"
-            android:layout_marginRight="7dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/xinhao_1"/>
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/img_signal_3"
+            android:src="@mipmap/xinhao_1" />
 
         <TextClock
             android:id="@+id/tv_time"
             style="@style/tower_primary_text_style"
-            android:layout_toLeftOf="@id/img_signal_1"
-            android:layout_toRightOf="@id/img_logo"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_toLeftOf="@id/img_signal_1"
+            android:layout_toRightOf="@id/img_logo"
             android:format24Hour="yyyy年MM月dd日 HH:mm:ss EEEE"
-            android:textColor="#475771"/>
+            android:textColor="#475771" />
 
     </RelativeLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/img_header"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:src="@mipmap/logo_2"/>
+            android:src="@mipmap/logo_2" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp">
+
             <TextView
                 android:id="@+id/tv_name"
                 style="@style/tower_primary_text_style"
-                android:textColor="#475771"
-                android:text="安晓迪"/>
+                android:text="安晓迪"
+                android:textColor="#475771" />
+
             <TextView
                 android:id="@+id/tv_start_work_time"
                 style="@style/tower_primary_text_style"
                 android:layout_below="@id/tv_name"
-                android:textColor="#475771"
-                android:text="18.11.05 14:16:12"/>
+                android:text="18.11.05 14:16:12"
+                android:textColor="#475771" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1">
+
             <TextView
                 android:id="@+id/tv_work_time"
                 style="@style/tower_primary_text_style"
-                android:textColor="#475771"
-                android:text="累计上班时间：30:26:28"/>
+                android:text="累计上班时间：30:26:28"
+                android:textColor="#475771" />
+
             <TextView
                 android:id="@+id/tv_pay"
                 style="@style/tower_primary_text_style"
                 android:layout_below="@id/tv_work_time"
-                android:textColor="#475771"
-                android:text="本月收入: 3000元"/>
+                android:text="本月收入: 3000元"
+                android:textColor="#475771" />
         </RelativeLayout>
+
         <TextView
             android:id="@+id/tv_attendance_onwork"
             style="@style/tower_attendance_text_style"
             android:layout_marginEnd="5dp"
-            android:text="上班"/>
+            android:text="上班" />
+
         <TextView
             android:id="@+id/tv_attendance_offwork"
             style="@style/tower_attendance_text_style"
             android:layout_marginStart="5dp"
-            android:text="下班"/>
+            android:text="下班" />
+
         <TextView
             android:id="@+id/tv_attendance_workhistory"
             style="@style/tower_attendance_text_style"
             android:layout_width="49dp"
             android:layout_marginStart="5dp"
-            android:text="考勤记录"/>
-        
+            android:text="考勤记录" />
+
         <TextView
             android:id="@+id/tv_emergency_call"
             android:layout_width="49dp"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
-            android:gravity="center"
-            android:textSize="7sp"
-            android:textColor="@android:color/white"
             android:background="@drawable/tower_emergency_call_btn_bg_selector"
-            android:text="紧急呼叫"/>
+            android:gravity="center"
+            android:text="紧急呼叫"
+            android:textColor="@android:color/white"
+            android:textSize="7sp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -192,7 +212,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:fitsSystemWindows="false" >
+            android:fitsSystemWindows="false">
 
             <RelativeLayout
                 android:id="@+id/rl_video_bg"
@@ -206,85 +226,91 @@
             android:layout_height="18dp"
             android:orientation="horizontal"
             android:visibility="gone">
+
             <TextView
                 android:id="@+id/tv_v1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="7sp"
                 android:background="#4AA5FE"
+                android:gravity="center"
+                android:text="吊钩可视化"
                 android:textColor="#FED456"
-                android:text="吊钩可视化"/>
+                android:textSize="7sp" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
+
             <TextView
                 android:id="@+id/tv_v2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="7sp"
                 android:background="#B24AA5FE"
+                android:gravity="center"
+                android:text="排绳监控视频"
                 android:textColor="#FFFFFF"
-                android:text="排绳监控视频"/>
+                android:textSize="7sp" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
+
             <TextView
                 android:id="@+id/tv_v3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="7sp"
                 android:background="#B24AA5FE"
+                android:gravity="center"
+                android:text="驾驶室监控视频"
                 android:textColor="#FFFFFF"
-                android:text="驾驶室监控视频"/>
+                android:textSize="7sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_video"
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="18dp"
             android:layout_alignParentBottom="true"
             android:background="#7f000000">
+
             <Button
                 android:id="@+id/btn_play"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:stateListAnimator="@null"
-                android:textColor="@android:color/white"
                 android:background="@drawable/setting_save_btn_bg_selector"
-                android:textSize="7sp"
-                android:text="播放"/>
+                android:stateListAnimator="@null"
+                android:text="播放"
+                android:textColor="@android:color/white"
+                android:textSize="7sp" />
 
             <ImageView
                 android:id="@+id/img_full_screen"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="0dp"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/quanping"
-                android:scaleType="center"/>
+                android:layout_marginEnd="0dp"
+                android:scaleType="center"
+                android:src="@mipmap/quanping" />
 
             <ImageView
                 android:id="@+id/img_volume"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/yinliang"
-                android:scaleType="center"/>
+                android:layout_marginEnd="30dp"
+                android:scaleType="center"
+                android:src="@mipmap/yinliang" />
 
         </RelativeLayout>
 
@@ -293,7 +319,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -301,132 +327,143 @@
         android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_real_state"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="@dimen/main_content_text_dimen"
-            android:textColor="@drawable/tower_parameter_converter_text_color_selector"
-            android:background="@drawable/tower_parameter_converter_text_bg_selector"
-            android:text="实时工况"/>
-        <TextView
-            android:id="@+id/tv_upload_converter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="@dimen/main_content_text_dimen"
-            android:textColor="@drawable/tower_parameter_converter_text_color_selector"
-            android:background="@drawable/tower_parameter_converter_text_bg_selector"
-            android:text="起升变频器"/>
-        <TextView
-            android:id="@+id/tv_luffing_converter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="@dimen/main_content_text_dimen"
-            android:textColor="@drawable/tower_parameter_converter_text_color_selector"
-            android:background="@drawable/tower_parameter_converter_text_bg_selector"
-            android:text="变幅变频器"/>
-        <TextView
-            android:id="@+id/tv_around_converter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="@dimen/main_content_text_dimen"
-            android:textColor="@drawable/tower_parameter_converter_text_color_selector"
-            android:background="@drawable/tower_parameter_converter_text_bg_selector"
-            android:text="回转变频器"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/tv_real_state"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tower_parameter_converter_text_bg_selector"
+                android:gravity="center"
+                android:text="实时工况"
+                android:textColor="@drawable/tower_parameter_converter_text_color_selector"
+                android:textSize="@dimen/main_content_text_dimen" />
+
+            <TextView
+                android:id="@+id/tv_upload_converter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tower_parameter_converter_text_bg_selector"
+                android:gravity="center"
+                android:text="起升变频器"
+                android:textColor="@drawable/tower_parameter_converter_text_color_selector"
+                android:textSize="@dimen/main_content_text_dimen" />
+
+            <TextView
+                android:id="@+id/tv_luffing_converter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tower_parameter_converter_text_bg_selector"
+                android:gravity="center"
+                android:text="变幅变频器"
+                android:textColor="@drawable/tower_parameter_converter_text_color_selector"
+                android:textSize="@dimen/main_content_text_dimen" />
+
+            <TextView
+                android:id="@+id/tv_around_converter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tower_parameter_converter_text_bg_selector"
+                android:gravity="center"
+                android:text="回转变频器"
+                android:textColor="@drawable/tower_parameter_converter_text_color_selector"
+                android:textSize="@dimen/main_content_text_dimen" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/tower_line_color" />
+
+        <FrameLayout
+            android:id="@+id/fl_frequency_converter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+        </FrameLayout>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/tower_line_color"/>
 
-    <FrameLayout
-        android:id="@+id/fl_frequency_converter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/white">
-
-    </FrameLayout>
-    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp">
+        android:layout_height="24dp"
+        android:layout_marginTop="6dp">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="14dp"
             android:layout_alignParentBottom="true"
-            android:background="#4AA5FE"/>
+            android:background="#4AA5FE" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="7dp"
-                android:gravity="center"
-                android:background="@mipmap/anniu"
-                android:textSize="7sp"
-                android:textColor="@android:color/white"
-                android:text="一键报修"/>
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="26dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="7dp"
-                android:gravity="center"
-                android:background="@mipmap/anniu"
-                android:textSize="7sp"
-                android:textColor="@android:color/white"
-                android:text="检查维保"/>
 
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="26dp"
-                android:layout_weight="1"
                 android:layout_marginEnd="7dp"
-                android:gravity="center"
+                android:layout_weight="1"
                 android:background="@mipmap/anniu"
-                android:textSize="7sp"
+                android:gravity="center"
+                android:text="一键报修"
                 android:textColor="@android:color/white"
-                android:text="安全教育"/>
+                android:textSize="11sp" />
 
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="26dp"
-                android:layout_weight="1"
                 android:layout_marginEnd="7dp"
-                android:gravity="center"
+                android:layout_weight="1"
                 android:background="@mipmap/anniu"
-                android:textSize="7sp"
+                android:gravity="center"
+                android:text="检查维保"
                 android:textColor="@android:color/white"
-                android:text="劳务结算"/>
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:layout_marginEnd="7dp"
+                android:layout_weight="1"
+                android:background="@mipmap/anniu"
+                android:gravity="center"
+                android:text="安全教育"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="26dp"
+                android:layout_marginEnd="7dp"
+                android:layout_weight="1"
+                android:background="@mipmap/anniu"
+                android:gravity="center"
+                android:text="劳务结算"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/tv_tower_market"
                 android:layout_width="60dp"
                 android:layout_height="26dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:background="@mipmap/anniu"
-                android:textSize="7sp"
+                android:gravity="center"
+                android:text="建机商城"
                 android:textColor="@android:color/white"
-                android:text="建机商城"/>
+                android:textSize="11sp" />
 
         </LinearLayout>
     </RelativeLayout>
