@@ -36,14 +36,14 @@
     </style>
     <style name="tower_primary_title_text_style" parent="tower_primary_text_style" >
         <item name="android:textColor">@color/tower_primary_normal_text_color_blue</item>
-        <item name="android:textSize">6sp</item>
+        <item name="android:textSize">7sp</item>
     </style>
 
     <style name="tower_attendance_text_style" >
-        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_width">36dp</item>
         <item name="android:layout_height">16dp</item>
         <item name="android:textColor">@color/tower_attendance_text_bg_selector</item>
-        <item name="android:textSize">7sp</item>
+        <item name="android:textSize">8sp</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
         <item name="android:background">@drawable/tower_attendance_btn_bg_selector</item>

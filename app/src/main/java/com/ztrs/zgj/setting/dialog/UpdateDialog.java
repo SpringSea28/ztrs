@@ -2,12 +2,16 @@ package com.ztrs.zgj.setting.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
+import com.ztrs.zgj.R;
 import com.ztrs.zgj.databinding.DialogUpdateBinding;
 
 
@@ -83,6 +87,33 @@ public class UpdateDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+    }
+
+    private Animation animation;
+    public void startAnimation() {
+        if (animation == null) {
+            animation = AnimationUtils.loadAnimation(getContext(), R.anim.loading_anmi);
+            if (binding.imgLoading != null) {
+                binding.imgLoading.startAnimation(animation);
+                binding.imgLoading.setVisibility(View.VISIBLE);
+            }
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+                if (binding.imgLoading != null) {
+                    binding.imgLoading.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                }
+            }
+        }
+    }
+
+    public void clearAnimation() {
+        if (animation != null) {
+            animation.cancel();
+            animation = null;
+            if (binding.imgLoading != null) {
+                binding.imgLoading.clearAnimation();
+                binding.imgLoading.setVisibility(View.GONE);
+            }
+        }
     }
 
     OnUserClick onUserClick;

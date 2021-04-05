@@ -20,6 +20,8 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -259,6 +261,7 @@ public class MainActivity extends BaseActivity  {
                     updateDialog.setText("新版本下载中...");
                     updateDialog.hideButton();
                     updateDialog.show();
+                    updateDialog.startAnimation();
                 }
                 break;
             case DOWNLOAD_SUCCESS:
@@ -270,6 +273,7 @@ public class MainActivity extends BaseActivity  {
                         requestInstallPermission(versionModel.getApkFile(this));
                     });
                     updateDialog.show();
+                    updateDialog.clearAnimation();
                 }
                 break;
             case DOWNLOAD_FAIL:
@@ -278,6 +282,7 @@ public class MainActivity extends BaseActivity  {
                     updateDialog.showConfirm();
                     updateDialog.setOnUserClick(() -> updateDialog.dismiss());
                     updateDialog.show();
+                    updateDialog.clearAnimation();
                 }
                 break;
         }
@@ -1310,4 +1315,6 @@ public class MainActivity extends BaseActivity  {
             Log.e(TAG,"onBlockedStatusChanged");
         }
     };
+
+
 }

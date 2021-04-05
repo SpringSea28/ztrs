@@ -13,10 +13,11 @@
 
         <ImageView
             android:id="@+id/img_logo"
-            android:layout_width="80dp"
-            android:layout_height="14dp"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/logo" />
+            android:src="@mipmap/logo"
+            android:scaleType="fitXY"/>
 
         <RelativeLayout
             android:id="@+id/rl_setting"
@@ -114,8 +115,9 @@
             android:layout_marginEnd="8dp"
             android:layout_toLeftOf="@id/img_signal_1"
             android:layout_toRightOf="@id/img_logo"
-            android:format24Hour="yyyy年MM月dd日 HH:mm:ss EEEE"
-            android:textColor="#475771" />
+            android:format24Hour="yyyy年MM月dd日 \n HH:mm:ss EEEE"
+            android:textColor="#475771"
+            android:textSize="6sp"/>
 
     </RelativeLayout>
 
@@ -132,7 +134,7 @@
             android:src="@mipmap/logo_2" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp">
 
@@ -140,41 +142,47 @@
                 android:id="@+id/tv_name"
                 style="@style/tower_primary_text_style"
                 android:text="安晓迪"
+                android:textSize="7sp"
                 android:textColor="#475771" />
 
             <TextView
                 android:id="@+id/tv_start_work_time"
                 style="@style/tower_primary_text_style"
-                android:layout_below="@id/tv_name"
+                android:layout_toRightOf="@id/tv_name"
+                android:layout_marginLeft="9dp"
                 android:text="18.11.05 14:16:12"
+                android:textSize="6sp"
                 android:textColor="#475771" />
+            <TextView
+                android:id="@+id/tv_work_time"
+                style="@style/tower_primary_text_style"
+                android:text="累计上班时间：30:26:28"
+                android:layout_below="@id/tv_name"
+                android:textColor="#475771"
+                android:textSize="7sp"/>
+
+            <TextView
+                android:id="@+id/tv_pay"
+                style="@style/tower_primary_text_style"
+                android:layout_below="@id/tv_name"
+                android:layout_alignParentEnd="true"
+                android:text="本月收入: 3000元"
+                android:textColor="#475771"
+                android:textSize="7sp"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="5dp"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_work_time"
-                style="@style/tower_primary_text_style"
-                android:text="累计上班时间：30:26:28"
-                android:textColor="#475771" />
 
-            <TextView
-                android:id="@+id/tv_pay"
-                style="@style/tower_primary_text_style"
-                android:layout_below="@id/tv_work_time"
-                android:text="本月收入: 3000元"
-                android:textColor="#475771" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_attendance_onwork"
             style="@style/tower_attendance_text_style"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:text="上班" />
 
         <TextView
@@ -192,14 +200,14 @@
 
         <TextView
             android:id="@+id/tv_emergency_call"
-            android:layout_width="49dp"
+            android:layout_width="44dp"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/tower_emergency_call_btn_bg_selector"
             android:gravity="center"
             android:text="紧急呼叫"
             android:textColor="@android:color/white"
-            android:textSize="7sp" />
+            android:textSize="8sp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -316,10 +324,7 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -330,6 +335,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="29dp"
+            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
             <TextView

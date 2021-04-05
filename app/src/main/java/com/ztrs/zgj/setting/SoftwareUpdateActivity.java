@@ -132,6 +132,7 @@ public class SoftwareUpdateActivity extends BaseActivity implements View.OnClick
                     updateDialog.setText("新版本下载中...");
                     updateDialog.hideButton();
                     updateDialog.show();
+                    updateDialog.startAnimation();
                 }
                 break;
             case DOWNLOAD_SUCCESS:
@@ -143,6 +144,7 @@ public class SoftwareUpdateActivity extends BaseActivity implements View.OnClick
                         requestInstallPermission(versionModel.getApkFile(this));
                     });
                     updateDialog.show();
+                    updateDialog.clearAnimation();
                 }
                 break;
             case DOWNLOAD_FAIL:
@@ -151,6 +153,7 @@ public class SoftwareUpdateActivity extends BaseActivity implements View.OnClick
                     updateDialog.showConfirm();
                     updateDialog.setOnUserClick(() -> updateDialog.dismiss());
                     updateDialog.show();
+                    updateDialog.clearAnimation();
                 }
                 break;
         }
