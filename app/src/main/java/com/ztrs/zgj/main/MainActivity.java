@@ -414,10 +414,10 @@ public class MainActivity extends BaseActivity  {
 //                        + SAVE_IMG_DIR + File.separator
 //                        + fileName + IMG_SUFFIX);
 //                Log.e("wch","imgFile:"+imgFile);
-//                Glide.with(this)
-//                        .load(imgFile)
-//                        .error(R.mipmap.logo_2)
-//                        .into(imgHeader);
+                Glide.with(this)
+                        .load(fileName)
+                        .error(R.mipmap.logo_2)
+                        .into(imgHeader);
             }else if(requestCode == 3){
                 int code = data.getIntExtra("requestCode",-1);
                 String name = data.getStringExtra("name");
@@ -851,6 +851,7 @@ public class MainActivity extends BaseActivity  {
                         public void run() {
                             rlVideoBg.setVisibility(View.GONE);
                             btnPlay.setText("暂停");
+                            clearAnimation();
                         }
                     });             }
                 else if (event.type == MediaPlayer.Event.Paused){
@@ -871,8 +872,9 @@ public class MainActivity extends BaseActivity  {
                         public void run() {
 
                             Log.d(TAG, "VLC Stopped detachViews");
-                                mMediaPlayer.detachViews();
+                            mMediaPlayer.detachViews();
                             btnPlay.setText("播放");
+                            clearAnimation();
                         }
                     });
                 }
@@ -908,7 +910,7 @@ public class MainActivity extends BaseActivity  {
         media.release();
         mMediaPlayer.play();
         updateVolume();
-
+        startAnimation();
     }
 
     private void pausePlay(){
@@ -1316,5 +1318,32 @@ public class MainActivity extends BaseActivity  {
         }
     };
 
+    @BindView(R.id.img_loading)
+    ImageView imgLoading;
+    private Animation animation;
+    public void startAnimation() {
+        if (animation == null) {
+            animation = AnimationUtils.loadAnimation(this, R.anim.loading_anmi);
+            if (imgLoading != null) {
+                imgLoading.startAnimation(animation);
+                imgLoading.setVisibility(View.VISIBLE);
+            }
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+                if (imgLoading != null) {
+                    imgLoading.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                }
+            }
+        }
+    }
 
+    public void clearAnimation() {
+        if (animation != null) {
+            animation.cancel();
+            animation = null;
+            if (imgLoading != null) {
+                imgLoading.clearAnimation();
+                imgLoading.setVisibility(View.GONE);
+            }
+        }
+    }
 }

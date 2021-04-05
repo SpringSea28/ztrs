@@ -87,7 +87,7 @@
         <activity android:name=".setting.VideoInputActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".main.FullScreenActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

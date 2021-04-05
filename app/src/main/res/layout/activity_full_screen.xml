@@ -18,7 +18,8 @@
     <RelativeLayout
         android:id="@+id/rl_video"
         android:layout_width="match_parent"
-        android:layout_height="203dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_title"
         android:layout_centerInParent="true">
 
         <org.videolan.libvlc.util.VLCVideoLayout
