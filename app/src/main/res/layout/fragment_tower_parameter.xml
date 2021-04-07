@@ -8,12 +8,12 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="29dp"
+        android:layout_height="32dp"
         >
         <LinearLayout
             android:id="@+id/ll_parameter_alarm"
             android:layout_width="match_parent"
-            android:layout_height="19dp"
+            android:layout_height="22dp"
             android:layout_toLeftOf="@id/img_parameter_alarm"
             android:layout_marginRight="8dp"
             android:layout_centerVertical="true"
@@ -23,8 +23,8 @@
 
         <ImageView
             android:id="@+id/img_parameter_alarm"
-            android:layout_width="13dp"
-            android:layout_height="14dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:scaleType="center"
@@ -33,13 +33,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_parameter"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="6dp"
         android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -161,7 +162,7 @@
                 android:id="@+id/ll_wire_rope"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="0dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -297,7 +298,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="4dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_tower_serial_number"
@@ -328,7 +329,7 @@
         android:id="@+id/ll_direction"
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="9dp"
         android:orientation="horizontal"
         android:visibility="visible">
