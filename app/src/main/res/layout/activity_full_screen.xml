@@ -17,8 +17,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="640dp"
+        android:layout_height="360dp"
         android:layout_below="@id/rl_title"
         android:layout_centerInParent="true">
 
@@ -29,12 +29,12 @@
             android:background="@android:color/transparent"
             android:fitsSystemWindows="false" />
 
+
         <RelativeLayout
             android:id="@+id/rl_video_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@mipmap/pic"/>
-
+            android:background="@mipmap/pic" />
 
         <RelativeLayout
             android:layout_width="match_parent"
