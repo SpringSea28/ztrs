@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="265dp"
+    android:layout_height="295dp"
     android:orientation="vertical"
     tools:context=".main.fragment.UploadConverterFragment">
 
@@ -10,7 +10,7 @@
         android:id="@+id/tv_error"
         style="@style/tower_converter_text_style_number"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="12dp"
         android:text="变频器通讯异常"
         android:textColor="@color/tower_parameter_converter_error_text_color"
         android:visibility="invisible" />
@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -130,7 +130,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -268,7 +268,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="23dp"
         android:layout_marginEnd="12dp"
         android:orientation="horizontal">
 

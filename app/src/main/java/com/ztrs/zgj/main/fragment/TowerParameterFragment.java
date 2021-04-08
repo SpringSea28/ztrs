@@ -257,6 +257,8 @@ public class TowerParameterFragment extends Fragment {
             rotationAnimator.setInterpolator(new LinearInterpolator());
             rotationAnimator.setDuration(2000);
         }
+        LogUtils.LogE(TAG,"startAngle: "+startAngle);
+        LogUtils.LogE(TAG,"stopAngle: "+stopAngle);
         rotationAnimator.start();
     }
 
@@ -348,8 +350,8 @@ public class TowerParameterFragment extends Fragment {
             transYAnimator.setInterpolator(new LinearInterpolator());
             transYAnimator.setDuration(2000);
         }
-//        Log.e("wch","translationYBefore:"+translationYBefore);
-//        Log.e("wch","translationY:"+translationY);
+        LogUtils.LogE(TAG,"translationYBefore:"+translationYBefore);
+        LogUtils.LogE(TAG,"translationY:"+translationY);
         transYAnimator.start();
 
 
@@ -378,6 +380,8 @@ public class TowerParameterFragment extends Fragment {
             transXAnimator.setInterpolator(new LinearInterpolator());
             transXAnimator.setDuration(2000);
         }
+        LogUtils.LogE(TAG,"translationXBefore:"+translationXBefore);
+        LogUtils.LogE(TAG,"tranX:"+tranX);
         transXAnimator.start();
 
         translationXBefore = imgWireRopeCar.getTranslationX();
@@ -641,15 +645,17 @@ public class TowerParameterFragment extends Fragment {
                     @Override
                     public void accept(Long aLong) throws Exception {
                         int aroundAngle = device.getRealTimeDataBean().getAroundAngle();
-                        device.getRealTimeDataBean().setAroundAngle(aroundAngle+900);
+                        device.getRealTimeDataBean().setAroundAngle(aroundAngle+50);
                         int amplitude = device.getRealTimeDataBean().getAmplitude()+50;
                         device.getRealTimeDataBean().setAmplitude(amplitude);
                         int height = device.getRealTimeDataBean().getHeight()+50;
                         device.getRealTimeDataBean().setHeight((short)height);
-                        Log.e("wch","hookupAnimation start");
                         hookupAnimation();
-                        Log.e("wch","hookupAnimation end");
                         updateRotationAngle();
+                        if(amplitude>4000){
+                            device.getRealTimeDataBean().setAmplitude(0);
+                            device.getRealTimeDataBean().setHeight((short)0);
+                        }
                     }
                 });
     }

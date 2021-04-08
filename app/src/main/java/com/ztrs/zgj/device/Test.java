@@ -368,27 +368,29 @@ public class Test {
                        //塔机坐标
 //                        String str = "b3 48 00 00 22 21 01 17 22 15 03 00 00 00 00 00 00 00 00 00 00 00 03 20 00 00 00 00 00 00 00 00 00 01 ff f1 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 32 cc";
 //                        String str = "b3 48 00 00 22 21 01 21 22 34 25 00 00 00 00 64 00 00 00 00 01 f4 01 90 00 00 00 00 00 00 00 00";
-                        String str = "b3 48 00 00 22 20 11 18 14 42 52 00 02 bc 00 c8 00 00 00 00 00 32 05 78 00 00 00 00 00 00 00 00";
-                        byte[] byteFromStr = getByteFromStr(str);
+//                        String str = "b3 48 00 00 22 20 11 18 14 42 52 00 02 bc 00 c8 00 00 00 00 00 32 05 78 00 00 00 00 00 00 00 00";
+//                        byte[] byteFromStr = getByteFromStr(str);
 //                        int crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
 //                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
 //                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
-                        DeviceManager.getInstance().onDataReceive(byteFromStr);
+//                        DeviceManager.getInstance().onDataReceive(byteFromStr);
 
 //                        str = "01 2c 00 c8 00 00 00 54 43 37 30 34 32 00 00 00 00 00 00 00 00 00 00 00 08 00 05 00 96 00 64 00";
-                        str = "00 00 00 00 00 00 00 51 54 5a 35 35 31 33 00 00 00 00 00 00 00 00 02 00 03 01 f4 01 2c 01 f4 01";
-                        byteFromStr = getByteFromStr(str);
+//                        str = "00 00 00 00 00 00 00 51 54 5a 35 35 31 33 00 00 00 00 00 00 00 00 02 00 03 01 f4 01 2c 01 f4 01";
+//                        byteFromStr = getByteFromStr(str);
 //                        crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
 //                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
 //                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
-                        DeviceManager.getInstance().onDataReceive(byteFromStr);
+//                        DeviceManager.getInstance().onDataReceive(byteFromStr);
 
 //                        str = "96 00 64 00 00 1e 67 3c";
-                        str = "2c ff 03 1e ff ff 67 9c";
-                        byteFromStr = getByteFromStr(str);
+//                        str = "2c ff 03 1e ff ff 67 9c";
+//                        byteFromStr = getByteFromStr(str);
 //                        crc = Crc16.getCRC(byteFromStr, byteFromStr.length - 2);
 //                        byteFromStr[byteFromStr.length - 2] = (byte) (crc >> 8);
 //                        byteFromStr[byteFromStr.length - 1] = (byte) (crc);
+                        String str = "b3 48 00 00 22 21 04 08 17 56 16 ff 02 ee 00 f0 ff ff ff ff 00 00 02 d0 ff ff ff ff ff ff ff ff 00 00 00 00 ff ff ff 54 43 54 37 35 33 35 00 00 00 00 00 00 00 00 04 00 08 00 07 00 c9 00 97 00 c9 00 97 01 00 1e f3 76";
+                        byte[] byteFromStr = getByteFromStr(str);
                         DeviceManager.getInstance().onDataReceive(byteFromStr);
                         StaticParameterBean staticParameterBean = DeviceManager.getInstance()
                                 .getZtrsDevice().getStaticParameterBean();
