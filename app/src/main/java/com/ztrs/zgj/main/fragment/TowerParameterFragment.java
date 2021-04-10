@@ -1,5 +1,6 @@
 package com.ztrs.zgj.main.fragment;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
@@ -248,14 +249,40 @@ public class TowerParameterFragment extends Fragment {
         float startAngle = rlRotationAngle.getRotation();
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         float stopAngle = (float)(realTimeDataBean.getAroundAngle()/10.0);
+        if(rotationAnimator != null ) {
+            startAngle = (float) rotationAnimator.getAnimatedValue();
+        }
+        if(startAngle == stopAngle){
+            return;
+        }
         if(rotationAnimator != null ){
-            startAngle = (float)rotationAnimator.getAnimatedValue();
             rotationAnimator.cancel();
             rotationAnimator.setFloatValues(startAngle,stopAngle);
         }else {
             rotationAnimator = ObjectAnimator.ofFloat(rlRotationAngle,"rotation",startAngle,stopAngle);
             rotationAnimator.setInterpolator(new LinearInterpolator());
-            rotationAnimator.setDuration(2000);
+            rotationAnimator.setDuration(1000);
+            rotationAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    LogUtils.LogE(TAG,"onAnimationStart: ");
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    LogUtils.LogE(TAG,"onAnimationEnd: ");
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    LogUtils.LogE(TAG,"onAnimationCancel: ");
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+                    LogUtils.LogE(TAG,"onAnimationRepeat: ");
+                }
+            });
         }
         LogUtils.LogE(TAG,"startAngle: "+startAngle);
         LogUtils.LogE(TAG,"stopAngle: "+stopAngle);
@@ -295,7 +322,7 @@ public class TowerParameterFragment extends Fragment {
                 offsetY = 1;
              }
 //            Log.e("wch","offsetY:"+offsetY);
-            translationY = -ScaleUtils.dip2px(context,(offsetY)*99);
+            translationY = -ScaleUtils.dip2px(context,(offsetY)*117);
             llHookup.setTranslationY(translationY);
         }
 
@@ -311,7 +338,7 @@ public class TowerParameterFragment extends Fragment {
             if(offset >1){
                 offset = 1;
             }
-            float tranX = offset*82;
+            float tranX = offset*102;
             Log.e("wch","tranX: "+tranX);
             llHookup.setTranslationX(ScaleUtils.dip2px(context,tranX));
             imgWireRopeCar.setTranslationX(ScaleUtils.dip2px(context,tranX));
@@ -339,7 +366,13 @@ public class TowerParameterFragment extends Fragment {
                 offsetY = 1;
             }
 //            Log.e("wch","offsetY:"+offsetY);
-            translationY = -ScaleUtils.dip2px(context,(offsetY)*99);
+            translationY = -ScaleUtils.dip2px(context,(offsetY)*117);
+        }
+        if(transYAnimator != null ) {
+            translationYBefore = (float) transYAnimator.getAnimatedValue();
+        }
+        if(translationYBefore == translationY){
+            return;
         }
         if(transYAnimator != null ){
             translationYBefore = (float) transYAnimator.getAnimatedValue();
@@ -348,7 +381,7 @@ public class TowerParameterFragment extends Fragment {
         }else {
             transYAnimator = ObjectAnimator.ofFloat(llHookup,"translationY",translationYBefore,translationY);
             transYAnimator.setInterpolator(new LinearInterpolator());
-            transYAnimator.setDuration(2000);
+            transYAnimator.setDuration(1000);
         }
         LogUtils.LogE(TAG,"translationYBefore:"+translationYBefore);
         LogUtils.LogE(TAG,"translationY:"+translationY);
@@ -367,10 +400,16 @@ public class TowerParameterFragment extends Fragment {
             if(offset >1){
                 offset = 1;
             }
-            float tranXDp = offset*82;
+            float tranXDp = offset*102;
             tranX = ScaleUtils.dip2px(context,tranXDp);
         }
         float translationXBefore = llHookup.getTranslationX();
+        if(transXAnimator != null ) {
+            translationXBefore = (float) transXAnimator.getAnimatedValue();
+        }
+        if(translationXBefore == tranX){
+            return;
+        }
         if(transXAnimator != null ){
             translationXBefore = (float)transXAnimator.getAnimatedValue();
             transXAnimator.cancel();
@@ -378,7 +417,7 @@ public class TowerParameterFragment extends Fragment {
         }else {
             transXAnimator = ObjectAnimator.ofFloat(llHookup,"translationX",translationXBefore,tranX);
             transXAnimator.setInterpolator(new LinearInterpolator());
-            transXAnimator.setDuration(2000);
+            transXAnimator.setDuration(1000);
         }
         LogUtils.LogE(TAG,"translationXBefore:"+translationXBefore);
         LogUtils.LogE(TAG,"tranX:"+tranX);
@@ -392,7 +431,7 @@ public class TowerParameterFragment extends Fragment {
         }else {
             transXCarAnimator = ObjectAnimator.ofFloat(imgWireRopeCar,"translationX",translationXBefore,tranX);
             transXCarAnimator.setInterpolator(new LinearInterpolator());
-            transXCarAnimator.setDuration(2000);
+            transXCarAnimator.setDuration(1000);
         }
         transXCarAnimator.start();
 
@@ -639,11 +678,15 @@ public class TowerParameterFragment extends Fragment {
         device.getRealTimeDataBean().setHeight((short)1000);
         device.getRealTimeDataBean().setWireRopeDamageMagnification((byte)2);
         device.getStaticParameterBean().setTowerHeight(4000);
+        final int[] i = {0};
         Observable.interval(1,TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
+                        if((i[0]++)%2 == 0){
+//                            return;
+                        }
                         int aroundAngle = device.getRealTimeDataBean().getAroundAngle();
                         device.getRealTimeDataBean().setAroundAngle(aroundAngle+50);
                         int amplitude = device.getRealTimeDataBean().getAmplitude()+50;

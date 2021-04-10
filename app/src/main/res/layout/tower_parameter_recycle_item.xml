@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_tower_parameter_item"
     android:layout_width="47dp"
-    android:layout_height="32dp"
+    android:layout_height="33dp"
     android:gravity="center"
     android:background="@drawable/tower_parameter_item_bg"
     android:orientation="vertical">
