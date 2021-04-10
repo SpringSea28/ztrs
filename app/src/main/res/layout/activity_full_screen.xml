@@ -17,8 +17,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_video"
-        android:layout_width="640dp"
-        android:layout_height="360dp"
+        android:layout_width="400dp"
+        android:layout_height="225dp"
         android:layout_below="@id/rl_title"
         android:layout_centerInParent="true">
 

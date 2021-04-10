@@ -393,7 +393,7 @@ public class MainActivity extends BaseActivity  {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode ==RESULT_OK){
             if(requestCode == 1){
-                Toast.makeText(this,"身份采集成功",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,"身份采集成功",Toast.LENGTH_SHORT).show();
             }else if(requestCode == 2){
                 int code = data.getIntExtra("requestCode",-1);
                 String name = data.getStringExtra("name");
@@ -433,7 +433,7 @@ public class MainActivity extends BaseActivity  {
             }
         }else {
             if(requestCode == 1){
-                Toast.makeText(this,"身份采集失败",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,"身份采集失败",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -544,7 +544,7 @@ public class MainActivity extends BaseActivity  {
         Intent intentIdentity = new Intent();
         //第一种方式
         ComponentName cn = new ComponentName("com.arcsoft.arcfacedemo",
-                "com.arcsoft.arcfacedemo.activity.InitActivity");
+                "com.arcsoft.arcfacedemo.activity.MainActivity");
         try {
             intentIdentity.setComponent(cn);
             //第二种方式

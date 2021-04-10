@@ -2,5 +2,5 @@
 <resources>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
-    <string name="build_vlc_revision" translatable="false">a4fd06e</string>
+    <string name="build_vlc_revision" translatable="false">3bc527c</string>
 </resources>
