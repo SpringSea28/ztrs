@@ -445,7 +445,8 @@ public class Test {
 //        String str = "b3 09 00 01 01 00 00 6e c9";
 //        String str = "B0 3B 00 00 23 20 11 18 14 44 02 00 00 08 00 C0 F3 FF FF F0 0C FF F0 FF F0 FF F0 00 00 00 B0 00 96 01 F4 00 A0 00 00 00 00 00 00 00 00 1F 40 00 00 00 FF 6A 00 96 01 13 00 C5 C8";
 //        String str = "B0 3B 00 00 23 20 11 18 14 42 58 00 00 08 00 C0 F3 FF FF F0 0C FF F0 FF F0 FF F0 00 00 00 04 02 04 0B 8E 02 12 00 00 00 03 00 00 00 00 1F 40 00 00 01 00 2A FF D7 00 14 01 E8 1B";
-       String str = "B0 43 00 00 23 21 01 30 13 11 37 00 00 08 15 C0 F3 FF F7 F0 AC F7 F0 FF F0 FF F0 FF FC C7 DC 0B 3E C2 3D FB DD 00 00 00 00 00 00 00 00 0B B8 00 00 00 FF 6A 00 95 46 A3 00 00 03 01 02 00 64 00 28 56 FB";
+//       String str = "B0 43 00 00 23 21 01 30 13 11 37 00 00 08 15 C0 F3 FF F7 F0 AC F7 F0 FF F0 FF F0 FF FC C7 DC 0B 3E C2 3D FB DD 00 00 00 00 00 00 00 00 0B B8 00 00 00 FF 6A 00 95 46 A3 00 00 03 01 02 00 64 00 28 56 FB";
+        String str = "b0 43 00 00 23 21 04 12 17 34 22 ff 04 08 00 c0 f3 ff ff ff fc ff f0 ff f0 ff f0 05 1c 03 d5 02 3b 0e b0 01 b6 00 00 00 00 00 00 00 00 1d 4c 00 00 00 ff 6b 00 95 00 00 a4 7c 00 00 00 00 00 00 00 d5 09";
         byte[] byteFromStr = getByteFromStr(str);
 //        byte[] byteFromStr2 = getByteFromStr(str2);
         LogUtils.LogE(TAG, " bytefrom str: " + byteFromStr.length);

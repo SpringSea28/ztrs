@@ -245,7 +245,12 @@ public class TowerParameterFragment extends Fragment {
     }
 
     ObjectAnimator rotationAnimator;
+    boolean isRotationRunning = false;
     private void updateRotationAngle(){
+        if(isRotationRunning){
+            LogUtils.LogE(TAG,"isRotationRunning return");
+            return;
+        }
         float startAngle = rlRotationAngle.getRotation();
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         float stopAngle = (float)(realTimeDataBean.getAroundAngle()/10.0);
@@ -266,11 +271,14 @@ public class TowerParameterFragment extends Fragment {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     LogUtils.LogE(TAG,"onAnimationStart: ");
+                    isRotationRunning = true;
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     LogUtils.LogE(TAG,"onAnimationEnd: ");
+                    isRotationRunning = false;
+                    updateRotationAngle();
                 }
 
                 @Override
@@ -348,9 +356,14 @@ public class TowerParameterFragment extends Fragment {
     private ObjectAnimator transXAnimator;
     private ObjectAnimator transYAnimator;
     private ObjectAnimator transXCarAnimator;
-    private void hookupAnimation(){
+    boolean isTransYRunning = false;
+    boolean isTransXRunning = false;
+    private void hookupYAnimation(){
 //        LogUtils.LogE("WCH","hookupAnimation");
-
+        if(isTransYRunning){
+            LogUtils.LogE(TAG,"isTransYRunning return");
+            return;
+        }
         RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
         int height = realTimeDataBean.getHeight();
         int towerHeight = device.getStaticParameterBean().getTowerHeight();
@@ -374,20 +387,52 @@ public class TowerParameterFragment extends Fragment {
         if(translationYBefore == translationY){
             return;
         }
-        if(transYAnimator != null ){
-            translationYBefore = (float) transYAnimator.getAnimatedValue();
-            transYAnimator.cancel();
-            transYAnimator.setFloatValues(translationYBefore,translationY);
-        }else {
-            transYAnimator = ObjectAnimator.ofFloat(llHookup,"translationY",translationYBefore,translationY);
-            transYAnimator.setInterpolator(new LinearInterpolator());
-            transYAnimator.setDuration(1000);
+            if (transYAnimator != null) {
+                translationYBefore = (float) transYAnimator.getAnimatedValue();
+                transYAnimator.cancel();
+                transYAnimator.setFloatValues(translationYBefore, translationY);
+            } else {
+                transYAnimator = ObjectAnimator.ofFloat(llHookup, "translationY", translationYBefore, translationY);
+                transYAnimator.setInterpolator(new LinearInterpolator());
+                transYAnimator.setDuration(1000);
+                transYAnimator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        LogUtils.LogE(TAG, " transYAnimator onAnimationStart: ");
+                        isTransYRunning = true;
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        LogUtils.LogE(TAG, "transYAnimator onAnimationEnd: ");
+                        isTransYRunning = false;
+                        hookupYAnimation();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                        LogUtils.LogE(TAG, "transYAnimator onAnimationCancel: ");
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                        LogUtils.LogE(TAG, "transYAnimator onAnimationRepeat: ");
+                    }
+                });
+            }
+            LogUtils.LogE(TAG, "translationYBefore:" + translationYBefore);
+            LogUtils.LogE(TAG, "translationY:" + translationY);
+            transYAnimator.start();
+    }
+
+    private void hookupXAnimation(){
+//        LogUtils.LogE("WCH","hookupAnimation");
+
+        RealTimeDataBean realTimeDataBean = device.getRealTimeDataBean();
+        if(isTransXRunning){
+            LogUtils.LogE(TAG,"isTransXRunning return");
+            return;
         }
-        LogUtils.LogE(TAG,"translationYBefore:"+translationYBefore);
-        LogUtils.LogE(TAG,"translationY:"+translationY);
-        transYAnimator.start();
-
-
         int amplitude = realTimeDataBean.getAmplitude();
         int upWeightArmLen = device.getStaticParameterBean().getUpWeightArmLen();
         float offset = 0;
@@ -418,6 +463,30 @@ public class TowerParameterFragment extends Fragment {
             transXAnimator = ObjectAnimator.ofFloat(llHookup,"translationX",translationXBefore,tranX);
             transXAnimator.setInterpolator(new LinearInterpolator());
             transXAnimator.setDuration(1000);
+            transXAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    LogUtils.LogE(TAG," transXAnimator onAnimationStart: ");
+                    isTransXRunning = true;
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    LogUtils.LogE(TAG,"transXAnimator onAnimationEnd: ");
+                    isTransXRunning = false;
+                    hookupXAnimation();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    LogUtils.LogE(TAG,"transXAnimator onAnimationCancel: ");
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+                    LogUtils.LogE(TAG,"transXAnimator onAnimationRepeat: ");
+                }
+            });
         }
         LogUtils.LogE(TAG,"translationXBefore:"+translationXBefore);
         LogUtils.LogE(TAG,"tranX:"+tranX);
@@ -660,7 +729,8 @@ public class TowerParameterFragment extends Fragment {
             || msg.getResult() == BaseMessage.RESULT_OK) {
             initView();
             updateRotationAngle();
-            hookupAnimation();
+            hookupYAnimation();
+            hookupXAnimation();
         }
     }
 
@@ -693,7 +763,8 @@ public class TowerParameterFragment extends Fragment {
                         device.getRealTimeDataBean().setAmplitude(amplitude);
                         int height = device.getRealTimeDataBean().getHeight()+50;
                         device.getRealTimeDataBean().setHeight((short)height);
-                        hookupAnimation();
+                        hookupYAnimation();
+                        hookupXAnimation();
                         updateRotationAngle();
                         if(amplitude>4000){
                             device.getRealTimeDataBean().setAmplitude(0);

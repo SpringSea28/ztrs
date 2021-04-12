@@ -265,6 +265,7 @@ public class RealTimeDataProtocol extends BaseProtocol{
         int yWalking= ((data[32]&0xffffffff) << 8) |(data[33]&0x00ff);
         realTimeDataBean.setyWalking(yWalking);
         int currentRatedLoad= ((data[34]&0xffffffff) << 8) |(data[35]&0x00ff);
+        Log.e(TAG,"receive currentRatedLoad:"+currentRatedLoad);
         realTimeDataBean.setCurrentRatedLoad(currentRatedLoad);
         byte upState = data[36];
         realTimeDataBean.setUpState(upState);

@@ -11,10 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 44,
-      "versionName": "1.2.6",
+      "versionCode": 46,
+      "versionName": "1.2.8",
       "enabled": true,
-      "outputFile": "ZGJ_v1.2.6_20210408-230131.apk"
+      "outputFile": "ZGJ_v1.2.8_20210412-225040.apk"
     }
   ]
 }
